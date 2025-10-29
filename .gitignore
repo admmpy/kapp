@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Flask
+instance/
+.webassets-cache
+*.db
+*.sqlite3
+
+# Environment
+.env
+.env.local
+
+# TTS Cache
+backend/data/audio_cache/*.mp3
+!backend/data/audio_cache/.gitkeep
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Documentation and Config (excluded from repo)
+*.md
+.github/
+.cursor/
