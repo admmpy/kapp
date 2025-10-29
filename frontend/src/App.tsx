@@ -31,39 +31,6 @@ function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Navigation functions
-  const goToDashboard = () => {
-    window.location.hash = '';
-    setCurrentPage('dashboard');
-  };
-
-  const goToReview = () => {
-    window.location.hash = 'review';
-    setCurrentPage('review');
-  };
-
-  // Override window.location.href assignments with hash-based routing
-  useEffect(() => {
-    const originalLocation = window.location;
-    Object.defineProperty(window, 'location', {
-      configurable: true,
-      value: new Proxy(originalLocation, {
-        set(target, prop, value) {
-          if (prop === 'href') {
-            if (value === '/') {
-              goToDashboard();
-              return true;
-            } else if (value === '/review') {
-              goToReview();
-              return true;
-            }
-          }
-          return Reflect.set(target, prop, value);
-        },
-      }),
-    });
-  }, []);
-
   return (
     <div className="app">
       {currentPage === 'dashboard' ? <Dashboard /> : <ReviewSession />}
