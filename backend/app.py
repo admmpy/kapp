@@ -60,12 +60,14 @@ def register_blueprints(app):
     from routes.reviews import reviews_bp
     from routes.stats import stats_bp
     from routes.audio import audio_bp
+    from routes.llm import llm_bp
     
     # Register blueprints with /api prefix
     app.register_blueprint(cards_bp, url_prefix='/api')
     app.register_blueprint(reviews_bp, url_prefix='/api')
     app.register_blueprint(stats_bp, url_prefix='/api')
     app.register_blueprint(audio_bp, url_prefix='/api')
+    app.register_blueprint(llm_bp, url_prefix='/api')
     
     # Register debug blueprint (development only)
     if app.config.get('DEBUG', False) or app.config.get('TESTING', False):
