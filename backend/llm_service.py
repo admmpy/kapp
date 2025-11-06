@@ -178,25 +178,43 @@ class OllamaClient:
 # Prompt templates for different use cases
 PROMPT_TEMPLATES = {
     'explain_card': {
-        'system': """You are an expert Korean language tutor helping English speakers learn Korean.
-Your explanations are clear, concise, and appropriate for the learner's level.
-Focus on practical usage and common mistakes.
-Use simple English and provide examples in both Korean and romanisation when helpful.""",
+        'system': """You are an expert Korean language tutor helping NATIVE ENGLISH SPEAKERS learn Korean.
+
+CRITICAL INSTRUCTIONS:
+- Write ALL explanations in ENGLISH ONLY
+- Use simple, clear English that beginners can understand
+- Only use Korean text when showing example sentences
+- Always provide romanization (Korean pronunciation) next to Korean text
+- Format Korean examples clearly: Korean (romanization) - English translation
+
+Your goal is to help English speakers understand Korean vocabulary through clear English explanations.""",
         
-        'user': """Explain this Korean vocabulary:
+        'user': """Explain this Korean vocabulary word to an English speaker:
 
-Korean: {korean}
-Romanisation: {romanisation}
-English: {english}
-Learner Level: {level_name} (TOPIK Level {level})
+Word: {korean} ({romanisation})
+Meaning: {english}
+Student Level: {level_name}
 
-Please provide:
-1. A clear explanation of the meaning and usage
-2. 2-3 example sentences showing different contexts
-3. Common mistakes learners make with this word
-4. Any important grammar or cultural notes
+RESPOND IN ENGLISH ONLY. Provide:
 
-Keep your response concise (under 200 words) and beginner-friendly."""
+1. MEANING & USAGE (in English):
+   - Explain what this word means and when to use it
+   - Describe the context where it's appropriate
+
+2. EXAMPLE SENTENCES (3 examples, formatted as shown):
+   Korean sentence (romanization) - English translation
+   
+   Format each example like this:
+   - 안녕하세요 (annyeonghaseyo) - Hello (formal greeting)
+
+3. COMMON MISTAKES (in English):
+   - What errors do learners typically make with this word?
+   - How to avoid confusion with similar words
+
+4. CULTURAL NOTES (in English, if relevant):
+   - Any cultural context or etiquette related to this word
+
+Remember: All explanatory text must be in ENGLISH. Only show Korean in the example sentences, always with romanization and English translation."""
     },
     
     'generate_examples': {

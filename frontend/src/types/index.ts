@@ -68,3 +68,28 @@ export interface DueCardsResponse {
   total_due: number;
   limit: number;
 }
+
+// LLM Types
+export interface LLMExplanation {
+  explanation: string;
+  card_id: number;
+  generated_at: string;
+}
+
+export interface LLMHealth {
+  status: string;
+  available: boolean;
+  models?: string[];
+  configured_model?: string;
+  model_loaded?: boolean;
+  error?: string;
+}
+
+export interface ExplanationRequest {
+  card_id: number;
+  user_context?: {
+    level?: number;
+    previous_ratings?: number[];
+    time_spent?: number;
+  };
+}

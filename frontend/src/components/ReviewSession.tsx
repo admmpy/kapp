@@ -3,6 +3,7 @@
  */
 import { useState, useEffect } from 'react';
 import FlashCard from './FlashCard';
+import ExplanationModal from './ExplanationModal';
 import apiClient from '../api/client';
 import type { Card } from '../types';
 import './ReviewSession.css';
@@ -37,6 +38,7 @@ export default function ReviewSession() {
   const [sessionComplete, setSessionComplete] = useState(false);
   const [reviewedCount, setReviewedCount] = useState(0);
   const [startTime, setStartTime] = useState<number>(Date.now());
+  const [showExplanation, setShowExplanation] = useState(false);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -125,6 +127,10 @@ export default function ReviewSession() {
     loadCards();
   };
 
+  const handleExplain = (_cardId: number) => {
+    setShowExplanation(true);
+  };
+
   if (loading) {
     return (
       <div className="review-session loading">
@@ -200,6 +206,7 @@ export default function ReviewSession() {
         showBack={showBack} 
         onFlip={() => setShowBack(prev => !prev)}
         autoPlayOnFlip={true}
+        onExplain={handleExplain}
       />
 
       {/* Action buttons */}
@@ -245,6 +252,18 @@ export default function ReviewSession() {
         <div className="submitting-overlay">
           <div className="spinner"></div>
         </div>
+      )}
+
+      {showExplanation && currentCard && (
+        <ExplanationModal
+          card={currentCard}
+          isOpen={showExplanation}
+          onClose={() => setShowExplanation(false)}
+          userContext={{
+            level: currentCard.level,
+            time_spent: (Date.now() - startTime) / 1000
+          }}
+        />
       )}
     </div>
   );
