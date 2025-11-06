@@ -33,10 +33,6 @@ export default function Dashboard() {
     window.location.hash = '#review';
   };
 
-  const handleDeckClick = (deckId: number) => {
-    window.location.hash = `#review?deck_id=${deckId}`;
-  };
-
   if (loading) {
     return (
       <div className="dashboard loading">
@@ -132,15 +128,14 @@ export default function Dashboard() {
             <div
               key={deck.id}
               className="deck-card"
-              onClick={() => handleDeckClick(deck.id)}
               role="button"
               tabIndex={0}
-              onKeyPress={(e) => {
+              onClick={() => (window.location.hash = `#review?deck_id=${deck.id}`)}
+              onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                  handleDeckClick(deck.id);
+                  window.location.hash = `#review?deck_id=${deck.id}`;
                 }
               }}
-              style={{ cursor: 'pointer' }}
             >
               <h3 className="deck-name">{deck.name}</h3>
               {deck.description && (

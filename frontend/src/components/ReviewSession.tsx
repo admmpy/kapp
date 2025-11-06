@@ -16,6 +16,17 @@ const QUALITY_RATINGS = [
   { value: 5, label: 'Perfect response', emoji: '😄', color: '#4caf50' },
 ];
 
+function parseHashParams() {
+  const query = window.location.hash.split('?')[1] || '';
+  const params = new URLSearchParams(query);
+  const deckIdParam = params.get('deck_id');
+  const levelParam = params.get('level');
+  return {
+    deck_id: deckIdParam ? Number(deckIdParam) : undefined,
+    level: levelParam ? Number(levelParam) : undefined,
+  };
+}
+
 export default function ReviewSession() {
   const [cards, setCards] = useState<Card[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,29 +38,12 @@ export default function ReviewSession() {
   const [reviewedCount, setReviewedCount] = useState(0);
   const [startTime, setStartTime] = useState<number>(Date.now());
 
-  // Parse query parameters from hash
-  const getQueryParams = () => {
-    const hashParts = window.location.hash.split('?');
-    const queryString = hashParts[1] || '';
-    const params = new URLSearchParams(queryString);
-    
-    const deckId = params.get('deck_id');
-    const level = params.get('level');
-    
-    return {
-      deck_id: deckId ? Number(deckId) : undefined,
-      level: level ? Number(level) : undefined,
-    };
-  };
-
   useEffect(() => {
-    loadCards();
-
-    // Listen for hash changes (back/forward navigation)
     const handleHashChange = () => {
       loadCards();
     };
 
+    loadCards();
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
@@ -58,15 +52,8 @@ export default function ReviewSession() {
     try {
       setLoading(true);
       setError(null);
-      
-      // Get filter parameters from URL hash
-      const params = getQueryParams();
-      
-      const response = await apiClient.getDueCards({
-        limit: 20,
-        deck_id: params.deck_id,
-        level: params.level,
-      });
+      const filters = parseHashParams();
+      const response = await apiClient.getDueCards({ limit: 20, deck_id: filters.deck_id, level: filters.level });
       
       if (response.cards.length === 0) {
         setSessionComplete(true);
@@ -122,6 +109,16 @@ export default function ReviewSession() {
     setShowBack(true);
   };
 
+  const handleSkipCard = () => {
+    if (currentIndex < cards.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+      setShowBack(false);
+      setStartTime(Date.now());
+    } else {
+      setSessionComplete(true);
+    }
+  };
+
   const handleRestart = () => {
     setSessionComplete(false);
     setReviewedCount(0);
@@ -160,7 +157,7 @@ export default function ReviewSession() {
               Start New Session
             </button>
             <button
-              onClick={() => window.location.hash = ''}
+              onClick={() => window.location.href = '/'}
               className="button button-secondary"
             >
               View Dashboard
@@ -176,14 +173,14 @@ export default function ReviewSession() {
 
   return (
     <div className="review-session">
-      {/* Header with home button */}
+      {/* Home button */}
       <div className="review-header">
         <button
           onClick={() => window.location.hash = ''}
-          className="button button-home"
-          title="Return to Dashboard"
+          className="home-button"
+          aria-label="Return to dashboard"
         >
-          🏠 Home
+          ← Dashboard
         </button>
       </div>
 
@@ -198,17 +195,25 @@ export default function ReviewSession() {
       </div>
 
       {/* FlashCard */}
-      <FlashCard card={currentCard} showBack={showBack} />
+      <FlashCard card={currentCard} showBack={showBack} onFlip={() => setShowBack(prev => !prev)} />
 
       {/* Action buttons */}
       <div className="actions">
         {!showBack ? (
-          <button
-            onClick={handleRevealAnswer}
-            className="button button-large button-primary"
-          >
-            Show Answer
-          </button>
+          <div className="action-buttons-row">
+            <button
+              onClick={handleRevealAnswer}
+              className="button button-large button-primary"
+            >
+              Show Answer
+            </button>
+            <button
+              onClick={handleSkipCard}
+              className="button button-large button-secondary"
+            >
+              Skip →
+            </button>
+          </div>
         ) : (
           <div className="rating-buttons">
             <p className="rating-prompt">How well did you remember?</p>
