@@ -14,6 +14,9 @@ import type {
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
+// Export API_BASE_URL for use in components
+export { API_BASE_URL };
+
 class APIClient {
   private client: AxiosInstance;
 

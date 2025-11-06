@@ -67,6 +67,12 @@ def register_blueprints(app):
     app.register_blueprint(stats_bp, url_prefix='/api')
     app.register_blueprint(audio_bp, url_prefix='/api')
     
+    # Register debug blueprint (development only)
+    if app.config.get('DEBUG', False) or app.config.get('TESTING', False):
+        from routes.debug import debug_bp
+        app.register_blueprint(debug_bp, url_prefix='/api')
+        app.logger.info("Debug endpoints enabled at /api/debug/*")
+    
     # Health check endpoint
     @app.route('/api/health')
     def health_check():

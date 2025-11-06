@@ -195,7 +195,12 @@ export default function ReviewSession() {
       </div>
 
       {/* FlashCard */}
-      <FlashCard card={currentCard} showBack={showBack} onFlip={() => setShowBack(prev => !prev)} />
+      <FlashCard 
+        card={currentCard} 
+        showBack={showBack} 
+        onFlip={() => setShowBack(prev => !prev)}
+        autoPlayOnFlip={true}
+      />
 
       {/* Action buttons */}
       <div className="actions">
