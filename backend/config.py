@@ -25,6 +25,12 @@ class Config:
     # TTS configuration
     TTS_CACHE_DIR = os.getenv('TTS_CACHE_DIR', 'data/audio_cache')
     
+    # LLM Configuration
+    LLM_MODEL = os.getenv('LLM_MODEL', 'open-llama-2-ko-7b')
+    LLM_BASE_URL = os.getenv('LLM_BASE_URL', 'http://localhost:11434')
+    LLM_CACHE_DIR = os.getenv('LLM_CACHE_DIR', 'data/llm_cache')
+    LLM_ENABLED = os.getenv('LLM_ENABLED', 'true').lower() == 'true'
+    
     # CORS configuration
     CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:5173').split(',')
     
@@ -41,6 +47,10 @@ class Config:
         
         audio_cache_dir = Path(app.root_path) / app.config['TTS_CACHE_DIR']
         audio_cache_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Ensure LLM cache directory exists
+        llm_cache_dir = Path(app.root_path) / app.config['LLM_CACHE_DIR']
+        llm_cache_dir.mkdir(parents=True, exist_ok=True)
         
         # Validate required configuration
         required_vars = ['SECRET_KEY', 'DATABASE_URL']

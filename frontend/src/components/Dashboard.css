@@ -276,6 +276,41 @@
   font-size: 18px;
 }
 
+/* Desktop Optimizations */
+@media (min-width: 1024px) {
+  .dashboard {
+    max-width: 1400px;
+    padding: 48px 32px;
+  }
+
+  .stats-overview {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .stat-card {
+    padding: 32px;
+  }
+
+  .stat-value {
+    font-size: 56px;
+  }
+
+  .decks-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .deck-card {
+    padding: 28px;
+  }
+
+  .progress-section,
+  .decks-section {
+    padding: 40px;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .dashboard {

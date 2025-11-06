@@ -3,16 +3,15 @@
 .flashcard-container {
   perspective: 1000px;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 700px;
+  margin: 0 auto 40px auto;
 }
 
 .flashcard {
   position: relative;
   width: 100%;
   min-height: 400px;
-  cursor: pointer;
-  transition: transform 0.6s;
+  transition: transform 0.4s ease-out;
   transform-style: preserve-3d;
 }
 
@@ -25,6 +24,7 @@
   width: 100%;
   height: 100%;
   text-align: center;
+  transform-style: preserve-3d;
 }
 
 .flashcard-front,
@@ -32,7 +32,10 @@
   position: absolute;
   width: 100%;
   min-height: 400px;
+  max-height: 500px;
+  overflow-y: auto;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 40px;
@@ -45,12 +48,17 @@
 .flashcard-front {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+  transform: rotateY(0deg);
+  z-index: 2;
 }
 
 .flashcard-back {
-  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-  color: white;
+  /* Improve contrast: light background with dark text */
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #e2e8f0;
   transform: rotateY(180deg);
+  z-index: 1;
 }
 
 .card-level {
@@ -73,10 +81,16 @@
 }
 
 .korean-text {
-  font-size: 72px;
+  /* Reduce size to avoid vertical stacking and improve readability */
+  font-size: 36px;
   font-weight: 700;
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.3;
+  word-break: keep-all;
+  white-space: normal;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .romanization {
@@ -90,8 +104,8 @@
   font-size: 48px;
   font-weight: 700;
   margin: 0;
-  color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: #1a202c;
+  text-shadow: none;
 }
 
 .romanization-back {
@@ -99,30 +113,31 @@
   opacity: 0.9;
   margin: 8px 0 0 0;
   font-style: italic;
-  color: #e2e8f0;
+  color: #2d3748;
 }
 
 .translation-divider {
   font-size: 32px;
   margin: 16px 0;
   opacity: 0.7;
-  color: #a0aec0;
+  color: #4a5568;
 }
 
 .english-text {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
   margin: 0;
-  color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: #000000;
+  text-shadow: none;
 }
 
 .example {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.08);
   padding: 16px;
   border-radius: 12px;
   text-align: left;
   margin-top: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .example-label {
@@ -130,13 +145,14 @@
   text-transform: uppercase;
   font-weight: 600;
   margin: 0 0 8px 0;
-  opacity: 0.8;
+  color: #374151;
 }
 
 .example-text {
   font-size: 18px;
   margin: 0;
   line-height: 1.6;
+  color: #111827;
 }
 
 .card-stats {
@@ -144,7 +160,8 @@
   justify-content: center;
   gap: 24px;
   font-size: 14px;
-  opacity: 0.9;
+  color: #374151;
+  font-weight: 500;
 }
 
 .badge {
@@ -193,12 +210,35 @@
   animation: pulse 1s ease-in-out infinite;
 }
 
+.audio-button.error {
+  border-color: rgba(239, 68, 68, 0.7);
+  background: rgba(239, 68, 68, 0.2);
+}
+
+.audio-button.error:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+.audio-button.loading {
+  animation: spin 1s linear infinite;
+  opacity: 0.7;
+}
+
 @keyframes pulse {
   0%, 100% {
     transform: translateX(-50%) scale(1);
   }
   50% {
     transform: translateX(-50%) scale(1.1);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg);
   }
 }
 
@@ -210,6 +250,10 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
+  .flashcard-container {
+    max-width: 100%;
+  }
+
   .flashcard-front,
   .flashcard-back {
     min-height: 350px;
@@ -217,7 +261,7 @@
   }
 
   .korean-text {
-    font-size: 56px;
+    font-size: 32px;
   }
 
   .romanization {
@@ -225,10 +269,25 @@
   }
 
   .english-text {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .example-text {
     font-size: 16px;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1024px) {
+  .flashcard-container {
+    max-width: 700px;
+    margin-bottom: 48px;
+  }
+
+  .flashcard-front,
+  .flashcard-back {
+    padding: 48px;
+    min-height: 450px;
+    max-height: 550px;
   }
 }
