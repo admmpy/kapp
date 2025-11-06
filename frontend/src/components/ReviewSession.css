@@ -17,6 +17,32 @@
   text-align: center;
 }
 
+/* Review Header */
+.review-header {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 16px;
+}
+
+.button-home {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #f5f5f5;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.button-home:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
 /* Progress Bar */
 .progress-bar {
   height: 8px;
