@@ -27,15 +27,46 @@ export default function ReviewSession() {
   const [reviewedCount, setReviewedCount] = useState(0);
   const [startTime, setStartTime] = useState<number>(Date.now());
 
+  // Parse query parameters from hash
+  const getQueryParams = () => {
+    const hashParts = window.location.hash.split('?');
+    const queryString = hashParts[1] || '';
+    const params = new URLSearchParams(queryString);
+    
+    const deckId = params.get('deck_id');
+    const level = params.get('level');
+    
+    return {
+      deck_id: deckId ? Number(deckId) : undefined,
+      level: level ? Number(level) : undefined,
+    };
+  };
+
   useEffect(() => {
     loadCards();
+
+    // Listen for hash changes (back/forward navigation)
+    const handleHashChange = () => {
+      loadCards();
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   const loadCards = async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await apiClient.getDueCards({ limit: 20 });
+      
+      // Get filter parameters from URL hash
+      const params = getQueryParams();
+      
+      const response = await apiClient.getDueCards({
+        limit: 20,
+        deck_id: params.deck_id,
+        level: params.level,
+      });
       
       if (response.cards.length === 0) {
         setSessionComplete(true);
@@ -129,7 +160,7 @@ export default function ReviewSession() {
               Start New Session
             </button>
             <button
-              onClick={() => window.location.href = '/'}
+              onClick={() => window.location.hash = ''}
               className="button button-secondary"
             >
               View Dashboard
@@ -145,6 +176,17 @@ export default function ReviewSession() {
 
   return (
     <div className="review-session">
+      {/* Header with home button */}
+      <div className="review-header">
+        <button
+          onClick={() => window.location.hash = ''}
+          className="button button-home"
+          title="Return to Dashboard"
+        >
+          🏠 Home
+        </button>
+      </div>
+
       {/* Progress bar */}
       <div className="progress-bar">
         <div className="progress-fill" style={{ width: `${progress}%` }}></div>

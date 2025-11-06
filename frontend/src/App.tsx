@@ -10,15 +10,19 @@ type Page = 'dashboard' | 'review';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('dashboard');
+  const [dashboardKey, setDashboardKey] = useState(0);
 
   // Simple routing based on URL hash
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1); // Remove #
-      if (hash === 'review') {
+      // Check if hash starts with 'review' (handles both #review and #review?deck_id=1)
+      if (hash.startsWith('review')) {
         setCurrentPage('review');
       } else {
         setCurrentPage('dashboard');
+        // Increment key to force Dashboard remount and refresh stats
+        setDashboardKey(prev => prev + 1);
       }
     };
 
@@ -33,7 +37,11 @@ function App() {
 
   return (
     <div className="app">
-      {currentPage === 'dashboard' ? <Dashboard /> : <ReviewSession />}
+      {currentPage === 'dashboard' ? (
+        <Dashboard key={dashboardKey} />
+      ) : (
+        <ReviewSession key={window.location.hash} />
+      )}
     </div>
   );
 }

@@ -170,13 +170,19 @@
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
+  border: 2px solid transparent;
 }
 
 .deck-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-color: #667eea;
+}
+
+.deck-card:active {
+  transform: translateY(-2px);
 }
 
 .deck-name {
