@@ -3,9 +3,14 @@
 This script initializes the database and imports starter Korean vocabulary.
 
 Usage:
-    python init_db.py
+    python init_db.py [--generate-audio]
+
+Options:
+    --generate-audio    Pre-generate TTS audio for all cards after import
 """
 import json
+import sys
+import argparse
 from pathlib import Path
 from app import create_app
 from database import db
@@ -87,11 +92,58 @@ def import_vocabulary(app, vocab_data):
         print(f"\n✓ Successfully imported {total_cards} cards across {len(vocab_data['decks'])} decks")
 
 
-def print_summary(app):
+def pregenerate_audio(app):
+    """Pre-generate audio for all cards
+    
+    Args:
+        app: Flask application instance
+    """
+    from tts_service import get_tts_service
+    
+    with app.app_context():
+        tts = get_tts_service(app.config['TTS_CACHE_DIR'])
+        cards = Card.query.all()
+        
+        print("\n" + "="*50)
+        print("PRE-GENERATING AUDIO FILES")
+        print("="*50)
+        print(f"Total cards: {len(cards)}")
+        print()
+        
+        stats = {'generated': 0, 'cached': 0, 'failed': 0}
+        
+        for idx, card in enumerate(cards, 1):
+            slow = card.level <= 1
+            cache_key = tts._generate_cache_key(card.front_korean, 'ko', slow)
+            cache_path = tts._get_cache_path(cache_key)
+            
+            if cache_path.exists():
+                stats['cached'] += 1
+                print(f"[{idx}/{len(cards)}] ✓ Cached: {card.front_korean[:30]}")
+                continue
+            
+            print(f"[{idx}/{len(cards)}] ⚙️  Generating: {card.front_korean[:30]}... ", end='', flush=True)
+            audio_filename = tts.generate_audio(card.front_korean, 'ko', slow)
+            
+            if audio_filename:
+                stats['generated'] += 1
+                print("✅")
+            else:
+                stats['failed'] += 1
+                print("❌")
+        
+        print(f"\n✓ Audio generation complete:")
+        print(f"  Generated: {stats['generated']}")
+        print(f"  Cached: {stats['cached']}")
+        print(f"  Failed: {stats['failed']}")
+
+
+def print_summary(app, audio_generated=False):
     """Print database summary
     
     Args:
         app: Flask application instance
+        audio_generated: Whether audio was pre-generated
     """
     with app.app_context():
         decks = Deck.query.all()
@@ -108,17 +160,36 @@ def print_summary(app):
             deck_cards = Card.query.filter_by(deck_id=deck.id).count()
             print(f"  - {deck.name}: {deck_cards} cards (Level {deck.level})")
         
+        if audio_generated:
+            from tts_service import get_tts_service
+            tts = get_tts_service(app.config['TTS_CACHE_DIR'])
+            cache_stats = tts.get_cache_size()
+            print(f"\nAudio Cache:")
+            print(f"  - Files: {cache_stats['file_count']}")
+            print(f"  - Size: {cache_stats['total_size_mb']} MB")
+        
         print("="*50)
         print("\n✓ Database initialization complete!")
         print("\nYou can now start the backend server:")
         print("  python app.py")
         print("\nOr test the API:")
-        print("  curl http://localhost:5000/api/health")
-        print("  curl http://localhost:5000/api/cards/due")
+        print("  curl http://localhost:5001/api/health")
+        print("  curl http://localhost:5001/api/cards/due")
 
 
 def main():
     """Main initialization function"""
+    parser = argparse.ArgumentParser(
+        description='Initialize database and import Korean vocabulary'
+    )
+    parser.add_argument(
+        '--generate-audio',
+        action='store_true',
+        help='Pre-generate TTS audio for all cards after import'
+    )
+    
+    args = parser.parse_args()
+    
     print("="*50)
     print("KAPP DATABASE INITIALIZATION")
     print("="*50)
@@ -133,8 +204,12 @@ def main():
     # Import vocabulary
     import_vocabulary(app, vocab_data)
     
+    # Pre-generate audio if requested
+    if args.generate_audio:
+        pregenerate_audio(app)
+    
     # Print summary
-    print_summary(app)
+    print_summary(app, audio_generated=args.generate_audio)
 
 
 if __name__ == '__main__':
