@@ -1,7 +1,7 @@
 /**
  * FlashCard component displays a Korean learning card with audio playback
  */
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { Card } from '../types';
 import './FlashCard.css';
 
@@ -15,6 +15,11 @@ export default function FlashCard({ card, showBack = false, onFlip }: FlashCardP
   const [isFlipped, setIsFlipped] = useState(showBack);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Sync internal state with prop changes
+  useEffect(() => {
+    setIsFlipped(showBack);
+  }, [showBack]);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -89,6 +94,14 @@ export default function FlashCard({ card, showBack = false, onFlip }: FlashCardP
             <div className="card-level">Level {card.level}</div>
             
             <div className="card-content">
+              <h2 className="korean-text-back">{card.front_korean}</h2>
+              
+              {card.front_romanization && (
+                <p className="romanization-back">{card.front_romanization}</p>
+              )}
+              
+              <div className="translation-divider">→</div>
+              
               <h2 className="english-text">{card.back_english}</h2>
               
               {card.example_sentence && (
