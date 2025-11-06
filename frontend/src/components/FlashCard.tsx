@@ -11,9 +11,10 @@ interface FlashCardProps {
   showBack?: boolean;
   onFlip?: () => void;
   autoPlayOnFlip?: boolean;
+  onExplain?: (cardId: number) => void;
 }
 
-export default function FlashCard({ card, showBack = false, onFlip, autoPlayOnFlip = true }: FlashCardProps) {
+export default function FlashCard({ card, showBack = false, onFlip, autoPlayOnFlip = true, onExplain }: FlashCardProps) {
   const isFlipped = showBack;
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioError, setAudioError] = useState(false);
@@ -171,6 +172,18 @@ export default function FlashCard({ card, showBack = false, onFlip, autoPlayOnFl
                 )}
               </div>
             </div>
+
+            {onExplain && (
+              <button 
+                className="explain-button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onExplain(card.id);
+                }}
+              >
+                💡 Explain This
+              </button>
+            )}
 
             <div className="flip-hint">Click to flip back</div>
           </div>
