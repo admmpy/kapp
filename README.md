@@ -1,4 +1,4 @@
-# 🇰🇷 Kapp - Korean Language Learning App
+# 🇰🇷 Kapp - Korean Language Learning App (Work In Progress)
 
 A modern, intelligent flashcard application designed for Korean language learners (A0-A1 TOPIK I level) featuring spaced repetition, native audio pronunciation, and progress tracking.
 
@@ -12,6 +12,8 @@ A modern, intelligent flashcard application designed for Korean language learner
 ## 📖 Overview
 
 Kapp is a full-stack web application that helps beginners learn Korean through scientifically-proven spaced repetition. The app focuses on TOPIK I vocabulary (A0-A1 level) with native audio pronunciation, making it perfect for absolute beginners starting their Korean learning journey.
+
+This project was built in conjunction with Cursor, utilising the new plan feature, as well as ollama for local llm intergration.
 
 ---
 
