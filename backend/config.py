@@ -22,7 +22,7 @@ class Config:
     db_url = os.getenv('DATABASE_URL', 'sqlite:///data/kapp.db')
     
     # If it's a relative SQLite path, convert to absolute
-    if db_url.startswith('sqlite:///') and not db_url[12:13] in ('/', '\\', ':'):
+    if db_url.startswith('sqlite:///') and not (db_url[10:11] in ('/', '\\') or db_url[11:12] == ':'):
         # Relative path detected (sqlite:///data/... without drive letter)
         db_path = basedir / db_url.replace('sqlite:///', '')
         # Convert to absolute path with forward slashes for cross-platform compatibility
