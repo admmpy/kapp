@@ -10,6 +10,7 @@ from datetime import datetime
 from database import db
 from models import Card, Review
 from srs import update_card_after_review
+from utils import error_response, not_found_response, validation_error_response
 
 reviews_bp = Blueprint('reviews', __name__)
 
@@ -31,9 +32,7 @@ def submit_review():
         
         # Validate required fields
         if not data or 'card_id' not in data or 'quality_rating' not in data:
-            return jsonify({
-                'error': 'Missing required fields: card_id, quality_rating'
-            }), 400
+            return validation_error_response('Missing required fields: card_id, quality_rating')
         
         card_id = data['card_id']
         quality_rating = data['quality_rating']
@@ -41,14 +40,12 @@ def submit_review():
         
         # Validate quality rating
         if not isinstance(quality_rating, int) or not 0 <= quality_rating <= 5:
-            return jsonify({
-                'error': 'quality_rating must be an integer between 0 and 5'
-            }), 400
+            return validation_error_response('quality_rating must be an integer between 0 and 5')
         
         # Get card
         card = db.session.get(Card, card_id)
         if not card:
-            return jsonify({'error': 'Card not found'}), 404
+            return not_found_response('Card')
         
         # Create review record
         review = Review(
@@ -81,12 +78,12 @@ def submit_review():
     
     except ValueError as e:
         db.session.rollback()
-        return jsonify({'error': str(e)}), 400
-    
+        return validation_error_response(str(e))
+
     except Exception as e:
         db.session.rollback()
         current_app.logger.error(f"Error submitting review: {e}", exc_info=True)
-        return jsonify({'error': 'Failed to submit review'}), 500
+        return error_response('Failed to submit review', 500)
 
 
 @reviews_bp.route('/reviews/card/<int:card_id>', methods=['GET'])
@@ -103,7 +100,7 @@ def get_card_reviews(card_id):
         # Check if card exists
         card = db.session.get(Card, card_id)
         if not card:
-            return jsonify({'error': 'Card not found'}), 404
+            return not_found_response('Card')
         
         # Get reviews ordered by date (newest first)
         reviews = Review.query.filter_by(card_id=card_id)\
@@ -126,4 +123,4 @@ def get_card_reviews(card_id):
     
     except Exception as e:
         current_app.logger.error(f"Error fetching reviews for card {card_id}: {e}", exc_info=True)
-        return jsonify({'error': 'Failed to fetch reviews'}), 500
+        return error_response('Failed to fetch reviews', 500)

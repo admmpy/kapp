@@ -10,6 +10,7 @@ from sqlalchemy import select, func
 from datetime import date, datetime, timedelta
 from database import db
 from models import Card, Review, Deck
+from utils import error_response
 
 stats_bp = Blueprint('stats', __name__)
 
@@ -102,7 +103,7 @@ def get_stats():
     
     except Exception as e:
         current_app.logger.error(f"Error fetching stats: {e}", exc_info=True)
-        return jsonify({'error': 'Failed to fetch statistics'}), 500
+        return error_response('Failed to fetch statistics', 500)
 
 
 def calculate_review_streak() -> int:
@@ -180,4 +181,4 @@ def get_recent_reviews():
     
     except Exception as e:
         current_app.logger.error(f"Error fetching recent reviews: {e}", exc_info=True)
-        return jsonify({'error': 'Failed to fetch recent reviews'}), 500
+        return error_response('Failed to fetch recent reviews', 500)

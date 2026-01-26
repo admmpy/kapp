@@ -21,9 +21,10 @@ export default function Dashboard() {
       setError(null);
       const data = await apiClient.getStats();
       setStats(data);
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Error loading stats:', err);
-      setError('Failed to load statistics');
+      const message = err instanceof Error ? err.message : 'Unknown error';
+      setError(`Failed to load statistics: ${message}`);
     } finally {
       setLoading(false);
     }
