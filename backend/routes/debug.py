@@ -15,6 +15,7 @@ from models import Card
 from tts_service import get_tts_service
 from gtts import gTTS
 from pathlib import Path
+from utils import error_response, not_found_response
 import os
 
 debug_bp = Blueprint('debug', __name__)
@@ -42,10 +43,7 @@ def tts_status():
         })
     except Exception as e:
         current_app.logger.error(f"Error checking TTS status: {e}", exc_info=True)
-        return jsonify({
-            'status': 'error',
-            'error': str(e)
-        }), 500
+        return error_response('Failed to check TTS status', 500, str(e))
 
 
 @debug_bp.route('/debug/audio-cache', methods=['GET'])
@@ -88,9 +86,7 @@ def audio_cache_details():
         })
     except Exception as e:
         current_app.logger.error(f"Error getting cache details: {e}", exc_info=True)
-        return jsonify({
-            'error': str(e)
-        }), 500
+        return error_response('Failed to get cache details', 500, str(e))
 
 
 @debug_bp.route('/debug/regenerate-audio/<int:card_id>', methods=['POST'])
@@ -107,7 +103,7 @@ def regenerate_audio(card_id):
         # Get card
         card = db.session.get(Card, card_id)
         if not card:
-            return jsonify({'error': 'Card not found'}), 404
+            return not_found_response('Card')
         
         # Get TTS service
         tts = get_tts_service(current_app.config['TTS_CACHE_DIR'])
@@ -143,17 +139,11 @@ def regenerate_audio(card_id):
                 'slow_speed': card.level <= 1
             })
         else:
-            return jsonify({
-                'success': False,
-                'error': 'Failed to generate audio'
-            }), 500
-    
+            return error_response('Failed to generate audio', 500)
+
     except Exception as e:
         current_app.logger.error(f"Error regenerating audio for card {card_id}: {e}", exc_info=True)
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return error_response('Failed to regenerate audio', 500, str(e))
 
 
 @debug_bp.route('/debug/test-audio', methods=['GET'])
@@ -186,19 +176,11 @@ def test_audio():
                 'message': 'gTTS API is working correctly'
             })
         else:
-            return jsonify({
-                'success': False,
-                'error': 'Failed to generate test audio',
-                'message': 'gTTS API may be unreachable'
-            }), 500
-    
+            return error_response('Failed to generate test audio', 500, 'gTTS API may be unreachable')
+
     except Exception as e:
         current_app.logger.error(f"Error testing gTTS API: {e}", exc_info=True)
-        return jsonify({
-            'success': False,
-            'error': str(e),
-            'message': 'gTTS API test failed'
-        }), 500
+        return error_response('gTTS API test failed', 500, str(e))
 
 
 @debug_bp.route('/debug/clear-cache', methods=['POST'])
@@ -225,8 +207,7 @@ def clear_cache():
     
     except Exception as e:
         current_app.logger.error(f"Error clearing cache: {e}", exc_info=True)
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return error_response('Failed to clear cache', 500, str(e))
+
+
 

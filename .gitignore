@@ -25,6 +25,12 @@ instance/
 # TTS Cache
 backend/data/audio_cache/*.mp3
 !backend/data/audio_cache/.gitkeep
+data/audio_cache/
+
+# LLM Cache
+backend/data/llm_cache/*.json
+!backend/data/llm_cache/.gitkeep
+data/llm_cache/
 
 # Frontend
 frontend/node_modules/

@@ -4,10 +4,12 @@ This module implements the application factory pattern for creating
 and configuring the Flask application instance.
 """
 import os
+import logging
 from flask import Flask, jsonify
 from flask_cors import CORS
 from config import config
 from database import db, init_db
+from extensions import limiter
 
 
 def create_app(config_name=None):
@@ -31,8 +33,15 @@ def create_app(config_name=None):
     config[config_name].init_app(app)
     
     # Initialize extensions
-    CORS(app, origins=app.config['CORS_ORIGINS'])
+    # Support multiple origins for development (5173, 5174, etc.)
+    app.logger.debug(f"CORS_ORIGINS = {app.config['CORS_ORIGINS']}")
+    CORS(app, resources={r"/api/*": {"origins": app.config['CORS_ORIGINS']}})
     db.init_app(app)
+
+    # Initialize rate limiter
+    if app.config.get('RATELIMIT_ENABLED', True):
+        limiter.init_app(app)
+        app.logger.info("Rate limiting enabled")
     
     # Create database tables
     with app.app_context():
@@ -43,6 +52,26 @@ def create_app(config_name=None):
     
     # Register error handlers
     register_error_handlers(app)
+    
+    # Configure logging to suppress TLS handshake errors
+    # These occur when clients try HTTPS on an HTTP server (harmless)
+    class TLSFilter(logging.Filter):
+        def filter(self, record):
+            message = str(record.getMessage())
+            # Filter out TLS handshake attempts (clients trying HTTPS on HTTP server)
+            if 'Bad request version' in message:
+                # Check for TLS handshake indicators
+                if '\\x16\\x03' in message or '\\x16' in message or 'code 400' in message:
+                    return False
+            return True
+    
+    # Apply filter to Werkzeug logger
+    werkzeug_logger = logging.getLogger('werkzeug')
+    werkzeug_logger.addFilter(TLSFilter())
+    
+    # Also filter Python's http.server logs if present
+    http_logger = logging.getLogger('http.server')
+    http_logger.addFilter(TLSFilter())
     
     # Log startup
     app.logger.info(f"Kapp backend started in {config_name} mode")
@@ -74,6 +103,25 @@ def register_blueprints(app):
         from routes.debug import debug_bp
         app.register_blueprint(debug_bp, url_prefix='/api')
         app.logger.info("Debug endpoints enabled at /api/debug/*")
+    
+    # Root endpoint - API information
+    @app.route('/')
+    def root():
+        """Root endpoint providing API information"""
+        return jsonify({
+            'service': 'kapp-backend',
+            'version': '0.1.0',
+            'status': 'running',
+            'api_base': '/api',
+            'endpoints': {
+                'health': '/api/health',
+                'cards': '/api/cards',
+                'reviews': '/api/reviews',
+                'stats': '/api/stats',
+                'audio': '/api/audio',
+                'llm': '/api/llm'
+            }
+        })
     
     # Health check endpoint
     @app.route('/api/health')
@@ -119,6 +167,15 @@ def register_error_handlers(app):
             'status': 500
         }), 500
     
+    @app.errorhandler(429)
+    def ratelimit_handler(error):
+        """Handle 429 Too Many Requests errors"""
+        return jsonify({
+            'error': 'Rate limit exceeded',
+            'message': str(error.description),
+            'status': 429
+        }), 429
+
     @app.errorhandler(Exception)
     def handle_exception(error):
         """Handle all unhandled exceptions"""
@@ -132,4 +189,4 @@ def register_error_handlers(app):
 if __name__ == '__main__':
     app = create_app()
     port = int(os.getenv('FLASK_RUN_PORT', 5001))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    app.run(debug=True, host='127.0.0.1', port=port)

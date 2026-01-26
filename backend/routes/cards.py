@@ -13,6 +13,7 @@ from datetime import date
 from database import db
 from models import Card, Deck
 from tts_service import get_tts_service
+from utils import error_response, not_found_response
 
 cards_bp = Blueprint('cards', __name__)
 
@@ -90,7 +91,7 @@ def get_due_cards():
     
     except Exception as e:
         current_app.logger.error(f"Error fetching due cards: {e}", exc_info=True)
-        return jsonify({'error': 'Failed to fetch due cards'}), 500
+        return error_response('Failed to fetch due cards', 500)
 
 
 @cards_bp.route('/cards/<int:card_id>', methods=['GET'])
@@ -107,7 +108,7 @@ def get_card(card_id):
         card = db.session.get(Card, card_id)
         
         if not card:
-            return jsonify({'error': 'Card not found'}), 404
+            return not_found_response('Card')
         
         # Get TTS service and generate audio
         tts_service = get_tts_service(current_app.config['TTS_CACHE_DIR'])
@@ -136,7 +137,7 @@ def get_card(card_id):
     
     except Exception as e:
         current_app.logger.error(f"Error fetching card {card_id}: {e}", exc_info=True)
-        return jsonify({'error': 'Failed to fetch card'}), 500
+        return error_response('Failed to fetch card', 500)
 
 
 @cards_bp.route('/cards', methods=['GET'])
@@ -200,4 +201,4 @@ def get_all_cards():
     
     except Exception as e:
         current_app.logger.error(f"Error fetching cards: {e}", exc_info=True)
-        return jsonify({'error': 'Failed to fetch cards'}), 500
+        return error_response('Failed to fetch cards', 500)

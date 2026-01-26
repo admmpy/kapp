@@ -11,12 +11,24 @@ Endpoints:
 from flask import Blueprint, request, jsonify, current_app
 from models import Card, db
 from llm_service import OllamaClient, PROMPT_TEMPLATES, get_level_name
+from extensions import limiter
+from utils import error_response, not_found_response, validation_error_response
 from datetime import datetime
 import logging
 
 logger = logging.getLogger(__name__)
 
 llm_bp = Blueprint('llm', __name__)
+
+
+def validate_level(level, default: int = 0) -> int:
+    """Validate and clamp level to valid range (0-5)"""
+    if not isinstance(level, int):
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return default
+    return max(0, min(5, level))
 
 # Initialise LLM client (lazy loading)
 _llm_client = None
@@ -49,6 +61,7 @@ def health_check():
 
 
 @llm_bp.route('/llm/explain', methods=['POST'])
+@limiter.limit("10/hour")
 def explain_card():
     """
     Explain a vocabulary card using LLM
@@ -76,16 +89,16 @@ def explain_card():
         card_id = data.get('card_id')
         
         if not card_id:
-            return jsonify({'error': 'card_id is required'}), 400
-        
+            return validation_error_response('card_id is required')
+
         # Fetch card from database
         card = db.session.get(Card, card_id)
         if not card:
-            return jsonify({'error': 'Card not found'}), 404
+            return not_found_response('Card')
         
         # Get user context
         user_context = data.get('user_context', {})
-        level = user_context.get('level', card.level)
+        level = validate_level(user_context.get('level', card.level), default=card.level)
         
         # Build prompt
         template = PROMPT_TEMPLATES['explain_card']
@@ -115,13 +128,11 @@ def explain_card():
         
     except Exception as e:
         logger.error(f"Error in explain_card: {e}")
-        return jsonify({
-            'error': 'Failed to generate explanation',
-            'details': str(e)
-        }), 500
+        return error_response('Failed to generate explanation', 500, str(e))
 
 
 @llm_bp.route('/llm/generate-examples', methods=['POST'])
+@limiter.limit("10/hour")
 def generate_examples():
     """
     Generate example sentences for a card
@@ -148,12 +159,12 @@ def generate_examples():
         card_id = data.get('card_id')
         
         if not card_id:
-            return jsonify({'error': 'card_id is required'}), 400
-        
+            return validation_error_response('card_id is required')
+
         card = db.session.get(Card, card_id)
         if not card:
-            return jsonify({'error': 'Card not found'}), 404
-        
+            return not_found_response('Card')
+
         # Build prompt
         template = PROMPT_TEMPLATES['generate_examples']
         user_prompt = template['user'].format(
@@ -179,13 +190,11 @@ def generate_examples():
         
     except Exception as e:
         logger.error(f"Error in generate_examples: {e}")
-        return jsonify({
-            'error': 'Failed to generate examples',
-            'details': str(e)
-        }), 500
+        return error_response('Failed to generate examples', 500, str(e))
 
 
 @llm_bp.route('/llm/conversation', methods=['POST'])
+@limiter.limit("10/hour")
 def conversation():
     """
     Interactive conversation with AI tutor
@@ -211,9 +220,9 @@ def conversation():
         context = data.get('context', {})
         
         if not message:
-            return jsonify({'error': 'message is required'}), 400
-        
-        level = context.get('level', 0)
+            return validation_error_response('message is required')
+
+        level = validate_level(context.get('level', 0), default=0)
         history = context.get('conversation_history', [])
         
         # Build context from history
@@ -247,8 +256,7 @@ def conversation():
         
     except Exception as e:
         logger.error(f"Error in conversation: {e}")
-        return jsonify({
-            'error': 'Failed to generate response',
-            'details': str(e)
-        }), 500
+        return error_response('Failed to generate response', 500, str(e))
+
+
 
