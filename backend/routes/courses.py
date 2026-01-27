@@ -11,6 +11,7 @@ from flask import Blueprint, jsonify
 from database import db
 from models_v2 import Course, Unit, Lesson, UserProgress
 from utils import not_found_response, error_response
+from routes.helpers import get_current_user_id
 import logging
 
 logger = logging.getLogger(__name__)
@@ -209,13 +210,13 @@ def get_unit_lessons(unit_id: int):
         if not unit:
             return not_found_response("Unit")
 
-        # Get user progress for all lessons in this unit (user_id=1 for now)
+        user_id = get_current_user_id()
         progress_map = {}
         progress_records = (
             db.session.query(UserProgress)
             .filter(
                 UserProgress.lesson_id.in_([l.id for l in unit.lessons]),
-                UserProgress.user_id == 1,
+                UserProgress.user_id == user_id,
             )
             .all()
         )

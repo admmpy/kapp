@@ -11,7 +11,7 @@ Endpoints:
 """
 from flask import Blueprint, jsonify, current_app, request
 from database import db
-from models import Card
+from models_v2 import VocabularyItem
 from tts_service import get_tts_service
 from gtts import gTTS
 from pathlib import Path
@@ -97,27 +97,28 @@ def audio_cache_details():
         return error_response("Failed to get cache details", 500, str(e))
 
 
-@debug_bp.route("/debug/regenerate-audio/<int:card_id>", methods=["POST"])
-def regenerate_audio(card_id):
-    """Force regenerate audio for a specific card
+@debug_bp.route("/debug/regenerate-audio/<int:vocab_id>", methods=["POST"])
+def regenerate_audio(vocab_id):
+    """Force regenerate audio for a specific vocabulary item
 
     Args:
-        card_id: Card ID to regenerate audio for
+        vocab_id: Vocabulary item ID to regenerate audio for
 
     Returns:
         JSON with regeneration result
     """
     try:
-        # Get card
-        card = db.session.get(Card, card_id)
-        if not card:
-            return not_found_response("Card")
+        # Get vocabulary item
+        vocab = db.session.get(VocabularyItem, vocab_id)
+        if not vocab:
+            return not_found_response("Vocabulary item")
 
         # Get TTS service
         tts = get_tts_service(current_app.config["TTS_CACHE_DIR"])
 
         # Generate cache key and remove old file if exists
-        cache_key = tts._generate_cache_key(card.front_korean, "ko", card.level <= 1)
+        slow = vocab.difficulty_level <= 1
+        cache_key = tts._generate_cache_key(vocab.korean, "ko", slow)
         cache_path = tts._get_cache_path(cache_key)
 
         old_file_existed = cache_path.exists()
@@ -127,19 +128,19 @@ def regenerate_audio(card_id):
 
         # Generate new audio
         audio_filename = tts.generate_audio(
-            text=card.front_korean, lang="ko", slow=(card.level <= 1)
+            text=vocab.korean, lang="ko", slow=slow
         )
 
         if audio_filename:
             return jsonify(
                 {
                     "success": True,
-                    "card_id": card_id,
-                    "korean_text": card.front_korean,
+                    "vocab_id": vocab_id,
+                    "korean_text": vocab.korean,
                     "old_file_existed": old_file_existed,
                     "audio_filename": audio_filename,
                     "audio_url": tts.get_audio_url(audio_filename),
-                    "slow_speed": card.level <= 1,
+                    "slow_speed": slow,
                 }
             )
         else:

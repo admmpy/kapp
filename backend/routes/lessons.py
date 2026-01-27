@@ -13,6 +13,7 @@ from flask import Blueprint, request, jsonify
 from database import db
 from models_v2 import Lesson, Exercise, UserProgress
 from utils import not_found_response, error_response, validation_error_response
+from routes.helpers import get_user_progress, get_or_create_user_progress, get_current_user_id
 import logging
 
 logger = logging.getLogger(__name__)
@@ -63,12 +64,7 @@ def get_lesson(lesson_id: int):
         if not lesson:
             return not_found_response("Lesson")
 
-        # Get user progress (user_id=1 for now)
-        progress = (
-            db.session.query(UserProgress)
-            .filter(UserProgress.lesson_id == lesson_id, UserProgress.user_id == 1)
-            .first()
-        )
+        progress = get_user_progress(lesson_id)
 
         exercises = []
         for ex in lesson.exercises:
@@ -154,18 +150,7 @@ def start_lesson(lesson_id: int):
         if not lesson:
             return not_found_response("Lesson")
 
-        # Get or create progress record (user_id=1 for now)
-        progress = (
-            db.session.query(UserProgress)
-            .filter(UserProgress.lesson_id == lesson_id, UserProgress.user_id == 1)
-            .first()
-        )
-
-        if not progress:
-            progress = UserProgress(
-                lesson_id=lesson_id, user_id=1, total_exercises=lesson.exercise_count
-            )
-            db.session.add(progress)
+        progress = get_or_create_user_progress(lesson_id, lesson.exercise_count)
 
         if not progress.is_started:
             progress.is_started = True
@@ -226,22 +211,11 @@ def complete_lesson(lesson_id: int):
         score = data.get("score")
         time_spent = data.get("time_spent_seconds", 0)
 
-        # Get or create progress record
-        progress = (
-            db.session.query(UserProgress)
-            .filter(UserProgress.lesson_id == lesson_id, UserProgress.user_id == 1)
-            .first()
-        )
+        progress = get_or_create_user_progress(lesson_id, lesson.exercise_count)
 
-        if not progress:
-            progress = UserProgress(
-                lesson_id=lesson_id,
-                user_id=1,
-                is_started=True,
-                started_at=datetime.utcnow(),
-                total_exercises=lesson.exercise_count,
-            )
-            db.session.add(progress)
+        if not progress.is_started:
+            progress.is_started = True
+            progress.started_at = datetime.utcnow()
 
         progress.is_completed = True
         progress.completed_at = datetime.utcnow()
@@ -308,14 +282,7 @@ def submit_exercise(exercise_id: int):
 
         is_correct = user_answer == correct_answer
 
-        # Update lesson progress
-        progress = (
-            db.session.query(UserProgress)
-            .filter(
-                UserProgress.lesson_id == exercise.lesson_id, UserProgress.user_id == 1
-            )
-            .first()
-        )
+        progress = get_user_progress(exercise.lesson_id)
 
         if progress:
             if is_correct and progress.completed_exercises < progress.total_exercises:

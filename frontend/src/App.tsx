@@ -66,16 +66,7 @@ function App() {
     setState({ page: 'lesson', courseId: state.courseId, lessonId });
   }
 
-  function handleLessonComplete() {
-    // Go back to course view after completing a lesson
-    if (state.courseId) {
-      navigateToCourse(state.courseId);
-    } else {
-      navigateToCourses();
-    }
-  }
-
-  function handleLessonBack() {
+  function handleLessonExit() {
     if (state.courseId) {
       navigateToCourse(state.courseId);
     } else {
@@ -100,8 +91,8 @@ function App() {
       {state.page === 'lesson' && state.lessonId && (
         <LessonView
           lessonId={state.lessonId}
-          onComplete={handleLessonComplete}
-          onBack={handleLessonBack}
+          onComplete={handleLessonExit}
+          onBack={handleLessonExit}
         />
       )}
     </div>

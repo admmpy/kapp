@@ -12,6 +12,7 @@ from sqlalchemy import func
 from database import db
 from models_v2 import Course, Unit, Lesson, UserProgress
 from utils import error_response
+from routes.helpers import get_current_user_id
 import logging
 
 logger = logging.getLogger(__name__)
@@ -46,7 +47,7 @@ def get_overall_progress():
         }
     """
     try:
-        user_id = 1  # Default user for now
+        user_id = get_current_user_id()
 
         # Get all courses with their progress
         courses = (
@@ -185,7 +186,7 @@ def get_recent_activity():
         }
     """
     try:
-        user_id = 1
+        user_id = get_current_user_id()
 
         # Get recent completed lessons
         recent = (
@@ -242,7 +243,7 @@ def get_learning_stats():
         }
     """
     try:
-        user_id = 1
+        user_id = get_current_user_id()
         today = datetime.utcnow().date()
         week_ago = today - timedelta(days=7)
 
