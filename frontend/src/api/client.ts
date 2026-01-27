@@ -9,7 +9,6 @@ import type {
   Unit,
   Lesson,
   LessonSummary,
-  Exercise,
   ExerciseResult,
   OverallProgress,
   RecentActivity,

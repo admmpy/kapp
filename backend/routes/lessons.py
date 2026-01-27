@@ -17,10 +17,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-lessons_bp = Blueprint('lessons', __name__)
+lessons_bp = Blueprint("lessons", __name__)
 
 
-@lessons_bp.route('/lessons/<int:lesson_id>', methods=['GET'])
+@lessons_bp.route("/lessons/<int:lesson_id>", methods=["GET"])
 def get_lesson(lesson_id: int):
     """
     Get lesson with grammar explanation and exercises
@@ -61,40 +61,41 @@ def get_lesson(lesson_id: int):
     try:
         lesson = db.session.get(Lesson, lesson_id)
         if not lesson:
-            return not_found_response('Lesson')
+            return not_found_response("Lesson")
 
         # Get user progress (user_id=1 for now)
-        progress = db.session.query(UserProgress).filter(
-            UserProgress.lesson_id == lesson_id,
-            UserProgress.user_id == 1
-        ).first()
+        progress = (
+            db.session.query(UserProgress)
+            .filter(UserProgress.lesson_id == lesson_id, UserProgress.user_id == 1)
+            .first()
+        )
 
         exercises = []
         for ex in lesson.exercises:
             exercise_data = {
-                'id': ex.id,
-                'exercise_type': ex.exercise_type.value,
-                'question': ex.question,
-                'instruction': ex.instruction,
-                'display_order': ex.display_order
+                "id": ex.id,
+                "exercise_type": ex.exercise_type.value,
+                "question": ex.question,
+                "instruction": ex.instruction,
+                "display_order": ex.display_order,
             }
 
             # Add type-specific fields
             if ex.korean_text:
-                exercise_data['korean_text'] = ex.korean_text
+                exercise_data["korean_text"] = ex.korean_text
             if ex.romanization:
-                exercise_data['romanization'] = ex.romanization
+                exercise_data["romanization"] = ex.romanization
             if ex.english_text:
-                exercise_data['english_text'] = ex.english_text
+                exercise_data["english_text"] = ex.english_text
             if ex.content_text:
-                exercise_data['content_text'] = ex.content_text
+                exercise_data["content_text"] = ex.content_text
             if ex.audio_url:
-                exercise_data['audio_url'] = ex.audio_url
+                exercise_data["audio_url"] = ex.audio_url
             if ex.options:
                 try:
-                    exercise_data['options'] = json.loads(ex.options)
+                    exercise_data["options"] = json.loads(ex.options)
                 except json.JSONDecodeError:
-                    exercise_data['options'] = []
+                    exercise_data["options"] = []
 
             # Don't include correct_answer in the response (for security)
             exercises.append(exercise_data)
@@ -102,34 +103,39 @@ def get_lesson(lesson_id: int):
         progress_data = None
         if progress:
             progress_data = {
-                'is_started': progress.is_started,
-                'is_completed': progress.is_completed,
-                'completed_exercises': progress.completed_exercises,
-                'total_exercises': progress.total_exercises,
-                'score': progress.score
+                "is_started": progress.is_started,
+                "is_completed": progress.is_completed,
+                "completed_exercises": progress.completed_exercises,
+                "total_exercises": progress.total_exercises,
+                "score": progress.score,
             }
 
-        return jsonify({
-            'lesson': {
-                'id': lesson.id,
-                'title': lesson.title,
-                'description': lesson.description,
-                'grammar_explanation': lesson.grammar_explanation,
-                'grammar_tip': lesson.grammar_tip,
-                'estimated_minutes': lesson.estimated_minutes,
-                'unit_id': lesson.unit_id,
-                'exercise_count': lesson.exercise_count,
-                'exercises': exercises,
-                'progress': progress_data
-            }
-        }), 200
+        return (
+            jsonify(
+                {
+                    "lesson": {
+                        "id": lesson.id,
+                        "title": lesson.title,
+                        "description": lesson.description,
+                        "grammar_explanation": lesson.grammar_explanation,
+                        "grammar_tip": lesson.grammar_tip,
+                        "estimated_minutes": lesson.estimated_minutes,
+                        "unit_id": lesson.unit_id,
+                        "exercise_count": lesson.exercise_count,
+                        "exercises": exercises,
+                        "progress": progress_data,
+                    }
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"Error getting lesson {lesson_id}: {e}")
-        return error_response('Failed to get lesson', 500, str(e))
+        return error_response("Failed to get lesson", 500, str(e))
 
 
-@lessons_bp.route('/lessons/<int:lesson_id>/start', methods=['POST'])
+@lessons_bp.route("/lessons/<int:lesson_id>/start", methods=["POST"])
 def start_lesson(lesson_id: int):
     """
     Mark lesson as started
@@ -146,19 +152,18 @@ def start_lesson(lesson_id: int):
     try:
         lesson = db.session.get(Lesson, lesson_id)
         if not lesson:
-            return not_found_response('Lesson')
+            return not_found_response("Lesson")
 
         # Get or create progress record (user_id=1 for now)
-        progress = db.session.query(UserProgress).filter(
-            UserProgress.lesson_id == lesson_id,
-            UserProgress.user_id == 1
-        ).first()
+        progress = (
+            db.session.query(UserProgress)
+            .filter(UserProgress.lesson_id == lesson_id, UserProgress.user_id == 1)
+            .first()
+        )
 
         if not progress:
             progress = UserProgress(
-                lesson_id=lesson_id,
-                user_id=1,
-                total_exercises=lesson.exercise_count
+                lesson_id=lesson_id, user_id=1, total_exercises=lesson.exercise_count
             )
             db.session.add(progress)
 
@@ -170,21 +175,28 @@ def start_lesson(lesson_id: int):
         progress.last_activity_at = datetime.utcnow()
         db.session.commit()
 
-        return jsonify({
-            'success': True,
-            'progress': {
-                'is_started': progress.is_started,
-                'started_at': progress.started_at.isoformat() if progress.started_at else None
-            }
-        }), 200
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "progress": {
+                        "is_started": progress.is_started,
+                        "started_at": progress.started_at.isoformat()
+                        if progress.started_at
+                        else None,
+                    },
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"Error starting lesson {lesson_id}: {e}")
         db.session.rollback()
-        return error_response('Failed to start lesson', 500, str(e))
+        return error_response("Failed to start lesson", 500, str(e))
 
 
-@lessons_bp.route('/lessons/<int:lesson_id>/complete', methods=['POST'])
+@lessons_bp.route("/lessons/<int:lesson_id>/complete", methods=["POST"])
 def complete_lesson(lesson_id: int):
     """
     Mark lesson as completed
@@ -208,17 +220,18 @@ def complete_lesson(lesson_id: int):
     try:
         lesson = db.session.get(Lesson, lesson_id)
         if not lesson:
-            return not_found_response('Lesson')
+            return not_found_response("Lesson")
 
         data = request.get_json() or {}
-        score = data.get('score')
-        time_spent = data.get('time_spent_seconds', 0)
+        score = data.get("score")
+        time_spent = data.get("time_spent_seconds", 0)
 
         # Get or create progress record
-        progress = db.session.query(UserProgress).filter(
-            UserProgress.lesson_id == lesson_id,
-            UserProgress.user_id == 1
-        ).first()
+        progress = (
+            db.session.query(UserProgress)
+            .filter(UserProgress.lesson_id == lesson_id, UserProgress.user_id == 1)
+            .first()
+        )
 
         if not progress:
             progress = UserProgress(
@@ -226,7 +239,7 @@ def complete_lesson(lesson_id: int):
                 user_id=1,
                 is_started=True,
                 started_at=datetime.utcnow(),
-                total_exercises=lesson.exercise_count
+                total_exercises=lesson.exercise_count,
             )
             db.session.add(progress)
 
@@ -242,22 +255,29 @@ def complete_lesson(lesson_id: int):
 
         db.session.commit()
 
-        return jsonify({
-            'success': True,
-            'progress': {
-                'is_completed': progress.is_completed,
-                'completed_at': progress.completed_at.isoformat() if progress.completed_at else None,
-                'score': progress.score
-            }
-        }), 200
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "progress": {
+                        "is_completed": progress.is_completed,
+                        "completed_at": progress.completed_at.isoformat()
+                        if progress.completed_at
+                        else None,
+                        "score": progress.score,
+                    },
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"Error completing lesson {lesson_id}: {e}")
         db.session.rollback()
-        return error_response('Failed to complete lesson', 500, str(e))
+        return error_response("Failed to complete lesson", 500, str(e))
 
 
-@lessons_bp.route('/exercises/<int:exercise_id>/submit', methods=['POST'])
+@lessons_bp.route("/exercises/<int:exercise_id>/submit", methods=["POST"])
 def submit_exercise(exercise_id: int):
     """
     Submit an answer for an exercise
@@ -277,22 +297,25 @@ def submit_exercise(exercise_id: int):
     try:
         exercise = db.session.get(Exercise, exercise_id)
         if not exercise:
-            return not_found_response('Exercise')
+            return not_found_response("Exercise")
 
         data = request.get_json()
-        if not data or 'answer' not in data:
-            return validation_error_response('answer is required')
+        if not data or "answer" not in data:
+            return validation_error_response("answer is required")
 
-        user_answer = str(data['answer']).strip().lower()
+        user_answer = str(data["answer"]).strip().lower()
         correct_answer = exercise.correct_answer.strip().lower()
 
         is_correct = user_answer == correct_answer
 
         # Update lesson progress
-        progress = db.session.query(UserProgress).filter(
-            UserProgress.lesson_id == exercise.lesson_id,
-            UserProgress.user_id == 1
-        ).first()
+        progress = (
+            db.session.query(UserProgress)
+            .filter(
+                UserProgress.lesson_id == exercise.lesson_id, UserProgress.user_id == 1
+            )
+            .first()
+        )
 
         if progress:
             if is_correct and progress.completed_exercises < progress.total_exercises:
@@ -300,13 +323,18 @@ def submit_exercise(exercise_id: int):
             progress.last_activity_at = datetime.utcnow()
             db.session.commit()
 
-        return jsonify({
-            'correct': is_correct,
-            'correct_answer': exercise.correct_answer,
-            'explanation': exercise.explanation
-        }), 200
+        return (
+            jsonify(
+                {
+                    "correct": is_correct,
+                    "correct_answer": exercise.correct_answer,
+                    "explanation": exercise.explanation,
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"Error submitting exercise {exercise_id}: {e}")
         db.session.rollback()
-        return error_response('Failed to submit exercise', 500, str(e))
+        return error_response("Failed to submit exercise", 500, str(e))

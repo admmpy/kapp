@@ -93,7 +93,10 @@ class TestCalculateSM2:
         ease_factor = 2.5
         previous_interval = 6
         reps, interval, ef, next_date = calculate_sm2(
-            quality=4, repetitions=2, ease_factor=ease_factor, interval=previous_interval
+            quality=4,
+            repetitions=2,
+            ease_factor=ease_factor,
+            interval=previous_interval,
         )
         assert reps == 3
         assert interval == round(previous_interval * ease_factor)  # 6 * 2.5 = 15
@@ -103,7 +106,10 @@ class TestCalculateSM2:
         ease_factor = 2.5
         previous_interval = 15
         reps, interval, ef, next_date = calculate_sm2(
-            quality=4, repetitions=3, ease_factor=ease_factor, interval=previous_interval
+            quality=4,
+            repetitions=3,
+            ease_factor=ease_factor,
+            interval=previous_interval,
         )
         assert reps == 4
         # Ease factor changes slightly after each review, but interval grows
@@ -205,6 +211,7 @@ class TestUpdateCardAfterReview:
     def test_updates_card_repetitions(self, app, sample_card):
         """Should update card repetitions after review"""
         from models import Card
+
         with app.app_context():
             card = Card.query.get(sample_card)
             original_reps = card.repetitions
@@ -214,6 +221,7 @@ class TestUpdateCardAfterReview:
     def test_updates_card_interval(self, app, sample_card):
         """Should update card interval after review"""
         from models import Card
+
         with app.app_context():
             card = Card.query.get(sample_card)
             update_card_after_review(card, quality_rating=4)
@@ -222,6 +230,7 @@ class TestUpdateCardAfterReview:
     def test_updates_card_ease_factor(self, app, sample_card):
         """Should update card ease factor after review"""
         from models import Card
+
         with app.app_context():
             card = Card.query.get(sample_card)
             original_ef = card.ease_factor
@@ -231,6 +240,7 @@ class TestUpdateCardAfterReview:
     def test_updates_next_review_date(self, app, sample_card):
         """Should update card next_review_date after review"""
         from models import Card
+
         with app.app_context():
             card = Card.query.get(sample_card)
             update_card_after_review(card, quality_rating=4)
@@ -240,6 +250,7 @@ class TestUpdateCardAfterReview:
     def test_failed_review_resets_card(self, app, sample_card):
         """Failed review should reset card progress"""
         from models import Card
+
         with app.app_context():
             card = Card.query.get(sample_card)
             # First do some successful reviews

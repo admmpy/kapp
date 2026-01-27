@@ -15,10 +15,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-vocabulary_bp = Blueprint('vocabulary', __name__)
+vocabulary_bp = Blueprint("vocabulary", __name__)
 
 
-@vocabulary_bp.route('/vocabulary', methods=['GET'])
+@vocabulary_bp.route("/vocabulary", methods=["GET"])
 def list_vocabulary():
     """
     List vocabulary items with filtering
@@ -53,11 +53,11 @@ def list_vocabulary():
     """
     try:
         # Parse query parameters
-        category = request.args.get('category')
-        difficulty = request.args.get('difficulty', type=int)
-        search = request.args.get('search', '').strip()
-        limit = min(request.args.get('limit', 50, type=int), 100)
-        offset = request.args.get('offset', 0, type=int)
+        category = request.args.get("category")
+        difficulty = request.args.get("difficulty", type=int)
+        search = request.args.get("search", "").strip()
+        limit = min(request.args.get("limit", 50, type=int), 100)
+        offset = request.args.get("offset", 0, type=int)
 
         # Build query
         query = db.session.query(VocabularyItem)
@@ -67,12 +67,12 @@ def list_vocabulary():
         if difficulty:
             query = query.filter(VocabularyItem.difficulty_level == difficulty)
         if search:
-            search_pattern = f'%{search}%'
+            search_pattern = f"%{search}%"
             query = query.filter(
                 db.or_(
                     VocabularyItem.korean.ilike(search_pattern),
                     VocabularyItem.english.ilike(search_pattern),
-                    VocabularyItem.romanization.ilike(search_pattern)
+                    VocabularyItem.romanization.ilike(search_pattern),
                 )
             )
 
@@ -80,39 +80,51 @@ def list_vocabulary():
         total = query.count()
 
         # Apply pagination and ordering
-        items = query.order_by(
-            VocabularyItem.difficulty_level,
-            VocabularyItem.category,
-            VocabularyItem.korean
-        ).offset(offset).limit(limit).all()
+        items = (
+            query.order_by(
+                VocabularyItem.difficulty_level,
+                VocabularyItem.category,
+                VocabularyItem.korean,
+            )
+            .offset(offset)
+            .limit(limit)
+            .all()
+        )
 
         vocabulary = []
         for item in items:
-            vocabulary.append({
-                'id': item.id,
-                'korean': item.korean,
-                'romanization': item.romanization,
-                'english': item.english,
-                'part_of_speech': item.part_of_speech,
-                'category': item.category,
-                'difficulty_level': item.difficulty_level,
-                'audio_url': item.audio_url,
-                'accuracy_rate': item.accuracy_rate
-            })
+            vocabulary.append(
+                {
+                    "id": item.id,
+                    "korean": item.korean,
+                    "romanization": item.romanization,
+                    "english": item.english,
+                    "part_of_speech": item.part_of_speech,
+                    "category": item.category,
+                    "difficulty_level": item.difficulty_level,
+                    "audio_url": item.audio_url,
+                    "accuracy_rate": item.accuracy_rate,
+                }
+            )
 
-        return jsonify({
-            'vocabulary': vocabulary,
-            'total': total,
-            'limit': limit,
-            'offset': offset
-        }), 200
+        return (
+            jsonify(
+                {
+                    "vocabulary": vocabulary,
+                    "total": total,
+                    "limit": limit,
+                    "offset": offset,
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"Error listing vocabulary: {e}")
-        return error_response('Failed to list vocabulary', 500, str(e))
+        return error_response("Failed to list vocabulary", 500, str(e))
 
 
-@vocabulary_bp.route('/vocabulary/<int:item_id>', methods=['GET'])
+@vocabulary_bp.route("/vocabulary/<int:item_id>", methods=["GET"])
 def get_vocabulary_item(item_id: int):
     """
     Get vocabulary item details
@@ -139,32 +151,37 @@ def get_vocabulary_item(item_id: int):
     try:
         item = db.session.get(VocabularyItem, item_id)
         if not item:
-            return not_found_response('Vocabulary item')
+            return not_found_response("Vocabulary item")
 
-        return jsonify({
-            'item': {
-                'id': item.id,
-                'korean': item.korean,
-                'romanization': item.romanization,
-                'english': item.english,
-                'part_of_speech': item.part_of_speech,
-                'example_sentence_korean': item.example_sentence_korean,
-                'example_sentence_english': item.example_sentence_english,
-                'category': item.category,
-                'difficulty_level': item.difficulty_level,
-                'audio_url': item.audio_url,
-                'times_practiced': item.times_practiced,
-                'times_correct': item.times_correct,
-                'accuracy_rate': item.accuracy_rate
-            }
-        }), 200
+        return (
+            jsonify(
+                {
+                    "item": {
+                        "id": item.id,
+                        "korean": item.korean,
+                        "romanization": item.romanization,
+                        "english": item.english,
+                        "part_of_speech": item.part_of_speech,
+                        "example_sentence_korean": item.example_sentence_korean,
+                        "example_sentence_english": item.example_sentence_english,
+                        "category": item.category,
+                        "difficulty_level": item.difficulty_level,
+                        "audio_url": item.audio_url,
+                        "times_practiced": item.times_practiced,
+                        "times_correct": item.times_correct,
+                        "accuracy_rate": item.accuracy_rate,
+                    }
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"Error getting vocabulary item {item_id}: {e}")
-        return error_response('Failed to get vocabulary item', 500, str(e))
+        return error_response("Failed to get vocabulary item", 500, str(e))
 
 
-@vocabulary_bp.route('/vocabulary/categories', methods=['GET'])
+@vocabulary_bp.route("/vocabulary/categories", methods=["GET"])
 def list_categories():
     """
     List all vocabulary categories
@@ -188,32 +205,26 @@ def list_categories():
         # Get distinct categories with counts
         from sqlalchemy import func
 
-        results = db.session.query(
-            VocabularyItem.category,
-            func.count(VocabularyItem.id).label('count')
-        ).filter(
-            VocabularyItem.category.isnot(None)
-        ).group_by(
-            VocabularyItem.category
-        ).order_by(
-            VocabularyItem.category
-        ).all()
+        results = (
+            db.session.query(
+                VocabularyItem.category, func.count(VocabularyItem.id).label("count")
+            )
+            .filter(VocabularyItem.category.isnot(None))
+            .group_by(VocabularyItem.category)
+            .order_by(VocabularyItem.category)
+            .all()
+        )
 
-        categories = [
-            {'name': cat, 'count': count}
-            for cat, count in results
-        ]
+        categories = [{"name": cat, "count": count} for cat, count in results]
 
-        return jsonify({
-            'categories': categories
-        }), 200
+        return jsonify({"categories": categories}), 200
 
     except Exception as e:
         logger.error(f"Error listing categories: {e}")
-        return error_response('Failed to list categories', 500, str(e))
+        return error_response("Failed to list categories", 500, str(e))
 
 
-@vocabulary_bp.route('/vocabulary/<int:item_id>/practice', methods=['POST'])
+@vocabulary_bp.route("/vocabulary/<int:item_id>/practice", methods=["POST"])
 def record_practice(item_id: int):
     """
     Record a practice attempt for a vocabulary item
@@ -234,13 +245,13 @@ def record_practice(item_id: int):
     try:
         item = db.session.get(VocabularyItem, item_id)
         if not item:
-            return not_found_response('Vocabulary item')
+            return not_found_response("Vocabulary item")
 
         data = request.get_json()
-        if data is None or 'correct' not in data:
-            return validation_error_response('correct field is required')
+        if data is None or "correct" not in data:
+            return validation_error_response("correct field is required")
 
-        is_correct = bool(data['correct'])
+        is_correct = bool(data["correct"])
 
         item.times_practiced += 1
         if is_correct:
@@ -248,14 +259,19 @@ def record_practice(item_id: int):
 
         db.session.commit()
 
-        return jsonify({
-            'success': True,
-            'times_practiced': item.times_practiced,
-            'times_correct': item.times_correct,
-            'accuracy_rate': item.accuracy_rate
-        }), 200
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "times_practiced": item.times_practiced,
+                    "times_correct": item.times_correct,
+                    "accuracy_rate": item.accuracy_rate,
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"Error recording practice for item {item_id}: {e}")
         db.session.rollback()
-        return error_response('Failed to record practice', 500, str(e))
+        return error_response("Failed to record practice", 500, str(e))

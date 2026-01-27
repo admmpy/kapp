@@ -3,7 +3,7 @@
  */
 import { useState, useEffect } from 'react';
 import { apiClient } from '../api/client';
-import type { Lesson, Exercise, ExerciseResult } from '../types';
+import type { Lesson, ExerciseResult } from '../types';
 import ExerciseRenderer from './ExerciseRenderer';
 import ProgressBar from './ProgressBar';
 import './LessonView.css';

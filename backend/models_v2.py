@@ -13,7 +13,16 @@ Models:
 """
 from datetime import datetime
 from enum import Enum
-from sqlalchemy import Integer, String, Float, Text, DateTime, ForeignKey, Boolean, Enum as SQLEnum
+from sqlalchemy import (
+    Integer,
+    String,
+    Float,
+    Text,
+    DateTime,
+    ForeignKey,
+    Boolean,
+    Enum as SQLEnum,
+)
 from sqlalchemy import CheckConstraint, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List, Optional
@@ -22,33 +31,42 @@ from database import db
 
 class ExerciseType(str, Enum):
     """Types of exercises available in lessons"""
-    VOCABULARY = 'vocabulary'      # Vocabulary matching/translation
-    GRAMMAR = 'grammar'            # Fill-in-blank, grammar rules
-    READING = 'reading'            # Reading comprehension
-    LISTENING = 'listening'        # Audio comprehension
-    REVIEW = 'review'              # Mixed review exercises
+
+    VOCABULARY = "vocabulary"  # Vocabulary matching/translation
+    GRAMMAR = "grammar"  # Fill-in-blank, grammar rules
+    READING = "reading"  # Reading comprehension
+    LISTENING = "listening"  # Audio comprehension
+    REVIEW = "review"  # Mixed review exercises
 
 
 class Course(db.Model):
     """Top-level course containing units and lessons"""
 
-    __tablename__ = 'course'
+    __tablename__ = "course"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(200), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(Text)
-    language: Mapped[str] = mapped_column(String(50), default='Korean')
-    level: Mapped[str] = mapped_column(String(50), default='Beginner')  # Beginner, Intermediate, Advanced
+    language: Mapped[str] = mapped_column(String(50), default="Korean")
+    level: Mapped[str] = mapped_column(
+        String(50), default="Beginner"
+    )  # Beginner, Intermediate, Advanced
     image_url: Mapped[Optional[str]] = mapped_column(String(500))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     display_order: Mapped[int] = mapped_column(Integer, default=0)
 
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
-    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
 
     # Relationships
-    units: Mapped[List["Unit"]] = relationship("Unit", back_populates="course", cascade="all, delete-orphan",
-                                                order_by="Unit.display_order")
+    units: Mapped[List["Unit"]] = relationship(
+        "Unit",
+        back_populates="course",
+        cascade="all, delete-orphan",
+        order_by="Unit.display_order",
+    )
 
     def __repr__(self) -> str:
         return f"<Course {self.id}: {self.title}>"
@@ -65,25 +83,31 @@ class Course(db.Model):
 class Unit(db.Model):
     """Section within a course containing related lessons"""
 
-    __tablename__ = 'unit'
+    __tablename__ = "unit"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    course_id: Mapped[int] = mapped_column(Integer, ForeignKey('course.id'), nullable=False)
+    course_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("course.id"), nullable=False
+    )
     title: Mapped[str] = mapped_column(String(200), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(Text)
     display_order: Mapped[int] = mapped_column(Integer, default=0)
-    is_locked: Mapped[bool] = mapped_column(Boolean, default=False)  # For progression gating
+    is_locked: Mapped[bool] = mapped_column(
+        Boolean, default=False
+    )  # For progression gating
 
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     # Relationships
     course: Mapped["Course"] = relationship("Course", back_populates="units")
-    lessons: Mapped[List["Lesson"]] = relationship("Lesson", back_populates="unit", cascade="all, delete-orphan",
-                                                    order_by="Lesson.display_order")
-
-    __table_args__ = (
-        Index('idx_unit_course_order', 'course_id', 'display_order'),
+    lessons: Mapped[List["Lesson"]] = relationship(
+        "Lesson",
+        back_populates="unit",
+        cascade="all, delete-orphan",
+        order_by="Lesson.display_order",
     )
+
+    __table_args__ = (Index("idx_unit_course_order", "course_id", "display_order"),)
 
     def __repr__(self) -> str:
         return f"<Unit {self.id}: {self.title}>"
@@ -96,10 +120,10 @@ class Unit(db.Model):
 class Lesson(db.Model):
     """Individual lesson with grammar explanation and exercises"""
 
-    __tablename__ = 'lesson'
+    __tablename__ = "lesson"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    unit_id: Mapped[int] = mapped_column(Integer, ForeignKey('unit.id'), nullable=False)
+    unit_id: Mapped[int] = mapped_column(Integer, ForeignKey("unit.id"), nullable=False)
     title: Mapped[str] = mapped_column(String(200), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(Text)
 
@@ -113,19 +137,23 @@ class Lesson(db.Model):
     is_locked: Mapped[bool] = mapped_column(Boolean, default=False)
 
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
-    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
 
     # Relationships
     unit: Mapped["Unit"] = relationship("Unit", back_populates="lessons")
-    exercises: Mapped[List["Exercise"]] = relationship("Exercise", back_populates="lesson",
-                                                        cascade="all, delete-orphan",
-                                                        order_by="Exercise.display_order")
-    progress: Mapped[List["UserProgress"]] = relationship("UserProgress", back_populates="lesson",
-                                                           cascade="all, delete-orphan")
-
-    __table_args__ = (
-        Index('idx_lesson_unit_order', 'unit_id', 'display_order'),
+    exercises: Mapped[List["Exercise"]] = relationship(
+        "Exercise",
+        back_populates="lesson",
+        cascade="all, delete-orphan",
+        order_by="Exercise.display_order",
     )
+    progress: Mapped[List["UserProgress"]] = relationship(
+        "UserProgress", back_populates="lesson", cascade="all, delete-orphan"
+    )
+
+    __table_args__ = (Index("idx_lesson_unit_order", "unit_id", "display_order"),)
 
     def __repr__(self) -> str:
         return f"<Lesson {self.id}: {self.title}>"
@@ -138,17 +166,23 @@ class Lesson(db.Model):
 class Exercise(db.Model):
     """Individual exercise within a lesson"""
 
-    __tablename__ = 'exercise'
+    __tablename__ = "exercise"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    lesson_id: Mapped[int] = mapped_column(Integer, ForeignKey('lesson.id'), nullable=False)
+    lesson_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("lesson.id"), nullable=False
+    )
 
     # Exercise type and content
-    exercise_type: Mapped[ExerciseType] = mapped_column(SQLEnum(ExerciseType), nullable=False)
+    exercise_type: Mapped[ExerciseType] = mapped_column(
+        SQLEnum(ExerciseType), nullable=False
+    )
 
     # Question/prompt
     question: Mapped[str] = mapped_column(Text, nullable=False)
-    instruction: Mapped[Optional[str]] = mapped_column(Text)  # e.g., "Select the correct translation"
+    instruction: Mapped[Optional[str]] = mapped_column(
+        Text
+    )  # e.g., "Select the correct translation"
 
     # For vocabulary/grammar exercises
     korean_text: Mapped[Optional[str]] = mapped_column(Text)
@@ -156,11 +190,15 @@ class Exercise(db.Model):
     english_text: Mapped[Optional[str]] = mapped_column(Text)
 
     # Answer options (JSON string for multiple choice)
-    options: Mapped[Optional[str]] = mapped_column(Text)  # JSON: ["option1", "option2", ...]
+    options: Mapped[Optional[str]] = mapped_column(
+        Text
+    )  # JSON: ["option1", "option2", ...]
     correct_answer: Mapped[str] = mapped_column(Text, nullable=False)
 
     # For reading/listening exercises
-    content_text: Mapped[Optional[str]] = mapped_column(Text)  # Reading passage or audio transcript
+    content_text: Mapped[Optional[str]] = mapped_column(
+        Text
+    )  # Reading passage or audio transcript
     audio_url: Mapped[Optional[str]] = mapped_column(String(500))
 
     # Explanation shown after answering
@@ -174,8 +212,8 @@ class Exercise(db.Model):
     lesson: Mapped["Lesson"] = relationship("Lesson", back_populates="exercises")
 
     __table_args__ = (
-        Index('idx_exercise_lesson_order', 'lesson_id', 'display_order'),
-        Index('idx_exercise_type', 'exercise_type'),
+        Index("idx_exercise_lesson_order", "lesson_id", "display_order"),
+        Index("idx_exercise_type", "exercise_type"),
     )
 
     def __repr__(self) -> str:
@@ -185,10 +223,12 @@ class Exercise(db.Model):
 class UserProgress(db.Model):
     """Tracks user completion and performance on lessons"""
 
-    __tablename__ = 'user_progress'
+    __tablename__ = "user_progress"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    lesson_id: Mapped[int] = mapped_column(Integer, ForeignKey('lesson.id'), nullable=False)
+    lesson_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("lesson.id"), nullable=False
+    )
 
     # For multi-user support (optional, default user_id=1)
     user_id: Mapped[int] = mapped_column(Integer, default=1)
@@ -206,25 +246,31 @@ class UserProgress(db.Model):
     # Timestamps
     started_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
     completed_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
-    last_activity_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    last_activity_at: Mapped[datetime] = mapped_column(
+        DateTime, default=datetime.utcnow
+    )
 
     # Relationships
     lesson: Mapped["Lesson"] = relationship("Lesson", back_populates="progress")
 
     __table_args__ = (
-        Index('idx_user_lesson', 'user_id', 'lesson_id'),
-        Index('idx_user_completed', 'user_id', 'is_completed'),
+        Index("idx_user_lesson", "user_id", "lesson_id"),
+        Index("idx_user_completed", "user_id", "is_completed"),
     )
 
     def __repr__(self) -> str:
-        status = "completed" if self.is_completed else ("started" if self.is_started else "not started")
+        status = (
+            "completed"
+            if self.is_completed
+            else ("started" if self.is_started else "not started")
+        )
         return f"<UserProgress Lesson {self.lesson_id}: {status}>"
 
 
 class VocabularyItem(db.Model):
     """Standalone vocabulary reference/glossary item"""
 
-    __tablename__ = 'vocabulary_item'
+    __tablename__ = "vocabulary_item"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
@@ -234,7 +280,9 @@ class VocabularyItem(db.Model):
     english: Mapped[str] = mapped_column(Text, nullable=False)
 
     # Additional info
-    part_of_speech: Mapped[Optional[str]] = mapped_column(String(50))  # noun, verb, adjective, etc.
+    part_of_speech: Mapped[Optional[str]] = mapped_column(
+        String(50)
+    )  # noun, verb, adjective, etc.
     example_sentence_korean: Mapped[Optional[str]] = mapped_column(Text)
     example_sentence_english: Mapped[Optional[str]] = mapped_column(Text)
 
@@ -242,7 +290,9 @@ class VocabularyItem(db.Model):
     audio_url: Mapped[Optional[str]] = mapped_column(String(500))
 
     # Categorization
-    category: Mapped[Optional[str]] = mapped_column(String(100))  # greetings, numbers, family, etc.
+    category: Mapped[Optional[str]] = mapped_column(
+        String(100)
+    )  # greetings, numbers, family, etc.
     difficulty_level: Mapped[int] = mapped_column(Integer, default=1)  # 1-5
 
     # Tracking
@@ -252,9 +302,12 @@ class VocabularyItem(db.Model):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     __table_args__ = (
-        Index('idx_vocab_category', 'category'),
-        Index('idx_vocab_difficulty', 'difficulty_level'),
-        CheckConstraint('difficulty_level >= 1 AND difficulty_level <= 5', name='check_vocab_difficulty'),
+        Index("idx_vocab_category", "category"),
+        Index("idx_vocab_difficulty", "difficulty_level"),
+        CheckConstraint(
+            "difficulty_level >= 1 AND difficulty_level <= 5",
+            name="check_vocab_difficulty",
+        ),
     )
 
     def __repr__(self) -> str:

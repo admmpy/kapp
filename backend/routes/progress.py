@@ -16,10 +16,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-progress_bp = Blueprint('progress', __name__)
+progress_bp = Blueprint("progress", __name__)
 
 
-@progress_bp.route('/progress', methods=['GET'])
+@progress_bp.route("/progress", methods=["GET"])
 def get_overall_progress():
     """
     Get overall learning progress
@@ -49,7 +49,9 @@ def get_overall_progress():
         user_id = 1  # Default user for now
 
         # Get all courses with their progress
-        courses = db.session.query(Course).filter(Course.is_active == True).all()  # noqa: E712
+        courses = (
+            db.session.query(Course).filter(Course.is_active == True).all()
+        )  # noqa: E712
 
         course_progress = []
         total_lessons = 0
@@ -68,11 +70,15 @@ def get_overall_progress():
 
             if course_lesson_ids:
                 # Get completed lessons for this course
-                completed = db.session.query(UserProgress).filter(
-                    UserProgress.lesson_id.in_(course_lesson_ids),
-                    UserProgress.user_id == user_id,
-                    UserProgress.is_completed == True  # noqa: E712
-                ).all()
+                completed = (
+                    db.session.query(UserProgress)
+                    .filter(
+                        UserProgress.lesson_id.in_(course_lesson_ids),
+                        UserProgress.user_id == user_id,
+                        UserProgress.is_completed == True,  # noqa: E712
+                    )
+                    .all()
+                )
 
                 course_completed = len(completed)
                 total_completed += course_completed
@@ -82,35 +88,48 @@ def get_overall_progress():
                     if p.score is not None:
                         scores.append(p.score)
 
-                course_progress.append({
-                    'id': course.id,
-                    'title': course.title,
-                    'completed_lessons': course_completed,
-                    'total_lessons': course_total,
-                    'percentage': round((course_completed / course_total) * 100, 1) if course_total > 0 else 0
-                })
+                course_progress.append(
+                    {
+                        "id": course.id,
+                        "title": course.title,
+                        "completed_lessons": course_completed,
+                        "total_lessons": course_total,
+                        "percentage": round((course_completed / course_total) * 100, 1)
+                        if course_total > 0
+                        else 0,
+                    }
+                )
 
-        completion_percentage = round((total_completed / total_lessons) * 100, 1) if total_lessons > 0 else 0
+        completion_percentage = (
+            round((total_completed / total_lessons) * 100, 1)
+            if total_lessons > 0
+            else 0
+        )
         average_score = round(sum(scores) / len(scores), 1) if scores else None
 
         # Calculate streak (days with activity in a row)
         streak = calculate_streak(user_id)
 
-        return jsonify({
-            'progress': {
-                'total_lessons': total_lessons,
-                'completed_lessons': total_completed,
-                'completion_percentage': completion_percentage,
-                'total_time_spent_minutes': round(total_time_seconds / 60),
-                'average_score': average_score,
-                'current_streak': streak,
-                'courses': course_progress
-            }
-        }), 200
+        return (
+            jsonify(
+                {
+                    "progress": {
+                        "total_lessons": total_lessons,
+                        "completed_lessons": total_completed,
+                        "completion_percentage": completion_percentage,
+                        "total_time_spent_minutes": round(total_time_seconds / 60),
+                        "average_score": average_score,
+                        "current_streak": streak,
+                        "courses": course_progress,
+                    }
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"Error getting overall progress: {e}")
-        return error_response('Failed to get progress', 500, str(e))
+        return error_response("Failed to get progress", 500, str(e))
 
 
 def calculate_streak(user_id: int) -> int:
@@ -125,11 +144,15 @@ def calculate_streak(user_id: int) -> int:
             start_of_day = datetime.combine(check_date, datetime.min.time())
             end_of_day = datetime.combine(check_date, datetime.max.time())
 
-            had_activity = db.session.query(UserProgress).filter(
-                UserProgress.user_id == user_id,
-                UserProgress.completed_at >= start_of_day,
-                UserProgress.completed_at <= end_of_day
-            ).first()
+            had_activity = (
+                db.session.query(UserProgress)
+                .filter(
+                    UserProgress.user_id == user_id,
+                    UserProgress.completed_at >= start_of_day,
+                    UserProgress.completed_at <= end_of_day,
+                )
+                .first()
+            )
 
             if had_activity:
                 streak += 1
@@ -142,7 +165,7 @@ def calculate_streak(user_id: int) -> int:
         return 0
 
 
-@progress_bp.route('/progress/recent', methods=['GET'])
+@progress_bp.route("/progress/recent", methods=["GET"])
 def get_recent_activity():
     """
     Get recent learning activity
@@ -165,35 +188,43 @@ def get_recent_activity():
         user_id = 1
 
         # Get recent completed lessons
-        recent = db.session.query(UserProgress).filter(
-            UserProgress.user_id == user_id,
-            UserProgress.is_completed == True  # noqa: E712
-        ).order_by(UserProgress.completed_at.desc()).limit(10).all()
+        recent = (
+            db.session.query(UserProgress)
+            .filter(
+                UserProgress.user_id == user_id,
+                UserProgress.is_completed == True,  # noqa: E712
+            )
+            .order_by(UserProgress.completed_at.desc())
+            .limit(10)
+            .all()
+        )
 
         activities = []
         for p in recent:
             lesson = db.session.get(Lesson, p.lesson_id)
             if lesson:
                 unit = db.session.get(Unit, lesson.unit_id)
-                activities.append({
-                    'lesson_id': p.lesson_id,
-                    'lesson_title': lesson.title,
-                    'unit_title': unit.title if unit else None,
-                    'completed_at': p.completed_at.isoformat() if p.completed_at else None,
-                    'score': p.score,
-                    'time_spent_minutes': round((p.time_spent_seconds or 0) / 60)
-                })
+                activities.append(
+                    {
+                        "lesson_id": p.lesson_id,
+                        "lesson_title": lesson.title,
+                        "unit_title": unit.title if unit else None,
+                        "completed_at": p.completed_at.isoformat()
+                        if p.completed_at
+                        else None,
+                        "score": p.score,
+                        "time_spent_minutes": round((p.time_spent_seconds or 0) / 60),
+                    }
+                )
 
-        return jsonify({
-            'recent_activity': activities
-        }), 200
+        return jsonify({"recent_activity": activities}), 200
 
     except Exception as e:
         logger.error(f"Error getting recent activity: {e}")
-        return error_response('Failed to get recent activity', 500, str(e))
+        return error_response("Failed to get recent activity", 500, str(e))
 
 
-@progress_bp.route('/progress/stats', methods=['GET'])
+@progress_bp.route("/progress/stats", methods=["GET"])
 def get_learning_stats():
     """
     Get detailed learning statistics
@@ -217,46 +248,65 @@ def get_learning_stats():
 
         # Lessons completed today
         start_of_today = datetime.combine(today, datetime.min.time())
-        today_count = db.session.query(func.count(UserProgress.id)).filter(
-            UserProgress.user_id == user_id,
-            UserProgress.is_completed == True,  # noqa: E712
-            UserProgress.completed_at >= start_of_today
-        ).scalar() or 0
+        today_count = (
+            db.session.query(func.count(UserProgress.id))
+            .filter(
+                UserProgress.user_id == user_id,
+                UserProgress.is_completed == True,  # noqa: E712
+                UserProgress.completed_at >= start_of_today,
+            )
+            .scalar()
+            or 0
+        )
 
         # Lessons completed this week
         start_of_week = datetime.combine(week_ago, datetime.min.time())
-        week_count = db.session.query(func.count(UserProgress.id)).filter(
-            UserProgress.user_id == user_id,
-            UserProgress.is_completed == True,  # noqa: E712
-            UserProgress.completed_at >= start_of_week
-        ).scalar() or 0
+        week_count = (
+            db.session.query(func.count(UserProgress.id))
+            .filter(
+                UserProgress.user_id == user_id,
+                UserProgress.is_completed == True,  # noqa: E712
+                UserProgress.completed_at >= start_of_week,
+            )
+            .scalar()
+            or 0
+        )
 
         # Total exercises completed
-        total_exercises = db.session.query(func.sum(UserProgress.completed_exercises)).filter(
-            UserProgress.user_id == user_id
-        ).scalar() or 0
+        total_exercises = (
+            db.session.query(func.sum(UserProgress.completed_exercises))
+            .filter(UserProgress.user_id == user_id)
+            .scalar()
+            or 0
+        )
 
         # Best score
-        best_score = db.session.query(func.max(UserProgress.score)).filter(
-            UserProgress.user_id == user_id,
-            UserProgress.score.isnot(None)
-        ).scalar()
+        best_score = (
+            db.session.query(func.max(UserProgress.score))
+            .filter(UserProgress.user_id == user_id, UserProgress.score.isnot(None))
+            .scalar()
+        )
 
         # Calculate improvement trend (compare last week's avg to previous week)
         improvement_trend = None
         # This would require more historical data, leaving as placeholder
 
-        return jsonify({
-            'stats': {
-                'lessons_completed_today': today_count,
-                'lessons_completed_this_week': week_count,
-                'total_exercises_completed': total_exercises,
-                'best_score': best_score,
-                'improvement_trend': improvement_trend,
-                'current_streak': calculate_streak(user_id)
-            }
-        }), 200
+        return (
+            jsonify(
+                {
+                    "stats": {
+                        "lessons_completed_today": today_count,
+                        "lessons_completed_this_week": week_count,
+                        "total_exercises_completed": total_exercises,
+                        "best_score": best_score,
+                        "improvement_trend": improvement_trend,
+                        "current_streak": calculate_streak(user_id),
+                    }
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"Error getting learning stats: {e}")
-        return error_response('Failed to get stats', 500, str(e))
+        return error_response("Failed to get stats", 500, str(e))
