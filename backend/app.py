@@ -81,43 +81,51 @@ def create_app(config_name=None):
 
 def register_blueprints(app):
     """Register Flask blueprints for routes
-    
+
     Args:
         app: Flask application instance
     """
-    from routes.cards import cards_bp
-    from routes.reviews import reviews_bp
-    from routes.stats import stats_bp
+    # Lesson-based routes (v2.0)
+    from routes.courses import courses_bp
+    from routes.lessons import lessons_bp
+    from routes.progress import progress_bp
+    from routes.vocabulary import vocabulary_bp
+
+    # Shared routes (kept from v1)
     from routes.audio import audio_bp
     from routes.llm import llm_bp
-    
-    # Register blueprints with /api prefix
-    app.register_blueprint(cards_bp, url_prefix='/api')
-    app.register_blueprint(reviews_bp, url_prefix='/api')
-    app.register_blueprint(stats_bp, url_prefix='/api')
+
+    # Register lesson-based blueprints with /api prefix
+    app.register_blueprint(courses_bp, url_prefix='/api')
+    app.register_blueprint(lessons_bp, url_prefix='/api')
+    app.register_blueprint(progress_bp, url_prefix='/api')
+    app.register_blueprint(vocabulary_bp, url_prefix='/api')
+
+    # Register shared blueprints
     app.register_blueprint(audio_bp, url_prefix='/api')
     app.register_blueprint(llm_bp, url_prefix='/api')
-    
+
     # Register debug blueprint (development only)
     if app.config.get('DEBUG', False) or app.config.get('TESTING', False):
         from routes.debug import debug_bp
         app.register_blueprint(debug_bp, url_prefix='/api')
         app.logger.info("Debug endpoints enabled at /api/debug/*")
-    
+
     # Root endpoint - API information
     @app.route('/')
     def root():
         """Root endpoint providing API information"""
         return jsonify({
             'service': 'kapp-backend',
-            'version': '0.1.0',
+            'version': '2.0.0',
             'status': 'running',
             'api_base': '/api',
             'endpoints': {
                 'health': '/api/health',
-                'cards': '/api/cards',
-                'reviews': '/api/reviews',
-                'stats': '/api/stats',
+                'courses': '/api/courses',
+                'lessons': '/api/lessons',
+                'progress': '/api/progress',
+                'vocabulary': '/api/vocabulary',
                 'audio': '/api/audio',
                 'llm': '/api/llm'
             }
@@ -130,7 +138,7 @@ def register_blueprints(app):
         return jsonify({
             'status': 'ok',
             'service': 'kapp-backend',
-            'version': '0.1.0'
+            'version': '2.0.0'
         })
 
 
