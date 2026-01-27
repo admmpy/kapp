@@ -14,23 +14,24 @@ from models import Card, Deck, Review
 
 class TestingConfig:
     """Testing configuration"""
+
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'test-secret-key'
-    TTS_CACHE_DIR = 'data/audio_cache'
-    LLM_CACHE_DIR = 'data/llm_cache'
-    LLM_MODEL = 'test-model'
-    LLM_BASE_URL = 'http://localhost:11434'
+    SECRET_KEY = "test-secret-key"
+    TTS_CACHE_DIR = "data/audio_cache"
+    LLM_CACHE_DIR = "data/llm_cache"
+    LLM_MODEL = "test-model"
+    LLM_BASE_URL = "http://localhost:11434"
     LLM_ENABLED = False
-    CORS_ORIGINS = ['http://localhost:5173']
+    CORS_ORIGINS = ["http://localhost:5173"]
     RATELIMIT_ENABLED = False
 
 
 @pytest.fixture
 def app():
     """Create application for testing"""
-    app = create_app('testing')
+    app = create_app("testing")
     app.config.from_object(TestingConfig)
 
     with app.app_context():
@@ -56,11 +57,7 @@ def db_session(app):
 def sample_deck(app):
     """Create a sample deck for testing"""
     with app.app_context():
-        deck = Deck(
-            name='Test Deck',
-            description='A test deck',
-            level=1
-        )
+        deck = Deck(name="Test Deck", description="A test deck", level=1)
         db.session.add(deck)
         db.session.commit()
         deck_id = deck.id
@@ -73,13 +70,13 @@ def sample_card(app, sample_deck):
     with app.app_context():
         card = Card(
             deck_id=sample_deck,
-            front_korean='안녕하세요',
-            front_romanization='annyeonghaseyo',
-            back_english='Hello',
+            front_korean="안녕하세요",
+            front_romanization="annyeonghaseyo",
+            back_english="Hello",
             level=1,
             ease_factor=2.5,
             interval=0,
-            repetitions=0
+            repetitions=0,
         )
         db.session.add(card)
         db.session.commit()
@@ -93,9 +90,9 @@ def multiple_cards(app, sample_deck):
     with app.app_context():
         cards = []
         test_data = [
-            ('감사합니다', 'gamsahamnida', 'Thank you'),
-            ('네', 'ne', 'Yes'),
-            ('아니요', 'aniyo', 'No'),
+            ("감사합니다", "gamsahamnida", "Thank you"),
+            ("네", "ne", "Yes"),
+            ("아니요", "aniyo", "No"),
         ]
         for korean, romanization, english in test_data:
             card = Card(
@@ -106,7 +103,7 @@ def multiple_cards(app, sample_deck):
                 level=1,
                 ease_factor=2.5,
                 interval=0,
-                repetitions=0
+                repetitions=0,
             )
             db.session.add(card)
             cards.append(card)

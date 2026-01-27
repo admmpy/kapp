@@ -19,7 +19,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-llm_bp = Blueprint('llm', __name__)
+llm_bp = Blueprint("llm", __name__)
 
 
 def validate_level(level, default: int = 0) -> int:
@@ -31,42 +31,40 @@ def validate_level(level, default: int = 0) -> int:
             return default
     return max(0, min(5, level))
 
+
 # Initialise LLM client (lazy loading)
 _llm_client = None
+
 
 def get_llm_client() -> OllamaClient:
     """Get or create LLM client instance"""
     global _llm_client
     if _llm_client is None:
-        model = current_app.config.get('LLM_MODEL', 'open-llama-2-ko-7b')
-        base_url = current_app.config.get('LLM_BASE_URL', 'http://localhost:11434')
-        cache_dir = current_app.config.get('LLM_CACHE_DIR', 'data/llm_cache')
+        model = current_app.config.get("LLM_MODEL", "open-llama-2-ko-7b")
+        base_url = current_app.config.get("LLM_BASE_URL", "http://localhost:11434")
+        cache_dir = current_app.config.get("LLM_CACHE_DIR", "data/llm_cache")
         _llm_client = OllamaClient(base_url=base_url, model=model, cache_dir=cache_dir)
     return _llm_client
 
 
-@llm_bp.route('/llm/health', methods=['GET'])
+@llm_bp.route("/llm/health", methods=["GET"])
 def health_check():
     """Check if LLM service is available"""
     try:
         client = get_llm_client()
         health = client.health_check()
-        return jsonify(health), 200 if health['available'] else 503
+        return jsonify(health), 200 if health["available"] else 503
     except Exception as e:
         logger.error(f"Health check failed: {e}")
-        return jsonify({
-            'status': 'error',
-            'available': False,
-            'error': str(e)
-        }), 503
+        return jsonify({"status": "error", "available": False, "error": str(e)}), 503
 
 
-@llm_bp.route('/llm/explain', methods=['POST'])
+@llm_bp.route("/llm/explain", methods=["POST"])
 @limiter.limit("10/hour")
 def explain_card():
     """
     Explain a vocabulary card using LLM
-    
+
     Request body:
         {
             "card_id": 123,
@@ -76,7 +74,7 @@ def explain_card():
                 "time_spent": 45
             }
         }
-    
+
     Response:
         {
             "explanation": "...",
@@ -87,62 +85,66 @@ def explain_card():
     """
     try:
         data = request.get_json()
-        card_id = data.get('card_id')
-        
+        card_id = data.get("card_id")
+
         if not card_id:
-            return validation_error_response('card_id is required')
+            return validation_error_response("card_id is required")
 
         # Fetch card from database
         card = db.session.get(Card, card_id)
         if not card:
-            return not_found_response('Card')
-        
+            return not_found_response("Card")
+
         # Get user context
-        user_context = data.get('user_context', {})
-        level = validate_level(user_context.get('level', card.level), default=card.level)
-        
+        user_context = data.get("user_context", {})
+        level = validate_level(
+            user_context.get("level", card.level), default=card.level
+        )
+
         # Build prompt
-        template = PROMPT_TEMPLATES['explain_card']
-        system_prompt = template['system']
-        user_prompt = template['user'].format(
+        template = PROMPT_TEMPLATES["explain_card"]
+        system_prompt = template["system"]
+        user_prompt = template["user"].format(
             korean=card.front_korean,
             romanisation=card.front_romanization or "N/A",
             english=card.back_english,
             level=level,
-            level_name=get_level_name(level)
+            level_name=get_level_name(level),
         )
-        
+
         # Call LLM
         client = get_llm_client()
         response = client.chat(
-            prompt=user_prompt,
-            system=system_prompt,
-            temperature=0.7,
-            max_tokens=500
+            prompt=user_prompt, system=system_prompt, temperature=0.7, max_tokens=500
         )
-        
-        return jsonify({
-            'explanation': response,
-            'card_id': card_id,
-            'generated_at': datetime.now().isoformat()
-        }), 200
-        
+
+        return (
+            jsonify(
+                {
+                    "explanation": response,
+                    "card_id": card_id,
+                    "generated_at": datetime.now().isoformat(),
+                }
+            ),
+            200,
+        )
+
     except Exception as e:
         logger.error(f"Error in explain_card: {e}")
-        return error_response('Failed to generate explanation', 500, str(e))
+        return error_response("Failed to generate explanation", 500, str(e))
 
 
-@llm_bp.route('/llm/generate-examples', methods=['POST'])
+@llm_bp.route("/llm/generate-examples", methods=["POST"])
 @limiter.limit("10/hour")
 def generate_examples():
     """
     Generate example sentences for a card
-    
+
     Request body:
         {
             "card_id": 123
         }
-    
+
     Response:
         {
             "examples": [
@@ -157,49 +159,52 @@ def generate_examples():
     """
     try:
         data = request.get_json()
-        card_id = data.get('card_id')
-        
+        card_id = data.get("card_id")
+
         if not card_id:
-            return validation_error_response('card_id is required')
+            return validation_error_response("card_id is required")
 
         card = db.session.get(Card, card_id)
         if not card:
-            return not_found_response('Card')
+            return not_found_response("Card")
 
         # Build prompt
-        template = PROMPT_TEMPLATES['generate_examples']
-        user_prompt = template['user'].format(
-            korean=card.front_korean,
-            english=card.back_english,
-            level=card.level
+        template = PROMPT_TEMPLATES["generate_examples"]
+        user_prompt = template["user"].format(
+            korean=card.front_korean, english=card.back_english, level=card.level
         )
-        
+
         # Call LLM
         client = get_llm_client()
         response = client.chat(
             prompt=user_prompt,
-            system=template['system'],
+            system=template["system"],
             temperature=0.8,
-            max_tokens=400
+            max_tokens=400,
         )
-        
-        return jsonify({
-            'examples_text': response,
-            'card_id': card_id,
-            'generated_at': datetime.now().isoformat()
-        }), 200
-        
+
+        return (
+            jsonify(
+                {
+                    "examples_text": response,
+                    "card_id": card_id,
+                    "generated_at": datetime.now().isoformat(),
+                }
+            ),
+            200,
+        )
+
     except Exception as e:
         logger.error(f"Error in generate_examples: {e}")
-        return error_response('Failed to generate examples', 500, str(e))
+        return error_response("Failed to generate examples", 500, str(e))
 
 
-@llm_bp.route('/llm/conversation', methods=['POST'])
+@llm_bp.route("/llm/conversation", methods=["POST"])
 @limiter.limit("10/hour")
 def conversation():
     """
     Interactive conversation with AI tutor
-    
+
     Request body:
         {
             "message": "안녕하세요!",
@@ -208,7 +213,7 @@ def conversation():
                 "conversation_history": [...]
             }
         }
-    
+
     Response:
         {
             "response": "...",
@@ -246,31 +251,28 @@ def conversation():
         ])
 
         # Build prompt
-        template = PROMPT_TEMPLATES['conversation']
-        user_prompt = template['user'].format(
+        template = PROMPT_TEMPLATES["conversation"]
+        user_prompt = template["user"].format(
             level=level,
             context=context_str or "This is the start of the conversation",
-            message=message
+            message=message,
         )
-        
+
         # Call LLM
         client = get_llm_client()
         response = client.chat(
             prompt=user_prompt,
-            system=template['system'],
+            system=template["system"],
             temperature=0.9,  # More creative for conversation
             max_tokens=200,
-            use_cache=False  # Don't cache conversations
+            use_cache=False,  # Don't cache conversations
         )
-        
-        return jsonify({
-            'response': response,
-            'timestamp': datetime.now().isoformat()
-        }), 200
-        
+
+        return (
+            jsonify({"response": response, "timestamp": datetime.now().isoformat()}),
+            200,
+        )
+
     except Exception as e:
         logger.error(f"Error in conversation: {e}")
-        return error_response('Failed to generate response', 500, str(e))
-
-
-
+        return error_response("Failed to generate response", 500, str(e))

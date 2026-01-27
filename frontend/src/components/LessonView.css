@@ -1,0 +1,191 @@
+.lesson-view {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.lesson-view.loading,
+.lesson-view.error {
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.lesson-header {
+  margin-bottom: 1.5rem;
+}
+
+.lesson-header .back-button {
+  background: none;
+  border: none;
+  color: #4a90d9;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-header h1 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.grammar-section {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grammar-section h2 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #667eea;
+}
+
+.grammar-content {
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.grammar-content p {
+  margin-bottom: 0.75rem;
+}
+
+.grammar-tip {
+  background: #fff8e6;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.start-exercises-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.start-exercises-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.exercise-container {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-feedback {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.result-feedback.correct {
+  background: #dcfce7;
+  border: 2px solid #22c55e;
+}
+
+.result-feedback.incorrect {
+  background: #fee2e2;
+  border: 2px solid #ef4444;
+}
+
+.result-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.result-feedback.correct .result-icon {
+  color: #22c55e;
+}
+
+.result-feedback.incorrect .result-icon {
+  color: #ef4444;
+}
+
+.result-message {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.correct-answer {
+  margin-bottom: 0.75rem;
+  color: #666;
+}
+
+.result-explanation {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+}
+
+.next-button {
+  padding: 0.75rem 2rem;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.next-button:hover {
+  background: #444;
+}
+
+.lesson-progress-summary {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.no-exercises {
+  text-align: center;
+  padding: 3rem;
+}
+
+.no-exercises p {
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+@media (max-width: 640px) {
+  .lesson-view {
+    padding: 1rem;
+  }
+
+  .grammar-section {
+    padding: 1.25rem;
+  }
+}

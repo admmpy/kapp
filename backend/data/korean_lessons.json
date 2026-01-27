@@ -1,0 +1,426 @@
+{
+  "courses": [
+    {
+      "title": "Korean Fundamentals",
+      "description": "Master the basics of Korean language from greetings to daily conversation",
+      "language": "Korean",
+      "level": "Beginner",
+      "units": [
+        {
+          "title": "Greetings & Introductions",
+          "description": "Learn essential Korean greetings and how to introduce yourself",
+          "lessons": [
+            {
+              "title": "Hello & Goodbye",
+              "description": "Basic greetings for any situation",
+              "estimated_minutes": 5,
+              "grammar_explanation": "Korean greetings change based on formality level. The most common polite greeting is 안녕하세요 (annyeonghaseyo).\n\nKey points:\n- 안녕하세요 is used for both 'hello' and 'goodbye' (when leaving someone behind)\n- 안녕히 가세요 means 'goodbye' when someone is leaving\n- 안녕히 계세요 means 'goodbye' when you are the one leaving",
+              "grammar_tip": "When in doubt, use 안녕하세요 - it's polite and works in most situations!",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 안녕하세요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "안녕하세요",
+                  "romanization": "annyeonghaseyo",
+                  "options": ["Hello", "Goodbye", "Thank you", "Sorry"],
+                  "correct_answer": "Hello",
+                  "explanation": "안녕하세요 is the standard polite greeting meaning 'hello'"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you say goodbye when YOU are leaving?",
+                  "instruction": "Select the correct phrase",
+                  "options": ["안녕하세요", "안녕히 가세요", "안녕히 계세요", "감사합니다"],
+                  "correct_answer": "안녕히 계세요",
+                  "explanation": "안녕히 계세요 (stay in peace) is said when you are the one leaving"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you say goodbye when SOMEONE ELSE is leaving?",
+                  "instruction": "Select the correct phrase",
+                  "options": ["안녕하세요", "안녕히 가세요", "안녕히 계세요", "감사합니다"],
+                  "correct_answer": "안녕히 가세요",
+                  "explanation": "안녕히 가세요 (go in peace) is said when someone else is leaving"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "안녕하세요",
+                  "audio_url": "/api/audio/annyeonghaseyo.mp3",
+                  "options": ["안녕하세요", "안녕히 가세요", "감사합니다", "미안합니다"],
+                  "correct_answer": "안녕하세요"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "You are at a store and the cashier is about to leave for the day. What do you say?",
+                  "instruction": "Choose the appropriate goodbye",
+                  "options": ["안녕히 가세요", "안녕히 계세요", "안녕", "뭐야"],
+                  "correct_answer": "안녕히 가세요",
+                  "explanation": "Since the cashier is leaving, you say 안녕히 가세요"
+                }
+              ]
+            },
+            {
+              "title": "Thank You & Sorry",
+              "description": "Express gratitude and apologies",
+              "estimated_minutes": 5,
+              "grammar_explanation": "Expressing thanks and apologies is essential in Korean culture.\n\n감사합니다 (gamsahamnida) - Thank you (formal)\n고마워요 (gomawoyo) - Thank you (informal polite)\n\n죄송합니다 (joesonghamnida) - I'm sorry (formal apology)\n미안해요 (mianhaeyo) - I'm sorry (informal polite)",
+              "grammar_tip": "Use 감사합니다 with strangers and in formal situations. Use 고마워요 with friends.",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 감사합니다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "감사합니다",
+                  "romanization": "gamsahamnida",
+                  "options": ["Hello", "Goodbye", "Thank you", "Sorry"],
+                  "correct_answer": "Thank you",
+                  "explanation": "감사합니다 is the formal way to say 'thank you'"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 죄송합니다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "죄송합니다",
+                  "romanization": "joesonghamnida",
+                  "options": ["Hello", "Please", "Thank you", "I'm sorry"],
+                  "correct_answer": "I'm sorry",
+                  "explanation": "죄송합니다 is the formal way to apologize"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "Your boss helped you. How do you thank them?",
+                  "instruction": "Select the most appropriate response",
+                  "options": ["고마워", "감사합니다", "고마워요", "괜찮아요"],
+                  "correct_answer": "감사합니다",
+                  "explanation": "Use 감사합니다 with your boss as it's the most formal"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "You accidentally bump into a stranger. What do you say?",
+                  "instruction": "Select the appropriate apology",
+                  "options": ["미안", "괜찮아요", "죄송합니다", "감사합니다"],
+                  "correct_answer": "죄송합니다",
+                  "explanation": "죄송합니다 is appropriate when apologizing to strangers"
+                }
+              ]
+            },
+            {
+              "title": "Self Introduction",
+              "description": "Introduce yourself in Korean",
+              "estimated_minutes": 7,
+              "grammar_explanation": "Introducing yourself in Korean follows a pattern:\n\n저는 [name]입니다 - I am [name] (formal)\n제 이름은 [name]입니다 - My name is [name] (formal)\n\nKey vocabulary:\n저 (jeo) - I (humble/formal)\n이름 (ireum) - name\n입니다 (imnida) - am/is (formal ending)",
+              "grammar_tip": "Always use 저 (not 나) when meeting someone for the first time!",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 저 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "저",
+                  "romanization": "jeo",
+                  "options": ["You", "I (formal)", "Name", "Hello"],
+                  "correct_answer": "I (formal)",
+                  "explanation": "저 is the humble/formal way to say 'I' in Korean"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 이름 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "이름",
+                  "romanization": "ireum",
+                  "options": ["Person", "Name", "Hello", "Good"],
+                  "correct_answer": "Name",
+                  "explanation": "이름 means 'name' in Korean"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "Complete the sentence: 저는 민수___",
+                  "instruction": "Fill in the blank to say 'I am Minsu'",
+                  "korean_text": "저는 민수___",
+                  "options": ["이에요", "입니다", "예요", "있어요"],
+                  "correct_answer": "입니다",
+                  "explanation": "입니다 is the formal copula ('to be') used in introductions"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "Read the introduction and answer: What is the person's name?",
+                  "content_text": "안녕하세요. 저는 김지현입니다. 만나서 반갑습니다.",
+                  "options": ["김민수", "김지현", "박지현", "이지현"],
+                  "correct_answer": "김지현",
+                  "explanation": "The text says '저는 김지현입니다' (I am Kim Jihyeon)"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 만나서 반갑습니다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "만나서 반갑습니다",
+                  "romanization": "mannaseo bangapseumnida",
+                  "options": ["See you later", "Nice to meet you", "How are you?", "I'm fine"],
+                  "correct_answer": "Nice to meet you",
+                  "explanation": "만나서 반갑습니다 is the formal way to say 'Nice to meet you'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Numbers & Counting",
+          "description": "Learn Korean number systems and counting",
+          "lessons": [
+            {
+              "title": "Sino-Korean Numbers 1-10",
+              "description": "Numbers used for dates, money, and phone numbers",
+              "estimated_minutes": 6,
+              "grammar_explanation": "Korean has two number systems. Sino-Korean numbers (based on Chinese) are used for:\n- Dates and months\n- Money\n- Phone numbers\n- Minutes\n- Addresses\n\n1=일, 2=이, 3=삼, 4=사, 5=오\n6=육, 7=칠, 8=팔, 9=구, 10=십",
+              "grammar_tip": "Think of Sino-Korean numbers as the 'official' numbers for formal things like documents and prices.",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What is 'one' in Sino-Korean?",
+                  "instruction": "Select the correct number",
+                  "korean_text": "일",
+                  "romanization": "il",
+                  "options": ["일", "이", "하나", "둘"],
+                  "correct_answer": "일",
+                  "explanation": "일 (il) is 'one' in Sino-Korean"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What number is 삼?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "삼",
+                  "romanization": "sam",
+                  "options": ["2", "3", "4", "5"],
+                  "correct_answer": "3",
+                  "explanation": "삼 (sam) means 3 in Sino-Korean"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What number is 칠?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "칠",
+                  "romanization": "chil",
+                  "options": ["5", "6", "7", "8"],
+                  "correct_answer": "7",
+                  "explanation": "칠 (chil) means 7 in Sino-Korean"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "If something costs 오천원, how much is it?",
+                  "instruction": "Translate the price",
+                  "korean_text": "오천원",
+                  "options": ["4,000 won", "5,000 won", "6,000 won", "7,000 won"],
+                  "correct_answer": "5,000 won",
+                  "explanation": "오 (5) + 천 (thousand) + 원 (won) = 5,000 won"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What number is 십?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "십",
+                  "romanization": "sip",
+                  "options": ["8", "9", "10", "100"],
+                  "correct_answer": "10",
+                  "explanation": "십 (sip) means 10 in Sino-Korean"
+                }
+              ]
+            },
+            {
+              "title": "Native Korean Numbers 1-10",
+              "description": "Numbers used for counting objects and age",
+              "estimated_minutes": 6,
+              "grammar_explanation": "Native Korean numbers are used for:\n- Counting objects (with counters)\n- Age (with 살)\n- Hours (when telling time)\n\n1=하나, 2=둘, 3=셋, 4=넷, 5=다섯\n6=여섯, 7=일곱, 8=여덟, 9=아홉, 10=열\n\nNote: When used with counters, 1-4 change form:\n하나→한, 둘→두, 셋→세, 넷→네",
+              "grammar_tip": "Native Korean numbers are used when counting things you can touch or see!",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What is 'one' in Native Korean?",
+                  "instruction": "Select the correct number",
+                  "korean_text": "하나",
+                  "romanization": "hana",
+                  "options": ["하나", "일", "둘", "이"],
+                  "correct_answer": "하나",
+                  "explanation": "하나 (hana) is 'one' in Native Korean"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What number is 다섯?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "다섯",
+                  "romanization": "daseot",
+                  "options": ["3", "4", "5", "6"],
+                  "correct_answer": "5",
+                  "explanation": "다섯 (daseot) means 5 in Native Korean"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "To say 'two apples', which number form do you use?",
+                  "instruction": "Select the correct form",
+                  "options": ["둘 사과", "두 개", "이 사과", "이 개"],
+                  "correct_answer": "두 개",
+                  "explanation": "With counters, 둘 becomes 두, so it's 두 개 (two items)"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What number is 열?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "열",
+                  "romanization": "yeol",
+                  "options": ["8", "9", "10", "100"],
+                  "correct_answer": "10",
+                  "explanation": "열 (yeol) means 10 in Native Korean"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How would you say you are 25 years old?",
+                  "instruction": "Korean uses native numbers for age with 살",
+                  "options": ["이십오 살", "스물다섯 살", "이십오 세", "스물다섯 세"],
+                  "correct_answer": "스물다섯 살",
+                  "explanation": "Age uses Native Korean numbers + 살: 스물다섯 (25) + 살 (years old)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Basic Phrases",
+          "description": "Essential phrases for everyday situations",
+          "lessons": [
+            {
+              "title": "Yes, No & Please",
+              "description": "Basic response words",
+              "estimated_minutes": 5,
+              "grammar_explanation": "Essential response words in Korean:\n\n네 (ne) - Yes (polite)\n아니요 (aniyo) - No (polite)\n주세요 (juseyo) - Please give me...\n\n네 can also mean 'I see' or 'I understand' in conversation.",
+              "grammar_tip": "네 sounds like 'neh' and is often repeated twice (네, 네) to show you're listening!",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 네 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "네",
+                  "romanization": "ne",
+                  "options": ["No", "Yes", "Please", "Thank you"],
+                  "correct_answer": "Yes",
+                  "explanation": "네 is the polite way to say 'yes'"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 아니요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "아니요",
+                  "romanization": "aniyo",
+                  "options": ["Yes", "No", "Maybe", "Please"],
+                  "correct_answer": "No",
+                  "explanation": "아니요 is the polite way to say 'no'"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you say 'Water, please'?",
+                  "instruction": "Select the correct phrase",
+                  "options": ["물 주세요", "물 있어요", "물 감사합니다", "물 네"],
+                  "correct_answer": "물 주세요",
+                  "explanation": "물 (water) + 주세요 (please give me) = Water, please"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 주세요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "주세요",
+                  "romanization": "juseyo",
+                  "options": ["Thank you", "Yes please", "Please give me", "No thank you"],
+                  "correct_answer": "Please give me",
+                  "explanation": "주세요 means 'please give me' or just 'please' when requesting something"
+                }
+              ]
+            },
+            {
+              "title": "Excuse Me & Wait",
+              "description": "Getting attention and asking to wait",
+              "estimated_minutes": 5,
+              "grammar_explanation": "Useful phrases for getting attention:\n\n저기요 (jeogiyo) - Excuse me (to get attention, like at a restaurant)\n잠깐만요 (jamkkanmanyo) - Wait a moment / Just a second\n실례합니다 (sillyehamnida) - Excuse me (more formal, when passing by)",
+              "grammar_tip": "Use 저기요 when calling a waiter - it's like saying 'over there!'",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you get a waiter's attention?",
+                  "instruction": "Select the correct phrase",
+                  "korean_text": "저기요",
+                  "romanization": "jeogiyo",
+                  "options": ["저기요", "잠깐만요", "감사합니다", "안녕하세요"],
+                  "correct_answer": "저기요",
+                  "explanation": "저기요 is used to get someone's attention, like 'Excuse me!'"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 잠깐만요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "잠깐만요",
+                  "romanization": "jamkkanmanyo",
+                  "options": ["Excuse me", "Wait a moment", "Thank you", "I'm sorry"],
+                  "correct_answer": "Wait a moment",
+                  "explanation": "잠깐만요 means 'wait a moment' or 'just a second'"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "You need to pass by someone in a crowded place. What do you say?",
+                  "instruction": "Select the most appropriate phrase",
+                  "options": ["저기요", "잠깐만요", "실례합니다", "주세요"],
+                  "correct_answer": "실례합니다",
+                  "explanation": "실례합니다 is used when excusing yourself to pass by someone"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "You're on the phone and someone is talking to you. What do you say to the caller?",
+                  "instruction": "Select the appropriate phrase",
+                  "options": ["감사합니다", "잠깐만요", "저기요", "안녕히 가세요"],
+                  "correct_answer": "잠깐만요",
+                  "explanation": "잠깐만요 asks the caller to wait a moment"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "vocabulary": [
+    {"korean": "안녕하세요", "romanization": "annyeonghaseyo", "english": "hello", "category": "greetings", "difficulty_level": 1},
+    {"korean": "안녕히 가세요", "romanization": "annyeonghi gaseyo", "english": "goodbye (to someone leaving)", "category": "greetings", "difficulty_level": 1},
+    {"korean": "안녕히 계세요", "romanization": "annyeonghi gyeseyo", "english": "goodbye (when you are leaving)", "category": "greetings", "difficulty_level": 1},
+    {"korean": "감사합니다", "romanization": "gamsahamnida", "english": "thank you", "category": "greetings", "difficulty_level": 1},
+    {"korean": "고마워요", "romanization": "gomawoyo", "english": "thanks (informal)", "category": "greetings", "difficulty_level": 2},
+    {"korean": "죄송합니다", "romanization": "joesonghamnida", "english": "I'm sorry", "category": "greetings", "difficulty_level": 1},
+    {"korean": "미안해요", "romanization": "mianhaeyo", "english": "sorry (informal)", "category": "greetings", "difficulty_level": 2},
+    {"korean": "저", "romanization": "jeo", "english": "I (formal)", "category": "pronouns", "difficulty_level": 1},
+    {"korean": "이름", "romanization": "ireum", "english": "name", "category": "basic", "difficulty_level": 1},
+    {"korean": "만나서 반갑습니다", "romanization": "mannaseo bangapseumnida", "english": "nice to meet you", "category": "greetings", "difficulty_level": 1},
+    {"korean": "네", "romanization": "ne", "english": "yes", "category": "basic", "difficulty_level": 1},
+    {"korean": "아니요", "romanization": "aniyo", "english": "no", "category": "basic", "difficulty_level": 1},
+    {"korean": "주세요", "romanization": "juseyo", "english": "please (give me)", "category": "basic", "difficulty_level": 1},
+    {"korean": "저기요", "romanization": "jeogiyo", "english": "excuse me (for attention)", "category": "basic", "difficulty_level": 1},
+    {"korean": "잠깐만요", "romanization": "jamkkanmanyo", "english": "wait a moment", "category": "basic", "difficulty_level": 1},
+    {"korean": "실례합니다", "romanization": "sillyehamnida", "english": "excuse me (formal)", "category": "basic", "difficulty_level": 2},
+    {"korean": "일", "romanization": "il", "english": "one (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "이", "romanization": "i", "english": "two (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "삼", "romanization": "sam", "english": "three (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "사", "romanization": "sa", "english": "four (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "오", "romanization": "o", "english": "five (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "육", "romanization": "yuk", "english": "six (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "칠", "romanization": "chil", "english": "seven (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "팔", "romanization": "pal", "english": "eight (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "구", "romanization": "gu", "english": "nine (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "십", "romanization": "sip", "english": "ten (sino)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "하나", "romanization": "hana", "english": "one (native)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "둘", "romanization": "dul", "english": "two (native)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "셋", "romanization": "set", "english": "three (native)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "넷", "romanization": "net", "english": "four (native)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "다섯", "romanization": "daseot", "english": "five (native)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "여섯", "romanization": "yeoseot", "english": "six (native)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "일곱", "romanization": "ilgop", "english": "seven (native)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "여덟", "romanization": "yeodeol", "english": "eight (native)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "아홉", "romanization": "ahop", "english": "nine (native)", "category": "numbers", "difficulty_level": 1},
+    {"korean": "열", "romanization": "yeol", "english": "ten (native)", "category": "numbers", "difficulty_level": 1}
+  ]
+}

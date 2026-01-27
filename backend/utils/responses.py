@@ -6,7 +6,9 @@ from typing import Any, Optional
 from flask import jsonify
 
 
-def error_response(message: str, status_code: int = 400, details: Optional[str] = None) -> tuple:
+def error_response(
+    message: str, status_code: int = 400, details: Optional[str] = None
+) -> tuple:
     """Create a standardized error response
 
     Args:
@@ -17,12 +19,9 @@ def error_response(message: str, status_code: int = 400, details: Optional[str] 
     Returns:
         Tuple of (JSON response, status code)
     """
-    response = {
-        'error': message,
-        'status': status_code
-    }
+    response = {"error": message, "status": status_code}
     if details:
-        response['details'] = details
+        response["details"] = details
     return jsonify(response), status_code
 
 
@@ -39,7 +38,7 @@ def success_response(data: Any, status_code: int = 200) -> tuple:
     return jsonify(data), status_code
 
 
-def not_found_response(resource: str = 'Resource') -> tuple:
+def not_found_response(resource: str = "Resource") -> tuple:
     """Create a standardized 404 not found response
 
     Args:
@@ -48,7 +47,7 @@ def not_found_response(resource: str = 'Resource') -> tuple:
     Returns:
         Tuple of (JSON response, 404)
     """
-    return error_response(f'{resource} not found', 404)
+    return error_response(f"{resource} not found", 404)
 
 
 def validation_error_response(message: str) -> tuple:
