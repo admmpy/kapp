@@ -9,8 +9,10 @@ This script:
 
 Usage:
     cd backend
-    python scripts/import_lessons.py
+    python scripts/import_lessons.py          # Interactive mode
+    python scripts/import_lessons.py --force  # Non-interactive (overwrites existing data)
 """
+import argparse
 import os
 import sys
 import json
@@ -153,8 +155,12 @@ def clear_existing_data():
     print("Cleared existing data")
 
 
-def run_import():
-    """Run the full import process"""
+def run_import(force=False):
+    """Run the full import process
+
+    Args:
+        force: If True, skip interactive prompt and overwrite existing data
+    """
     print("=" * 60)
     print("LESSON CONTENT IMPORT")
     print("=" * 60)
@@ -171,14 +177,18 @@ def run_import():
         # Check for existing data
         if check_existing_data():
             print("\nExisting lesson data found!")
-            response = (
-                input("Clear existing data and reimport? (yes/no): ").strip().lower()
-            )
-            if response == "yes":
+            if force:
+                print("Force mode: clearing existing data...")
                 clear_existing_data()
             else:
-                print("Import cancelled.")
-                return False
+                response = (
+                    input("Clear existing data and reimport? (yes/no): ").strip().lower()
+                )
+                if response == "yes":
+                    clear_existing_data()
+                else:
+                    print("Import cancelled.")
+                    return False
 
         # Import courses and lessons
         print("\nImporting courses and lessons...")
@@ -209,6 +219,18 @@ def run_import():
     return True
 
 
-if __name__ == "__main__":
-    success = run_import()
+def main():
+    parser = argparse.ArgumentParser(description="Import lesson content into the database")
+    parser.add_argument(
+        "--force", "-f",
+        action="store_true",
+        help="Skip interactive prompt and overwrite existing data"
+    )
+    args = parser.parse_args()
+
+    success = run_import(force=args.force)
     sys.exit(0 if success else 1)
+
+
+if __name__ == "__main__":
+    main()

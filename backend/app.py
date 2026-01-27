@@ -45,6 +45,7 @@ def create_app(config_name=None):
 
     # Create database tables
     with app.app_context():
+        import models_v2  # noqa: F401 - Import to register models with SQLAlchemy
         db.create_all()
 
     # Register blueprints
