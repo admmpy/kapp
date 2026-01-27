@@ -13,6 +13,7 @@ from models import Card, db
 from llm_service import OllamaClient, PROMPT_TEMPLATES, get_level_name
 from extensions import limiter
 from utils import error_response, not_found_response, validation_error_response
+from security import sanitize_user_input, validate_conversation_history
 from datetime import datetime
 import logging
 
@@ -221,22 +222,33 @@ def conversation():
     """
     try:
         data = request.get_json()
-        message = data.get("message")
-        context = data.get("context", {})
+        raw_message = data.get('message')
+        context = data.get('context', {})
+
+        if not raw_message:
+            return validation_error_response('message is required')
+
+        # Sanitize user message to prevent prompt injection
+        message, msg_warnings = sanitize_user_input(raw_message, max_length=500)
+        if msg_warnings:
+            logger.info(f"Input sanitization warnings: {msg_warnings}")
 
         if not message:
-            return validation_error_response("message is required")
+            return validation_error_response('message is required after sanitization')
 
-        level = validate_level(context.get("level", 0), default=0)
-        history = context.get("conversation_history", [])
+        level = validate_level(context.get('level', 0), default=0)
 
-        # Build context from history
-        context_str = "\n".join(
-            [
-                f"Learner: {h.get('user', '')}\nTutor: {h.get('assistant', '')}"
-                for h in history[-3:]  # Last 3 exchanges
-            ]
-        )
+        # Validate and sanitize conversation history
+        raw_history = context.get('conversation_history', [])
+        history, history_warnings = validate_conversation_history(raw_history)
+        if history_warnings:
+            logger.info(f"History validation warnings: {history_warnings}")
+
+        # Build context from sanitized history
+        context_str = "\n".join([
+            f"Learner: {h.get('user', '')}\nTutor: {h.get('assistant', '')}"
+            for h in history
+        ])
 
         # Build prompt
         template = PROMPT_TEMPLATES["conversation"]
