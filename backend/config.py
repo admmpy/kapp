@@ -15,7 +15,19 @@ class Config:
     """Base configuration with default values"""
     
     # Flask configuration
-    SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
+    # SECRET_KEY must be set in .env - no default fallback for security
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
+    # Weak/placeholder keys that should be rejected
+    WEAK_SECRET_KEYS = {
+        'dev-secret-key-change-in-production',
+        'your-secret-key-here-change-in-production',
+        'your-generated-secret-key-here',
+        'changeme',
+        'secret',
+        None,
+        '',
+    }
     
     # Database configuration
     # Handle both relative and absolute paths cross-platform
@@ -54,27 +66,30 @@ class Config:
     @staticmethod
     def init_app(app):
         """Initialize app with configuration
-        
+
         Args:
             app: Flask application instance
         """
         # Ensure required directories exist
         data_dir = Path(app.root_path) / 'data'
         data_dir.mkdir(exist_ok=True)
-        
+
         audio_cache_dir = Path(app.root_path) / app.config['TTS_CACHE_DIR']
         audio_cache_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # Ensure LLM cache directory exists
         llm_cache_dir = Path(app.root_path) / app.config['LLM_CACHE_DIR']
         llm_cache_dir.mkdir(parents=True, exist_ok=True)
-        
-        # Validate required configuration
-        required_vars = ['SECRET_KEY', 'DATABASE_URL']
-        missing = [var for var in required_vars if not app.config.get(var)]
-        
-        if missing and app.config.get('ENV') == 'production':
-            raise ValueError(f"Missing required configuration: {', '.join(missing)}")
+
+        # Validate SECRET_KEY in all environments
+        secret_key = app.config.get('SECRET_KEY')
+        if secret_key in Config.WEAK_SECRET_KEYS:
+            raise ValueError(
+                "SECRET_KEY is missing or weak! "
+                "Generate one with: python -c \"import secrets; print(secrets.token_hex(32))\""
+            )
+        if len(secret_key) < 32:
+            raise ValueError("SECRET_KEY must be at least 32 characters for security!")
 
 
 class DevelopmentConfig(Config):
@@ -87,20 +102,19 @@ class ProductionConfig(Config):
     """Production configuration"""
     DEBUG = False
     TESTING = False
-    
+
     @classmethod
     def init_app(cls, app):
         Config.init_app(app)
-        
-        # Production-specific setup
-        if app.config['SECRET_KEY'] == 'dev-secret-key-change-in-production':
-            raise ValueError("Must set SECRET_KEY in production!")
+        # Base class already validates SECRET_KEY
 
 
 class TestingConfig(Config):
     """Testing configuration"""
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    # Use a fixed test key (only for testing)
+    SECRET_KEY = 'test-secret-key-only-for-automated-testing-not-production'
 
 
 # Configuration dictionary
