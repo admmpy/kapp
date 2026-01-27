@@ -1,48 +1,108 @@
 /**
- * Main App component - handles routing between Dashboard and Review Session
+ * Main App component - handles routing for lesson-based learning
  */
 import { useState, useEffect } from 'react';
-import Dashboard from './components/Dashboard';
-import ReviewSession from './components/ReviewSession';
+import CourseList from './components/CourseList';
+import UnitView from './components/UnitView';
+import LessonView from './components/LessonView';
 import './App.css';
 
-type Page = 'dashboard' | 'review';
+type Page = 'courses' | 'units' | 'lesson';
+
+interface AppState {
+  page: Page;
+  courseId: number | null;
+  lessonId: number | null;
+}
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<Page>('dashboard');
-  const [dashboardKey, setDashboardKey] = useState(0);
-  const [reviewKey, setReviewKey] = useState(0);
+  const [state, setState] = useState<AppState>({
+    page: 'courses',
+    courseId: null,
+    lessonId: null
+  });
 
-  // Simple routing based on URL hash
+  // Parse URL hash for routing
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.slice(1); // Remove #
-      // Check if hash starts with 'review' (handles both #review and #review?deck_id=1)
-      if (hash.startsWith('review')) {
-        setCurrentPage('review');
-        setReviewKey(prev => prev + 1);
-      } else {
-        setCurrentPage('dashboard');
-        // Increment key to force Dashboard remount and refresh stats
-        setDashboardKey(prev => prev + 1);
+      const hash = window.location.hash.slice(1);
+
+      if (hash.startsWith('lesson/')) {
+        const lessonId = parseInt(hash.split('/')[1]);
+        if (!isNaN(lessonId)) {
+          setState({ page: 'lesson', courseId: null, lessonId });
+          return;
+        }
       }
+
+      if (hash.startsWith('course/')) {
+        const courseId = parseInt(hash.split('/')[1]);
+        if (!isNaN(courseId)) {
+          setState({ page: 'units', courseId, lessonId: null });
+          return;
+        }
+      }
+
+      setState({ page: 'courses', courseId: null, lessonId: null });
     };
 
-    // Initial check
     handleHashChange();
-
-    // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange);
-    
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  function navigateToCourses() {
+    window.location.hash = '';
+    setState({ page: 'courses', courseId: null, lessonId: null });
+  }
+
+  function navigateToCourse(courseId: number) {
+    window.location.hash = `course/${courseId}`;
+    setState({ page: 'units', courseId, lessonId: null });
+  }
+
+  function navigateToLesson(lessonId: number) {
+    window.location.hash = `lesson/${lessonId}`;
+    setState({ page: 'lesson', courseId: state.courseId, lessonId });
+  }
+
+  function handleLessonComplete() {
+    // Go back to course view after completing a lesson
+    if (state.courseId) {
+      navigateToCourse(state.courseId);
+    } else {
+      navigateToCourses();
+    }
+  }
+
+  function handleLessonBack() {
+    if (state.courseId) {
+      navigateToCourse(state.courseId);
+    } else {
+      navigateToCourses();
+    }
+  }
+
   return (
     <div className="app">
-      {currentPage === 'dashboard' ? (
-        <Dashboard key={dashboardKey} />
-      ) : (
-        <ReviewSession key={reviewKey} />
+      {state.page === 'courses' && (
+        <CourseList onSelectCourse={navigateToCourse} />
+      )}
+
+      {state.page === 'units' && state.courseId && (
+        <UnitView
+          courseId={state.courseId}
+          onSelectLesson={navigateToLesson}
+          onBack={navigateToCourses}
+        />
+      )}
+
+      {state.page === 'lesson' && state.lessonId && (
+        <LessonView
+          lessonId={state.lessonId}
+          onComplete={handleLessonComplete}
+          onBack={handleLessonBack}
+        />
       )}
     </div>
   );
