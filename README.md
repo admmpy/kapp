@@ -1,334 +1,167 @@
-# 🇰🇷 Kapp v2.0 - Korean Language Learning Platform
+# 🇰🇷 Kapp - Korean Language Learning Platform
 
-A structured lesson-based Korean learning application inspired by LingoDeer, featuring grammar-focused lessons, reading & listening exercises, and progressive curriculum.
+A structured lesson-based Korean learning app with grammar explanations, vocabulary exercises, reading/listening practice, and word-ordering exercises.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![React](https://img.shields.io/badge/React-18.0+-61DAFB.svg)](https://reactjs.org/)
+[![React](https://img.shields.io/badge/React-19.0+-61DAFB.svg)](https://reactjs.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.0+-000000.svg)](https://flask.palletsprojects.com/)
 
 ---
 
-## 📖 Overview
+## Overview
 
-Kapp v2.0 is a complete rebuild transitioning from flashcard-based learning to a structured lesson-based approach. Lessons include grammar explanations, vocabulary exercises, reading comprehension, and listening practice.
+Kapp is a lesson-based learning platform with structured curriculum progression: **Course → Unit → Lesson → Exercises**. Each lesson includes grammar explanations and multiple exercise types with immediate feedback.
 
-**v2.0 Major Changes:**
-- Replaced flashcards with structured lessons
-- Added grammar explanations in each lesson
-- Multiple exercise types (vocabulary, grammar, reading, listening)
-- Course → Unit → Lesson progression system
-- Removed SM-2 spaced repetition (replaced with lesson-based progression)
+**Current Content:** 1 course, 3 units, 7 lessons, 48 exercises
 
 ---
 
-## ✨ Key Features
+## Features
 
-### 📚 Structured Curriculum
-- **Courses:** Organized learning paths (e.g., "Korean Fundamentals")
-- **Units:** Thematic sections (e.g., "Greetings & Introductions")
-- **Lessons:** Bite-sized learning with grammar and exercises
-- **Progressive difficulty:** Start with basics, advance systematically
-
-### 📖 Grammar-Focused Learning
-- In-depth grammar explanations in each lesson
-- Quick tips for practical usage
-- Contextual examples
-- Pattern-based learning
-
-### 🎯 Multiple Exercise Types
-- **Vocabulary:** Translation matching, word recognition
-- **Grammar:** Fill-in-the-blank, pattern application
-- **Reading:** Comprehension passages with questions
-- **Listening:** Audio-based exercises with transcripts
-
-### 📊 Progress Tracking
-- Lesson completion tracking
-- Score recording per lesson
-- Learning streak counter
-- Overall course progress
-
-### 🔊 Native Audio Support
-- Text-to-speech for Korean text
-- Audio playback in listening exercises
-- Pronunciation practice
+- **Structured Lessons:** Grammar explanations + contextual examples
+- **5 Exercise Types:** Vocabulary, Grammar, Reading, Listening, Sentence Arrangement
+- **Progress Tracking:** Completion status, scores per lesson, activity history
+- **Audio Support:** Text-to-speech for Korean pronunciation
+- **Security:** Input validation, SECRET_KEY enforcement, prompt injection protection
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-### Backend
-- **Framework:** Flask 3.0 (Python)
-- **Database:** SQLite with SQLAlchemy ORM
-- **TTS:** gTTS (Google Text-to-Speech)
-- **API:** RESTful JSON endpoints with Flask-CORS
-- **Security:** Input sanitization, validated SECRET_KEY
-
-### Frontend
-- **Framework:** React 18 with TypeScript
-- **Build Tool:** Vite
-- **Styling:** CSS with responsive design
-- **Routing:** Hash-based navigation
+| Component | Tech |
+|-----------|------|
+| **Backend** | Flask 3.0 (Python 3.9+) with SQLAlchemy ORM, SQLite |
+| **Frontend** | React 19 + TypeScript, Vite 7, Axios, CSS |
+| **Audio** | gTTS (Google Text-to-Speech) |
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
-- Python 3.9 or higher
-- Node.js 18 or higher
-- Git
+- Python 3.9+, Node.js 18+, Git
 
 ### Installation
 
-#### 1. Clone the Repository
+**1. Clone & Backend Setup**
 ```bash
-git clone https://github.com/admmpy/kapp.git
-cd kapp
-```
-
-#### 2. Backend Setup
-```bash
-cd backend
-
-# Create virtual environment
+git clone https://github.com/admmpy/kapp.git && cd kapp/backend
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
+source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Configure environment
 cp .env.example .env
-# IMPORTANT: Generate a secure SECRET_KEY
-python -c "import secrets; print(secrets.token_hex(32))"
-# Edit .env and add the generated key
-
-# Run database migration (if upgrading from v1)
-python migrations/migrate_to_lessons.py
-
-# Import lesson content
-python scripts/import_lessons.py
+# Generate secure SECRET_KEY (required):
+python -c "import secrets; print(secrets.token_hex(32))" >> .env
 ```
 
-#### 3. Frontend Setup
+**2. Frontend Setup**
 ```bash
 cd ../frontend
-
-# Install dependencies
 npm install
 ```
 
-#### 4. Run the Application
+**3. Run**
 
-**Option A: Use the start script**
+*Option A - Start scripts:*
 ```bash
-./start-servers.sh  # Unix/Mac
-# or
-.\start-servers.ps1  # Windows PowerShell
+./start-servers.sh        # Unix/Mac
+.\start-servers.ps1       # Windows
 ```
 
-**Option B: Manual start**
-
-Terminal 1 - Backend:
+*Option B - Manual:*
 ```bash
-cd backend
-source venv/bin/activate
-python app.py
+# Terminal 1 - Backend
+cd backend && source venv/bin/activate && python app.py
 # Runs on http://localhost:5001
-```
 
-Terminal 2 - Frontend:
-```bash
-cd frontend
-npm run dev
+# Terminal 2 - Frontend
+cd frontend && npm run dev
 # Runs on http://localhost:5173
 ```
 
-#### 5. Open Your Browser
-Navigate to `http://localhost:5173` and start learning Korean! 🎉
+Open http://localhost:5173 in your browser.
 
 ---
 
-## 📱 How to Use
+## Usage
 
-### Course Navigation
-1. **Course List:** See available courses and your progress
-2. **Select Course:** Click to view units within the course
-3. **Select Unit:** See lessons and their completion status
-4. **Start Lesson:** Begin with grammar explanation
-
-### Lesson Flow
-1. **Grammar Section:** Read the grammar explanation
-2. **Grammar Tip:** Quick practical tip
-3. **Start Exercises:** Click to begin practice
-4. **Exercise Types:**
-   - Answer vocabulary questions
-   - Complete grammar exercises
-   - Read passages and answer questions
-   - Listen to audio and respond
-5. **Immediate Feedback:** See if you're correct
-6. **Complete Lesson:** Get your score
-
-### Tracking Progress
-- View overall completion percentage
-- Track lessons completed today
-- Build a learning streak
-- Review recent activity
+1. **Select a course** from the home page
+2. **Choose a unit** to see available lessons
+3. **Start a lesson:**
+   - Read grammar explanation
+   - Complete 4-6 practice exercises
+   - See immediate feedback
+   - View final score
+4. **Track progress** on the course page
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 kapp/
-├── backend/                    # Flask REST API
-│   ├── app.py                  # Application factory
-│   ├── config.py               # Environment configuration
-│   ├── database.py             # SQLAlchemy setup
-│   ├── models_v2.py            # Course, Lesson, Exercise models
-│   ├── security.py             # Input validation & sanitization
-│   ├── routes/
-│   │   ├── courses.py          # Course/Unit endpoints
-│   │   ├── lessons.py          # Lesson & Exercise endpoints
-│   │   ├── progress.py         # Progress tracking
-│   │   ├── vocabulary.py       # Vocabulary reference
-│   │   ├── audio.py            # Audio serving
-│   │   └── llm.py              # LLM integration
-│   ├── data/
-│   │   ├── korean_lessons.json # Lesson content
-│   │   └── audio_cache/        # Generated TTS files
-│   ├── migrations/
-│   │   └── migrate_to_lessons.py
-│   └── scripts/
-│       └── import_lessons.py   # Content import script
-│
-├── frontend/                   # React SPA
-│   ├── src/
-│   │   ├── App.tsx             # Main app with routing
-│   │   ├── components/
-│   │   │   ├── CourseList.tsx  # Course selection
-│   │   │   ├── UnitView.tsx    # Unit/Lesson navigation
-│   │   │   ├── LessonView.tsx  # Lesson interface
-│   │   │   ├── ExerciseRenderer.tsx # Exercise display
-│   │   │   └── ProgressBar.tsx # Progress indicator
-│   │   ├── api/
-│   │   │   └── client.ts       # Backend API client
-│   │   └── types/
-│   │       └── index.ts        # TypeScript interfaces
-│   └── package.json
-│
-├── claude.md                   # Development gotchas & lessons
-└── README.md                   # This file
+├── backend/
+│   ├── app.py, config.py, models_v2.py, security.py
+│   ├── routes/ (courses, lessons, progress, vocabulary, audio, llm, debug)
+│   ├── data/ (korean_lessons.json, korean_vocab.json, audio_cache/)
+│   └── migrations/, scripts/
+├── frontend/
+│   └── src/ (App.tsx, components/, api/, types/)
+├── claude.md (development notes & security lessons)
+└── README.md
 ```
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Backend API Tests
+**API Endpoints:**
 ```bash
-# Health check
-curl http://localhost:5001/api/health
-
-# Get courses
-curl http://localhost:5001/api/courses
-
-# Get lesson details
-curl http://localhost:5001/api/lessons/1
-
-# Get progress
-curl http://localhost:5001/api/progress
+curl http://localhost:5001/api/health        # Health check
+curl http://localhost:5001/api/courses       # All courses
+curl http://localhost:5001/api/courses/1    # Course with units/lessons
+curl http://localhost:5001/api/progress     # User progress
 ```
 
-### Frontend
-1. Navigate to `http://localhost:5173`
-2. Select a course
-3. Complete a lesson
-4. Verify progress updates
+**Frontend:** Navigate to http://localhost:5173 and complete a lesson
 
 ---
 
-## 🔒 Security
+## Security
 
-This version includes security improvements:
-- **SECRET_KEY validation:** Rejects weak/default keys
+- **SECRET_KEY validation:** Rejects weak/missing keys (min 32 chars)
+- **Input sanitization:** Length limits, type checking
 - **Prompt injection protection:** Sanitizes LLM inputs
-- **Input validation:** Length limits, type checking
-- See `claude.md` for security lessons learned
+- See `CLAUDE.md` for security design decisions
 
 ---
 
-## 🚧 Current Content
+## Content
 
-### Korean Fundamentals Course
-- **Unit 1: Greetings & Introductions** (3 lessons)
-  - Hello & Goodbye
-  - Thank You & Sorry
-  - Self Introduction
-
-- **Unit 2: Numbers & Counting** (2 lessons)
-  - Sino-Korean Numbers 1-10
-  - Native Korean Numbers 1-10
-
-- **Unit 3: Basic Phrases** (2 lessons)
-  - Yes, No & Please
-  - Excuse Me & Wait
-
-**Total:** 7 lessons, 35+ exercises, 36 vocabulary items
+**Korean Fundamentals Course:**
+- Unit 1: Greetings & Introductions (3 lessons)
+- Unit 2: Numbers & Counting (2 lessons)
+- Unit 3: Basic Phrases (2 lessons)
 
 ---
 
-## 🚧 Roadmap
-
-### Next Steps
-- [ ] Add more lessons (20+ planned)
-- [ ] Improve exercise variety
-- [ ] Add user authentication
-- [ ] Mobile-responsive improvements
-
-### Future Features
-- [ ] Writing/speaking exercises
-- [ ] Review mode for completed lessons
-- [ ] Vocabulary flashcard mode
-- [ ] Offline support (PWA)
-
----
-
-## 📝 Migration from v1.0
-
-If upgrading from the flashcard version:
-
-1. **Backup your data:** The migration script does this automatically
-2. **Run migration:** `python migrations/migrate_to_lessons.py`
-3. **Import lessons:** `python scripts/import_lessons.py`
-
-Note: Old flashcard/review data is exported to JSON but not used in v2.0.
-
----
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit changes: `git commit -m "Add your feature"`
+4. Push: `git push origin feature/your-feature`
 5. Open a Pull Request
 
 ---
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- **Inspiration:** LingoDeer, Duolingo
-- **TTS:** Google Text-to-Speech (gTTS library)
-- **Vocabulary:** Curated from TOPIK I frequency lists
+MIT License - see [LICENSE](LICENSE) file
 
 ---
 
-**Happy Learning! 화이팅! (Fighting!) 💪🇰🇷**
+**Happy Learning! 화이팅! 💪**
