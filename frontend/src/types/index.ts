@@ -58,7 +58,13 @@ export interface LessonSummary {
 // Exercise Types
 // ============================================
 
-export type ExerciseType = 'vocabulary' | 'grammar' | 'reading' | 'listening' | 'review';
+export type ExerciseType = 'vocabulary' | 'grammar' | 'reading' | 'listening' | 'review' | 'sentence_arrange';
+
+export interface SentenceTile {
+  korean: string;
+  romanization: string;
+  id: number;
+}
 
 export interface Exercise {
   id: number;
@@ -71,7 +77,7 @@ export interface Exercise {
   english_text?: string;
   content_text?: string;
   audio_url?: string;
-  options?: string[];
+  options?: string[] | SentenceTile[];
 }
 
 export interface ExerciseSubmission {

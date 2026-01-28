@@ -21,6 +21,16 @@ logger = logging.getLogger(__name__)
 lessons_bp = Blueprint("lessons", __name__)
 
 
+def validate_sentence_arrange(user_answer, correct_answer: str) -> bool:
+    """Compare arrays of tile IDs for sentence_arrange exercises"""
+    try:
+        user_ids = json.loads(user_answer) if isinstance(user_answer, str) else user_answer
+        correct_ids = json.loads(correct_answer) if isinstance(correct_answer, str) else correct_answer
+        return user_ids == correct_ids
+    except (json.JSONDecodeError, TypeError):
+        return False
+
+
 @lessons_bp.route("/lessons/<int:lesson_id>", methods=["GET"])
 def get_lesson(lesson_id: int):
     """
@@ -277,10 +287,17 @@ def submit_exercise(exercise_id: int):
         if not data or "answer" not in data:
             return validation_error_response("answer is required")
 
-        user_answer = str(data["answer"]).strip().lower()
-        correct_answer = exercise.correct_answer.strip().lower()
+        user_answer = data["answer"]
+        correct_answer = exercise.correct_answer
 
-        is_correct = user_answer == correct_answer
+        # Handle sentence_arrange exercises differently
+        if exercise.exercise_type.value == "sentence_arrange":
+            is_correct = validate_sentence_arrange(user_answer, correct_answer)
+        else:
+            # Standard text comparison for other exercise types
+            user_answer_normalized = str(user_answer).strip().lower()
+            correct_answer_normalized = correct_answer.strip().lower()
+            is_correct = user_answer_normalized == correct_answer_normalized
 
         progress = get_user_progress(exercise.lesson_id)
 
