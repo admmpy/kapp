@@ -170,6 +170,7 @@ export default function LessonView({ lessonId, onComplete, onBack }: Props) {
 
       <div className="exercise-container">
         <ExerciseRenderer
+          key={currentExercise.id}
           exercise={currentExercise}
           onSubmit={handleSubmitAnswer}
           result={lastResult}

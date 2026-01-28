@@ -2,7 +2,7 @@
  * SentenceArrangeExercise - Arrange Korean word tiles to form a sentence
  * LingoDeer-style exercise implementing Active Recall and Context Learning
  */
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { Exercise, ExerciseResult, SentenceTile } from '../types';
 import './SentenceArrangeExercise.css';
 
@@ -13,18 +13,34 @@ interface Props {
   submitting: boolean;
 }
 
+// Fisher-Yates shuffle algorithm
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 export default function SentenceArrangeExercise({ exercise, onSubmit, result, submitting }: Props) {
   const [selectedTiles, setSelectedTiles] = useState<SentenceTile[]>([]);
 
   const tiles = exercise.options as SentenceTile[] | undefined;
   const isAnswered = result !== null;
 
+  // Shuffle tiles once when exercise loads (stable during component lifetime)
+  const shuffledTiles = useMemo(() => {
+    if (!tiles) return [];
+    return shuffleArray(tiles);
+  }, [exercise.id]);
+
   if (!tiles || tiles.length === 0) {
     return <div className="error">No tiles available for this exercise</div>;
   }
 
-  // Get available tiles (not yet selected)
-  const availableTiles = tiles.filter(
+  // Get available tiles (not yet selected) - maintain shuffled order
+  const availableTiles = shuffledTiles.filter(
     tile => !selectedTiles.some(selected => selected.id === tile.id)
   );
 

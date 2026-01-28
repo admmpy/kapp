@@ -74,14 +74,17 @@
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "Goodbye! (to someone leaving)",
+                  "question": "Hello, nice to meet you. I am Minsu.",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
-                    {"korean": "안녕히", "romanization": "annyeonghi", "id": 0},
-                    {"korean": "가세요", "romanization": "gaseyo", "id": 1}
+                    {"korean": "안녕하세요", "romanization": "annyeonghaseyo", "id": 0},
+                    {"korean": "만나서", "romanization": "mannaseo", "id": 1},
+                    {"korean": "반갑습니다", "romanization": "bangapseumnida", "id": 2},
+                    {"korean": "저는", "romanization": "jeoneun", "id": 3},
+                    {"korean": "민수입니다", "romanization": "minsu-imnida", "id": 4}
                   ],
-                  "correct_answer": "[0, 1]",
-                  "explanation": "안녕히 (peacefully) + 가세요 (go) = Go in peace / Goodbye"
+                  "correct_answer": "[0, 1, 2, 3, 4]",
+                  "explanation": "안녕하세요 (hello) + 만나서 반갑습니다 (nice to meet you) + 저는 민수입니다 (I am Minsu)"
                 }
               ]
             },
@@ -130,25 +133,29 @@
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "Thank you very much.",
+                  "question": "Thank you very much for your help.",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
-                    {"korean": "정말", "romanization": "jeongmal", "id": 0},
-                    {"korean": "감사합니다", "romanization": "gamsahamnida", "id": 1}
+                    {"korean": "도와", "romanization": "dowa", "id": 0},
+                    {"korean": "주셔서", "romanization": "jusyeoseo", "id": 1},
+                    {"korean": "정말", "romanization": "jeongmal", "id": 2},
+                    {"korean": "감사합니다", "romanization": "gamsahamnida", "id": 3}
                   ],
-                  "correct_answer": "[0, 1]",
-                  "explanation": "정말 (really) + 감사합니다 (thank you) = Thank you very much"
+                  "correct_answer": "[0, 1, 2, 3]",
+                  "explanation": "도와 주셔서 (for helping) + 정말 감사합니다 (thank you very much) = Thank you very much for your help"
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "I'm really sorry.",
+                  "question": "I'm sorry, I don't understand Korean well.",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
-                    {"korean": "정말", "romanization": "jeongmal", "id": 0},
-                    {"korean": "죄송합니다", "romanization": "joesonghamnida", "id": 1}
+                    {"korean": "죄송합니다", "romanization": "joesonghamnida", "id": 0},
+                    {"korean": "한국어를", "romanization": "hangugeoreul", "id": 1},
+                    {"korean": "잘", "romanization": "jal", "id": 2},
+                    {"korean": "못해요", "romanization": "mothaeyo", "id": 3}
                   ],
-                  "correct_answer": "[0, 1]",
-                  "explanation": "정말 (really) + 죄송합니다 (I'm sorry) = I'm really sorry"
+                  "correct_answer": "[0, 1, 2, 3]",
+                  "explanation": "죄송합니다 (I'm sorry) + 한국어를 (Korean) + 잘 못해요 (can't do well) = I'm sorry, I don't speak Korean well"
                 }
               ]
             },
@@ -208,15 +215,17 @@
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "I am Kim Minsu.",
+                  "question": "Hello, I am Kim Minsu from Korea.",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
-                    {"korean": "저는", "romanization": "jeoneun", "id": 0},
-                    {"korean": "김민수", "romanization": "Kim Minsu", "id": 1},
-                    {"korean": "입니다", "romanization": "imnida", "id": 2}
+                    {"korean": "안녕하세요", "romanization": "annyeonghaseyo", "id": 0},
+                    {"korean": "저는", "romanization": "jeoneun", "id": 1},
+                    {"korean": "한국에서", "romanization": "hangugeso", "id": 2},
+                    {"korean": "온", "romanization": "on", "id": 3},
+                    {"korean": "김민수입니다", "romanization": "Kim Minsu-imnida", "id": 4}
                   ],
-                  "correct_answer": "[0, 1, 2]",
-                  "explanation": "저는 (I + topic) + 김민수 (name) + 입니다 (am) = I am Kim Minsu"
+                  "correct_answer": "[0, 1, 2, 3, 4]",
+                  "explanation": "안녕하세요 (hello) + 저는 (I) + 한국에서 온 (from Korea) + 김민수입니다 (am Kim Minsu)"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -233,15 +242,17 @@
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "I am a student.",
+                  "question": "I am a university student studying Korean.",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
                     {"korean": "저는", "romanization": "jeoneun", "id": 0},
-                    {"korean": "학생", "romanization": "haksaeng", "id": 1},
-                    {"korean": "입니다", "romanization": "imnida", "id": 2}
+                    {"korean": "한국어를", "romanization": "hangugeoreul", "id": 1},
+                    {"korean": "공부하는", "romanization": "gongbuhaneun", "id": 2},
+                    {"korean": "대학생", "romanization": "daehaksaeng", "id": 3},
+                    {"korean": "입니다", "romanization": "imnida", "id": 4}
                   ],
-                  "correct_answer": "[0, 1, 2]",
-                  "explanation": "Korean SOV order: 저는 (I + topic) + 학생 (student) + 입니다 (am)"
+                  "correct_answer": "[0, 1, 2, 3, 4]",
+                  "explanation": "저는 (I) + 한국어를 공부하는 (studying Korean) + 대학생입니다 (am a university student)"
                 }
               ]
             }
@@ -309,27 +320,31 @@
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "It is 5,000 won.",
+                  "question": "This coffee is 5,000 won. Is that okay?",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
-                    {"korean": "오천", "romanization": "ocheon", "id": 0},
-                    {"korean": "원", "romanization": "won", "id": 1},
-                    {"korean": "입니다", "romanization": "imnida", "id": 2}
+                    {"korean": "이", "romanization": "i", "id": 0},
+                    {"korean": "커피는", "romanization": "keopineun", "id": 1},
+                    {"korean": "오천", "romanization": "ocheon", "id": 2},
+                    {"korean": "원입니다", "romanization": "wonimnida", "id": 3},
+                    {"korean": "괜찮으세요", "romanization": "gwaenchaneuseyo", "id": 4}
                   ],
-                  "correct_answer": "[0, 1, 2]",
-                  "explanation": "오천 (5000) + 원 (won) + 입니다 (is) = It is 5,000 won"
+                  "correct_answer": "[0, 1, 2, 3, 4]",
+                  "explanation": "이 커피는 (this coffee) + 오천 원입니다 (is 5,000 won) + 괜찮으세요? (is that okay?)"
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "Phone number: 010-1234",
+                  "question": "My phone number is 010-1234-5678.",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
-                    {"korean": "공일공", "romanization": "gong-il-gong", "id": 0},
-                    {"korean": "일이삼사", "romanization": "il-i-sam-sa", "id": 1},
-                    {"korean": "입니다", "romanization": "imnida", "id": 2}
+                    {"korean": "제", "romanization": "je", "id": 0},
+                    {"korean": "전화번호는", "romanization": "jeonhwabeonhoneun", "id": 1},
+                    {"korean": "공일공", "romanization": "gong-il-gong", "id": 2},
+                    {"korean": "일이삼사", "romanization": "il-i-sam-sa", "id": 3},
+                    {"korean": "오육칠팔입니다", "romanization": "o-yuk-chil-pal-imnida", "id": 4}
                   ],
-                  "correct_answer": "[0, 1, 2]",
-                  "explanation": "공일공 (010) + 일이삼사 (1234) + 입니다 (is) - Phone numbers use Sino-Korean"
+                  "correct_answer": "[0, 1, 2, 3, 4]",
+                  "explanation": "제 전화번호는 (my phone number is) + 공일공-일이삼사-오육칠팔입니다 (010-1234-5678)"
                 }
               ]
             },
@@ -467,36 +482,44 @@
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "Water, please.",
+                  "question": "Excuse me, could I have some cold water please?",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
-                    {"korean": "물", "romanization": "mul", "id": 0},
-                    {"korean": "주세요", "romanization": "juseyo", "id": 1}
+                    {"korean": "저기요", "romanization": "jeogiyo", "id": 0},
+                    {"korean": "차가운", "romanization": "chagaun", "id": 1},
+                    {"korean": "물", "romanization": "mul", "id": 2},
+                    {"korean": "좀", "romanization": "jom", "id": 3},
+                    {"korean": "주세요", "romanization": "juseyo", "id": 4}
                   ],
-                  "correct_answer": "[0, 1]",
-                  "explanation": "물 (water) + 주세요 (please give me) = Water, please"
+                  "correct_answer": "[0, 1, 2, 3, 4]",
+                  "explanation": "저기요 (excuse me) + 차가운 물 (cold water) + 좀 주세요 (please give me some)"
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "Yes, I understand.",
+                  "question": "Yes, I understand. I will do it now.",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
                     {"korean": "네", "romanization": "ne", "id": 0},
-                    {"korean": "알겠습니다", "romanization": "algesseumnida", "id": 1}
+                    {"korean": "알겠습니다", "romanization": "algesseumnida", "id": 1},
+                    {"korean": "지금", "romanization": "jigeum", "id": 2},
+                    {"korean": "바로", "romanization": "baro", "id": 3},
+                    {"korean": "하겠습니다", "romanization": "hagesseumnida", "id": 4}
                   ],
-                  "correct_answer": "[0, 1]",
-                  "explanation": "네 (yes) + 알겠습니다 (I understand) = Yes, I understand"
+                  "correct_answer": "[0, 1, 2, 3, 4]",
+                  "explanation": "네 알겠습니다 (yes, I understand) + 지금 바로 (right now) + 하겠습니다 (I will do it)"
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "No, thank you.",
+                  "question": "No thank you, I already ate.",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
                     {"korean": "아니요", "romanization": "aniyo", "id": 0},
-                    {"korean": "괜찮습니다", "romanization": "gwaenchansseumnida", "id": 1}
+                    {"korean": "괜찮습니다", "romanization": "gwaenchansseumnida", "id": 1},
+                    {"korean": "이미", "romanization": "imi", "id": 2},
+                    {"korean": "먹었어요", "romanization": "meogeosseoyo", "id": 3}
                   ],
-                  "correct_answer": "[0, 1]",
-                  "explanation": "아니요 (no) + 괜찮습니다 (it's okay/no thank you) = No, thank you"
+                  "correct_answer": "[0, 1, 2, 3]",
+                  "explanation": "아니요 괜찮습니다 (no thank you) + 이미 먹었어요 (I already ate)"
                 }
               ]
             },
@@ -558,15 +581,18 @@
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "Please wait a moment.",
+                  "question": "Please wait here for a moment, I will be right back.",
                   "instruction": "Arrange the Korean words to form the sentence",
                   "options": [
-                    {"korean": "잠깐만", "romanization": "jamkkanman", "id": 0},
-                    {"korean": "기다려", "romanization": "gidaryeo", "id": 1},
-                    {"korean": "주세요", "romanization": "juseyo", "id": 2}
+                    {"korean": "여기서", "romanization": "yeogiseo", "id": 0},
+                    {"korean": "잠깐만", "romanization": "jamkkanman", "id": 1},
+                    {"korean": "기다려", "romanization": "gidaryeo", "id": 2},
+                    {"korean": "주세요", "romanization": "juseyo", "id": 3},
+                    {"korean": "금방", "romanization": "geumbang", "id": 4},
+                    {"korean": "올게요", "romanization": "olgeyo", "id": 5}
                   ],
-                  "correct_answer": "[0, 1, 2]",
-                  "explanation": "잠깐만 (a moment) + 기다려 (wait) + 주세요 (please) = Please wait a moment"
+                  "correct_answer": "[0, 1, 2, 3, 4, 5]",
+                  "explanation": "여기서 (here) + 잠깐만 기다려 주세요 (please wait a moment) + 금방 올게요 (I'll be right back)"
                 }
               ]
             }
