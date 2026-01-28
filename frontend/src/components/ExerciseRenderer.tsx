@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import type { Exercise, ExerciseResult } from '../types';
 import { API_BASE_URL } from '../api/client';
+import SentenceArrangeExercise from './SentenceArrangeExercise';
 import './ExerciseRenderer.css';
 
 interface Props {
@@ -14,6 +15,18 @@ interface Props {
 }
 
 export default function ExerciseRenderer({ exercise, onSubmit, result, submitting }: Props) {
+  // Route sentence_arrange exercises to dedicated component
+  if (exercise.exercise_type === 'sentence_arrange') {
+    return (
+      <SentenceArrangeExercise
+        exercise={exercise}
+        onSubmit={onSubmit}
+        result={result}
+        submitting={submitting}
+      />
+    );
+  }
+
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [textAnswer, setTextAnswer] = useState('');
 
@@ -119,7 +132,7 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
       <div className="answer-section">
         {hasOptions ? (
           <div className="options-grid">
-            {exercise.options!.map((option, index) => (
+            {(exercise.options as string[]).map((option, index) => (
               <button
                 key={index}
                 className={getOptionClass(option)}

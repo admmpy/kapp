@@ -59,6 +59,29 @@
                   "options": ["안녕히 가세요", "안녕히 계세요", "안녕", "뭐야"],
                   "correct_answer": "안녕히 가세요",
                   "explanation": "Since the cashier is leaving, you say 안녕히 가세요"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Nice to meet you.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "안녕하세요", "romanization": "annyeonghaseyo", "id": 0},
+                    {"korean": "만나서", "romanization": "mannaseo", "id": 1},
+                    {"korean": "반갑습니다", "romanization": "bangapseumnida", "id": 2}
+                  ],
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "안녕하세요 (hello) + 만나서 (meeting) + 반갑습니다 (glad) = Nice to meet you"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Goodbye! (to someone leaving)",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "안녕히", "romanization": "annyeonghi", "id": 0},
+                    {"korean": "가세요", "romanization": "gaseyo", "id": 1}
+                  ],
+                  "correct_answer": "[0, 1]",
+                  "explanation": "안녕히 (peacefully) + 가세요 (go) = Go in peace / Goodbye"
                 }
               ]
             },
@@ -104,6 +127,28 @@
                   "options": ["미안", "괜찮아요", "죄송합니다", "감사합니다"],
                   "correct_answer": "죄송합니다",
                   "explanation": "죄송합니다 is appropriate when apologizing to strangers"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Thank you very much.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "정말", "romanization": "jeongmal", "id": 0},
+                    {"korean": "감사합니다", "romanization": "gamsahamnida", "id": 1}
+                  ],
+                  "correct_answer": "[0, 1]",
+                  "explanation": "정말 (really) + 감사합니다 (thank you) = Thank you very much"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "I'm really sorry.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "정말", "romanization": "jeongmal", "id": 0},
+                    {"korean": "죄송합니다", "romanization": "joesonghamnida", "id": 1}
+                  ],
+                  "correct_answer": "[0, 1]",
+                  "explanation": "정말 (really) + 죄송합니다 (I'm sorry) = I'm really sorry"
                 }
               ]
             },
@@ -160,6 +205,43 @@
                   "options": ["See you later", "Nice to meet you", "How are you?", "I'm fine"],
                   "correct_answer": "Nice to meet you",
                   "explanation": "만나서 반갑습니다 is the formal way to say 'Nice to meet you'"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "I am Kim Minsu.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "저는", "romanization": "jeoneun", "id": 0},
+                    {"korean": "김민수", "romanization": "Kim Minsu", "id": 1},
+                    {"korean": "입니다", "romanization": "imnida", "id": 2}
+                  ],
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "저는 (I + topic) + 김민수 (name) + 입니다 (am) = I am Kim Minsu"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "My name is Jihyun.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "제", "romanization": "je", "id": 0},
+                    {"korean": "이름은", "romanization": "ireumeun", "id": 1},
+                    {"korean": "지현", "romanization": "Jihyun", "id": 2},
+                    {"korean": "입니다", "romanization": "imnida", "id": 3}
+                  ],
+                  "correct_answer": "[0, 1, 2, 3]",
+                  "explanation": "제 (my) + 이름은 (name + topic) + 지현 (name) + 입니다 (is) = My name is Jihyun"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "I am a student.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "저는", "romanization": "jeoneun", "id": 0},
+                    {"korean": "학생", "romanization": "haksaeng", "id": 1},
+                    {"korean": "입니다", "romanization": "imnida", "id": 2}
+                  ],
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "Korean SOV order: 저는 (I + topic) + 학생 (student) + 입니다 (am)"
                 }
               ]
             }
@@ -224,6 +306,30 @@
                   "options": ["8", "9", "10", "100"],
                   "correct_answer": "10",
                   "explanation": "십 (sip) means 10 in Sino-Korean"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "It is 5,000 won.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "오천", "romanization": "ocheon", "id": 0},
+                    {"korean": "원", "romanization": "won", "id": 1},
+                    {"korean": "입니다", "romanization": "imnida", "id": 2}
+                  ],
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "오천 (5000) + 원 (won) + 입니다 (is) = It is 5,000 won"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Phone number: 010-1234",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "공일공", "romanization": "gong-il-gong", "id": 0},
+                    {"korean": "일이삼사", "romanization": "il-i-sam-sa", "id": 1},
+                    {"korean": "입니다", "romanization": "imnida", "id": 2}
+                  ],
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "공일공 (010) + 일이삼사 (1234) + 입니다 (is) - Phone numbers use Sino-Korean"
                 }
               ]
             },
@@ -279,6 +385,32 @@
                   "options": ["이십오 살", "스물다섯 살", "이십오 세", "스물다섯 세"],
                   "correct_answer": "스물다섯 살",
                   "explanation": "Age uses Native Korean numbers + 살: 스물다섯 (25) + 살 (years old)"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Two apples, please.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "사과", "romanization": "sagwa", "id": 0},
+                    {"korean": "두", "romanization": "du", "id": 1},
+                    {"korean": "개", "romanization": "gae", "id": 2},
+                    {"korean": "주세요", "romanization": "juseyo", "id": 3}
+                  ],
+                  "correct_answer": "[0, 1, 2, 3]",
+                  "explanation": "사과 (apple) + 두 (two) + 개 (counter) + 주세요 (please) = Two apples, please"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "I am 25 years old.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "저는", "romanization": "jeoneun", "id": 0},
+                    {"korean": "스물다섯", "romanization": "seumuldaseot", "id": 1},
+                    {"korean": "살", "romanization": "sal", "id": 2},
+                    {"korean": "입니다", "romanization": "imnida", "id": 3}
+                  ],
+                  "correct_answer": "[0, 1, 2, 3]",
+                  "explanation": "저는 (I) + 스물다섯 (25) + 살 (years old) + 입니다 (am) - Uses native Korean numbers"
                 }
               ]
             }
@@ -332,6 +464,39 @@
                   "options": ["Thank you", "Yes please", "Please give me", "No thank you"],
                   "correct_answer": "Please give me",
                   "explanation": "주세요 means 'please give me' or just 'please' when requesting something"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Water, please.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "물", "romanization": "mul", "id": 0},
+                    {"korean": "주세요", "romanization": "juseyo", "id": 1}
+                  ],
+                  "correct_answer": "[0, 1]",
+                  "explanation": "물 (water) + 주세요 (please give me) = Water, please"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Yes, I understand.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "네", "romanization": "ne", "id": 0},
+                    {"korean": "알겠습니다", "romanization": "algesseumnida", "id": 1}
+                  ],
+                  "correct_answer": "[0, 1]",
+                  "explanation": "네 (yes) + 알겠습니다 (I understand) = Yes, I understand"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "No, thank you.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "아니요", "romanization": "aniyo", "id": 0},
+                    {"korean": "괜찮습니다", "romanization": "gwaenchansseumnida", "id": 1}
+                  ],
+                  "correct_answer": "[0, 1]",
+                  "explanation": "아니요 (no) + 괜찮습니다 (it's okay/no thank you) = No, thank you"
                 }
               ]
             },
@@ -377,6 +542,31 @@
                   "options": ["감사합니다", "잠깐만요", "저기요", "안녕히 가세요"],
                   "correct_answer": "잠깐만요",
                   "explanation": "잠깐만요 asks the caller to wait a moment"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Excuse me, where is the bathroom?",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "저기요", "romanization": "jeogiyo", "id": 0},
+                    {"korean": "화장실", "romanization": "hwajangsil", "id": 1},
+                    {"korean": "어디", "romanization": "eodi", "id": 2},
+                    {"korean": "있어요", "romanization": "isseoyo", "id": 3}
+                  ],
+                  "correct_answer": "[0, 1, 2, 3]",
+                  "explanation": "저기요 (excuse me) + 화장실 (bathroom) + 어디 (where) + 있어요 (is) = Excuse me, where is the bathroom?"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Please wait a moment.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {"korean": "잠깐만", "romanization": "jamkkanman", "id": 0},
+                    {"korean": "기다려", "romanization": "gidaryeo", "id": 1},
+                    {"korean": "주세요", "romanization": "juseyo", "id": 2}
+                  ],
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "잠깐만 (a moment) + 기다려 (wait) + 주세요 (please) = Please wait a moment"
                 }
               ]
             }

@@ -37,6 +37,7 @@ class ExerciseType(str, Enum):
     READING = "reading"  # Reading comprehension
     LISTENING = "listening"  # Audio comprehension
     REVIEW = "review"  # Mixed review exercises
+    SENTENCE_ARRANGE = "sentence_arrange"  # Arrange words to form sentence
 
 
 class Course(db.Model):
