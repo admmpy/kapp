@@ -9,7 +9,8 @@ Endpoints:
 """
 
 from flask import Blueprint, request, jsonify, current_app
-from models import Card, db
+from database import db
+from models_v2 import VocabularyItem
 from llm_service import OllamaClient, PROMPT_TEMPLATES, get_level_name
 from extensions import limiter
 from utils import error_response, not_found_response, validation_error_response
@@ -90,24 +91,24 @@ def explain_card():
         if not card_id:
             return validation_error_response("card_id is required")
 
-        # Fetch card from database
-        card = db.session.get(Card, card_id)
-        if not card:
-            return not_found_response("Card")
+        # Fetch vocabulary item from database (card_id maps to vocabulary item)
+        vocab = db.session.get(VocabularyItem, card_id)
+        if not vocab:
+            return not_found_response("Vocabulary item")
 
         # Get user context
         user_context = data.get("user_context", {})
         level = validate_level(
-            user_context.get("level", card.level), default=card.level
+            user_context.get("level", vocab.difficulty_level), default=vocab.difficulty_level
         )
 
         # Build prompt
         template = PROMPT_TEMPLATES["explain_card"]
         system_prompt = template["system"]
         user_prompt = template["user"].format(
-            korean=card.front_korean,
-            romanisation=card.front_romanization or "N/A",
-            english=card.back_english,
+            korean=vocab.korean,
+            romanisation=vocab.romanization or "N/A",
+            english=vocab.english,
             level=level,
             level_name=get_level_name(level),
         )
@@ -164,14 +165,14 @@ def generate_examples():
         if not card_id:
             return validation_error_response("card_id is required")
 
-        card = db.session.get(Card, card_id)
-        if not card:
-            return not_found_response("Card")
+        vocab = db.session.get(VocabularyItem, card_id)
+        if not vocab:
+            return not_found_response("Vocabulary item")
 
         # Build prompt
         template = PROMPT_TEMPLATES["generate_examples"]
         user_prompt = template["user"].format(
-            korean=card.front_korean, english=card.back_english, level=card.level
+            korean=vocab.korean, english=vocab.english, level=vocab.difficulty_level
         )
 
         # Call LLM

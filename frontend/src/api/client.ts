@@ -27,9 +27,9 @@ import type {
   LLMHealth,
 } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+import { API_BASE_URL } from '../config';
 
-// Export API_BASE_URL for use in components
+// Re-export for backward compatibility
 export { API_BASE_URL };
 
 class APIClient {

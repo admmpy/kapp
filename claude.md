@@ -108,6 +108,18 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 2. Memoize callbacks with useCallback
 3. Use key prop strategically to control remounts
 
+### Absolute Position Overflow
+
+**Problem:** Progress bar gradient escapes container, covering large portion of screen.
+
+**Symptom:** Large purple gradient appears on landing page (not just hover).
+
+**Cause:** CSS cascade conflict - `.progress-fill` inherited `position: absolute` from ProgressBar.css while its parent `.progress-bar` in CourseList.css had `position: static`.
+
+**Key CSS Rule:** `overflow: hidden` does NOT clip `position: absolute` children unless the parent has `position: relative/absolute/fixed`.
+
+**Fix:** Always add `position: relative` to containers with `overflow: hidden` that have absolutely-positioned children.
+
 ## Content Structure
 
 ### Example Sentence Format
@@ -126,6 +138,20 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 ```
 
 ## Development Workflow
+
+### Branch Workflow
+
+**Rule:** NEVER make changes directly on main. Always create a new branch before starting work.
+
+```bash
+# Good - create feature branch first
+git checkout main && git pull
+git checkout -b feature/my-changes
+
+# Bad - making changes on main
+git checkout main
+# ... making edits (DON'T DO THIS)
+```
 
 ### .gitignore Essentials
 

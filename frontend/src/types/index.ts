@@ -161,6 +161,22 @@ export interface VocabularyCategory {
 // LLM Types (kept from v1)
 // ============================================
 
+export interface Card {
+  id: number;
+  front_korean: string;
+  front_romanization?: string;
+  back_english: string;
+}
+
+export interface ExplanationRequest {
+  card_id: number;
+  user_context?: {
+    level?: number;
+    previous_ratings?: number[];
+    time_spent?: number;
+  };
+}
+
 export interface LLMExplanation {
   explanation: string;
   card_id: number;

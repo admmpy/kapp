@@ -4,8 +4,7 @@
 import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import type { LLMExplanation, LLMHealth, ExplanationRequest } from '../types';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+import { API_BASE_URL } from '../config';
 
 class LLMClient {
   private client: AxiosInstance;
