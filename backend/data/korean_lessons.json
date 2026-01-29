@@ -74,6 +74,36 @@
                   "correct_answer": "안녕하세요"
                 },
                 {
+                  "exercise_type": "listening",
+                  "question": "Listen to the full sentence and select what you hear",
+                  "instruction": "Play the audio carefully",
+                  "korean_text": "안녕하세요. 만나서 반갑습니다.",
+                  "options": [
+                    "안녕하세요. 만나서 반갑습니다.",
+                    "안녕히 가세요. 감사합니다.",
+                    "안녕하세요. 죄송합니다.",
+                    "안녕히 계세요. 고마워요."
+                  ],
+                  "correct_answer": "안녕하세요. 만나서 반갑습니다.",
+                  "explanation": "The sentence means 'Hello. Nice to meet you.'",
+                  "audio_url": "/api/audio/09face2c9f20df0d3e95b0bbe0063a0f.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "This is a common greeting phrase",
+                  "korean_text": "오늘 날씨가 좋아요.",
+                  "options": [
+                    "오늘 날씨가 좋아요.",
+                    "오늘 뭐 해요?",
+                    "어제 날씨가 나빴어요.",
+                    "내일 날씨가 좋을까요?"
+                  ],
+                  "correct_answer": "오늘 날씨가 좋아요.",
+                  "explanation": "The sentence means 'The weather is nice today.'",
+                  "audio_url": "/api/audio/12af595c9ac839ea5e77baec128d5bae.mp3"
+                },
+                {
                   "exercise_type": "grammar",
                   "question": "You are at a store and the cashier is about to leave for the day. What do you say?",
                   "instruction": "Choose the appropriate goodbye",
@@ -192,6 +222,36 @@
                   "correct_answer": "I'm sorry",
                   "explanation": "죄송합니다 is the formal way to apologize",
                   "audio_url": "/api/audio/96cb025e8c5c9d7a81afaf3a5f39a724.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to the sentence and select what you hear",
+                  "instruction": "Pay attention to the formality",
+                  "korean_text": "도와 주셔서 정말 감사합니다.",
+                  "options": [
+                    "도와 주셔서 정말 감사합니다.",
+                    "도와 주셔서 고마워요.",
+                    "죄송합니다. 도와 주세요.",
+                    "감사합니다. 잘 지내요."
+                  ],
+                  "correct_answer": "도와 주셔서 정말 감사합니다.",
+                  "explanation": "The sentence means 'Thank you very much for your help.'",
+                  "audio_url": "/api/audio/99d94ba0d44298ff6ed36184b787bc31.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and identify the apology phrase",
+                  "instruction": "Listen carefully to the full sentence",
+                  "korean_text": "죄송합니다. 잘 못 들었어요.",
+                  "options": [
+                    "죄송합니다. 잘 못 들었어요.",
+                    "감사합니다. 잘 들었어요.",
+                    "미안해요. 뭐라고요?",
+                    "죄송합니다. 다시 말해 주세요."
+                  ],
+                  "correct_answer": "죄송합니다. 잘 못 들었어요.",
+                  "explanation": "The sentence means 'I'm sorry. I didn't hear well.'",
+                  "audio_url": "/api/audio/a514cc0919403d991b7c8e39fa0a3d66.mp3"
                 },
                 {
                   "exercise_type": "grammar",
@@ -369,6 +429,51 @@
                   "correct_answer": "Nice to meet you",
                   "explanation": "만나서 반갑습니다 is the formal way to say 'Nice to meet you'",
                   "audio_url": "/api/audio/6664d471befeb925e17dd60c5d2f54ec.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to the introduction and select what you hear",
+                  "instruction": "This is a self-introduction",
+                  "korean_text": "저는 미국에서 왔습니다.",
+                  "options": [
+                    "저는 미국에서 왔습니다.",
+                    "저는 한국에서 왔어요.",
+                    "저는 일본에서 왔습니다.",
+                    "저는 중국에서 왔어요."
+                  ],
+                  "correct_answer": "저는 미국에서 왔습니다.",
+                  "explanation": "The sentence means 'I came from America.'",
+                  "audio_url": "/api/audio/ce458fbcbed81b94dc37373d2a7ee096.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Pay attention to the verb ending",
+                  "korean_text": "한국어를 배우고 싶어요.",
+                  "options": [
+                    "한국어를 배우고 싶어요.",
+                    "한국어를 잘 해요.",
+                    "한국어를 공부해요.",
+                    "한국어를 가르쳐요."
+                  ],
+                  "correct_answer": "한국어를 배우고 싶어요.",
+                  "explanation": "The sentence means 'I want to learn Korean.'",
+                  "audio_url": "/api/audio/e8616a4ae0da4abcb8bfb0541ff38a9d.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to the full introduction",
+                  "instruction": "A longer self-introduction phrase",
+                  "korean_text": "제 이름은 김민수입니다. 대학생이에요.",
+                  "options": [
+                    "제 이름은 김민수입니다. 대학생이에요.",
+                    "제 이름은 박지현입니다. 회사원이에요.",
+                    "제 이름은 김민수입니다. 선생님이에요.",
+                    "저는 김민수입니다. 학생이 아니에요."
+                  ],
+                  "correct_answer": "제 이름은 김민수입니다. 대학생이에요.",
+                  "explanation": "The sentence means 'My name is Kim Minsu. I'm a university student.'",
+                  "audio_url": "/api/audio/fe180a616e01e945062a11784f89c8d4.mp3"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -576,6 +681,36 @@
                   "audio_url": "/api/audio/ce07b55f44d7c6b13657191e1c95bb1a.mp3"
                 },
                 {
+                  "exercise_type": "listening",
+                  "question": "Listen and identify the price",
+                  "instruction": "This is about money",
+                  "korean_text": "이것은 삼천 원입니다.",
+                  "options": [
+                    "이것은 삼천 원입니다.",
+                    "이것은 오천 원입니다.",
+                    "이것은 만 원입니다.",
+                    "이것은 천 원입니다."
+                  ],
+                  "correct_answer": "이것은 삼천 원입니다.",
+                  "explanation": "The sentence means 'This is 3,000 won.' (삼천 = 3,000)",
+                  "audio_url": "/api/audio/a3edc97a618b9096d84cfe2c738e0aa2.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select the date phrase",
+                  "instruction": "Pay attention to the numbers",
+                  "korean_text": "오늘은 삼월 십오일입니다.",
+                  "options": [
+                    "오늘은 삼월 십오일입니다.",
+                    "오늘은 사월 이십일입니다.",
+                    "오늘은 오월 십일입니다.",
+                    "오늘은 일월 오일입니다."
+                  ],
+                  "correct_answer": "오늘은 삼월 십오일입니다.",
+                  "explanation": "The sentence means 'Today is March 15th.' (삼월 십오일 = 3/15)",
+                  "audio_url": "/api/audio/db4c88e399c3050bf5b7104ba90f066f.mp3"
+                },
+                {
                   "exercise_type": "sentence_arrange",
                   "question": "This coffee is 5,000 won. Is that okay?",
                   "instruction": "Arrange the Korean words to form the sentence",
@@ -722,6 +857,36 @@
                   "correct_answer": "10",
                   "explanation": "열 (yeol) means 10 in Native Korean",
                   "audio_url": "/api/audio/17ea567de8db8819063c6b1f0423146a.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select the counting phrase",
+                  "instruction": "Uses native Korean numbers with counters",
+                  "korean_text": "사과 세 개 주세요.",
+                  "options": [
+                    "사과 세 개 주세요.",
+                    "사과 두 개 주세요.",
+                    "사과 네 개 주세요.",
+                    "사과 다섯 개 주세요."
+                  ],
+                  "correct_answer": "사과 세 개 주세요.",
+                  "explanation": "The sentence means 'Please give me three apples.' (세 개 = 3 items)",
+                  "audio_url": "/api/audio/d76f0cbc5f28f525100cab934fdebce3.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and identify the age statement",
+                  "instruction": "Korean uses native numbers for age",
+                  "korean_text": "저는 스물다섯 살입니다.",
+                  "options": [
+                    "저는 스물다섯 살입니다.",
+                    "저는 서른 살입니다.",
+                    "저는 스무 살입니다.",
+                    "저는 열아홉 살입니다."
+                  ],
+                  "correct_answer": "저는 스물다섯 살입니다.",
+                  "explanation": "The sentence means 'I am 25 years old.' (스물다섯 = 25)",
+                  "audio_url": "/api/audio/d17710649990fb836fca5ad00b004bff.mp3"
                 },
                 {
                   "exercise_type": "grammar",
@@ -879,6 +1044,36 @@
                   "audio_url": "/api/audio/8441433a3a6b5a5dbfb12004be8a4fd5.mp3"
                 },
                 {
+                  "exercise_type": "listening",
+                  "question": "Listen and select the request phrase",
+                  "instruction": "A polite request",
+                  "korean_text": "물 한 잔 주세요.",
+                  "options": [
+                    "물 한 잔 주세요.",
+                    "커피 주세요.",
+                    "물 있어요?",
+                    "주스 두 잔 주세요."
+                  ],
+                  "correct_answer": "물 한 잔 주세요.",
+                  "explanation": "The sentence means 'Please give me a glass of water.'",
+                  "audio_url": "/api/audio/931af98cd5eec3e6ca8acf076f28d7f6.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and identify the response",
+                  "instruction": "Yes/No response in context",
+                  "korean_text": "네, 알겠습니다. 잠깐만 기다려 주세요.",
+                  "options": [
+                    "네, 알겠습니다. 잠깐만 기다려 주세요.",
+                    "아니요, 괜찮습니다.",
+                    "네, 감사합니다.",
+                    "아니요, 모르겠어요."
+                  ],
+                  "correct_answer": "네, 알겠습니다. 잠깐만 기다려 주세요.",
+                  "explanation": "The sentence means 'Yes, I understand. Please wait a moment.'",
+                  "audio_url": "/api/audio/9aef8d76ae6e305727411f36dfafa115.mp3"
+                },
+                {
                   "exercise_type": "sentence_arrange",
                   "question": "Excuse me, could I have some cold water please?",
                   "instruction": "Arrange the Korean words to form the sentence",
@@ -1029,6 +1224,36 @@
                   "correct_answer": "Wait a moment",
                   "explanation": "잠깐만요 means 'wait a moment' or 'just a second'",
                   "audio_url": "/api/audio/271a45ce865ea877f92f48232c366b2a.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select the question",
+                  "instruction": "Asking for directions",
+                  "korean_text": "화장실이 어디에 있어요?",
+                  "options": [
+                    "화장실이 어디에 있어요?",
+                    "식당이 어디에 있어요?",
+                    "지하철역이 어디에 있어요?",
+                    "출구가 어디에 있어요?"
+                  ],
+                  "correct_answer": "화장실이 어디에 있어요?",
+                  "explanation": "The sentence means 'Where is the bathroom?'",
+                  "audio_url": "/api/audio/abf0a4cbb2640c89be071232fe0b64d3.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and identify the polite request",
+                  "instruction": "Asking someone to wait",
+                  "korean_text": "잠깐만 기다려 주세요. 금방 돌아올게요.",
+                  "options": [
+                    "잠깐만 기다려 주세요. 금방 돌아올게요.",
+                    "여기서 기다리세요. 가지 마세요.",
+                    "저기요, 도와주세요.",
+                    "실례합니다. 지나갈게요."
+                  ],
+                  "correct_answer": "잠깐만 기다려 주세요. 금방 돌아올게요.",
+                  "explanation": "The sentence means 'Please wait a moment. I'll be right back.'",
+                  "audio_url": "/api/audio/6c32b8e3b12c44e82c2e5b170b02e959.mp3"
                 },
                 {
                   "exercise_type": "grammar",
