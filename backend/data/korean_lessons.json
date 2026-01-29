@@ -144,43 +144,31 @@
                   "explanation": "안녕하세요 (hello) + 만나서 (meeting) + 반갑습니다 (glad) = Nice to meet you"
                 },
                 {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Hello, nice to meet you. I am Minsu.",
-                  "instruction": "Arrange the Korean words to form the sentence",
+                  "question": "When did you arrive in Korea?",
+                  "instruction": "Arrange the Korean words to form the question",
                   "options": [
                     {
-                      "korean": "안녕하세요",
-                      "romanization": "annyeonghaseyo",
+                      "korean": "언제",
+                      "romanization": "eonje",
                       "id": 0,
-                      "audio_url": "/api/audio/6572762d43073c46ad22c9e6bf08bd37.mp3"
+                      "audio_url": "/api/audio/ef3bf401f57ec188040895754c4e21fd.mp3"
                     },
                     {
-                      "korean": "만나서",
-                      "romanization": "mannaseo",
+                      "korean": "한국에",
+                      "romanization": "hanguge",
                       "id": 1,
-                      "audio_url": "/api/audio/7d28991a59e651280eae8696e3757496.mp3"
+                      "audio_url": "/api/audio/46687ef3a1c8dc2780e65438ad9e2107.mp3"
                     },
                     {
-                      "korean": "반갑습니다",
-                      "romanization": "bangapseumnida",
+                      "korean": "도착했어요",
+                      "romanization": "dochakhaesseoyo",
                       "id": 2,
-                      "audio_url": "/api/audio/16cb401d7cc65244720faa33643c2694.mp3"
-                    },
-                    {
-                      "korean": "저는",
-                      "romanization": "jeoneun",
-                      "id": 3,
-                      "audio_url": "/api/audio/7fb32af2efc2418fcced071110a452a5.mp3"
-                    },
-                    {
-                      "korean": "민수입니다",
-                      "romanization": "minsu-imnida",
-                      "id": 4,
-                      "audio_url": "/api/audio/be94f8dff31013b92c13036c92df4e26.mp3"
+                      "audio_url": "/api/audio/7f9b39053f68ce4b9f9b9bee62d8a071.mp3"
                     }
                   ],
-                  "correct_answer": "[0, 1, 2, 3, 4]",
-                  "explanation": "안녕하세요 (hello) + 만나서 반갑습니다 (nice to meet you) + 저는 민수입니다 (I am Minsu)"
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "언제 (when) + 한국에 (to Korea) + 도착했어요 (did you arrive) = When did you arrive in Korea?",
+                  "exercise_type": "sentence_arrange"
                 }
               ]
             },
@@ -280,37 +268,37 @@
                   "explanation": "죄송합니다 is appropriate when apologizing to strangers"
                 },
                 {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Thank you very much for your help.",
-                  "instruction": "Arrange the Korean words to form the sentence",
+                  "question": "How can I help you today?",
+                  "instruction": "Arrange the Korean words to form the question",
                   "options": [
+                    {
+                      "korean": "오늘",
+                      "romanization": "oneul",
+                      "id": 0,
+                      "audio_url": "/api/audio/8e15c2b178b16af59d461830afa07a31.mp3"
+                    },
+                    {
+                      "korean": "어떻게",
+                      "romanization": "eotteoke",
+                      "id": 1,
+                      "audio_url": "/api/audio/4bbee0a4f358c9a94c45ef7c61bacb9e.mp3"
+                    },
                     {
                       "korean": "도와",
                       "romanization": "dowa",
-                      "id": 0,
+                      "id": 2,
                       "audio_url": "/api/audio/8f93ab51856d4a75dcfc56c6c2740511.mp3"
                     },
                     {
-                      "korean": "주셔서",
-                      "romanization": "jusyeoseo",
-                      "id": 1,
-                      "audio_url": "/api/audio/3325591e7eadd91d7fa627d4dfba0519.mp3"
-                    },
-                    {
-                      "korean": "정말",
-                      "romanization": "jeongmal",
-                      "id": 2,
-                      "audio_url": "/api/audio/ef65a8d8459c8d097446bab52953b180.mp3"
-                    },
-                    {
-                      "korean": "감사합니다",
-                      "romanization": "gamsahamnida",
+                      "korean": "드릴까요",
+                      "romanization": "deurilkkayo",
                       "id": 3,
-                      "audio_url": "/api/audio/03bf731fea8fe57f9285ac99920e4cd4.mp3"
+                      "audio_url": "/api/audio/18f5ca9d06d7a0ace7c021d39a0d3976.mp3"
                     }
                   ],
                   "correct_answer": "[0, 1, 2, 3]",
-                  "explanation": "도와 주셔서 (for helping) + 정말 감사합니다 (thank you very much) = Thank you very much for your help"
+                  "explanation": "오늘 (today) + 어떻게 (how) + 도와 드릴까요 (can I help you) = How can I help you today?",
+                  "exercise_type": "sentence_arrange"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -476,43 +464,31 @@
                   "audio_url": "/api/audio/fe180a616e01e945062a11784f89c8d4.mp3"
                 },
                 {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Hello, I am Kim Minsu from Korea.",
-                  "instruction": "Arrange the Korean words to form the sentence",
+                  "question": "Where are you from originally?",
+                  "instruction": "Arrange the Korean words to form the question",
                   "options": [
                     {
-                      "korean": "안녕하세요",
-                      "romanization": "annyeonghaseyo",
+                      "korean": "원래",
+                      "romanization": "wollae",
                       "id": 0,
-                      "audio_url": "/api/audio/6572762d43073c46ad22c9e6bf08bd37.mp3"
+                      "audio_url": "/api/audio/c3ae9a555583cf9bb77b0d8b6d372b08.mp3"
                     },
                     {
-                      "korean": "저는",
-                      "romanization": "jeoneun",
+                      "korean": "어디",
+                      "romanization": "eodi",
                       "id": 1,
-                      "audio_url": "/api/audio/7fb32af2efc2418fcced071110a452a5.mp3"
+                      "audio_url": "/api/audio/d38f9b01e37facf309dfbba9db3b5962.mp3"
                     },
                     {
-                      "korean": "한국에서",
-                      "romanization": "hangugeso",
+                      "korean": "출신이에요",
+                      "romanization": "chulsinieyo",
                       "id": 2,
-                      "audio_url": "/api/audio/3acaf3c316a3d3137f3a0ddb6ede7cb5.mp3"
-                    },
-                    {
-                      "korean": "온",
-                      "romanization": "on",
-                      "id": 3,
-                      "audio_url": "/api/audio/113215cf55a18c0a7343d810bc5636b6.mp3"
-                    },
-                    {
-                      "korean": "김민수입니다",
-                      "romanization": "Kim Minsu-imnida",
-                      "id": 4,
-                      "audio_url": "/api/audio/448d8cc6398aa68e938017844806f607.mp3"
+                      "audio_url": "/api/audio/417a1add7fe95c670dc75a5d5f9c4dcd.mp3"
                     }
                   ],
-                  "correct_answer": "[0, 1, 2, 3, 4]",
-                  "explanation": "안녕하세요 (hello) + 저는 (I) + 한국에서 온 (from Korea) + 김민수입니다 (am Kim Minsu)"
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "원래 (originally) + 어디 (where) + 출신이에요 (are you from) = Where are you from originally?",
+                  "exercise_type": "sentence_arrange"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -711,43 +687,31 @@
                   "audio_url": "/api/audio/db4c88e399c3050bf5b7104ba90f066f.mp3"
                 },
                 {
-                  "exercise_type": "sentence_arrange",
-                  "question": "This coffee is 5,000 won. Is that okay?",
-                  "instruction": "Arrange the Korean words to form the sentence",
+                  "question": "How much is this altogether?",
+                  "instruction": "Arrange the Korean words to form the question",
                   "options": [
                     {
-                      "korean": "이",
-                      "romanization": "i",
+                      "korean": "이거",
+                      "romanization": "igeo",
                       "id": 0,
-                      "audio_url": "/api/audio/d7f13335902a8557ea228c442bd539b2.mp3"
+                      "audio_url": "/api/audio/a5dd2eb590be0c23b1b018e69db8c367.mp3"
                     },
                     {
-                      "korean": "커피는",
-                      "romanization": "keopineun",
+                      "korean": "전부",
+                      "romanization": "jeonbu",
                       "id": 1,
-                      "audio_url": "/api/audio/e010e024dc84ac288399d59230bbb453.mp3"
+                      "audio_url": "/api/audio/ab6321563b51eb9aa08a1f8549ce336f.mp3"
                     },
                     {
-                      "korean": "오천",
-                      "romanization": "ocheon",
+                      "korean": "얼마예요",
+                      "romanization": "eolmayeyo",
                       "id": 2,
-                      "audio_url": "/api/audio/21120f3b6666a61afc3876fd32131170.mp3"
-                    },
-                    {
-                      "korean": "원입니다",
-                      "romanization": "wonimnida",
-                      "id": 3,
-                      "audio_url": "/api/audio/525c1c811b2b35eb727892c7a54e2474.mp3"
-                    },
-                    {
-                      "korean": "괜찮으세요",
-                      "romanization": "gwaenchaneuseyo",
-                      "id": 4,
-                      "audio_url": "/api/audio/6d2aefb16d77b1c2af6ad473d2d3e32d.mp3"
+                      "audio_url": "/api/audio/17ae8bbc6cfab913b991c2b0e4fc4cda.mp3"
                     }
                   ],
-                  "correct_answer": "[0, 1, 2, 3, 4]",
-                  "explanation": "이 커피는 (this coffee) + 오천 원입니다 (is 5,000 won) + 괜찮으세요? (is that okay?)"
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "이거 (this) + 전부 (altogether) + 얼마예요 (how much is it) = How much is this altogether?",
+                  "exercise_type": "sentence_arrange"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -902,21 +866,20 @@
                   "explanation": "Age uses Native Korean numbers + 살: 스물다섯 (25) + 살 (years old)"
                 },
                 {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Two apples, please.",
-                  "instruction": "Arrange the Korean words to form the sentence",
+                  "question": "Actually, I need three more.",
+                  "instruction": "Arrange the Korean words to form the statement",
                   "options": [
                     {
-                      "korean": "사과",
-                      "romanization": "sagwa",
+                      "korean": "사실",
+                      "romanization": "sasil",
                       "id": 0,
-                      "audio_url": "/api/audio/5056336cf31226eeba4e1778d2ca430d.mp3"
+                      "audio_url": "/api/audio/5788ff338156204be282be5e3b34b41f.mp3"
                     },
                     {
-                      "korean": "두",
-                      "romanization": "du",
+                      "korean": "세",
+                      "romanization": "se",
                       "id": 1,
-                      "audio_url": "/api/audio/7363444d090d35de30cc535f37a110a5.mp3"
+                      "audio_url": "/api/audio/2f2f38a1017a70b82d13670f256b26bc.mp3"
                     },
                     {
                       "korean": "개",
@@ -925,14 +888,21 @@
                       "audio_url": "/api/audio/2c6f93a336bf52dd48e5ce34db3e2c1e.mp3"
                     },
                     {
-                      "korean": "주세요",
-                      "romanization": "juseyo",
+                      "korean": "더",
+                      "romanization": "deo",
                       "id": 3,
-                      "audio_url": "/api/audio/8441433a3a6b5a5dbfb12004be8a4fd5.mp3"
+                      "audio_url": "/api/audio/0195a0624e1bd86644a5f830a4ad45f6.mp3"
+                    },
+                    {
+                      "korean": "필요해요",
+                      "romanization": "piryohaeyo",
+                      "id": 4,
+                      "audio_url": "/api/audio/e9a0a0f9f46e1b7cc4de092db13d46e7.mp3"
                     }
                   ],
-                  "correct_answer": "[0, 1, 2, 3]",
-                  "explanation": "사과 (apple) + 두 (two) + 개 (counter) + 주세요 (please) = Two apples, please"
+                  "correct_answer": "[0, 1, 2, 3, 4]",
+                  "explanation": "사실 (actually) + 세 개 (three items) + 더 (more) + 필요해요 (I need) = Actually, I need three more.",
+                  "exercise_type": "sentence_arrange"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -1074,43 +1044,31 @@
                   "audio_url": "/api/audio/9aef8d76ae6e305727411f36dfafa115.mp3"
                 },
                 {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Excuse me, could I have some cold water please?",
-                  "instruction": "Arrange the Korean words to form the sentence",
+                  "question": "Of course! Would you like ice with that?",
+                  "instruction": "Arrange the Korean words to form the response",
                   "options": [
                     {
-                      "korean": "저기요",
-                      "romanization": "jeogiyo",
+                      "korean": "물론이죠",
+                      "romanization": "mullonijyo",
                       "id": 0,
-                      "audio_url": "/api/audio/b77b10447c4152a88691538dd82b4de1.mp3"
+                      "audio_url": "/api/audio/b89b6e720e2f332422359f273eaf1b31.mp3"
                     },
                     {
-                      "korean": "차가운",
-                      "romanization": "chagaun",
+                      "korean": "얼음도",
+                      "romanization": "eoreumdo",
                       "id": 1,
-                      "audio_url": "/api/audio/8b3801754d49071945e0fe0d81bed8d3.mp3"
+                      "audio_url": "/api/audio/b2ff1ca3e249bbbac89b8ed06c210652.mp3"
                     },
                     {
-                      "korean": "물",
-                      "romanization": "mul",
+                      "korean": "드릴까요",
+                      "romanization": "deurilkkayo",
                       "id": 2,
-                      "audio_url": "/api/audio/c6222ee62622971e0724c87df0873093.mp3"
-                    },
-                    {
-                      "korean": "좀",
-                      "romanization": "jom",
-                      "id": 3,
-                      "audio_url": "/api/audio/4d8ee848de633987749034b40a579dbb.mp3"
-                    },
-                    {
-                      "korean": "주세요",
-                      "romanization": "juseyo",
-                      "id": 4,
-                      "audio_url": "/api/audio/8441433a3a6b5a5dbfb12004be8a4fd5.mp3"
+                      "audio_url": "/api/audio/18f5ca9d06d7a0ace7c021d39a0d3976.mp3"
                     }
                   ],
-                  "correct_answer": "[0, 1, 2, 3, 4]",
-                  "explanation": "저기요 (excuse me) + 차가운 물 (cold water) + 좀 주세요 (please give me some)"
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "물론이죠 (of course) + 얼음도 (ice too) + 드릴까요 (shall I give you) = Of course! Would you like ice with that?",
+                  "exercise_type": "sentence_arrange"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -1282,37 +1240,37 @@
                   "explanation": "잠깐만요 asks the caller to wait a moment"
                 },
                 {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Excuse me, where is the bathroom?",
-                  "instruction": "Arrange the Korean words to form the sentence",
+                  "question": "Could you tell me where the exit is?",
+                  "instruction": "Arrange the Korean words to form the question",
                   "options": [
                     {
-                      "korean": "저기요",
-                      "romanization": "jeogiyo",
+                      "korean": "출구가",
+                      "romanization": "chulguga",
                       "id": 0,
-                      "audio_url": "/api/audio/b77b10447c4152a88691538dd82b4de1.mp3"
+                      "audio_url": "/api/audio/ea89c3471c30c5cd93327170cada65b1.mp3"
                     },
                     {
-                      "korean": "화장실",
-                      "romanization": "hwajangsil",
+                      "korean": "어디인지",
+                      "romanization": "eodinji",
                       "id": 1,
-                      "audio_url": "/api/audio/8cf8cffa80f900185a0eb0ddc0041130.mp3"
+                      "audio_url": "/api/audio/9b663deb9710a2965c54206e86aa35ef.mp3"
                     },
                     {
-                      "korean": "어디",
-                      "romanization": "eodi",
+                      "korean": "알려",
+                      "romanization": "allyeo",
                       "id": 2,
-                      "audio_url": "/api/audio/d38f9b01e37facf309dfbba9db3b5962.mp3"
+                      "audio_url": "/api/audio/eb8dfa3e3e46f0e74bd71d48bf04faea.mp3"
                     },
                     {
-                      "korean": "있어요",
-                      "romanization": "isseoyo",
+                      "korean": "주시겠어요",
+                      "romanization": "jusigesseoyo",
                       "id": 3,
-                      "audio_url": "/api/audio/da3c8a471025ccd825bc5f6484c0c681.mp3"
+                      "audio_url": "/api/audio/7f9befcc205208daefe9df97020f7cc5.mp3"
                     }
                   ],
                   "correct_answer": "[0, 1, 2, 3]",
-                  "explanation": "저기요 (excuse me) + 화장실 (bathroom) + 어디 (where) + 있어요 (is) = Excuse me, where is the bathroom?"
+                  "explanation": "출구가 (the exit) + 어디인지 (where it is) + 알려 주시겠어요 (could you tell me) = Could you tell me where the exit is?",
+                  "exercise_type": "sentence_arrange"
                 },
                 {
                   "exercise_type": "sentence_arrange",
