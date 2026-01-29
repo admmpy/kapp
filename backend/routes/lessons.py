@@ -322,3 +322,88 @@ def submit_exercise(exercise_id: int):
         logger.error(f"Error submitting exercise {exercise_id}: {e}")
         db.session.rollback()
         return error_response("Failed to submit exercise", 500, str(e))
+
+
+@lessons_bp.route("/lessons/<int:lesson_id>/next", methods=["GET"])
+def get_next_lesson(lesson_id: int):
+    """
+    Get the next lesson in sequence
+
+    Response:
+        {
+            "next_lesson": {
+                "id": 2,
+                "title": "...",
+                "unit_id": 1,
+                ...
+            },
+            "is_last_in_unit": false,
+            "is_last_in_course": false
+        }
+    """
+    try:
+        lesson = Lesson.query.get(lesson_id)
+        if not lesson:
+            return not_found_response("Lesson not found")
+
+        # Get lessons in same unit
+        same_unit_lessons = Lesson.query.filter_by(unit_id=lesson.unit_id).order_by(Lesson.display_order).all()
+        current_index = next((i for i, l in enumerate(same_unit_lessons) if l.id == lesson_id), -1)
+
+        # Check if there's a next lesson in the same unit
+        if current_index >= 0 and current_index < len(same_unit_lessons) - 1:
+            next_lesson = same_unit_lessons[current_index + 1]
+            return jsonify(
+                {
+                    "next_lesson": {
+                        "id": next_lesson.id,
+                        "title": next_lesson.title,
+                        "description": next_lesson.description,
+                        "unit_id": next_lesson.unit_id,
+                        "estimated_minutes": next_lesson.estimated_minutes,
+                        "exercise_count": len(next_lesson.exercises) if next_lesson.exercises else 0,
+                    },
+                    "is_last_in_unit": False,
+                    "is_last_in_course": False,
+                }
+            ), 200
+
+        # No more lessons in unit - check if there's next unit
+        from models_v2 import Unit
+        current_unit = Unit.query.get(lesson.unit_id)
+        if not current_unit:
+            return jsonify({"next_lesson": None, "is_last_in_unit": True, "is_last_in_course": True}), 200
+
+        next_unit = Unit.query.filter_by(course_id=current_unit.course_id).filter(
+            Unit.display_order > current_unit.display_order
+        ).order_by(Unit.display_order).first()
+
+        if next_unit:
+            # Get first lesson in next unit
+            first_lesson_in_next_unit = Lesson.query.filter_by(unit_id=next_unit.id).order_by(
+                Lesson.display_order
+            ).first()
+            if first_lesson_in_next_unit:
+                return jsonify(
+                    {
+                        "next_lesson": {
+                            "id": first_lesson_in_next_unit.id,
+                            "title": first_lesson_in_next_unit.title,
+                            "description": first_lesson_in_next_unit.description,
+                            "unit_id": first_lesson_in_next_unit.unit_id,
+                            "estimated_minutes": first_lesson_in_next_unit.estimated_minutes,
+                            "exercise_count": len(first_lesson_in_next_unit.exercises)
+                            if first_lesson_in_next_unit.exercises
+                            else 0,
+                        },
+                        "is_last_in_unit": True,
+                        "is_last_in_course": False,
+                    }
+                ), 200
+
+        # No more lessons in course
+        return jsonify({"next_lesson": None, "is_last_in_unit": True, "is_last_in_course": True}), 200
+
+    except Exception as e:
+        logger.error(f"Error getting next lesson for {lesson_id}: {e}")
+        return error_response("Failed to get next lesson", 500, str(e))
