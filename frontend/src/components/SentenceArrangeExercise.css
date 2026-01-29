@@ -110,6 +110,27 @@
   color: var(--color-text-muted);
 }
 
+/* Audio indicator on tiles */
+.tile-audio-icon {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: 0.6rem;
+  opacity: 0.6;
+}
+
+.word-tile.has-audio {
+  position: relative;
+}
+
+.word-tile.has-audio:hover .tile-audio-icon {
+  opacity: 1;
+}
+
+.word-tile.selected .tile-audio-icon {
+  opacity: 0.8;
+}
+
 /* Word bank - available tiles */
 .word-bank {
   display: flex;

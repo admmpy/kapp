@@ -64,6 +64,7 @@ export interface SentenceTile {
   korean: string;
   romanization: string;
   id: number;
+  audio_url?: string;
 }
 
 export interface Exercise {
