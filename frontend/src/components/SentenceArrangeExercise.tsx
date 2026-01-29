@@ -2,8 +2,9 @@
  * SentenceArrangeExercise - Arrange Korean word tiles to form a sentence
  * LingoDeer-style exercise implementing Active Recall and Context Learning
  */
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import type { Exercise, ExerciseResult, SentenceTile } from '../types';
+import { API_BASE_URL } from '../api/client';
 import './SentenceArrangeExercise.css';
 
 interface Props {
@@ -25,9 +26,32 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export default function SentenceArrangeExercise({ exercise, onSubmit, result, submitting }: Props) {
   const [selectedTiles, setSelectedTiles] = useState<SentenceTile[]>([]);
+  const lastSelectedIdRef = useRef<number | null>(null);
 
   const tiles = exercise.options as SentenceTile[] | undefined;
   const isAnswered = result !== null;
+
+  // Play audio for a tile
+  function playTileAudio(tile: SentenceTile) {
+    if (tile.audio_url) {
+      const audio = new Audio(`${API_BASE_URL}${tile.audio_url}`);
+      audio.play().catch(err => console.error('Tile audio failed:', err));
+    }
+  }
+
+  // Auto-play audio when a new tile is selected
+  useEffect(() => {
+    if (selectedTiles.length > 0) {
+      const lastTile = selectedTiles[selectedTiles.length - 1];
+      // Only play if this is a newly added tile (not from initial render)
+      if (lastTile.id !== lastSelectedIdRef.current) {
+        lastSelectedIdRef.current = lastTile.id;
+        playTileAudio(lastTile);
+      }
+    } else {
+      lastSelectedIdRef.current = null;
+    }
+  }, [selectedTiles]);
 
   // Shuffle tiles once when exercise loads (stable during component lifetime)
   const shuffledTiles = useMemo(() => {
@@ -46,12 +70,24 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
 
   function handleTileClick(tile: SentenceTile) {
     if (isAnswered || submitting) return;
+    // Audio plays via useEffect when tile is added
     setSelectedTiles([...selectedTiles, tile]);
   }
 
-  function handleRemoveTile(tile: SentenceTile) {
+  function handleRemoveTile(tile: SentenceTile, e: React.MouseEvent) {
     if (isAnswered || submitting) return;
     setSelectedTiles(selectedTiles.filter(t => t.id !== tile.id));
+  }
+
+  function handleSelectedTileClick(tile: SentenceTile, e: React.MouseEvent) {
+    // Play audio on click (replay in drop zone)
+    playTileAudio(tile);
+  }
+
+  function handleWordBankTileClick(tile: SentenceTile) {
+    if (isAnswered || submitting) return;
+    // Select the tile (audio will play via useEffect)
+    setSelectedTiles([...selectedTiles, tile]);
   }
 
   function handleSubmit() {
@@ -103,12 +139,26 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
             {selectedTiles.map((tile, index) => (
               <button
                 key={`selected-${tile.id}-${index}`}
-                className="word-tile selected"
-                onClick={() => handleRemoveTile(tile)}
-                disabled={isAnswered || submitting}
+                className={`word-tile selected ${tile.audio_url ? 'has-audio' : ''}`}
+                onClick={(e) => {
+                  if (isAnswered) {
+                    // After answering, clicking plays audio
+                    handleSelectedTileClick(tile, e);
+                  } else {
+                    // Before answering, clicking removes tile
+                    handleRemoveTile(tile, e);
+                  }
+                }}
+                onDoubleClick={(e) => {
+                  // Double-click always plays audio
+                  e.preventDefault();
+                  playTileAudio(tile);
+                }}
+                disabled={submitting}
               >
                 <span className="tile-korean">{tile.korean}</span>
                 <span className="tile-romanization">{tile.romanization}</span>
+                {tile.audio_url && <span className="tile-audio-icon">🔊</span>}
               </button>
             ))}
           </div>
@@ -135,12 +185,13 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
           {availableTiles.map((tile, index) => (
             <button
               key={`available-${tile.id}-${index}`}
-              className="word-tile"
-              onClick={() => handleTileClick(tile)}
+              className={`word-tile ${tile.audio_url ? 'has-audio' : ''}`}
+              onClick={() => handleWordBankTileClick(tile)}
               disabled={submitting}
             >
               <span className="tile-korean">{tile.korean}</span>
               <span className="tile-romanization">{tile.romanization}</span>
+              {tile.audio_url && <span className="tile-audio-icon">🔊</span>}
             </button>
           ))}
         </div>
