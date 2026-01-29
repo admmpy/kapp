@@ -97,8 +97,8 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
         <p>{exercise.question}</p>
       </div>
 
-      {/* Korean text display (for vocabulary exercises) */}
-      {exercise.korean_text && (
+      {/* Korean text display (for vocabulary exercises, NOT listening) */}
+      {exercise.korean_text && exercise.exercise_type !== 'listening' && (
         <div className="korean-display">
           <div className="korean-text">{exercise.korean_text}</div>
           {exercise.romanization && (
