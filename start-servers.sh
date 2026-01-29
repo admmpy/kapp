@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Start Kapp Backend and Frontend Servers
+# Start Kapp Backend and Frontend Servers (Monorepo)
 
 echo "🚀 Starting Kapp servers..."
 echo ""
@@ -27,10 +27,10 @@ echo ""
 # Wait a moment for backend to start
 sleep 2
 
-# Start frontend
+# Start frontend using npm workspace command
 echo "⚛️  Starting frontend on http://localhost:5173..."
-cd /Users/am/Sync/Cursor/Kapp_1/frontend
-npm run dev
+cd /Users/am/Sync/Cursor/Kapp_1
+npm run web
 
 # If frontend exits, kill backend too
 kill $BACKEND_PID
