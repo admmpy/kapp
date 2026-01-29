@@ -1,4 +1,4 @@
-# Start Kapp Backend, Frontend, and Ollama Servers for Windows
+# Start Kapp Backend, Frontend, and Ollama Servers for Windows (Monorepo)
 #
 # This script starts all three components needed for Kapp:
 # 1. Ollama (Local LLM server)
@@ -7,18 +7,18 @@
 
 # Configuration
 $backendDir = "backend"
-$frontendDir = "frontend"
+$webDir = "packages\web"
 $backendPort = 5001
 $ollamaPort = 11434
 $ErrorActionPreference = "SilentlyContinue"
 
-Write-Host "Starting Kapp servers for Windows..." -ForegroundColor Cyan
+Write-Host "Starting Kapp servers for Windows (Monorepo)..." -ForegroundColor Cyan
 
 # ------------------------------------
 # Check if backend port is in use
 # ------------------------------------
 Write-Host "Checking for existing backend process on port $backendPort..."
-$existingProcess = Get-NetTCPConnection -LocalPort $backendPort -ErrorAction SilentlyContinue | 
+$existingProcess = Get-NetTCPConnection -LocalPort $backendPort -ErrorAction SilentlyContinue |
                   Select-Object -ExpandProperty OwningProcess -Unique
 
 if ($existingProcess) {
@@ -38,7 +38,7 @@ $ollamaRunning = Get-NetTCPConnection -LocalPort $ollamaPort -ErrorAction Silent
 
 if (-not $ollamaRunning) {
     Write-Host "Starting Ollama..." -ForegroundColor Cyan
-    
+
     # Check if Ollama is installed
     $ollamaPath = Get-Command ollama -ErrorAction SilentlyContinue
     if ($ollamaPath) {
@@ -60,25 +60,42 @@ Write-Host "Starting backend on http://localhost:$backendPort..." -ForegroundCol
 
 # Find Python executable (check for conda first, then venv, then system)
 $pythonCmd = $null
+$venvPython = Join-Path $backendDir "venv\Scripts\python.exe"
 
 # Check if we're in a conda environment
 if ($env:CONDA_DEFAULT_ENV) {
     Write-Host "Using Conda environment: $env:CONDA_DEFAULT_ENV" -ForegroundColor Green
     $pythonCmd = "python"
 }
-# Check for venv
-elseif (Test-Path (Join-Path $backendDir "venv\Scripts\python.exe")) {
-    Write-Host "Using virtual environment" -ForegroundColor Yellow
-    $pythonCmd = Join-Path $backendDir "venv\Scripts\python.exe"
+# Check for venv - but verify it's a Windows venv, not a Mac one
+elseif (Test-Path $venvPython) {
+    # Check if the venv was created on Mac by looking at pyvenv.cfg
+    $pyvenvCfg = Join-Path $backendDir "venv\pyvenv.cfg"
+    if (Test-Path $pyvenvCfg) {
+        $cfgContent = Get-Content $pyvenvCfg -Raw
+        if ($cfgContent -match "/Users/" -or $cfgContent -match "/usr/") {
+            Write-Host "WARNING: Virtual environment was created on Mac and won't work on Windows." -ForegroundColor Yellow
+            Write-Host "Please run .\setup-windows-venv.ps1 to recreate the venv for Windows." -ForegroundColor Yellow
+            Write-Host "Falling back to system Python for now..." -ForegroundColor Yellow
+            $pythonCmd = "python"
+        } else {
+            Write-Host "Using virtual environment" -ForegroundColor Green
+            $pythonCmd = $venvPython
+        }
+    } else {
+        Write-Host "Using virtual environment" -ForegroundColor Green
+        $pythonCmd = $venvPython
+    }
 }
 # Fall back to system Python
 else {
     $pythonPath = Get-Command python -ErrorAction SilentlyContinue
     if ($pythonPath) {
-        Write-Host "Using system Python" -ForegroundColor Yellow
+        Write-Host "Using system Python (no venv found)" -ForegroundColor Yellow
         $pythonCmd = "python"
     } else {
         Write-Host "Python not found. Please install Python or activate conda environment." -ForegroundColor Red
+        Write-Host "If you have a venv, run .\setup-windows-venv.ps1 to recreate it for Windows." -ForegroundColor Yellow
         exit 1
     }
 }
@@ -91,7 +108,7 @@ Write-Host "Backend started in new window" -ForegroundColor Green
 Start-Sleep -Seconds 3
 
 # ------------------------------------
-# Start frontend
+# Start frontend using npm workspaces
 # ------------------------------------
 Write-Host "Starting frontend on http://localhost:5173..." -ForegroundColor Cyan
 
@@ -104,40 +121,18 @@ if (-not $npmCmd) {
     exit 1
 }
 
-# Go to frontend directory and prepare environment
-Push-Location $frontendDir
-
-# Ensure node_modules exists and Vite is installed
+# Ensure node_modules exists at root level
 if (-not (Test-Path "node_modules")) {
-    Write-Host "Installing frontend dependencies..." -ForegroundColor Yellow
+    Write-Host "Installing dependencies..." -ForegroundColor Yellow
     npm install
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "Failed to install frontend dependencies." -ForegroundColor Red
+        Write-Host "Failed to install dependencies." -ForegroundColor Red
         Write-Host "Note: Backend is running in separate window - close that window manually" -ForegroundColor Yellow
-        Pop-Location
         exit 1
     }
 }
 
-# Make sure Vite is installed properly
-if (-not (Test-Path "node_modules\.bin\vite.cmd")) {
-    Write-Host "Vite not found in node_modules. Reinstalling..." -ForegroundColor Yellow
-    npm install vite
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "Failed to install Vite." -ForegroundColor Red
-        Write-Host "Note: Backend is running in separate window - close that window manually" -ForegroundColor Yellow
-        Pop-Location
-        exit 1
-    }
-}
-
-Write-Host "Starting npm run dev (press Ctrl+C to stop all services)..." -ForegroundColor Cyan
-Write-Host "If Vite fails to start, try running these commands manually:" -ForegroundColor Yellow
-Write-Host "cd frontend" -ForegroundColor Gray
-Write-Host "npx vite" -ForegroundColor Gray
-Write-Host ""
-
-# Run the dev command in foreground
+Write-Host "Starting npm run web (press Ctrl+C to stop all services)..." -ForegroundColor Cyan
 Write-Host ""
 Write-Host "================================" -ForegroundColor Cyan
 Write-Host "Frontend starting..." -ForegroundColor Cyan
@@ -146,10 +141,9 @@ Write-Host "Backend is running in separate window" -ForegroundColor Yellow
 Write-Host "================================" -ForegroundColor Cyan
 Write-Host ""
 
-npm run dev
+# Run the dev command using workspace script
+npm run web
 
-# If npm exits or user presses Ctrl+C
-Pop-Location
 Write-Host ""
 Write-Host "Frontend stopped." -ForegroundColor Yellow
 Write-Host "Note: Backend is still running in separate window - close that window manually to stop it." -ForegroundColor Yellow

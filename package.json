@@ -1,0 +1,16 @@
+{
+  "name": "kapp",
+  "private": true,
+  "version": "2.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "web": "npm run dev --workspace=packages/web",
+    "web:build": "npm run build --workspace=packages/web",
+    "web:preview": "npm run preview --workspace=packages/web"
+  },
+  "dependencies": {
+    "ws": "^8.19.0"
+  }
+}
