@@ -217,12 +217,8 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
         </div>
       )}
 
-      {/* Explanation after answering */}
-      {isAnswered && result?.explanation && (
-        <div className="explanation">
-          {result.explanation}
-        </div>
-      )}
+      {/* Note: Explanation is rendered in LessonView's result-feedback section
+          to ensure consistency across all exercise types and prevent duplicate rendering */}
     </div>
   );
 }

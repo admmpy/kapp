@@ -266,3 +266,38 @@ CORS_ORIGINS = 'http://localhost:5173,http://localhost:5174'
 2. File permissions allow read
 3. CORS allows audio endpoint
 4. File is valid MP3 format
+
+### Exercise State Pollution
+
+**Problem:** Exercise results from previous questions showing on current exercise.
+
+**Symptom:** After completing an exercise and moving to the next, the result feedback (correct answer, explanation) from the previous exercise briefly appears or persists on the new exercise.
+
+**Root Cause:**
+1. React state updates are asynchronous
+2. Calling `setLastResult(null)` then immediately `setCurrentExerciseIndex(prev => prev + 1)` creates a race condition
+3. Component re-renders with new exercise BEFORE `lastResult` is cleared
+
+**Solution:** Use `useEffect` to clear result state when exercise index changes:
+
+```typescript
+// In LessonView.tsx
+useEffect(() => {
+  setLastResult(null);
+}, [currentExerciseIndex]);
+
+function handleNextExercise() {
+  // Don't call setLastResult(null) here
+  // Let useEffect handle it when currentExerciseIndex changes
+  if (currentExerciseIndex < lesson.exercises.length - 1) {
+    setCurrentExerciseIndex(prev => prev + 1);
+  }
+}
+```
+
+**Key Principle:** When one state change should trigger another, use `useEffect` with dependencies rather than calling multiple state setters sequentially.
+
+**Duplicate Rendering Issue:**
+- NEVER render the same feedback in both parent (LessonView) and child (ExerciseRenderer/SentenceArrangeExercise)
+- Choose ONE location for result feedback - preferably in the parent (LessonView) for consistency
+- This prevents mismatched or duplicate explanations from showing

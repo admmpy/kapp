@@ -40,6 +40,11 @@ export default function LessonView({ lessonId, onComplete, onBack }: Props) {
     loadLesson();
   }, [lessonId]);
 
+  // Clear result when exercise changes to prevent state pollution
+  useEffect(() => {
+    setLastResult(null);
+  }, [currentExerciseIndex]);
+
   async function handleSubmitAnswer(answer: string) {
     if (!lesson?.exercises || submitting) return;
 
@@ -63,7 +68,8 @@ export default function LessonView({ lessonId, onComplete, onBack }: Props) {
   async function handleNextExercise() {
     if (!lesson?.exercises) return;
 
-    setLastResult(null);
+    // Note: setLastResult(null) is handled by useEffect when currentExerciseIndex changes
+    // This prevents race conditions with async state updates
 
     if (currentExerciseIndex < lesson.exercises.length - 1) {
       setCurrentExerciseIndex(prev => prev + 1);
