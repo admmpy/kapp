@@ -51,56 +51,56 @@
           "front_korean": "안녕하세요",
           "front_romanization": "annyeonghaseyo",
           "back_english": "Hello (formal)",
-          "example_sentence": "안녕하세요, 만나서 반갑습니다.",
+          "example_sentence": "안녕하세요, 만나서 반갑습니다. - Hello, nice to meet you.",
           "level": 0
         },
         {
           "front_korean": "안녕히 가세요",
           "front_romanization": "annyeonghi gaseyo",
           "back_english": "Goodbye (to person leaving)",
-          "example_sentence": "안녕히 가세요, 내일 봐요.",
+          "example_sentence": "안녕히 가세요, 내일 봐요. - Goodbye, see you tomorrow.",
           "level": 0
         },
         {
           "front_korean": "감사합니다",
           "front_romanization": "gamsahamnida",
           "back_english": "Thank you (formal)",
-          "example_sentence": "도와주셔서 감사합니다.",
+          "example_sentence": "도와주셔서 감사합니다. - Thank you for your help.",
           "level": 0
         },
         {
           "front_korean": "죄송합니다",
           "front_romanization": "joesonghamnida",
           "back_english": "I'm sorry (formal)",
-          "example_sentence": "늦어서 죄송합니다.",
+          "example_sentence": "늦어서 죄송합니다. - I'm sorry for being late.",
           "level": 0
         },
         {
           "front_korean": "네",
           "front_romanization": "ne",
           "back_english": "Yes",
-          "example_sentence": "네, 맞아요.",
+          "example_sentence": "네, 맞아요. - Yes, that's right.",
           "level": 0
         },
         {
           "front_korean": "아니요",
           "front_romanization": "aniyo",
           "back_english": "No",
-          "example_sentence": "아니요, 괜찮아요.",
+          "example_sentence": "아니요, 괜찮아요. - No, it's okay.",
           "level": 0
         },
         {
           "front_korean": "잠깐만요",
           "front_romanization": "jamkkanmanyo",
           "back_english": "Wait a moment / Just a second",
-          "example_sentence": "잠깐만요, 지금 갈게요.",
+          "example_sentence": "잠깐만요, 지금 갈게요. - Wait a moment, I'll go now.",
           "level": 0
         },
         {
           "front_korean": "괜찮아요",
           "front_romanization": "gwaenchanayo",
           "back_english": "It's okay / I'm fine",
-          "example_sentence": "괜찮아요, 걱정하지 마세요.",
+          "example_sentence": "괜찮아요, 걱정하지 마세요. - It's okay, don't worry.",
           "level": 0
         }
       ]
@@ -114,70 +114,70 @@
           "front_korean": "하나",
           "front_romanization": "hana",
           "back_english": "One",
-          "example_sentence": "사과 하나 주세요.",
+          "example_sentence": "사과 하나 주세요. - Please give me one apple.",
           "level": 0
         },
         {
           "front_korean": "둘",
           "front_romanization": "dul",
           "back_english": "Two",
-          "example_sentence": "둘 중에 하나를 선택하세요.",
+          "example_sentence": "둘 중에 하나를 선택하세요. - Choose one of the two.",
           "level": 0
         },
         {
           "front_korean": "셋",
           "front_romanization": "set",
           "back_english": "Three",
-          "example_sentence": "셋, 둘, 하나!",
+          "example_sentence": "셋, 둘, 하나! - [Translation needed]",
           "level": 0
         },
         {
           "front_korean": "넷",
           "front_romanization": "net",
           "back_english": "Four",
-          "example_sentence": "넷이서 같이 가요.",
+          "example_sentence": "넷이서 같이 가요. - [Translation needed]",
           "level": 0
         },
         {
           "front_korean": "다섯",
           "front_romanization": "daseot",
           "back_english": "Five",
-          "example_sentence": "다섯 명이 왔어요.",
+          "example_sentence": "다섯 명이 왔어요. - [Translation needed]",
           "level": 0
         },
         {
           "front_korean": "여섯",
           "front_romanization": "yeoseot",
           "back_english": "Six",
-          "example_sentence": "여섯 시에 만나요.",
+          "example_sentence": "여섯 시에 만나요. - [Translation needed]",
           "level": 0
         },
         {
           "front_korean": "일곱",
           "front_romanization": "ilgop",
           "back_english": "Seven",
-          "example_sentence": "일곱 개 있어요.",
+          "example_sentence": "일곱 개 있어요. - [Translation needed]",
           "level": 0
         },
         {
           "front_korean": "여덟",
           "front_romanization": "yeodeol",
           "back_english": "Eight",
-          "example_sentence": "여덟 살이에요.",
+          "example_sentence": "여덟 살이에요. - [Translation needed]",
           "level": 0
         },
         {
           "front_korean": "아홉",
           "front_romanization": "ahop",
           "back_english": "Nine",
-          "example_sentence": "아홉 번 시도했어요.",
+          "example_sentence": "아홉 번 시도했어요. - [Translation needed]",
           "level": 0
         },
         {
           "front_korean": "열",
           "front_romanization": "yeol",
           "back_english": "Ten",
-          "example_sentence": "열 개 주세요.",
+          "example_sentence": "열 개 주세요. - Please give/do (polite request)",
           "level": 0
         }
       ]
@@ -191,56 +191,56 @@
           "front_korean": "가족",
           "front_romanization": "gajok",
           "back_english": "Family",
-          "example_sentence": "우리 가족은 네 명이에요.",
+          "example_sentence": "우리 가족은 네 명이에요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "아버지",
           "front_romanization": "abeoji",
           "back_english": "Father (formal)",
-          "example_sentence": "아버지는 회사원이세요.",
+          "example_sentence": "아버지는 회사원이세요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "어머니",
           "front_romanization": "eomeoni",
           "back_english": "Mother (formal)",
-          "example_sentence": "어머니는 요리를 잘하세요.",
+          "example_sentence": "어머니는 요리를 잘하세요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "형",
           "front_romanization": "hyeong",
           "back_english": "Older brother (male speaker)",
-          "example_sentence": "형이 저를 도와줬어요.",
+          "example_sentence": "형이 저를 도와줬어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "누나",
           "front_romanization": "nuna",
           "back_english": "Older sister (male speaker)",
-          "example_sentence": "누나는 대학생이에요.",
+          "example_sentence": "누나는 대학생이에요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "오빠",
           "front_romanization": "oppa",
           "back_english": "Older brother (female speaker)",
-          "example_sentence": "오빠, 같이 가요!",
+          "example_sentence": "오빠, 같이 가요! - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "언니",
           "front_romanization": "eonni",
           "back_english": "Older sister (female speaker)",
-          "example_sentence": "언니가 선물을 줬어요.",
+          "example_sentence": "언니가 선물을 줬어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "동생",
           "front_romanization": "dongsaeng",
           "back_english": "Younger sibling",
-          "example_sentence": "동생이 두 명 있어요.",
+          "example_sentence": "동생이 두 명 있어요. - [Translation needed]",
           "level": 1
         }
       ]
@@ -254,56 +254,56 @@
           "front_korean": "물",
           "front_romanization": "mul",
           "back_english": "Water",
-          "example_sentence": "물 한 잔 주세요.",
+          "example_sentence": "물 한 잔 주세요. - Please give/do (polite request)",
           "level": 1
         },
         {
           "front_korean": "밥",
           "front_romanization": "bap",
           "back_english": "Rice / Meal",
-          "example_sentence": "밥 먹었어요?",
+          "example_sentence": "밥 먹었어요? - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "김치",
           "front_romanization": "gimchi",
           "back_english": "Kimchi",
-          "example_sentence": "김치가 맵지 않아요.",
+          "example_sentence": "김치가 맵지 않아요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "커피",
           "front_romanization": "keopi",
           "back_english": "Coffee",
-          "example_sentence": "커피 한 잔 마실래요.",
+          "example_sentence": "커피 한 잔 마실래요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "차",
           "front_romanization": "cha",
           "back_english": "Tea",
-          "example_sentence": "녹차 좋아해요?",
+          "example_sentence": "녹차 좋아해요? - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "빵",
           "front_romanization": "ppang",
           "back_english": "Bread",
-          "example_sentence": "빵을 사러 갔어요.",
+          "example_sentence": "빵을 사러 갔어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "고기",
           "front_romanization": "gogi",
           "back_english": "Meat",
-          "example_sentence": "고기를 먹고 싶어요.",
+          "example_sentence": "고기를 먹고 싶어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "과일",
           "front_romanization": "gwail",
           "back_english": "Fruit",
-          "example_sentence": "과일이 신선해요.",
+          "example_sentence": "과일이 신선해요. - [Translation needed]",
           "level": 1
         }
       ]
@@ -317,84 +317,84 @@
           "front_korean": "가다",
           "front_romanization": "gada",
           "back_english": "To go",
-          "example_sentence": "학교에 가요.",
+          "example_sentence": "학교에 가요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "오다",
           "front_romanization": "oda",
           "back_english": "To come",
-          "example_sentence": "친구가 와요.",
+          "example_sentence": "친구가 와요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "먹다",
           "front_romanization": "meokda",
           "back_english": "To eat",
-          "example_sentence": "아침을 먹었어요.",
+          "example_sentence": "아침을 먹었어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "마시다",
           "front_romanization": "masida",
           "back_english": "To drink",
-          "example_sentence": "물을 마셔요.",
+          "example_sentence": "물을 마셔요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "자다",
           "front_romanization": "jada",
           "back_english": "To sleep",
-          "example_sentence": "일찍 자요.",
+          "example_sentence": "일찍 자요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "보다",
           "front_romanization": "boda",
           "back_english": "To see / To watch",
-          "example_sentence": "영화를 봐요.",
+          "example_sentence": "영화를 봐요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "듣다",
           "front_romanization": "deutda",
           "back_english": "To listen / To hear",
-          "example_sentence": "음악을 들어요.",
+          "example_sentence": "음악을 들어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "읽다",
           "front_romanization": "ilkda",
           "back_english": "To read",
-          "example_sentence": "책을 읽어요.",
+          "example_sentence": "책을 읽어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "쓰다",
           "front_romanization": "sseuda",
           "back_english": "To write / To use",
-          "example_sentence": "편지를 써요.",
+          "example_sentence": "편지를 써요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "공부하다",
           "front_romanization": "gongbu-hada",
           "back_english": "To study",
-          "example_sentence": "한국어를 공부해요.",
+          "example_sentence": "한국어를 공부해요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "일하다",
           "front_romanization": "ilhada",
           "back_english": "To work",
-          "example_sentence": "회사에서 일해요.",
+          "example_sentence": "회사에서 일해요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "좋아하다",
           "front_romanization": "joahada",
           "back_english": "To like",
-          "example_sentence": "음악을 좋아해요.",
+          "example_sentence": "음악을 좋아해요. - [Translation needed]",
           "level": 1
         }
       ]
@@ -408,56 +408,56 @@
           "front_korean": "집",
           "front_romanization": "jip",
           "back_english": "Home / House",
-          "example_sentence": "집에 있어요.",
+          "example_sentence": "집에 있어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "학교",
           "front_romanization": "hakgyo",
           "back_english": "School",
-          "example_sentence": "학교에 가요.",
+          "example_sentence": "학교에 가요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "회사",
           "front_romanization": "hoesa",
           "back_english": "Company / Office",
-          "example_sentence": "회사에서 일해요.",
+          "example_sentence": "회사에서 일해요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "병원",
           "front_romanization": "byeongwon",
           "back_english": "Hospital",
-          "example_sentence": "병원에 갔어요.",
+          "example_sentence": "병원에 갔어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "식당",
           "front_romanization": "sikdang",
           "back_english": "Restaurant",
-          "example_sentence": "식당에서 먹어요.",
+          "example_sentence": "식당에서 먹어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "카페",
           "front_romanization": "kape",
           "back_english": "Cafe",
-          "example_sentence": "카페에서 만나요.",
+          "example_sentence": "카페에서 만나요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "공원",
           "front_romanization": "gongwon",
           "back_english": "Park",
-          "example_sentence": "공원에서 산책해요.",
+          "example_sentence": "공원에서 산책해요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "은행",
           "front_romanization": "eunhaeng",
           "back_english": "Bank",
-          "example_sentence": "은행에 갈 거예요.",
+          "example_sentence": "은행에 갈 거예요. - [Translation needed]",
           "level": 1
         }
       ]
@@ -471,77 +471,77 @@
           "front_korean": "오늘",
           "front_romanization": "oneul",
           "back_english": "Today",
-          "example_sentence": "오늘 날씨가 좋아요.",
+          "example_sentence": "오늘 날씨가 좋아요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "어제",
           "front_romanization": "eoje",
           "back_english": "Yesterday",
-          "example_sentence": "어제 뭐 했어요?",
+          "example_sentence": "어제 뭐 했어요? - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "내일",
           "front_romanization": "naeil",
           "back_english": "Tomorrow",
-          "example_sentence": "내일 봐요!",
+          "example_sentence": "내일 봐요! - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "지금",
           "front_romanization": "jigeum",
           "back_english": "Now",
-          "example_sentence": "지금 뭐 해요?",
+          "example_sentence": "지금 뭐 해요? - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "월요일",
           "front_romanization": "woryoil",
           "back_english": "Monday",
-          "example_sentence": "월요일에 만나요.",
+          "example_sentence": "월요일에 만나요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "화요일",
           "front_romanization": "hwayoil",
           "back_english": "Tuesday",
-          "example_sentence": "화요일은 바빠요.",
+          "example_sentence": "화요일은 바빠요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "수요일",
           "front_romanization": "suyoil",
           "back_english": "Wednesday",
-          "example_sentence": "수요일에 시간 있어요?",
+          "example_sentence": "수요일에 시간 있어요? - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "목요일",
           "front_romanization": "mogyoil",
           "back_english": "Thursday",
-          "example_sentence": "목요일에 회의가 있어요.",
+          "example_sentence": "목요일에 회의가 있어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "금요일",
           "front_romanization": "geumyoil",
           "back_english": "Friday",
-          "example_sentence": "금요일이 기다려져요!",
+          "example_sentence": "금요일이 기다려져요! - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "토요일",
           "front_romanization": "toyoil",
           "back_english": "Saturday",
-          "example_sentence": "토요일에 쉬어요.",
+          "example_sentence": "토요일에 쉬어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "일요일",
           "front_romanization": "ilyoil",
           "back_english": "Sunday",
-          "example_sentence": "일요일은 휴일이에요.",
+          "example_sentence": "일요일은 휴일이에요. - [Translation needed]",
           "level": 1
         }
       ]
@@ -555,70 +555,70 @@
           "front_korean": "크다",
           "front_romanization": "keuda",
           "back_english": "To be big / large",
-          "example_sentence": "이 방은 커요.",
+          "example_sentence": "이 방은 커요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "작다",
           "front_romanization": "jakda",
           "back_english": "To be small",
-          "example_sentence": "저 가방은 작아요.",
+          "example_sentence": "저 가방은 작아요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "많다",
           "front_romanization": "manta",
           "back_english": "To be many / much",
-          "example_sentence": "사람이 많아요.",
+          "example_sentence": "사람이 많아요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "적다",
           "front_romanization": "jeokda",
           "back_english": "To be few / little",
-          "example_sentence": "시간이 적어요.",
+          "example_sentence": "시간이 적어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "좋다",
           "front_romanization": "jota",
           "back_english": "To be good",
-          "example_sentence": "날씨가 좋아요.",
+          "example_sentence": "날씨가 좋아요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "나쁘다",
           "front_romanization": "nappeuda",
           "back_english": "To be bad",
-          "example_sentence": "기분이 나빠요.",
+          "example_sentence": "기분이 나빠요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "맛있다",
           "front_romanization": "masitta",
           "back_english": "To be delicious",
-          "example_sentence": "이 음식은 맛있어요!",
+          "example_sentence": "이 음식은 맛있어요! - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "재미있다",
           "front_romanization": "jaemiitda",
           "back_english": "To be fun / interesting",
-          "example_sentence": "이 게임은 재미있어요.",
+          "example_sentence": "이 게임은 재미있어요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "어렵다",
           "front_romanization": "eoryeopda",
           "back_english": "To be difficult",
-          "example_sentence": "한국어가 어려워요.",
+          "example_sentence": "한국어가 어려워요. - [Translation needed]",
           "level": 1
         },
         {
           "front_korean": "쉽다",
           "front_romanization": "swipda",
           "back_english": "To be easy",
-          "example_sentence": "이 문제는 쉬워요.",
+          "example_sentence": "이 문제는 쉬워요. - [Translation needed]",
           "level": 1
         }
       ]

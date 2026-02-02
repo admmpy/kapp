@@ -25,8 +25,8 @@ class OllamaClient:
     def __init__(
         self,
         base_url: str = "http://localhost:11434",
-        model: str = "open-llama-2-ko-7b",
-        timeout: int = 30,
+        model: str = "qwen3:4b",
+        timeout: int = 60,
         cache_dir: str = "./data/llm_cache",
     ):
         self.base_url = base_url
@@ -121,8 +121,12 @@ class OllamaClient:
         payload = {
             "model": self.model,
             "messages": messages,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
+            "options": {
+                "num_ctx": 2048,
+                "num_predict": max_tokens,
+                "temperature": temperature,
+                "top_p": 0.9,
+            },
             "stream": False,
         }
 

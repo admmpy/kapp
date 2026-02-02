@@ -14,6 +14,8 @@ interface Props {
   submitting: boolean;
 }
 
+type PlaybackSpeed = 0.5 | 1.0 | 1.2;
+
 export default function ExerciseRenderer({ exercise, onSubmit, result, submitting }: Props) {
   // Route sentence_arrange exercises to dedicated component
   if (exercise.exercise_type === 'sentence_arrange') {
@@ -29,6 +31,7 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [textAnswer, setTextAnswer] = useState('');
+  const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1.0);
 
   const hasOptions = exercise.options && exercise.options.length > 0;
   const isAnswered = result !== null;
@@ -73,9 +76,10 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
     return classes;
   }
 
-  function playAudio() {
+  function playAudio(speed: PlaybackSpeed = playbackSpeed) {
     if (exercise.audio_url) {
       const audio = new Audio(`${API_BASE_URL}${exercise.audio_url}`);
+      audio.playbackRate = speed;
       audio.play().catch(err => console.error('Audio playback failed:', err));
     }
   }
@@ -105,9 +109,31 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
             <div className="romanization">{exercise.romanization}</div>
           )}
           {exercise.audio_url && (
-            <button className="audio-button" onClick={playAudio} title="Play audio">
-              🔊
-            </button>
+            <div className="audio-controls">
+              <button className="audio-button" onClick={() => playAudio()} title="Play audio">
+                🔊
+              </button>
+              <div className="speed-toggle">
+                <button
+                  className={`speed-button ${playbackSpeed === 0.5 ? 'active' : ''}`}
+                  onClick={() => setPlaybackSpeed(0.5)}
+                >
+                  0.5x
+                </button>
+                <button
+                  className={`speed-button ${playbackSpeed === 1.0 ? 'active' : ''}`}
+                  onClick={() => setPlaybackSpeed(1.0)}
+                >
+                  1x
+                </button>
+                <button
+                  className={`speed-button ${playbackSpeed === 1.2 ? 'active' : ''}`}
+                  onClick={() => setPlaybackSpeed(1.2)}
+                >
+                  1.2x
+                </button>
+              </div>
+            </div>
           )}
         </div>
       )}
@@ -122,9 +148,29 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
       {/* Listening exercise audio */}
       {exercise.exercise_type === 'listening' && exercise.audio_url && (
         <div className="listening-controls">
-          <button className="play-audio-btn" onClick={playAudio}>
+          <button className="play-audio-btn" onClick={() => playAudio()}>
             🔊 Play Audio
           </button>
+          <div className="speed-toggle listening-speed">
+            <button
+              className={`speed-button ${playbackSpeed === 0.5 ? 'active' : ''}`}
+              onClick={() => setPlaybackSpeed(0.5)}
+            >
+              0.5x
+            </button>
+            <button
+              className={`speed-button ${playbackSpeed === 1.0 ? 'active' : ''}`}
+              onClick={() => setPlaybackSpeed(1.0)}
+            >
+              1x
+            </button>
+            <button
+              className={`speed-button ${playbackSpeed === 1.2 ? 'active' : ''}`}
+              onClick={() => setPlaybackSpeed(1.2)}
+            >
+              1.2x
+            </button>
+          </div>
         </div>
       )}
 

@@ -7,7 +7,17 @@ import type { Lesson, ExerciseResult } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
 import ProgressBar from './ProgressBar';
 import Breadcrumb from './Breadcrumb';
+import LessonCompleteModal from './LessonCompleteModal';
+import ExerciseExplanationModal from './ExerciseExplanationModal';
+import { Skeleton, ExerciseSkeleton } from './Skeleton';
 import './LessonView.css';
+
+interface NextLessonInfo {
+  id: number;
+  title: string;
+  estimated_minutes: number;
+  exercise_count: number;
+}
 
 interface Props {
   lessonId: number;
@@ -16,9 +26,10 @@ interface Props {
   onBack: () => void;
   onBackToCourse?: (courseId: number) => void;
   onBackToCourses?: () => void;
+  onNavigateToLesson?: (lessonId: number) => void;
 }
 
-export default function LessonView({ lessonId, courseId, onComplete, onBack, onBackToCourse, onBackToCourses }: Props) {
+export default function LessonView({ lessonId, courseId, onComplete, onBack, onBackToCourse, onBackToCourses, onNavigateToLesson }: Props) {
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [showGrammar, setShowGrammar] = useState(true);
@@ -30,6 +41,12 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
   const [startTime] = useState(Date.now());
   const [courseName, setCourseName] = useState<string | undefined>();
   const [unitName, setUnitName] = useState<string | undefined>();
+  const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [nextLessonInfo, setNextLessonInfo] = useState<NextLessonInfo | null>(null);
+  const [isLastInUnit, setIsLastInUnit] = useState(false);
+  const [isLastInCourse, setIsLastInCourse] = useState(false);
+  const [finalScore, setFinalScore] = useState(0);
+  const [showExplanationModal, setShowExplanationModal] = useState(false);
 
   useEffect(() => {
     async function loadLesson() {
@@ -94,21 +111,50 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     if (currentExerciseIndex < lesson.exercises.length - 1) {
       setCurrentExerciseIndex(prev => prev + 1);
     } else {
-      // Lesson complete
+      // Lesson complete - show completion modal
       const timeSpent = Math.round((Date.now() - startTime) / 1000);
-      const score = totalAnswered > 0 ? (correctAnswers / totalAnswered) * 100 : 0;
+      // Use correctAnswers + 1 if current answer is correct (since state hasn't updated yet)
+      const finalCorrect = lastResult?.correct ? correctAnswers : correctAnswers;
+      const finalTotal = totalAnswered;
+      const score = finalTotal > 0 ? (finalCorrect / finalTotal) * 100 : 0;
 
       try {
         await apiClient.completeLesson(lessonId, {
           score,
           time_spent_seconds: timeSpent
         });
+
+        // Fetch next lesson info
+        const nextLessonData = await apiClient.getNextLesson(lessonId);
+        if (nextLessonData.next_lesson) {
+          setNextLessonInfo({
+            id: nextLessonData.next_lesson.id,
+            title: nextLessonData.next_lesson.title,
+            estimated_minutes: nextLessonData.next_lesson.estimated_minutes,
+            exercise_count: nextLessonData.next_lesson.exercise_count
+          });
+        }
+        setIsLastInUnit(nextLessonData.is_last_in_unit);
+        setIsLastInCourse(nextLessonData.is_last_in_course);
       } catch (err) {
         console.error('Failed to complete lesson:', err);
       }
 
-      onComplete();
+      setFinalScore(score);
+      setShowCompleteModal(true);
     }
+  }
+
+  function handleNextLesson(nextLessonId: number) {
+    setShowCompleteModal(false);
+    if (onNavigateToLesson) {
+      onNavigateToLesson(nextLessonId);
+    }
+  }
+
+  function handleBackToCourse() {
+    setShowCompleteModal(false);
+    onComplete();
   }
 
   function handleStartExercises() {
@@ -117,9 +163,15 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
 
   if (loading) {
     return (
-      <div className="lesson-view loading">
-        <div className="loading-spinner"></div>
-        <p>Loading lesson...</p>
+      <div className="lesson-view">
+        <header className="lesson-header">
+          <Skeleton variant="text" width={60} height={20} />
+          <Skeleton variant="text" width="70%" height={28} />
+          <Skeleton variant="rect" height={8} />
+        </header>
+        <div className="exercise-container">
+          <ExerciseSkeleton />
+        </div>
       </div>
     );
   }
@@ -239,9 +291,19 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
                 {lastResult.explanation}
               </div>
             )}
-            <button className="next-button" onClick={handleNextExercise}>
-              {isLastExercise ? 'Complete Lesson' : 'Next Exercise'}
-            </button>
+            <div className="result-actions">
+              {!lastResult.correct && (
+                <button
+                  className="explain-button"
+                  onClick={() => setShowExplanationModal(true)}
+                >
+                  Explain
+                </button>
+              )}
+              <button className="next-button" onClick={handleNextExercise}>
+                {isLastExercise ? 'Complete Lesson' : 'Next Exercise'}
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -250,6 +312,30 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
         <span>{correctAnswers} correct</span>
         <span>{totalAnswered - correctAnswers} incorrect</span>
       </div>
+
+      {showCompleteModal && (
+        <LessonCompleteModal
+          lessonTitle={lesson.title}
+          score={finalScore}
+          correctAnswers={correctAnswers}
+          totalAnswers={totalAnswered}
+          nextLesson={nextLessonInfo || undefined}
+          isLastInUnit={isLastInUnit}
+          isLastInCourse={isLastInCourse}
+          onNextLesson={handleNextLesson}
+          onBackToCourse={handleBackToCourse}
+        />
+      )}
+
+      {showExplanationModal && lastResult && currentExercise && (
+        <ExerciseExplanationModal
+          exercise={currentExercise}
+          correctAnswer={lastResult.correct_answer}
+          basicExplanation={lastResult.explanation}
+          isOpen={showExplanationModal}
+          onClose={() => setShowExplanationModal(false)}
+        />
+      )}
     </div>
   );
 }
