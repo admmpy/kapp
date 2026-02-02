@@ -1,0 +1,138 @@
+/* Base skeleton styles */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-border) 25%,
+    #e8e8e8 50%,
+    var(--color-border) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Variants */
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+}
+
+.skeleton-rect {
+  border-radius: var(--radius-md);
+}
+
+.skeleton-card {
+  border-radius: var(--radius-lg);
+}
+
+/* Text group */
+.skeleton-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Course card skeleton */
+.skeleton-course-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.skeleton-course-image {
+  height: 160px;
+  border-radius: 0;
+}
+
+.skeleton-course-content {
+  padding: 1.25rem;
+}
+
+.skeleton-course-meta {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.skeleton-progress-bar {
+  height: 8px;
+  margin-top: 1rem;
+}
+
+/* Lesson card skeleton */
+.skeleton-lesson-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: white;
+  border-radius: var(--radius-lg);
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-lesson-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Exercise skeleton */
+.skeleton-exercise {
+  padding: 1.5rem;
+}
+
+.skeleton-badge {
+  margin-bottom: 1rem;
+}
+
+.skeleton-korean-display {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skeleton-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.skeleton-option {
+  height: 48px;
+  border-radius: var(--radius-md);
+}
+
+/* Stats skeleton */
+.skeleton-stats {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg);
+}
+
+.skeleton-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}

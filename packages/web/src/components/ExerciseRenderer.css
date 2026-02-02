@@ -49,22 +49,64 @@
   color: white;
 }
 
-.audio-button {
+.audio-controls {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  width: 40px;
-  height: 40px;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.audio-button {
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   border: none;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .audio-button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.speed-toggle {
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 4px;
+}
+
+.speed-button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 16px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.speed-button:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.speed-button.active {
+  background: rgba(255, 255, 255, 0.4);
+  color: white;
 }
 
 .reading-content {
@@ -79,8 +121,27 @@
 
 .listening-controls {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
+}
+
+.listening-speed {
+  background: var(--color-border);
+}
+
+.listening-speed .speed-button {
+  color: var(--color-text-muted);
+}
+
+.listening-speed .speed-button:hover {
+  color: var(--color-text);
+}
+
+.listening-speed .speed-button.active {
+  background: var(--color-primary);
+  color: white;
 }
 
 .play-audio-btn {
@@ -190,5 +251,22 @@
 
   .korean-text {
     font-size: 1.75rem;
+  }
+
+  .audio-controls {
+    top: 8px;
+    right: 8px;
+    gap: 6px;
+  }
+
+  .audio-button {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .speed-button {
+    padding: 4px 8px;
+    font-size: 0.65rem;
   }
 }

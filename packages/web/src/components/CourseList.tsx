@@ -4,13 +4,15 @@
 import { useState, useEffect } from 'react';
 import { apiClient } from '@kapp/core';
 import type { Course, OverallProgress } from '@kapp/core';
+import { CourseCardSkeleton, Skeleton } from './Skeleton';
 import './CourseList.css';
 
 interface Props {
   onSelectCourse: (courseId: number) => void;
+  onStartConversation?: () => void;
 }
 
-export default function CourseList({ onSelectCourse }: Props) {
+export default function CourseList({ onSelectCourse, onStartConversation }: Props) {
   const [courses, setCourses] = useState<Course[]>([]);
   const [progress, setProgress] = useState<OverallProgress | null>(null);
   const [loading, setLoading] = useState(true);
@@ -37,9 +39,31 @@ export default function CourseList({ onSelectCourse }: Props) {
 
   if (loading) {
     return (
-      <div className="course-list loading">
-        <div className="loading-spinner"></div>
-        <p>Loading courses...</p>
+      <div className="course-list">
+        <header className="course-list-header">
+          <div className="header-top">
+            <Skeleton variant="text" width={200} height={32} />
+          </div>
+          <div className="skeleton-stats">
+            <div className="skeleton-stat">
+              <Skeleton variant="rect" width={40} height={24} />
+              <Skeleton variant="text" width={60} height={12} />
+            </div>
+            <div className="skeleton-stat">
+              <Skeleton variant="rect" width={40} height={24} />
+              <Skeleton variant="text" width={60} height={12} />
+            </div>
+            <div className="skeleton-stat">
+              <Skeleton variant="rect" width={40} height={24} />
+              <Skeleton variant="text" width={60} height={12} />
+            </div>
+          </div>
+        </header>
+        <div className="courses-grid">
+          <CourseCardSkeleton />
+          <CourseCardSkeleton />
+          <CourseCardSkeleton />
+        </div>
       </div>
     );
   }
@@ -60,7 +84,14 @@ export default function CourseList({ onSelectCourse }: Props) {
   return (
     <div className="course-list">
       <header className="course-list-header">
-        <h1>Korean Learning</h1>
+        <div className="header-top">
+          <h1>Korean Learning</h1>
+          {onStartConversation && (
+            <button className="practice-speaking-btn" onClick={onStartConversation}>
+              Practice Speaking
+            </button>
+          )}
+        </div>
         {progress && (
           <div className="overall-stats">
             <div className="stat">

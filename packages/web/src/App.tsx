@@ -5,9 +5,11 @@ import { useState, useEffect } from 'react';
 import CourseList from './components/CourseList';
 import UnitView from './components/UnitView';
 import LessonView from './components/LessonView';
+import ConversationView from './components/ConversationView';
+import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 
-type Page = 'courses' | 'units' | 'lesson';
+type Page = 'courses' | 'units' | 'lesson' | 'conversation';
 
 interface AppState {
   page: Page;
@@ -26,6 +28,11 @@ function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1);
+
+      if (hash === 'conversation') {
+        setState({ page: 'conversation', courseId: null, lessonId: null });
+        return;
+      }
 
       if (hash.startsWith('lesson/')) {
         const lessonId = parseInt(hash.split('/')[1]);
@@ -74,28 +81,54 @@ function App() {
     }
   }
 
+  function navigateToConversation() {
+    window.location.hash = 'conversation';
+    setState({ page: 'conversation', courseId: null, lessonId: null });
+  }
+
   return (
-    <div className="app">
-      {state.page === 'courses' && (
-        <CourseList onSelectCourse={navigateToCourse} />
-      )}
+    <ErrorBoundary>
+      <div className="app">
+        {state.page === 'courses' && (
+          <ErrorBoundary>
+            <CourseList
+              onSelectCourse={navigateToCourse}
+              onStartConversation={navigateToConversation}
+            />
+          </ErrorBoundary>
+        )}
 
-      {state.page === 'units' && state.courseId && (
-        <UnitView
-          courseId={state.courseId}
-          onSelectLesson={navigateToLesson}
-          onBack={navigateToCourses}
-        />
-      )}
+        {state.page === 'conversation' && (
+          <ErrorBoundary>
+            <ConversationView onBack={navigateToCourses} />
+          </ErrorBoundary>
+        )}
 
-      {state.page === 'lesson' && state.lessonId && (
-        <LessonView
-          lessonId={state.lessonId}
-          onComplete={handleLessonExit}
-          onBack={handleLessonExit}
-        />
-      )}
-    </div>
+        {state.page === 'units' && state.courseId && (
+          <ErrorBoundary>
+            <UnitView
+              courseId={state.courseId}
+              onSelectLesson={navigateToLesson}
+              onBack={navigateToCourses}
+            />
+          </ErrorBoundary>
+        )}
+
+        {state.page === 'lesson' && state.lessonId && (
+          <ErrorBoundary>
+            <LessonView
+              lessonId={state.lessonId}
+              courseId={state.courseId}
+              onComplete={handleLessonExit}
+              onBack={handleLessonExit}
+              onBackToCourse={navigateToCourse}
+              onBackToCourses={navigateToCourses}
+              onNavigateToLesson={navigateToLesson}
+            />
+          </ErrorBoundary>
+        )}
+      </div>
+    </ErrorBoundary>
   );
 }
 

@@ -1,0 +1,221 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.exercise-explanation-modal {
+  background: white;
+  border-radius: var(--radius-xl);
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+}
+
+.exercise-explanation-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.exercise-explanation-modal .modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--color-text);
+}
+
+.exercise-explanation-modal .close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s;
+}
+
+.exercise-explanation-modal .close-button:hover {
+  background: var(--color-border);
+}
+
+.exercise-explanation-modal .modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.exercise-reference {
+  background: var(--color-background);
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+}
+
+.question-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.question-text {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+
+.korean-display {
+  margin-bottom: 0.75rem;
+}
+
+.korean-display .korean {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.korean-display .romanization {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.correct-answer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.answer-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.answer-text {
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+.explanation-section,
+.enhanced-explanation {
+  margin-top: 1rem;
+}
+
+.explanation-section h3,
+.enhanced-explanation h3 {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.explanation-section p,
+.enhanced-explanation p {
+  color: var(--color-text);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.get-more-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.get-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.loading-state .spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-state p {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.error-state {
+  padding: 1rem;
+  background: #fef2f2;
+  border-radius: var(--radius-lg);
+  margin-top: 1rem;
+}
+
+.error-state p {
+  color: var(--color-error);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.exercise-explanation-modal .modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.exercise-explanation-modal .button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.exercise-explanation-modal .button-primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+.exercise-explanation-modal .button-primary:hover {
+  transform: translateY(-2px);
+}

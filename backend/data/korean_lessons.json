@@ -1320,6 +1320,384 @@
               ]
             }
           ]
+        },
+        {
+          "title": "Daily Activities",
+          "description": "Learn essential verbs for everyday actions",
+          "lessons": [
+            {
+              "title": "Basic Action Verbs",
+              "description": "Common verbs for daily activities",
+              "estimated_minutes": 6,
+              "grammar_explanation": "Korean verbs end in -다 in dictionary form. When speaking politely, we change this to -아요/어요.\n\n먹다 (meokda) → 먹어요 (meogeoyo) - to eat\n마시다 (masida) → 마셔요 (masyeoyo) - to drink\n가다 (gada) → 가요 (gayo) - to go\n오다 (oda) → 와요 (wayo) - to come",
+              "grammar_tip": "The -아요/어요 ending depends on the vowel in the verb stem. If it has ㅏ or ㅗ, use -아요. Otherwise, use -어요.",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 먹다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "먹다",
+                  "romanization": "meokda",
+                  "options": ["to eat", "to drink", "to go", "to come"],
+                  "correct_answer": "to eat",
+                  "explanation": "먹다 (meokda) means 'to eat' in Korean"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 마시다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "마시다",
+                  "romanization": "masida",
+                  "options": ["to eat", "to drink", "to sleep", "to walk"],
+                  "correct_answer": "to drink",
+                  "explanation": "마시다 (masida) means 'to drink' in Korean"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 가다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "가다",
+                  "romanization": "gada",
+                  "options": ["to come", "to go", "to stay", "to run"],
+                  "correct_answer": "to go",
+                  "explanation": "가다 (gada) means 'to go' in Korean"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 오다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "오다",
+                  "romanization": "oda",
+                  "options": ["to go", "to come", "to leave", "to arrive"],
+                  "correct_answer": "to come",
+                  "explanation": "오다 (oda) means 'to come' in Korean"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you say 'I eat' politely?",
+                  "instruction": "Select the correct polite form",
+                  "options": ["먹다", "먹어요", "먹어", "먹습니다"],
+                  "correct_answer": "먹어요",
+                  "explanation": "먹다 becomes 먹어요 in polite informal speech"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "Complete: 저는 물을 _____ (I drink water)",
+                  "instruction": "Select the correct verb form",
+                  "options": ["마시다", "마셔요", "먹어요", "가요"],
+                  "correct_answer": "마셔요",
+                  "explanation": "마시다 becomes 마셔요 in polite speech"
+                }
+              ]
+            },
+            {
+              "title": "More Daily Verbs",
+              "description": "Expand your vocabulary with more action verbs",
+              "estimated_minutes": 6,
+              "grammar_explanation": "More essential daily verbs:\n\n자다 (jada) → 자요 (jayo) - to sleep\n일어나다 (ireonada) → 일어나요 (ireonayo) - to wake up\n보다 (boda) → 봐요 (bwayo) - to see/watch\n읽다 (ikda) → 읽어요 (ilgeoyo) - to read",
+              "grammar_tip": "Practice conjugating verbs by removing -다 and adding -아요 or -어요!",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 자다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "자다",
+                  "romanization": "jada",
+                  "options": ["to wake up", "to sleep", "to dream", "to rest"],
+                  "correct_answer": "to sleep",
+                  "explanation": "자다 (jada) means 'to sleep' in Korean"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 보다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "보다",
+                  "romanization": "boda",
+                  "options": ["to hear", "to see/watch", "to read", "to write"],
+                  "correct_answer": "to see/watch",
+                  "explanation": "보다 (boda) means 'to see' or 'to watch' in Korean"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 읽다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "읽다",
+                  "romanization": "ikda",
+                  "options": ["to write", "to read", "to speak", "to listen"],
+                  "correct_answer": "to read",
+                  "explanation": "읽다 (ikda) means 'to read' in Korean"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you say 'I watch TV' politely?",
+                  "instruction": "Select the correct sentence",
+                  "options": ["TV를 보다", "TV를 봐요", "TV를 본다", "TV를 보아요"],
+                  "correct_answer": "TV를 봐요",
+                  "explanation": "보다 contracts to 봐요 in polite informal speech"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "Complete: 저는 책을 _____ (I read a book)",
+                  "instruction": "Select the correct verb form",
+                  "options": ["읽다", "읽어요", "봐요", "써요"],
+                  "correct_answer": "읽어요",
+                  "explanation": "읽다 becomes 읽어요 in polite speech"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Shopping & Money",
+          "description": "Essential phrases for shopping in Korea",
+          "lessons": [
+            {
+              "title": "At the Store",
+              "description": "Learn to ask prices and make purchases",
+              "estimated_minutes": 6,
+              "grammar_explanation": "Essential shopping phrases:\n\n이거 (igeo) - this (thing)\n그거 (geugeo) - that (thing)\n얼마예요? (eolmayeyo?) - How much is it?\n주세요 (juseyo) - Please give me...\n있어요? (isseoyo?) - Do you have...?",
+              "grammar_tip": "Point at items and say '이거 얼마예요?' (How much is this?) - it works everywhere!",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 이거 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "이거",
+                  "romanization": "igeo",
+                  "options": ["that", "this", "which", "what"],
+                  "correct_answer": "this",
+                  "explanation": "이거 (igeo) means 'this (thing)' - used when pointing at something close to you"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 얼마예요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "얼마예요?",
+                  "romanization": "eolmayeyo",
+                  "options": ["What is it?", "How much is it?", "Where is it?", "Do you have it?"],
+                  "correct_answer": "How much is it?",
+                  "explanation": "얼마예요? is used to ask the price of something"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you ask 'How much is this?'",
+                  "instruction": "Select the correct phrase",
+                  "options": ["이거 뭐예요?", "이거 얼마예요?", "이거 어디예요?", "이거 있어요?"],
+                  "correct_answer": "이거 얼마예요?",
+                  "explanation": "이거 (this) + 얼마예요 (how much) = How much is this?"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you say 'Please give me this'?",
+                  "instruction": "Select the correct phrase",
+                  "options": ["이거 있어요", "이거 주세요", "이거 얼마예요", "이거 뭐예요"],
+                  "correct_answer": "이거 주세요",
+                  "explanation": "이거 (this) + 주세요 (please give me) = Please give me this"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 있어요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "있어요?",
+                  "romanization": "isseoyo",
+                  "options": ["Is it?", "Do you have?/Is there?", "How much?", "Where?"],
+                  "correct_answer": "Do you have?/Is there?",
+                  "explanation": "있어요 means 'to have/exist'. As a question, it asks 'Do you have?' or 'Is there?'"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "A shopkeeper says '만 원이에요'. How much is it?",
+                  "instruction": "Translate the price",
+                  "options": ["1,000 won", "5,000 won", "10,000 won", "100,000 won"],
+                  "correct_answer": "10,000 won",
+                  "explanation": "만 (man) means 10,000, so 만 원 = 10,000 won"
+                }
+              ]
+            },
+            {
+              "title": "Shopping Conversations",
+              "description": "Practice common shopping dialogues",
+              "estimated_minutes": 5,
+              "grammar_explanation": "Useful shopping responses:\n\n네, 있어요 (ne, isseoyo) - Yes, we have it\n아니요, 없어요 (aniyo, eopseoyo) - No, we don't have it\n너무 비싸요 (neomu bissayo) - It's too expensive\n깎아 주세요 (kkakka juseyo) - Please give me a discount",
+              "grammar_tip": "At traditional markets, you can often bargain! Try saying '깎아 주세요' politely.",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 비싸요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "비싸요",
+                  "romanization": "bissayo",
+                  "options": ["It's cheap", "It's expensive", "It's big", "It's small"],
+                  "correct_answer": "It's expensive",
+                  "explanation": "비싸요 means 'it's expensive'"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 싸요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "싸요",
+                  "romanization": "ssayo",
+                  "options": ["It's expensive", "It's cheap", "It's good", "It's bad"],
+                  "correct_answer": "It's cheap",
+                  "explanation": "싸요 means 'it's cheap' - the opposite of 비싸요"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 없어요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "없어요",
+                  "romanization": "eopseoyo",
+                  "options": ["There is", "There isn't/Don't have", "It's here", "It's there"],
+                  "correct_answer": "There isn't/Don't have",
+                  "explanation": "없어요 is the opposite of 있어요 - it means 'there isn't' or 'don't have'"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you say 'It's too expensive'?",
+                  "instruction": "Select the correct phrase",
+                  "options": ["너무 싸요", "너무 비싸요", "조금 비싸요", "아주 싸요"],
+                  "correct_answer": "너무 비싸요",
+                  "explanation": "너무 (too much) + 비싸요 (expensive) = It's too expensive"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you ask for a discount?",
+                  "instruction": "Select the correct phrase",
+                  "options": ["더 주세요", "깎아 주세요", "싸게 주세요", "많이 주세요"],
+                  "correct_answer": "깎아 주세요",
+                  "explanation": "깎아 주세요 literally means 'please cut (the price)' - used to ask for a discount"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Time & Weather",
+          "description": "Talk about time, dates, and weather",
+          "lessons": [
+            {
+              "title": "Time Expressions",
+              "description": "Learn to talk about when things happen",
+              "estimated_minutes": 5,
+              "grammar_explanation": "Basic time words:\n\n오늘 (oneul) - today\n내일 (naeil) - tomorrow\n어제 (eoje) - yesterday\n지금 (jigeum) - now\n나중에 (najunge) - later",
+              "grammar_tip": "Time words usually come at the beginning of the sentence in Korean!",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 오늘 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "오늘",
+                  "romanization": "oneul",
+                  "options": ["yesterday", "today", "tomorrow", "now"],
+                  "correct_answer": "today",
+                  "explanation": "오늘 (oneul) means 'today'"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 내일 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "내일",
+                  "romanization": "naeil",
+                  "options": ["yesterday", "today", "tomorrow", "later"],
+                  "correct_answer": "tomorrow",
+                  "explanation": "내일 (naeil) means 'tomorrow'"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 어제 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "어제",
+                  "romanization": "eoje",
+                  "options": ["yesterday", "today", "tomorrow", "before"],
+                  "correct_answer": "yesterday",
+                  "explanation": "어제 (eoje) means 'yesterday'"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 지금 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "지금",
+                  "romanization": "jigeum",
+                  "options": ["later", "before", "now", "always"],
+                  "correct_answer": "now",
+                  "explanation": "지금 (jigeum) means 'now'"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you say 'I'm going tomorrow'?",
+                  "instruction": "Select the correct sentence",
+                  "options": ["오늘 가요", "내일 가요", "어제 가요", "지금 가요"],
+                  "correct_answer": "내일 가요",
+                  "explanation": "내일 (tomorrow) + 가요 (go) = I'm going tomorrow"
+                }
+              ]
+            },
+            {
+              "title": "Weather Talk",
+              "description": "Describe the weather in Korean",
+              "estimated_minutes": 5,
+              "grammar_explanation": "Weather expressions:\n\n날씨 (nalssi) - weather\n덥다 (deopda) → 더워요 (deowoyo) - to be hot\n춥다 (chupda) → 추워요 (chuwoyo) - to be cold\n비가 와요 (biga wayo) - it's raining\n눈이 와요 (nuni wayo) - it's snowing",
+              "grammar_tip": "In Korean, rain and snow 'come' (와요) rather than 'fall'!",
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 날씨 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "날씨",
+                  "romanization": "nalssi",
+                  "options": ["day", "weather", "temperature", "season"],
+                  "correct_answer": "weather",
+                  "explanation": "날씨 (nalssi) means 'weather'"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 더워요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "더워요",
+                  "romanization": "deowoyo",
+                  "options": ["It's cold", "It's hot", "It's warm", "It's cool"],
+                  "correct_answer": "It's hot",
+                  "explanation": "더워요 means 'it's hot' (weather or feeling)"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 추워요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "추워요",
+                  "romanization": "chuwoyo",
+                  "options": ["It's hot", "It's cold", "It's warm", "It's cool"],
+                  "correct_answer": "It's cold",
+                  "explanation": "추워요 means 'it's cold' (weather or feeling)"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you say 'It's raining'?",
+                  "instruction": "Select the correct phrase",
+                  "options": ["비가 와요", "눈이 와요", "바람이 와요", "날씨가 와요"],
+                  "correct_answer": "비가 와요",
+                  "explanation": "비 (rain) + 가 (subject marker) + 와요 (comes) = It's raining"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "question": "How do you say 'The weather is good today'?",
+                  "instruction": "Select the correct sentence",
+                  "options": ["오늘 날씨가 좋아요", "내일 날씨가 좋아요", "오늘 날씨가 나빠요", "어제 날씨가 좋아요"],
+                  "correct_answer": "오늘 날씨가 좋아요",
+                  "explanation": "오늘 (today) + 날씨가 (weather) + 좋아요 (is good) = The weather is good today"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 눈이 와요 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "눈이 와요",
+                  "romanization": "nuni wayo",
+                  "options": ["It's raining", "It's snowing", "It's windy", "It's sunny"],
+                  "correct_answer": "It's snowing",
+                  "explanation": "눈 (snow) + 이 (subject marker) + 와요 (comes) = It's snowing"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -1575,6 +1953,153 @@
       "romanization": "yeol",
       "english": "ten (native)",
       "category": "numbers",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "먹다",
+      "romanization": "meokda",
+      "english": "to eat",
+      "category": "verbs",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "마시다",
+      "romanization": "masida",
+      "english": "to drink",
+      "category": "verbs",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "가다",
+      "romanization": "gada",
+      "english": "to go",
+      "category": "verbs",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "오다",
+      "romanization": "oda",
+      "english": "to come",
+      "category": "verbs",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "자다",
+      "romanization": "jada",
+      "english": "to sleep",
+      "category": "verbs",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "보다",
+      "romanization": "boda",
+      "english": "to see/watch",
+      "category": "verbs",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "읽다",
+      "romanization": "ikda",
+      "english": "to read",
+      "category": "verbs",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "이거",
+      "romanization": "igeo",
+      "english": "this (thing)",
+      "category": "shopping",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "그거",
+      "romanization": "geugeo",
+      "english": "that (thing)",
+      "category": "shopping",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "얼마예요",
+      "romanization": "eolmayeyo",
+      "english": "how much is it?",
+      "category": "shopping",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "있어요",
+      "romanization": "isseoyo",
+      "english": "there is/have",
+      "category": "basic",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "없어요",
+      "romanization": "eopseoyo",
+      "english": "there isn't/don't have",
+      "category": "basic",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "비싸요",
+      "romanization": "bissayo",
+      "english": "it's expensive",
+      "category": "shopping",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "싸요",
+      "romanization": "ssayo",
+      "english": "it's cheap",
+      "category": "shopping",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "오늘",
+      "romanization": "oneul",
+      "english": "today",
+      "category": "time",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "내일",
+      "romanization": "naeil",
+      "english": "tomorrow",
+      "category": "time",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "어제",
+      "romanization": "eoje",
+      "english": "yesterday",
+      "category": "time",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "지금",
+      "romanization": "jigeum",
+      "english": "now",
+      "category": "time",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "날씨",
+      "romanization": "nalssi",
+      "english": "weather",
+      "category": "weather",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "더워요",
+      "romanization": "deowoyo",
+      "english": "it's hot",
+      "category": "weather",
+      "difficulty_level": 1
+    },
+    {
+      "korean": "추워요",
+      "romanization": "chuwoyo",
+      "english": "it's cold",
+      "category": "weather",
       "difficulty_level": 1
     }
   ]

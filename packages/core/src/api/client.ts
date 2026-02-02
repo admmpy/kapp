@@ -103,6 +103,22 @@ class APIClient {
     return response.data;
   }
 
+  async getNextLesson(lessonId: number): Promise<{
+    next_lesson: {
+      id: number;
+      title: string;
+      description?: string;
+      unit_id: number;
+      estimated_minutes: number;
+      exercise_count: number;
+    } | null;
+    is_last_in_unit: boolean;
+    is_last_in_course: boolean;
+  }> {
+    const response = await this.client.get(`/lessons/${lessonId}/next`);
+    return response.data;
+  }
+
   async submitExercise(exerciseId: number, answer: string): Promise<ExerciseResult> {
     const response = await this.client.post<ExerciseResult>(`/exercises/${exerciseId}/submit`, { answer });
     return response.data;
@@ -125,6 +141,11 @@ class APIClient {
   async getStats(): Promise<LearningStats> {
     const response = await this.client.get<StatsResponse>('/progress/stats');
     return response.data.stats;
+  }
+
+  async submitProgress(lessonId: string, data: { completed: boolean; score: number }): Promise<{ success: boolean }> {
+    const response = await this.client.post(`/progress/${lessonId}`, data);
+    return response.data;
   }
 
   // ============================================
@@ -178,6 +199,8 @@ class APIClient {
     const response = await this.client.post('/llm/explain', {
       lesson_id: lessonId,
       user_context: context
+    }, {
+      timeout: 90000  // 90 seconds for LLM requests
     });
     return response.data;
   }
@@ -206,6 +229,8 @@ class APIClient {
     const response = await this.client.post('/llm/conversation', {
       message,
       user_context: context
+    }, {
+      timeout: 90000  // 90 seconds for LLM requests
     });
     return response.data;
   }

@@ -51,7 +51,7 @@ class Config:
     TTS_CACHE_DIR = os.getenv("TTS_CACHE_DIR", "data/audio_cache")
 
     # LLM Configuration
-    LLM_MODEL = os.getenv("LLM_MODEL", "open-llama-2-ko-7b")
+    LLM_MODEL = os.getenv("LLM_MODEL", "qwen3:4b")
     LLM_BASE_URL = os.getenv("LLM_BASE_URL", "http://localhost:11434")
     LLM_CACHE_DIR = os.getenv("LLM_CACHE_DIR", "data/llm_cache")
     LLM_ENABLED = os.getenv("LLM_ENABLED", "true").lower() == "true"
