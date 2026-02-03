@@ -68,18 +68,12 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
     tile => !selectedTiles.some(selected => selected.id === tile.id)
   );
 
-  function handleTileClick(tile: SentenceTile) {
-    if (isAnswered || submitting) return;
-    // Audio plays via useEffect when tile is added
-    setSelectedTiles([...selectedTiles, tile]);
-  }
-
-  function handleRemoveTile(tile: SentenceTile, e: React.MouseEvent) {
+  function handleRemoveTile(tile: SentenceTile) {
     if (isAnswered || submitting) return;
     setSelectedTiles(selectedTiles.filter(t => t.id !== tile.id));
   }
 
-  function handleSelectedTileClick(tile: SentenceTile, e: React.MouseEvent) {
+  function handleSelectedTileClick(tile: SentenceTile) {
     // Play audio on click (replay in drop zone)
     playTileAudio(tile);
   }
@@ -140,13 +134,13 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
               <button
                 key={`selected-${tile.id}-${index}`}
                 className={`word-tile selected ${tile.audio_url ? 'has-audio' : ''}`}
-                onClick={(e) => {
+                onClick={() => {
                   if (isAnswered) {
                     // After answering, clicking plays audio
-                    handleSelectedTileClick(tile, e);
+                    handleSelectedTileClick(tile);
                   } else {
                     // Before answering, clicking removes tile
-                    handleRemoveTile(tile, e);
+                    handleRemoveTile(tile);
                   }
                 }}
                 onDoubleClick={(e) => {
