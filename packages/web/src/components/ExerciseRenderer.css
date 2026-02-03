@@ -44,9 +44,10 @@
   margin-bottom: 0.5rem;
 }
 
-.romanization {
+.exercise-renderer .korean-display .romanization {
   font-size: 1rem;
-  color: white;
+  color: #ffffff;
+  opacity: 1;
 }
 
 .audio-controls {
@@ -57,6 +58,25 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 12px;
+}
+
+.vocab-audio-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.vocab-audio-controls .audio-button {
+  background: var(--gradient-primary);
+  color: white;
+}
+
+.vocab-audio-controls .audio-button:hover {
+  background: var(--color-primary);
 }
 
 .audio-button {
@@ -202,6 +222,8 @@
 
 .option-button:disabled {
   cursor: not-allowed;
+  color: var(--color-text);
+  opacity: 1;
 }
 
 .text-answer input {

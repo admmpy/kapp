@@ -24,6 +24,8 @@ import type {
   StatsResponse,
   VocabularyListResponse,
   VocabularyCategoriesResponse,
+  VocabularyDueResponse,
+  VocabularyReviewResponse,
   LLMHealth,
 } from '../types';
 
@@ -211,12 +213,22 @@ class APIClient {
     return response.data;
   }
 
-  async getLLMExplanation(lessonId: number, context?: { level?: number }): Promise<{ explanation: string; generated_at: string }> {
+  async getLLMExplanation(vocabId: number, context?: { level?: number }): Promise<{ explanation: string; generated_at: string }> {
     const response = await this.client.post('/llm/explain', {
-      lesson_id: lessonId,
+      vocab_id: vocabId,
       user_context: context
     }, {
       timeout: 90000  // 90 seconds for LLM requests
+    });
+    return response.data;
+  }
+
+  async getLLMExerciseExplanation(exerciseId: number, context?: { level?: number }): Promise<{ explanation: string; generated_at: string }> {
+    const response = await this.client.post('/llm/explain-exercise', {
+      exercise_id: exerciseId,
+      user_context: context
+    }, {
+      timeout: 90000
     });
     return response.data;
   }
@@ -240,11 +252,11 @@ class APIClient {
 
   async sendConversationMessage(
     message: string,
-    context?: { level?: number; conversation_history?: Array<{ role: string; content: string }> }
+    context?: { level?: number; conversation_history?: Array<{ user: string; assistant: string }> }
   ): Promise<{ response: string; timestamp: string }> {
     const response = await this.client.post('/llm/conversation', {
       message,
-      user_context: context
+      context
     }, {
       timeout: 90000  // 90 seconds for LLM requests
     });

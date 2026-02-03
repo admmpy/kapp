@@ -33,7 +33,7 @@ export default function ExerciseExplanationModal({
 
     try {
       // Use the LLM explain endpoint if available
-      const result = await apiClient.getLLMExplanation(exercise.id, { level: 1 });
+      const result = await apiClient.getLLMExerciseExplanation(exercise.id, { level: 1 });
       setEnhancedExplanation(result.explanation);
     } catch (err: unknown) {
       console.error('Failed to fetch enhanced explanation:', err);
@@ -44,9 +44,9 @@ export default function ExerciseExplanationModal({
         if (err.message.includes('timeout') || err.message.includes('Timeout')) {
           errorMessage = 'Request timed out. The AI model may be loading. Please try again.';
         } else if (err.message.includes('connect') || err.message.includes('network')) {
-          errorMessage = 'Cannot connect to AI service. Please ensure Ollama is running.';
+          errorMessage = 'Cannot connect to AI service. Please check your connection.';
         } else if (err.message.includes('model')) {
-          errorMessage = 'AI model not loaded. Run: ollama pull qwen3:4b';
+          errorMessage = 'AI model unavailable. Please check server configuration.';
         }
       }
       setError(errorMessage);

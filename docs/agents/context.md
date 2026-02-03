@@ -3,7 +3,7 @@
 ## Project Overview
 **Kapp** - Korean language learning app with structured lessons (LingoDeer-style).
 - **Target:** TOPIK I level learners
-- **Features:** Lessons with exercises, local LLM explanations, TTS pronunciation
+- **Features:** Lessons with exercises, OpenAI LLM explanations, TTS pronunciation
 
 ## Tech Stack
 
@@ -15,7 +15,7 @@
 | Frontend | React 18 + TypeScript | Vite, CSS Modules |
 | Routing | Hash-based | `/#lesson/42` not react-router |
 | State | Component-level | No Redux/Zustand |
-| LLM | Ollama (local) | Port 11434 |
+| LLM | OpenAI API (GPT-4o mini) | Server-side only |
 | TTS | gTTS | Cached in `data/audio_cache/` |
 
 ## Architecture Constraints
@@ -25,9 +25,9 @@
 - SQLite sufficient for personal use
 - Adding auth would be breaking change
 
-### Local-First
-- Ollama for LLM (no API keys needed)
-- gTTS with caching (graceful offline degradation)
+### LLM Integration
+- OpenAI API for LLM (requires API key)
+- Keep API key server-side only
 
 ### Hash Routing
 - Uses `window.location.hash` intentionally
@@ -39,8 +39,8 @@
 |---------------|--------|
 | React Router | Hash routing is intentional |
 | PostgreSQL | Requires auth system first |
-| Removing Ollama | Core feature, local-first design |
-| Docker | Complicates Ollama setup |
+| Exposing API keys to frontend | Security risk |
+| Docker | Complicates local setup |
 | WebSockets | REST is sufficient |
 | Authentication | Breaking change, out of scope |
 | Tailwind CSS | Using CSS Modules |
@@ -72,8 +72,9 @@
 DATABASE_URL=sqlite:///./data/kapp.db
 SECRET_KEY=<generate-strong-random-key>
 CORS_ORIGINS=http://localhost:5173
-LLM_BASE_URL=http://localhost:11434
-LLM_MODEL=open-llama-2-ko-7b
+OPENAI_API_KEY=your-openai-api-key-here
+OPENAI_MODEL=gpt-4o-mini
+LLM_ENABLED=true
 ```
 
 ### Frontend (.env)
@@ -89,7 +90,7 @@ VITE_API_URL=http://localhost:5001
 | Frontend | React 18 + TypeScript |
 | Database | SQLite (single-user) |
 | Styling | CSS Modules |
-| LLM | Ollama (local) |
+| LLM | OpenAI API (GPT-4o mini) |
 | TTS | gTTS (cached) |
 | Auth | None (single-user) |
 | State | Component-level |

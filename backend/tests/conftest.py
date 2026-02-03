@@ -21,8 +21,8 @@ class TestingConfig:
     SECRET_KEY = "test-secret-key"
     TTS_CACHE_DIR = "data/audio_cache"
     LLM_CACHE_DIR = "data/llm_cache"
-    LLM_MODEL = "test-model"
-    LLM_BASE_URL = "http://localhost:11434"
+    OPENAI_API_KEY = "test-openai-key"
+    OPENAI_MODEL = "gpt-4o-mini"
     LLM_ENABLED = False
     CORS_ORIGINS = ["http://localhost:5173"]
     RATELIMIT_ENABLED = False

@@ -1,8 +1,8 @@
 """
-LLM Service for local AI integration using Ollama
+LLM Service for OpenAI integration (GPT-4o mini)
 
 This service provides:
-- Connection to local Ollama instance
+- Connection to OpenAI Responses API
 - Prompt template management
 - Response caching
 - Error handling and retries
@@ -12,27 +12,28 @@ import requests
 import hashlib
 import json
 import os
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional, Any
 from datetime import datetime, timedelta
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-class OllamaClient:
-    """Client for interacting with local Ollama LLM"""
+class OpenAIClient:
+    """Client for interacting with OpenAI Responses API"""
 
     def __init__(
         self,
-        base_url: str = "http://localhost:11434",
-        model: str = "qwen3:4b",
+        api_key: str,
+        model: str = "gpt-4o-mini",
         timeout: int = 60,
         cache_dir: str = "./data/llm_cache",
     ):
-        self.base_url = base_url
+        self.api_key = api_key
         self.model = model
         self.timeout = timeout
         self.cache_dir = cache_dir
+        self.base_url = "https://api.openai.com/v1"
 
         # Ensure cache directory exists
         os.makedirs(cache_dir, exist_ok=True)
@@ -84,6 +85,30 @@ class OllamaClient:
         except Exception as e:
             logger.error(f"Error caching response: {e}")
 
+    def _extract_text(self, response_json: Dict[str, Any]) -> str:
+        """Extract output text from Responses API payload."""
+        if response_json.get("output_text"):
+            return response_json["output_text"]
+
+        output_items = response_json.get("output", [])
+        chunks = []
+        for item in output_items:
+            if item.get("type") == "message":
+                for content in item.get("content", []):
+                    if content.get("type") in ("output_text", "text"):
+                        text = content.get("text")
+                        if text:
+                            chunks.append(text)
+            elif item.get("type") == "output_text":
+                text = item.get("text")
+                if text:
+                    chunks.append(text)
+
+        return "\n".join(chunks).strip()
+
+    def _headers(self) -> Dict[str, str]:
+        return {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
+
     def chat(
         self,
         prompt: str,
@@ -93,7 +118,7 @@ class OllamaClient:
         use_cache: bool = True,
     ) -> str:
         """
-        Send chat request to Ollama
+        Send chat request to OpenAI Responses API
 
         Args:
             prompt: User prompt
@@ -113,35 +138,33 @@ class OllamaClient:
                 return cached
 
         # Prepare request
-        messages = []
+        input_messages = []
         if system:
-            messages.append({"role": "system", "content": system})
-        messages.append({"role": "user", "content": prompt})
+            input_messages.append({"role": "system", "content": system})
+        input_messages.append({"role": "user", "content": prompt})
 
         payload = {
             "model": self.model,
-            "messages": messages,
-            "options": {
-                "num_ctx": 2048,
-                "num_predict": max_tokens,
-                "temperature": temperature,
-                "top_p": 0.9,
-            },
-            "stream": False,
+            "input": input_messages,
+            "max_output_tokens": max_tokens,
+            "temperature": temperature,
         }
 
         try:
-            # Send request to Ollama
+            # Send request to OpenAI
             response = requests.post(
-                f"{self.base_url}/v1/chat/completions",
+                f"{self.base_url}/responses",
                 json=payload,
                 timeout=self.timeout,
+                headers=self._headers(),
             )
             response.raise_for_status()
 
             # Extract response text
             result = response.json()
-            generated_text = result["choices"][0]["message"]["content"]
+            generated_text = self._extract_text(result)
+            if not generated_text:
+                raise Exception("LLM returned an empty response.")
 
             # Cache for future use
             if use_cache:
@@ -150,35 +173,38 @@ class OllamaClient:
             return generated_text
 
         except requests.exceptions.Timeout:
-            logger.error("Ollama request timed out")
+            logger.error("OpenAI request timed out")
             raise Exception("LLM request timed out. Please try again.")
         except requests.exceptions.ConnectionError:
-            logger.error("Could not connect to Ollama")
-            raise Exception("LLM service unavailable. Ensure Ollama is running.")
+            logger.error("Could not connect to OpenAI")
+            raise Exception("LLM service unavailable. Please try again later.")
         except Exception as e:
-            logger.error(f"Error calling Ollama: {e}")
+            logger.error(f"Error calling OpenAI: {e}")
             raise Exception(f"LLM error: {str(e)}")
 
     def health_check(self) -> Dict[str, Any]:
-        """Check if Ollama service is available"""
+        """Check if OpenAI service is available"""
         try:
-            response = requests.get(f"{self.base_url}/api/tags", timeout=5)
+            response = requests.get(
+                f"{self.base_url}/models",
+                timeout=5,
+                headers=self._headers(),
+            )
             response.raise_for_status()
 
-            models = response.json().get("models", [])
-            model_names = [m["name"] for m in models]
+            models = response.json().get("data", [])
+            model_names = [m.get("id") for m in models if m.get("id")]
 
             return {
                 "status": "ok",
                 "available": True,
                 "models": model_names,
                 "configured_model": self.model,
-                "model_loaded": self.model in model_names
-                or f"{self.model}:latest" in model_names,
+                "model_loaded": self.model in model_names,
             }
         except Exception as e:
-            logger.error(f"Ollama health check failed: {e}")
-            return {"status": "error", "available": False, "error": str(e)}
+            logger.error(f"OpenAI health check failed: {e}")
+            return {"status": "error", "available": False, "error": "OpenAI API unavailable"}
 
 
 # Prompt templates for different use cases
@@ -237,6 +263,27 @@ For each sentence provide:
 - English translation
 
 Make sentences progressively more complex.""",
+    },
+    "exercise_explanation": {
+        "system": """You are a Korean language tutor helping learners understand their mistakes.
+Explain why the correct answer is correct, identify common pitfalls, and give one concise tip.
+Use simple English and keep the response short (4-6 sentences).""",
+        "user": """Explain this exercise answer for an English-speaking learner.
+
+Question: {question}
+Correct Answer: {correct_answer}
+Learner Level: {level_name}
+
+Additional Context (if available):
+- Korean Text: {korean_text}
+- Romanization: {romanization}
+- English Text: {english_text}
+- Basic Explanation: {basic_explanation}
+
+Respond in English only. Focus on:
+1) Why the correct answer is correct.
+2) One common mistake to avoid.
+3) One helpful tip for remembering or using it correctly.""",
     },
     "conversation": {
         "system": """You are a friendly Korean language conversation partner.

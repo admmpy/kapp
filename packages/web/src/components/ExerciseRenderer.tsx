@@ -106,17 +106,19 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
 
       {/* Korean text display (for vocabulary exercises, NOT listening) */}
       {exercise.korean_text && exercise.exercise_type !== 'listening' && (
-        <div className="korean-display">
-          <div className="korean-text">{exercise.korean_text}</div>
-          {exercise.romanization && (
-            <div className="romanization">{exercise.romanization}</div>
-          )}
+        <>
+          <div className="korean-display">
+            <div className="korean-text">{exercise.korean_text}</div>
+            {exercise.romanization && (
+              <div className="romanization">{exercise.romanization}</div>
+            )}
+          </div>
           {exercise.audio_url && (
-            <div className="audio-controls">
+            <div className="vocab-audio-controls">
               <button className="audio-button" onClick={() => playAudio()} title="Play audio">
                 🔊
               </button>
-              <div className="speed-toggle">
+              <div className="speed-toggle listening-speed">
                 <button
                   className={`speed-button ${playbackSpeed === 0.5 ? 'active' : ''}`}
                   onClick={() => setPlaybackSpeed(0.5)}
@@ -138,7 +140,7 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
               </div>
             </div>
           )}
-        </div>
+        </>
       )}
 
       {/* Reading content */}

@@ -83,12 +83,27 @@ export default function ConversationView({ onBack }: Props) {
 
     try {
       // Prepare conversation history (last 5 exchanges for context)
-      const conversationHistory = messages
-        .slice(-10) // Last 10 messages (5 exchanges)
-        .map(msg => ({
-          role: msg.role,
-          content: msg.content
-        }));
+      const recentMessages = messages.slice(-10);
+      const conversationHistory: Array<{ user: string; assistant: string }> = [];
+      let current: { user?: string; assistant?: string } = {};
+
+      recentMessages.forEach(msg => {
+        if (msg.role === 'user') {
+          if (current.user || current.assistant) {
+            if (current.user && current.assistant) {
+              conversationHistory.push({ user: current.user, assistant: current.assistant });
+            }
+            current = {};
+          }
+          current.user = msg.content;
+        } else if (msg.role === 'assistant') {
+          current.assistant = msg.content;
+          if (current.user && current.assistant) {
+            conversationHistory.push({ user: current.user, assistant: current.assistant });
+            current = {};
+          }
+        }
+      });
 
       const response = await apiClient.sendConversationMessage(userMessage, {
         level: userLevel,
