@@ -57,6 +57,11 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
           setLesson(cached as Lesson);
         }
 
+        if (!navigator.onLine) {
+          setLoading(false);
+          return;
+        }
+
         // Fetch from network and cache
         const data = await apiClient.getLesson(lessonId);
         setLesson(data);
@@ -133,23 +138,29 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
         // Save progress offline (will sync when online)
         await saveProgress(lessonId.toString(), true, score);
 
-        await apiClient.completeLesson(lessonId, {
-          score,
-          time_spent_seconds: timeSpent
-        });
-
-        // Fetch next lesson info
-        const nextLessonData = await apiClient.getNextLesson(lessonId);
-        if (nextLessonData.next_lesson) {
-          setNextLessonInfo({
-            id: nextLessonData.next_lesson.id,
-            title: nextLessonData.next_lesson.title,
-            estimated_minutes: nextLessonData.next_lesson.estimated_minutes,
-            exercise_count: nextLessonData.next_lesson.exercise_count
+        if (navigator.onLine) {
+          await apiClient.completeLesson(lessonId, {
+            score,
+            time_spent_seconds: timeSpent
           });
+
+          // Fetch next lesson info
+          const nextLessonData = await apiClient.getNextLesson(lessonId);
+          if (nextLessonData.next_lesson) {
+            setNextLessonInfo({
+              id: nextLessonData.next_lesson.id,
+              title: nextLessonData.next_lesson.title,
+              estimated_minutes: nextLessonData.next_lesson.estimated_minutes,
+              exercise_count: nextLessonData.next_lesson.exercise_count
+            });
+          }
+          setIsLastInUnit(nextLessonData.is_last_in_unit);
+          setIsLastInCourse(nextLessonData.is_last_in_course);
+        } else {
+          setNextLessonInfo(null);
+          setIsLastInUnit(false);
+          setIsLastInCourse(false);
         }
-        setIsLastInUnit(nextLessonData.is_last_in_unit);
-        setIsLastInCourse(nextLessonData.is_last_in_course);
       } catch (err) {
         console.error('Failed to complete lesson:', err);
       }

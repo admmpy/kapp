@@ -12,6 +12,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      minify: false,
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
@@ -21,7 +22,10 @@ export default defineConfig({
         theme_color: '#6366f1',
         background_color: '#ffffff',
         display: 'standalone',
+        display_override: ['standalone', 'browser'],
         start_url: '/',
+        scope: '/',
+        id: '/',
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -42,7 +46,10 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        mode: 'development',
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest}'],
+        navigateFallback: '/index.html',
+        navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/.*\/api\/audio\/.*/i,
@@ -89,5 +96,8 @@ export default defineConfig({
         secure: false,
       }
     }
+  },
+  preview: {
+    allowedHosts: true
   }
 })

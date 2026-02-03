@@ -68,7 +68,11 @@ class APIClient {
 
   async getCourses(): Promise<Course[]> {
     const response = await this.client.get<CoursesResponse>('/courses');
-    return response.data.courses;
+    const courses = response.data?.courses;
+    if (!Array.isArray(courses)) {
+      throw new Error('Invalid courses response');
+    }
+    return courses;
   }
 
   async getCourse(courseId: number): Promise<Course & { units: Unit[] }> {
@@ -132,7 +136,11 @@ class APIClient {
 
   async getProgress(): Promise<OverallProgress> {
     const response = await this.client.get<ProgressResponse>('/progress');
-    return response.data.progress;
+    const progress = response.data?.progress;
+    if (!progress || typeof progress !== 'object') {
+      throw new Error('Invalid progress response');
+    }
+    return progress;
   }
 
   async getRecentActivity(): Promise<RecentActivity[]> {

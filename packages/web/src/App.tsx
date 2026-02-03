@@ -7,6 +7,7 @@ import UnitView from './components/UnitView';
 import LessonView from './components/LessonView';
 import ConversationView from './components/ConversationView';
 import ErrorBoundary from './components/ErrorBoundary';
+import IosInstallPrompt from './components/IosInstallPrompt';
 import { initDB, setupOnlineListener } from '@kapp/core';
 import './App.css';
 
@@ -130,6 +131,7 @@ function App() {
             Offline - Your progress will sync when reconnected
           </div>
         )}
+        <IosInstallPrompt />
         {state.page === 'courses' && (
           <ErrorBoundary>
             <CourseList

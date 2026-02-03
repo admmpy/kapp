@@ -38,6 +38,9 @@ frontend/build/
 frontend/dist/
 frontend/.env
 frontend/.env.local
+node_modules/
+packages/**/node_modules/
+packages/**/tsconfig.tsbuildinfo
 
 # IDEs
 .vscode/
@@ -45,10 +48,13 @@ frontend/.env.local
 *.swp
 *.swo
 .DS_Store
+./claude/
+.claude/
 
 # Logs
 *.log
 logs/
+backend/backend_log.txt
 
 # IDE and editor configs
 .github/

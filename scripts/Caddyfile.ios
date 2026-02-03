@@ -1,0 +1,17 @@
+:4173 {
+  log {
+    output file /tmp/kapp-caddy-access.log
+    format console
+  }
+
+  @api path /api/*
+  handle @api {
+    reverse_proxy http://127.0.0.1:5001
+  }
+
+  handle {
+    root * ./packages/web/dist
+    try_files {path} /index.html
+    file_server
+  }
+}
