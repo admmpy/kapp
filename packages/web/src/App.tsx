@@ -7,6 +7,7 @@ import UnitView from './components/UnitView';
 import LessonView from './components/LessonView';
 import ConversationView from './components/ConversationView';
 import ErrorBoundary from './components/ErrorBoundary';
+import { initDB, setupOnlineListener } from '@kapp/core';
 import './App.css';
 
 type Page = 'courses' | 'units' | 'lesson' | 'conversation';
@@ -23,6 +24,28 @@ function App() {
     courseId: null,
     lessonId: null
   });
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  // Initialize IndexedDB and setup online/offline listeners
+  useEffect(() => {
+    initDB().catch(err => {
+      console.error('Failed to initialize IndexedDB:', err);
+    });
+
+    const cleanup = setupOnlineListener();
+
+    const handleOnlineStatus = () => setIsOnline(navigator.onLine);
+    const handleOfflineStatus = () => setIsOnline(navigator.onLine);
+
+    window.addEventListener('online', handleOnlineStatus);
+    window.addEventListener('offline', handleOfflineStatus);
+
+    return () => {
+      cleanup();
+      window.removeEventListener('online', handleOnlineStatus);
+      window.removeEventListener('offline', handleOfflineStatus);
+    };
+  }, []);
 
   // Parse URL hash for routing
   useEffect(() => {
@@ -89,6 +112,24 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="app">
+        {!isOnline && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: '#f59e0b',
+            color: 'white',
+            padding: '8px 16px',
+            textAlign: 'center',
+            fontSize: '14px',
+            fontWeight: '500',
+            zIndex: 9999,
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}>
+            Offline - Your progress will sync when reconnected
+          </div>
+        )}
         {state.page === 'courses' && (
           <ErrorBoundary>
             <CourseList

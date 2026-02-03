@@ -2,7 +2,7 @@
  * LessonView - Main lesson interface with exercises
  */
 import { useState, useEffect } from 'react';
-import { apiClient } from '@kapp/core';
+import { apiClient, cacheLesson, getCachedLesson, saveProgress } from '@kapp/core';
 import type { Lesson, ExerciseResult } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
 import ProgressBar from './ProgressBar';
@@ -51,8 +51,19 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
   useEffect(() => {
     async function loadLesson() {
       try {
+        // Try to load from cache first
+        const cached = await getCachedLesson(lessonId.toString());
+        if (cached && typeof cached === 'object' && 'id' in cached) {
+          setLesson(cached as Lesson);
+        }
+
+        // Fetch from network and cache
         const data = await apiClient.getLesson(lessonId);
         setLesson(data);
+
+        // Cache the lesson for offline use
+        await cacheLesson(lessonId.toString(), data);
+
         await apiClient.startLesson(lessonId);
 
         // Load breadcrumb data if we have courseId
@@ -119,6 +130,9 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
       const score = finalTotal > 0 ? (finalCorrect / finalTotal) * 100 : 0;
 
       try {
+        // Save progress offline (will sync when online)
+        await saveProgress(lessonId.toString(), true, score);
+
         await apiClient.completeLesson(lessonId, {
           score,
           time_spent_seconds: timeSpent
