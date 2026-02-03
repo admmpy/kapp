@@ -3,6 +3,7 @@ LLM routes for AI-powered learning features
 
 Endpoints:
 - POST /api/llm/explain - Explain vocabulary card
+- POST /api/llm/explain-exercise - Explain exercise answer
 - POST /api/llm/generate-examples - Generate example sentences
 - POST /api/llm/conversation - Interactive conversation
 - GET /api/llm/health - Check LLM service status
@@ -10,8 +11,8 @@ Endpoints:
 
 from flask import Blueprint, request, jsonify, current_app
 from database import db
-from models_v2 import VocabularyItem
-from llm_service import OllamaClient, PROMPT_TEMPLATES, get_level_name
+from models_v2 import VocabularyItem, Exercise
+from llm_service import OpenAIClient, PROMPT_TEMPLATES, get_level_name
 from extensions import limiter
 from utils import error_response, not_found_response, validation_error_response
 from security import sanitize_user_input, validate_conversation_history
@@ -33,18 +34,25 @@ def validate_level(level, default: int = 0) -> int:
     return max(0, min(5, level))
 
 
+def ensure_llm_enabled():
+    """Return an error response if LLM is disabled."""
+    if not current_app.config.get("LLM_ENABLED", False):
+        return error_response("LLM is disabled", 503)
+    return None
+
+
 # Initialise LLM client (lazy loading)
 _llm_client = None
 
 
-def get_llm_client() -> OllamaClient:
+def get_llm_client() -> OpenAIClient:
     """Get or create LLM client instance"""
     global _llm_client
     if _llm_client is None:
-        model = current_app.config.get("LLM_MODEL", "open-llama-2-ko-7b")
-        base_url = current_app.config.get("LLM_BASE_URL", "http://localhost:11434")
+        model = current_app.config.get("OPENAI_MODEL", "gpt-4o-mini")
+        api_key = current_app.config.get("OPENAI_API_KEY")
         cache_dir = current_app.config.get("LLM_CACHE_DIR", "data/llm_cache")
-        _llm_client = OllamaClient(base_url=base_url, model=model, cache_dir=cache_dir)
+        _llm_client = OpenAIClient(api_key=api_key, model=model, cache_dir=cache_dir)
     return _llm_client
 
 
@@ -52,12 +60,15 @@ def get_llm_client() -> OllamaClient:
 def health_check():
     """Check if LLM service is available"""
     try:
+        disabled_response = ensure_llm_enabled()
+        if disabled_response:
+            return disabled_response
         client = get_llm_client()
         health = client.health_check()
         return jsonify(health), 200 if health["available"] else 503
     except Exception as e:
         logger.error(f"Health check failed: {e}")
-        return jsonify({"status": "error", "available": False, "error": str(e)}), 503
+        return jsonify({"status": "error", "available": False, "error": "LLM unavailable"}), 503
 
 
 @llm_bp.route("/llm/explain", methods=["POST"])
@@ -85,14 +96,17 @@ def explain_card():
         }
     """
     try:
-        data = request.get_json()
-        card_id = data.get("card_id")
+        disabled_response = ensure_llm_enabled()
+        if disabled_response:
+            return disabled_response
+        data = request.get_json(silent=True) or {}
+        vocab_id = data.get("vocab_id") or data.get("card_id")
 
-        if not card_id:
-            return validation_error_response("card_id is required")
+        if not vocab_id:
+            return validation_error_response("vocab_id is required")
 
         # Fetch vocabulary item from database (card_id maps to vocabulary item)
-        vocab = db.session.get(VocabularyItem, card_id)
+        vocab = db.session.get(VocabularyItem, vocab_id)
         if not vocab:
             return not_found_response("Vocabulary item")
 
@@ -123,7 +137,7 @@ def explain_card():
             jsonify(
                 {
                     "explanation": response,
-                    "card_id": card_id,
+                    "vocab_id": vocab_id,
                     "generated_at": datetime.now().isoformat(),
                 }
             ),
@@ -132,7 +146,7 @@ def explain_card():
 
     except Exception as e:
         logger.error(f"Error in explain_card: {e}")
-        return error_response("Failed to generate explanation", 500, str(e))
+        return error_response("Failed to generate explanation", 500)
 
 
 @llm_bp.route("/llm/generate-examples", methods=["POST"])
@@ -159,13 +173,16 @@ def generate_examples():
         }
     """
     try:
-        data = request.get_json()
-        card_id = data.get("card_id")
+        disabled_response = ensure_llm_enabled()
+        if disabled_response:
+            return disabled_response
+        data = request.get_json(silent=True) or {}
+        vocab_id = data.get("vocab_id") or data.get("card_id")
 
-        if not card_id:
-            return validation_error_response("card_id is required")
+        if not vocab_id:
+            return validation_error_response("vocab_id is required")
 
-        vocab = db.session.get(VocabularyItem, card_id)
+        vocab = db.session.get(VocabularyItem, vocab_id)
         if not vocab:
             return not_found_response("Vocabulary item")
 
@@ -188,7 +205,7 @@ def generate_examples():
             jsonify(
                 {
                     "examples_text": response,
-                    "card_id": card_id,
+                    "vocab_id": vocab_id,
                     "generated_at": datetime.now().isoformat(),
                 }
             ),
@@ -197,7 +214,71 @@ def generate_examples():
 
     except Exception as e:
         logger.error(f"Error in generate_examples: {e}")
-        return error_response("Failed to generate examples", 500, str(e))
+        return error_response("Failed to generate examples", 500)
+
+
+@llm_bp.route("/llm/explain-exercise", methods=["POST"])
+@limiter.limit("10/hour")
+def explain_exercise():
+    """
+    Explain an exercise answer using LLM
+
+    Request body:
+        {
+            "exercise_id": 123,
+            "user_context": {
+                "level": 1
+            }
+        }
+    """
+    try:
+        disabled_response = ensure_llm_enabled()
+        if disabled_response:
+            return disabled_response
+        data = request.get_json(silent=True) or {}
+        exercise_id = data.get("exercise_id")
+
+        if not exercise_id:
+            return validation_error_response("exercise_id is required")
+
+        exercise = db.session.get(Exercise, exercise_id)
+        if not exercise:
+            return not_found_response("Exercise")
+
+        user_context = data.get("user_context", {})
+        level = validate_level(user_context.get("level", 0), default=0)
+
+        template = PROMPT_TEMPLATES["exercise_explanation"]
+        system_prompt = template["system"]
+        user_prompt = template["user"].format(
+            question=exercise.question,
+            correct_answer=exercise.correct_answer,
+            level_name=get_level_name(level),
+            korean_text=exercise.korean_text or "N/A",
+            romanization=exercise.romanization or "N/A",
+            english_text=exercise.english_text or "N/A",
+            basic_explanation=exercise.explanation or "N/A",
+        )
+
+        client = get_llm_client()
+        response = client.chat(
+            prompt=user_prompt, system=system_prompt, temperature=0.7, max_tokens=400
+        )
+
+        return (
+            jsonify(
+                {
+                    "explanation": response,
+                    "exercise_id": exercise_id,
+                    "generated_at": datetime.now().isoformat(),
+                }
+            ),
+            200,
+        )
+
+    except Exception as e:
+        logger.error(f"Error in explain_exercise: {e}")
+        return error_response("Failed to generate explanation", 500)
 
 
 @llm_bp.route("/llm/conversation", methods=["POST"])
@@ -222,9 +303,12 @@ def conversation():
         }
     """
     try:
-        data = request.get_json()
-        raw_message = data.get('message')
-        context = data.get('context', {})
+        disabled_response = ensure_llm_enabled()
+        if disabled_response:
+            return disabled_response
+        data = request.get_json(silent=True) or {}
+        raw_message = data.get("message")
+        context = data.get("context") or data.get("user_context") or {}
 
         if not raw_message:
             return validation_error_response('message is required')
@@ -240,8 +324,9 @@ def conversation():
         level = validate_level(context.get('level', 0), default=0)
 
         # Validate and sanitize conversation history
-        raw_history = context.get('conversation_history', [])
-        history, history_warnings = validate_conversation_history(raw_history)
+        raw_history = context.get("conversation_history", [])
+        history_input = normalize_conversation_history(raw_history)
+        history, history_warnings = validate_conversation_history(history_input)
         if history_warnings:
             logger.info(f"History validation warnings: {history_warnings}")
 
@@ -276,4 +361,31 @@ def conversation():
 
     except Exception as e:
         logger.error(f"Error in conversation: {e}")
-        return error_response("Failed to generate response", 500, str(e))
+        return error_response("Failed to generate response", 500)
+
+
+def normalize_conversation_history(history):
+    """Normalize history to [{user, assistant}] format."""
+    if not isinstance(history, list) or not history:
+        return history
+
+    if all(isinstance(h, dict) and "role" in h and "content" in h for h in history):
+        exchanges = []
+        current = {}
+        for message in history:
+            role = message.get("role")
+            content = message.get("content", "")
+            if role == "user":
+                if current:
+                    exchanges.append(current)
+                    current = {}
+                current["user"] = content
+            elif role == "assistant":
+                current["assistant"] = content
+                exchanges.append(current)
+                current = {}
+        if current:
+            exchanges.append(current)
+        return exchanges
+
+    return history

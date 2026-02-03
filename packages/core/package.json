@@ -9,7 +9,6 @@
     ".": "./src/index.ts",
     "./types": "./src/types.ts",
     "./api": "./src/api/client.ts",
-    "./api/llm": "./src/api/llm.ts",
     "./config": "./src/config.ts"
   },
   "dependencies": {

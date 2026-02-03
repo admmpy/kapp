@@ -181,7 +181,8 @@ export interface Card {
 }
 
 export interface ExplanationRequest {
-  card_id: number;
+  vocab_id?: number;
+  card_id?: number;
   user_context?: {
     level?: number;
     previous_ratings?: number[];
@@ -191,8 +192,27 @@ export interface ExplanationRequest {
 
 export interface LLMExplanation {
   explanation: string;
-  card_id: number;
+  vocab_id?: number;
+  card_id?: number;
   generated_at: string;
+}
+
+export interface ExerciseExplanationRequest {
+  exercise_id: number;
+  user_context?: {
+    level?: number;
+  };
+}
+
+export interface LLMExerciseExplanation {
+  explanation: string;
+  exercise_id: number;
+  generated_at: string;
+}
+
+export interface LLMConversationExchange {
+  user: string;
+  assistant: string;
 }
 
 export interface LLMHealth {

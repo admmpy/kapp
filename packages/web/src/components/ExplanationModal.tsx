@@ -2,7 +2,7 @@
  * Explanation Modal - displays AI-generated card explanations
  */
 import { useState, useEffect } from 'react';
-import { llmClient } from '@kapp/core';
+import { apiClient } from '@kapp/core';
 import type { Card } from '@kapp/core';
 import './ExplanationModal.css';
 
@@ -33,10 +33,7 @@ export default function ExplanationModal({ card, isOpen, onClose, userContext }:
     setError(null);
     
     try {
-      const result = await llmClient.explainCard({
-        card_id: card.id,
-        user_context: userContext,
-      });
+      const result = await apiClient.getLLMExplanation(card.id, userContext);
       setExplanation(result.explanation);
     } catch (err) {
       console.error('Error fetching explanation:', err);
@@ -101,6 +98,5 @@ export default function ExplanationModal({ card, isOpen, onClose, userContext }:
     </div>
   );
 }
-
 
 

@@ -23,6 +23,7 @@ Kapp is a lesson-based learning platform with structured curriculum progression:
 - **5 Exercise Types:** Vocabulary, Grammar, Reading, Listening, Sentence Arrangement
 - **Progress Tracking:** Completion status, scores per lesson, activity history
 - **Audio Support:** Text-to-speech for Korean pronunciation
+- **AI Explanations (Optional):** GPT-4o mini via OpenAI API
 - **Security:** Input validation, SECRET_KEY enforcement, prompt injection protection
 
 ---
@@ -55,6 +56,12 @@ pip install -r requirements.txt
 cp .env.example .env
 # Generate secure SECRET_KEY (required):
 python -c "import secrets; print(secrets.token_hex(32))" >> .env
+
+# Optional: Enable AI explanations (OpenAI)
+# Add to backend/.env:
+# OPENAI_API_KEY=your-openai-api-key-here
+# OPENAI_MODEL=gpt-4o-mini
+# LLM_ENABLED=true
 ```
 
 **2. Frontend Setup**

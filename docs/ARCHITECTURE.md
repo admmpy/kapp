@@ -26,6 +26,8 @@ kapp/
 | `submitExercise(id, answer)` | Submit answer |
 | `completeLesson(id, data)` | Mark lesson complete |
 | `getProgress()` | Get overall progress |
+| `getLLMExplanation(vocabId, context)` | LLM vocab explanation |
+| `getLLMExerciseExplanation(exerciseId, context)` | LLM exercise explanation |
 | `sendConversationMessage(text, context)` | LLM chat |
 
 ## Component Routing (Hash-based)
@@ -49,6 +51,8 @@ kapp/
 | POST | `/api/exercises/{id}/submit` | Submit answer |
 | GET | `/api/progress` | Overall progress |
 | GET | `/api/llm/health` | LLM available? |
+| POST | `/api/llm/explain` | Explain vocabulary |
+| POST | `/api/llm/explain-exercise` | Explain exercise answer |
 | POST | `/api/llm/conversation` | Chat with AI |
 
 ## Environment Config
@@ -64,7 +68,9 @@ kapp/
 | `FLASK_ENV` | `development` |
 | `DATABASE_URL` | `sqlite:///data/kapp.db` |
 | `CORS_ORIGINS` | `http://localhost:5173` |
-| `OLLAMA_BASE_URL` | `http://localhost:11434` |
+| `OPENAI_API_KEY` | `sk-...` |
+| `OPENAI_MODEL` | `gpt-4o-mini` |
+| `LLM_ENABLED` | `true` |
 
 ## Quick Start
 

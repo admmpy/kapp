@@ -50,11 +50,18 @@ class Config:
     # TTS configuration
     TTS_CACHE_DIR = os.getenv("TTS_CACHE_DIR", "data/audio_cache")
 
-    # LLM Configuration
-    LLM_MODEL = os.getenv("LLM_MODEL", "qwen3:4b")
-    LLM_BASE_URL = os.getenv("LLM_BASE_URL", "http://localhost:11434")
+    # LLM Configuration (OpenAI)
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
     LLM_CACHE_DIR = os.getenv("LLM_CACHE_DIR", "data/llm_cache")
-    LLM_ENABLED = os.getenv("LLM_ENABLED", "true").lower() == "true"
+    LLM_ENABLED = os.getenv("LLM_ENABLED", "false").lower() == "true"
+    WEAK_OPENAI_KEYS = {
+        None,
+        "",
+        "changeme",
+        "your-openai-api-key-here",
+        "your-openai-api-key",
+    }
 
     # CORS configuration - Allow both common Vite ports by default
     CORS_ORIGINS = os.getenv(
@@ -95,6 +102,15 @@ class Config:
             )
         if len(secret_key) < 32:
             raise ValueError("SECRET_KEY must be at least 32 characters for security!")
+
+        # Validate OpenAI API key when LLM is enabled
+        if app.config.get("LLM_ENABLED", True):
+            openai_key = app.config.get("OPENAI_API_KEY")
+            if openai_key in Config.WEAK_OPENAI_KEYS:
+                raise ValueError(
+                    "OPENAI_API_KEY is missing or weak! "
+                    "Set it in backend/.env as OPENAI_API_KEY=..."
+                )
 
 
 class DevelopmentConfig(Config):

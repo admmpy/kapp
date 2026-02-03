@@ -174,9 +174,17 @@ class APIClient {
     return response.data;
   }
 
-  async getLLMExplanation(lessonId: number, context?: { level?: number }): Promise<{ explanation: string; generated_at: string }> {
+  async getLLMExplanation(vocabId: number, context?: { level?: number }): Promise<{ explanation: string; generated_at: string }> {
     const response = await this.client.post('/llm/explain', {
-      lesson_id: lessonId,
+      vocab_id: vocabId,
+      user_context: context
+    });
+    return response.data;
+  }
+
+  async getLLMExerciseExplanation(exerciseId: number, context?: { level?: number }): Promise<{ explanation: string; generated_at: string }> {
+    const response = await this.client.post('/llm/explain-exercise', {
+      exercise_id: exerciseId,
       user_context: context
     });
     return response.data;
