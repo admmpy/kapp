@@ -1338,7 +1338,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "먹다",
                   "romanization": "meokda",
-                  "options": ["to eat", "to drink", "to go", "to come"],
+                  "options": [
+                    "to eat",
+                    "to drink",
+                    "to go",
+                    "to come"
+                  ],
                   "correct_answer": "to eat",
                   "explanation": "먹다 (meokda) means 'to eat' in Korean"
                 },
@@ -1348,7 +1353,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "마시다",
                   "romanization": "masida",
-                  "options": ["to eat", "to drink", "to sleep", "to walk"],
+                  "options": [
+                    "to eat",
+                    "to drink",
+                    "to sleep",
+                    "to walk"
+                  ],
                   "correct_answer": "to drink",
                   "explanation": "마시다 (masida) means 'to drink' in Korean"
                 },
@@ -1358,7 +1368,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "가다",
                   "romanization": "gada",
-                  "options": ["to come", "to go", "to stay", "to run"],
+                  "options": [
+                    "to come",
+                    "to go",
+                    "to stay",
+                    "to run"
+                  ],
                   "correct_answer": "to go",
                   "explanation": "가다 (gada) means 'to go' in Korean"
                 },
@@ -1368,7 +1383,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "오다",
                   "romanization": "oda",
-                  "options": ["to go", "to come", "to leave", "to arrive"],
+                  "options": [
+                    "to go",
+                    "to come",
+                    "to leave",
+                    "to arrive"
+                  ],
                   "correct_answer": "to come",
                   "explanation": "오다 (oda) means 'to come' in Korean"
                 },
@@ -1376,7 +1396,12 @@
                   "exercise_type": "grammar",
                   "question": "How do you say 'I eat' politely?",
                   "instruction": "Select the correct polite form",
-                  "options": ["먹다", "먹어요", "먹어", "먹습니다"],
+                  "options": [
+                    "먹다",
+                    "먹어요",
+                    "먹어",
+                    "먹습니다"
+                  ],
                   "correct_answer": "먹어요",
                   "explanation": "먹다 becomes 먹어요 in polite informal speech"
                 },
@@ -1384,9 +1409,44 @@
                   "exercise_type": "grammar",
                   "question": "Complete: 저는 물을 _____ (I drink water)",
                   "instruction": "Select the correct verb form",
-                  "options": ["마시다", "마셔요", "먹어요", "가요"],
+                  "options": [
+                    "마시다",
+                    "마셔요",
+                    "먹어요",
+                    "가요"
+                  ],
                   "correct_answer": "마셔요",
                   "explanation": "마시다 becomes 마셔요 in polite speech"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "저는 공부해요.",
+                  "audio_url": "/api/audio/add9fdd87c1ad053097347e17bb415c0.mp3",
+                  "options": [
+                    "저는 공부해요.",
+                    "저는 일해요.",
+                    "저는 먹어요.",
+                    "저는 가요."
+                  ],
+                  "correct_answer": "저는 공부해요.",
+                  "explanation": "The sentence means: I study."
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "친구가 일해요.",
+                  "audio_url": "/api/audio/1e0731d6d6524f7375276f0895d9eca6.mp3",
+                  "options": [
+                    "친구가 일해요.",
+                    "친구가 공부해요.",
+                    "친구가 먹어요.",
+                    "친구가 자요."
+                  ],
+                  "correct_answer": "친구가 일해요.",
+                  "explanation": "The sentence means: My friend works."
                 }
               ]
             },
@@ -1403,7 +1463,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "자다",
                   "romanization": "jada",
-                  "options": ["to wake up", "to sleep", "to dream", "to rest"],
+                  "options": [
+                    "to wake up",
+                    "to sleep",
+                    "to dream",
+                    "to rest"
+                  ],
                   "correct_answer": "to sleep",
                   "explanation": "자다 (jada) means 'to sleep' in Korean"
                 },
@@ -1413,7 +1478,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "보다",
                   "romanization": "boda",
-                  "options": ["to hear", "to see/watch", "to read", "to write"],
+                  "options": [
+                    "to hear",
+                    "to see/watch",
+                    "to read",
+                    "to write"
+                  ],
                   "correct_answer": "to see/watch",
                   "explanation": "보다 (boda) means 'to see' or 'to watch' in Korean"
                 },
@@ -1423,7 +1493,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "읽다",
                   "romanization": "ikda",
-                  "options": ["to write", "to read", "to speak", "to listen"],
+                  "options": [
+                    "to write",
+                    "to read",
+                    "to speak",
+                    "to listen"
+                  ],
                   "correct_answer": "to read",
                   "explanation": "읽다 (ikda) means 'to read' in Korean"
                 },
@@ -1431,7 +1506,12 @@
                   "exercise_type": "grammar",
                   "question": "How do you say 'I watch TV' politely?",
                   "instruction": "Select the correct sentence",
-                  "options": ["TV를 보다", "TV를 봐요", "TV를 본다", "TV를 보아요"],
+                  "options": [
+                    "TV를 보다",
+                    "TV를 봐요",
+                    "TV를 본다",
+                    "TV를 보아요"
+                  ],
                   "correct_answer": "TV를 봐요",
                   "explanation": "보다 contracts to 봐요 in polite informal speech"
                 },
@@ -1439,9 +1519,44 @@
                   "exercise_type": "grammar",
                   "question": "Complete: 저는 책을 _____ (I read a book)",
                   "instruction": "Select the correct verb form",
-                  "options": ["읽다", "읽어요", "봐요", "써요"],
+                  "options": [
+                    "읽다",
+                    "읽어요",
+                    "봐요",
+                    "써요"
+                  ],
                   "correct_answer": "읽어요",
                   "explanation": "읽다 becomes 읽어요 in polite speech"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "저는 매일 운동해요.",
+                  "audio_url": "/api/audio/1ea0b6933df957b792191088865e35d0.mp3",
+                  "options": [
+                    "저는 매일 운동해요.",
+                    "저는 매일 공부해요.",
+                    "저는 매일 일해요.",
+                    "저는 매일 자요."
+                  ],
+                  "correct_answer": "저는 매일 운동해요.",
+                  "explanation": "The sentence means: I exercise every day."
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "언니가 요리해요.",
+                  "audio_url": "/api/audio/85ca718aec3d0b0b302ec0d94c2c82bb.mp3",
+                  "options": [
+                    "언니가 요리해요.",
+                    "언니가 청소해요.",
+                    "언니가 빨래해요.",
+                    "언니가 쉬어요."
+                  ],
+                  "correct_answer": "언니가 요리해요.",
+                  "explanation": "The sentence means: My older sister cooks."
                 }
               ]
             }
@@ -1464,7 +1579,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "이거",
                   "romanization": "igeo",
-                  "options": ["that", "this", "which", "what"],
+                  "options": [
+                    "that",
+                    "this",
+                    "which",
+                    "what"
+                  ],
                   "correct_answer": "this",
                   "explanation": "이거 (igeo) means 'this (thing)' - used when pointing at something close to you"
                 },
@@ -1474,7 +1594,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "얼마예요?",
                   "romanization": "eolmayeyo",
-                  "options": ["What is it?", "How much is it?", "Where is it?", "Do you have it?"],
+                  "options": [
+                    "What is it?",
+                    "How much is it?",
+                    "Where is it?",
+                    "Do you have it?"
+                  ],
                   "correct_answer": "How much is it?",
                   "explanation": "얼마예요? is used to ask the price of something"
                 },
@@ -1482,7 +1607,12 @@
                   "exercise_type": "grammar",
                   "question": "How do you ask 'How much is this?'",
                   "instruction": "Select the correct phrase",
-                  "options": ["이거 뭐예요?", "이거 얼마예요?", "이거 어디예요?", "이거 있어요?"],
+                  "options": [
+                    "이거 뭐예요?",
+                    "이거 얼마예요?",
+                    "이거 어디예요?",
+                    "이거 있어요?"
+                  ],
                   "correct_answer": "이거 얼마예요?",
                   "explanation": "이거 (this) + 얼마예요 (how much) = How much is this?"
                 },
@@ -1490,7 +1620,12 @@
                   "exercise_type": "grammar",
                   "question": "How do you say 'Please give me this'?",
                   "instruction": "Select the correct phrase",
-                  "options": ["이거 있어요", "이거 주세요", "이거 얼마예요", "이거 뭐예요"],
+                  "options": [
+                    "이거 있어요",
+                    "이거 주세요",
+                    "이거 얼마예요",
+                    "이거 뭐예요"
+                  ],
                   "correct_answer": "이거 주세요",
                   "explanation": "이거 (this) + 주세요 (please give me) = Please give me this"
                 },
@@ -1500,7 +1635,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "있어요?",
                   "romanization": "isseoyo",
-                  "options": ["Is it?", "Do you have?/Is there?", "How much?", "Where?"],
+                  "options": [
+                    "Is it?",
+                    "Do you have?/Is there?",
+                    "How much?",
+                    "Where?"
+                  ],
                   "correct_answer": "Do you have?/Is there?",
                   "explanation": "있어요 means 'to have/exist'. As a question, it asks 'Do you have?' or 'Is there?'"
                 },
@@ -1508,9 +1648,44 @@
                   "exercise_type": "grammar",
                   "question": "A shopkeeper says '만 원이에요'. How much is it?",
                   "instruction": "Translate the price",
-                  "options": ["1,000 won", "5,000 won", "10,000 won", "100,000 won"],
+                  "options": [
+                    "1,000 won",
+                    "5,000 won",
+                    "10,000 won",
+                    "100,000 won"
+                  ],
                   "correct_answer": "10,000 won",
                   "explanation": "만 (man) means 10,000, so 만 원 = 10,000 won"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "이거 얼마예요?",
+                  "audio_url": "/api/audio/8b13301ace96b42c805ae0630632b062.mp3",
+                  "options": [
+                    "이거 얼마예요?",
+                    "저거 얼마예요?",
+                    "그거 뭐예요?",
+                    "이거 좋아요?"
+                  ],
+                  "correct_answer": "이거 얼마예요?",
+                  "explanation": "The sentence means: How much is this?"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "너무 비싸요.",
+                  "audio_url": "/api/audio/2bcb61438f6d567673c9b511961bdfb1.mp3",
+                  "options": [
+                    "너무 비싸요.",
+                    "너무 싸요.",
+                    "너무 좋아요.",
+                    "너무 커요."
+                  ],
+                  "correct_answer": "너무 비싸요.",
+                  "explanation": "The sentence means: It's too expensive."
                 }
               ]
             },
@@ -1527,7 +1702,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "비싸요",
                   "romanization": "bissayo",
-                  "options": ["It's cheap", "It's expensive", "It's big", "It's small"],
+                  "options": [
+                    "It's cheap",
+                    "It's expensive",
+                    "It's big",
+                    "It's small"
+                  ],
                   "correct_answer": "It's expensive",
                   "explanation": "비싸요 means 'it's expensive'"
                 },
@@ -1537,7 +1717,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "싸요",
                   "romanization": "ssayo",
-                  "options": ["It's expensive", "It's cheap", "It's good", "It's bad"],
+                  "options": [
+                    "It's expensive",
+                    "It's cheap",
+                    "It's good",
+                    "It's bad"
+                  ],
                   "correct_answer": "It's cheap",
                   "explanation": "싸요 means 'it's cheap' - the opposite of 비싸요"
                 },
@@ -1547,7 +1732,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "없어요",
                   "romanization": "eopseoyo",
-                  "options": ["There is", "There isn't/Don't have", "It's here", "It's there"],
+                  "options": [
+                    "There is",
+                    "There isn't/Don't have",
+                    "It's here",
+                    "It's there"
+                  ],
                   "correct_answer": "There isn't/Don't have",
                   "explanation": "없어요 is the opposite of 있어요 - it means 'there isn't' or 'don't have'"
                 },
@@ -1555,7 +1745,12 @@
                   "exercise_type": "grammar",
                   "question": "How do you say 'It's too expensive'?",
                   "instruction": "Select the correct phrase",
-                  "options": ["너무 싸요", "너무 비싸요", "조금 비싸요", "아주 싸요"],
+                  "options": [
+                    "너무 싸요",
+                    "너무 비싸요",
+                    "조금 비싸요",
+                    "아주 싸요"
+                  ],
                   "correct_answer": "너무 비싸요",
                   "explanation": "너무 (too much) + 비싸요 (expensive) = It's too expensive"
                 },
@@ -1563,9 +1758,44 @@
                   "exercise_type": "grammar",
                   "question": "How do you ask for a discount?",
                   "instruction": "Select the correct phrase",
-                  "options": ["더 주세요", "깎아 주세요", "싸게 주세요", "많이 주세요"],
+                  "options": [
+                    "더 주세요",
+                    "깎아 주세요",
+                    "싸게 주세요",
+                    "많이 주세요"
+                  ],
                   "correct_answer": "깎아 주세요",
                   "explanation": "깎아 주세요 literally means 'please cut (the price)' - used to ask for a discount"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "할인해 주세요.",
+                  "audio_url": "/api/audio/d1e68cf5046a27a3a06e6c0a75aea588.mp3",
+                  "options": [
+                    "할인해 주세요.",
+                    "포장해 주세요.",
+                    "계산해 주세요.",
+                    "보여 주세요."
+                  ],
+                  "correct_answer": "할인해 주세요.",
+                  "explanation": "The sentence means: Please give me a discount."
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "카드로 계산할게요.",
+                  "audio_url": "/api/audio/f3273838cdb412f49e061ba727c0abc5.mp3",
+                  "options": [
+                    "카드로 계산할게요.",
+                    "현금으로 계산할게요.",
+                    "나중에 계산할게요.",
+                    "같이 계산할게요."
+                  ],
+                  "correct_answer": "카드로 계산할게요.",
+                  "explanation": "The sentence means: I'll pay by card."
                 }
               ]
             }
@@ -1588,7 +1818,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "오늘",
                   "romanization": "oneul",
-                  "options": ["yesterday", "today", "tomorrow", "now"],
+                  "options": [
+                    "yesterday",
+                    "today",
+                    "tomorrow",
+                    "now"
+                  ],
                   "correct_answer": "today",
                   "explanation": "오늘 (oneul) means 'today'"
                 },
@@ -1598,7 +1833,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "내일",
                   "romanization": "naeil",
-                  "options": ["yesterday", "today", "tomorrow", "later"],
+                  "options": [
+                    "yesterday",
+                    "today",
+                    "tomorrow",
+                    "later"
+                  ],
                   "correct_answer": "tomorrow",
                   "explanation": "내일 (naeil) means 'tomorrow'"
                 },
@@ -1608,7 +1848,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "어제",
                   "romanization": "eoje",
-                  "options": ["yesterday", "today", "tomorrow", "before"],
+                  "options": [
+                    "yesterday",
+                    "today",
+                    "tomorrow",
+                    "before"
+                  ],
                   "correct_answer": "yesterday",
                   "explanation": "어제 (eoje) means 'yesterday'"
                 },
@@ -1618,7 +1863,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "지금",
                   "romanization": "jigeum",
-                  "options": ["later", "before", "now", "always"],
+                  "options": [
+                    "later",
+                    "before",
+                    "now",
+                    "always"
+                  ],
                   "correct_answer": "now",
                   "explanation": "지금 (jigeum) means 'now'"
                 },
@@ -1626,9 +1876,44 @@
                   "exercise_type": "grammar",
                   "question": "How do you say 'I'm going tomorrow'?",
                   "instruction": "Select the correct sentence",
-                  "options": ["오늘 가요", "내일 가요", "어제 가요", "지금 가요"],
+                  "options": [
+                    "오늘 가요",
+                    "내일 가요",
+                    "어제 가요",
+                    "지금 가요"
+                  ],
                   "correct_answer": "내일 가요",
                   "explanation": "내일 (tomorrow) + 가요 (go) = I'm going tomorrow"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "지금 몇 시예요?",
+                  "audio_url": "/api/audio/574f93eb5a46f17de8cb751122e1f252.mp3",
+                  "options": [
+                    "지금 몇 시예요?",
+                    "내일 몇 시예요?",
+                    "어제 몇 시예요?",
+                    "오늘 몇 시예요?"
+                  ],
+                  "correct_answer": "지금 몇 시예요?",
+                  "explanation": "The sentence means: What time is it now?"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "세 시 삼십 분이에요.",
+                  "audio_url": "/api/audio/a9462a0d093e7a6afb3e91ae09f51e34.mp3",
+                  "options": [
+                    "세 시 삼십 분이에요.",
+                    "네 시 삼십 분이에요.",
+                    "세 시 사십 분이에요.",
+                    "두 시 삼십 분이에요."
+                  ],
+                  "correct_answer": "세 시 삼십 분이에요.",
+                  "explanation": "The sentence means: It's 3:30."
                 }
               ]
             },
@@ -1645,7 +1930,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "날씨",
                   "romanization": "nalssi",
-                  "options": ["day", "weather", "temperature", "season"],
+                  "options": [
+                    "day",
+                    "weather",
+                    "temperature",
+                    "season"
+                  ],
                   "correct_answer": "weather",
                   "explanation": "날씨 (nalssi) means 'weather'"
                 },
@@ -1655,7 +1945,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "더워요",
                   "romanization": "deowoyo",
-                  "options": ["It's cold", "It's hot", "It's warm", "It's cool"],
+                  "options": [
+                    "It's cold",
+                    "It's hot",
+                    "It's warm",
+                    "It's cool"
+                  ],
                   "correct_answer": "It's hot",
                   "explanation": "더워요 means 'it's hot' (weather or feeling)"
                 },
@@ -1665,7 +1960,12 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "추워요",
                   "romanization": "chuwoyo",
-                  "options": ["It's hot", "It's cold", "It's warm", "It's cool"],
+                  "options": [
+                    "It's hot",
+                    "It's cold",
+                    "It's warm",
+                    "It's cool"
+                  ],
                   "correct_answer": "It's cold",
                   "explanation": "추워요 means 'it's cold' (weather or feeling)"
                 },
@@ -1673,7 +1973,12 @@
                   "exercise_type": "grammar",
                   "question": "How do you say 'It's raining'?",
                   "instruction": "Select the correct phrase",
-                  "options": ["비가 와요", "눈이 와요", "바람이 와요", "날씨가 와요"],
+                  "options": [
+                    "비가 와요",
+                    "눈이 와요",
+                    "바람이 와요",
+                    "날씨가 와요"
+                  ],
                   "correct_answer": "비가 와요",
                   "explanation": "비 (rain) + 가 (subject marker) + 와요 (comes) = It's raining"
                 },
@@ -1681,7 +1986,12 @@
                   "exercise_type": "grammar",
                   "question": "How do you say 'The weather is good today'?",
                   "instruction": "Select the correct sentence",
-                  "options": ["오늘 날씨가 좋아요", "내일 날씨가 좋아요", "오늘 날씨가 나빠요", "어제 날씨가 좋아요"],
+                  "options": [
+                    "오늘 날씨가 좋아요",
+                    "내일 날씨가 좋아요",
+                    "오늘 날씨가 나빠요",
+                    "어제 날씨가 좋아요"
+                  ],
                   "correct_answer": "오늘 날씨가 좋아요",
                   "explanation": "오늘 (today) + 날씨가 (weather) + 좋아요 (is good) = The weather is good today"
                 },
@@ -1691,9 +2001,998 @@
                   "instruction": "Select the correct translation",
                   "korean_text": "눈이 와요",
                   "romanization": "nuni wayo",
-                  "options": ["It's raining", "It's snowing", "It's windy", "It's sunny"],
+                  "options": [
+                    "It's raining",
+                    "It's snowing",
+                    "It's windy",
+                    "It's sunny"
+                  ],
                   "correct_answer": "It's snowing",
                   "explanation": "눈 (snow) + 이 (subject marker) + 와요 (comes) = It's snowing"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "오늘 날씨가 어때요?",
+                  "audio_url": "/api/audio/26d400e9101948bbeebb8245a0218570.mp3",
+                  "options": [
+                    "오늘 날씨가 어때요?",
+                    "내일 날씨가 어때요?",
+                    "어제 날씨가 어때요?",
+                    "지금 날씨가 어때요?"
+                  ],
+                  "correct_answer": "오늘 날씨가 어때요?",
+                  "explanation": "The sentence means: How's the weather today?"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and select what you hear",
+                  "instruction": "Play the audio and choose the correct text",
+                  "korean_text": "비가 많이 와요.",
+                  "audio_url": "/api/audio/31467519a817fb8ee13ec7a505369869.mp3",
+                  "options": [
+                    "비가 많이 와요.",
+                    "눈이 많이 와요.",
+                    "바람이 많이 불어요.",
+                    "날씨가 좋아요."
+                  ],
+                  "correct_answer": "비가 많이 와요.",
+                  "explanation": "The sentence means: It's raining a lot."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Reading Practice",
+          "description": "Practice reading and understanding Korean text passages",
+          "lessons": [
+            {
+              "title": "Simple Introductions",
+              "description": "Read short self-introductions",
+              "estimated_minutes": 10,
+              "grammar_explanation": "Reading Korean text helps you recognize words and sentence patterns. Focus on:\n\n1. **Subject markers**: 은/는, 이/가\n2. **Object markers**: 을/를\n3. **Common connectors**: 그리고 (and), 하지만 (but)\n4. **Sentence endings**: -요 (polite), -습니다 (formal)",
+              "grammar_tip": "When reading, look for familiar words first, then use context to understand new vocabulary.",
+              "exercises": [
+                {
+                  "exercise_type": "reading",
+                  "question": "What is the person's name?",
+                  "instruction": "Read the passage and answer the question",
+                  "content_text": "안녕하세요. 제 이름은 김민수예요. 저는 학생이에요. 서울에 살아요.",
+                  "options": [
+                    "김민수",
+                    "이영희",
+                    "박철수",
+                    "최지영"
+                  ],
+                  "correct_answer": "김민수",
+                  "explanation": "The passage says '제 이름은 김민수예요' (My name is Kim Minsu)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "Where does Kim Minsu live?",
+                  "instruction": "Read the passage and answer the question",
+                  "content_text": "안녕하세요. 제 이름은 김민수예요. 저는 학생이에요. 서울에 살아요.",
+                  "options": [
+                    "부산",
+                    "서울",
+                    "대구",
+                    "인천"
+                  ],
+                  "correct_answer": "서울",
+                  "explanation": "The passage says '서울에 살아요' (I live in Seoul)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What is Kim Minsu's occupation?",
+                  "instruction": "Read the passage and answer the question",
+                  "content_text": "안녕하세요. 제 이름은 김민수예요. 저는 학생이에요. 서울에 살아요.",
+                  "options": [
+                    "선생님 (teacher)",
+                    "학생 (student)",
+                    "의사 (doctor)",
+                    "회사원 (office worker)"
+                  ],
+                  "correct_answer": "학생 (student)",
+                  "explanation": "The passage says '저는 학생이에요' (I am a student)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What is the person's hobby?",
+                  "instruction": "Read the passage and answer the question",
+                  "content_text": "제 이름은 이영희예요. 저는 회사원이에요. 제 취미는 음악 듣기예요. 저는 K-pop을 좋아해요.",
+                  "options": [
+                    "운동하기 (exercising)",
+                    "음악 듣기 (listening to music)",
+                    "요리하기 (cooking)",
+                    "독서하기 (reading)"
+                  ],
+                  "correct_answer": "음악 듣기 (listening to music)",
+                  "explanation": "The passage says '제 취미는 음악 듣기예요' (My hobby is listening to music)"
+                }
+              ]
+            },
+            {
+              "title": "Daily Routines",
+              "description": "Read about typical daily activities",
+              "estimated_minutes": 10,
+              "grammar_explanation": "Daily routine passages use time expressions and activity verbs:\n\n**Time expressions**: 아침에 (in the morning), 저녁에 (in the evening)\n**Activity verbs**: 일어나다 (to wake up), 먹다 (to eat), 가다 (to go)\n**Frequency**: 매일 (every day), 보통 (usually)",
+              "grammar_tip": "The particle -에 is used with time words to mean 'at' or 'in'.",
+              "exercises": [
+                {
+                  "exercise_type": "reading",
+                  "question": "What time does the person wake up?",
+                  "instruction": "Read the passage and answer the question",
+                  "content_text": "저는 매일 아침 7시에 일어나요. 아침을 먹고 학교에 가요. 학교는 9시에 시작해요.",
+                  "options": [
+                    "6시",
+                    "7시",
+                    "8시",
+                    "9시"
+                  ],
+                  "correct_answer": "7시",
+                  "explanation": "The passage says '매일 아침 7시에 일어나요' (I wake up at 7am every morning)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "When does school start?",
+                  "instruction": "Read the passage and answer the question",
+                  "content_text": "저는 매일 아침 7시에 일어나요. 아침을 먹고 학교에 가요. 학교는 9시에 시작해요.",
+                  "options": [
+                    "7시",
+                    "8시",
+                    "9시",
+                    "10시"
+                  ],
+                  "correct_answer": "9시",
+                  "explanation": "The passage says '학교는 9시에 시작해요' (School starts at 9)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What does the person do on weekends?",
+                  "instruction": "Read the passage and answer the question",
+                  "content_text": "저는 주말에 친구들을 만나요. 우리는 카페에 가요. 커피를 마시고 이야기해요. 정말 재미있어요.",
+                  "options": [
+                    "집에서 쉬어요 (rest at home)",
+                    "친구들을 만나요 (meet friends)",
+                    "공부해요 (study)",
+                    "운동해요 (exercise)"
+                  ],
+                  "correct_answer": "친구들을 만나요 (meet friends)",
+                  "explanation": "The passage says '저는 주말에 친구들을 만나요' (I meet friends on weekends)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "Where do they go together?",
+                  "instruction": "Read the passage and answer the question",
+                  "content_text": "저는 주말에 친구들을 만나요. 우리는 카페에 가요. 커피를 마시고 이야기해요. 정말 재미있어요.",
+                  "options": [
+                    "식당 (restaurant)",
+                    "카페 (cafe)",
+                    "공원 (park)",
+                    "영화관 (movie theater)"
+                  ],
+                  "correct_answer": "카페 (cafe)",
+                  "explanation": "The passage says '우리는 카페에 가요' (We go to a cafe)"
+                }
+              ]
+            },
+            {
+              "title": "Signs and Notices",
+              "description": "Understand common Korean signs",
+              "estimated_minutes": 8,
+              "grammar_explanation": "Korean signs use simple, direct language:\n\n**Common signs**:\n- 출구 (exit)\n- 입구 (entrance)\n- 화장실 (restroom)\n- 금지 (prohibited)\n- 주의 (caution)\n\n**Command forms**: -세요 (please do), 지 마세요 (please don't)",
+              "grammar_tip": "Signs often omit particles for brevity.",
+              "exercises": [
+                {
+                  "exercise_type": "reading",
+                  "question": "What does this sign mean?",
+                  "instruction": "Read and select the correct meaning",
+                  "content_text": "출구 →",
+                  "options": [
+                    "Entrance",
+                    "Exit",
+                    "Restroom",
+                    "Stairs"
+                  ],
+                  "correct_answer": "Exit",
+                  "explanation": "출구 (chulgu) means 'exit'"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What does this sign tell you to do?",
+                  "instruction": "Read and select the correct meaning",
+                  "content_text": "조용히 하세요",
+                  "options": [
+                    "Please be quiet",
+                    "Please enter",
+                    "Please wait",
+                    "Please exit"
+                  ],
+                  "correct_answer": "Please be quiet",
+                  "explanation": "조용히 하세요 means 'please be quiet'"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What is prohibited here?",
+                  "instruction": "Read and select the correct meaning",
+                  "content_text": "흡연 금지",
+                  "options": [
+                    "No parking",
+                    "No smoking",
+                    "No entry",
+                    "No food"
+                  ],
+                  "correct_answer": "No smoking",
+                  "explanation": "흡연 (smoking) + 금지 (prohibited) = No smoking"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "Where is this sign pointing to?",
+                  "instruction": "Read and understand the direction",
+                  "content_text": "화장실 ← 왼쪽",
+                  "options": [
+                    "Restroom on the left",
+                    "Restroom on the right",
+                    "Exit on the left",
+                    "Entrance on the right"
+                  ],
+                  "correct_answer": "Restroom on the left",
+                  "explanation": "화장실 (restroom) + 왼쪽 (left) with arrow pointing left"
+                }
+              ]
+            },
+            {
+              "title": "Simple Messages",
+              "description": "Read short messages and texts",
+              "estimated_minutes": 10,
+              "grammar_explanation": "Korean text messages use both formal and casual language:\n\n**Casual endings**: -어/아 (basic form), -ㄹ게 (I will)\n**Formal endings**: -어요/아요, -습니다\n\n**Common abbreviations**:\n- ㅋㅋ (haha)\n- ㅇㅋ (OK)\n- ㄱㅅ (thanks)",
+              "grammar_tip": "Casual Korean often drops particles and uses shortened forms.",
+              "exercises": [
+                {
+                  "exercise_type": "reading",
+                  "question": "What is the person asking?",
+                  "instruction": "Read the message and answer",
+                  "content_text": "지금 어디야? 같이 점심 먹을래?",
+                  "options": [
+                    "Where are you? Want to eat lunch together?",
+                    "What time is it? Let's have dinner.",
+                    "Where are you going? See you later.",
+                    "What are you doing? Let's study."
+                  ],
+                  "correct_answer": "Where are you? Want to eat lunch together?",
+                  "explanation": "지금 어디야 (where are you now) + 같이 점심 먹을래 (want to eat lunch together)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What time does the movie start?",
+                  "instruction": "Read the message and answer",
+                  "content_text": "영화는 7시에 시작해. 6시 30분에 만나자!",
+                  "options": [
+                    "6시",
+                    "6시 30분",
+                    "7시",
+                    "7시 30분"
+                  ],
+                  "correct_answer": "7시",
+                  "explanation": "영화는 7시에 시작해 (the movie starts at 7)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "Why can't the person come?",
+                  "instruction": "Read the message and answer",
+                  "content_text": "미안해. 오늘 못 가. 감기 걸렸어. 다음에 보자.",
+                  "options": [
+                    "Too busy",
+                    "Caught a cold",
+                    "Have other plans",
+                    "Don't want to go"
+                  ],
+                  "correct_answer": "Caught a cold",
+                  "explanation": "감기 걸렸어 means 'caught a cold'"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What is the person's response?",
+                  "instruction": "Read the message and answer",
+                  "content_text": "A: 내일 시간 있어? B: 응, 있어. 왜? A: 같이 쇼핑 갈래?",
+                  "options": [
+                    "No, busy",
+                    "Yes, free",
+                    "Maybe later",
+                    "Don't know"
+                  ],
+                  "correct_answer": "Yes, free",
+                  "explanation": "응, 있어 means 'yes, I have time' (informal)"
+                }
+              ]
+            },
+            {
+              "title": "Schedules and Plans",
+              "description": "Read schedule information",
+              "estimated_minutes": 8,
+              "grammar_explanation": "Schedules use specific time and date expressions:\n\n**Days**: 월요일 (Monday), 화요일 (Tuesday), etc.\n**Dates**: 1월 1일 (January 1st)\n**Duration**: ~부터 ~까지 (from ~ to ~)\n\n**Future tense**: -(으)ㄹ 거예요 (will/going to)",
+              "grammar_tip": "Korean dates follow the order: year > month > day.",
+              "exercises": [
+                {
+                  "exercise_type": "reading",
+                  "question": "When is the Korean test?",
+                  "instruction": "Read the schedule and answer",
+                  "content_text": "이번 주 일정:\n월요일 - 수학 시험\n수요일 - 영어 수업\n금요일 - 한국어 시험",
+                  "options": [
+                    "월요일 (Monday)",
+                    "수요일 (Wednesday)",
+                    "금요일 (Friday)",
+                    "토요일 (Saturday)"
+                  ],
+                  "correct_answer": "금요일 (Friday)",
+                  "explanation": "금요일 - 한국어 시험 (Friday - Korean test)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What time is the meeting?",
+                  "instruction": "Read the schedule and answer",
+                  "content_text": "5월 15일 일정:\n오전 9시 - 팀 회의\n오후 2시 - 점심 약속\n오후 5시 - 퇴근",
+                  "options": [
+                    "오전 9시",
+                    "오후 2시",
+                    "오후 5시",
+                    "오후 6시"
+                  ],
+                  "correct_answer": "오전 9시",
+                  "explanation": "오전 9시 - 팀 회의 (9am - team meeting)"
+                }
+              ]
+            },
+            {
+              "title": "Short Stories",
+              "description": "Read and comprehend short narratives",
+              "estimated_minutes": 12,
+              "grammar_explanation": "Stories use past, present, and future tenses:\n\n**Past**: -았/었어요 (did)\n**Present**: -어요/아요 (do/does)\n**Future**: -(으)ㄹ 거예요 (will do)\n\n**Conjunctions**: 그래서 (so/therefore), 그런데 (but/however), 그리고 (and)",
+              "grammar_tip": "Pay attention to time markers to understand when events happen.",
+              "exercises": [
+                {
+                  "exercise_type": "reading",
+                  "question": "What did Jisu do yesterday?",
+                  "instruction": "Read the story and answer",
+                  "content_text": "어제 지수는 도서관에 갔어요. 2시간 동안 공부했어요. 그리고 친구를 만났어요. 같이 커피를 마셨어요. 정말 좋은 하루였어요.",
+                  "options": [
+                    "Went to a library",
+                    "Went to a cafe",
+                    "Went shopping",
+                    "Went to a movie"
+                  ],
+                  "correct_answer": "Went to a library",
+                  "explanation": "지수는 도서관에 갔어요 (Jisu went to the library)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "How long did Jisu study?",
+                  "instruction": "Read the story and answer",
+                  "content_text": "어제 지수는 도서관에 갔어요. 2시간 동안 공부했어요. 그리고 친구를 만났어요. 같이 커피를 마셨어요. 정말 좋은 하루였어요.",
+                  "options": [
+                    "1시간 (1 hour)",
+                    "2시간 (2 hours)",
+                    "3시간 (3 hours)",
+                    "4시간 (4 hours)"
+                  ],
+                  "correct_answer": "2시간 (2 hours)",
+                  "explanation": "2시간 동안 공부했어요 (studied for 2 hours)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What is Minho's problem?",
+                  "instruction": "Read the story and answer",
+                  "content_text": "민호는 요즘 바빠요. 회사 일이 많아요. 그래서 친구들을 못 만나요. 주말에도 일해요. 민호는 휴가가 필요해요.",
+                  "options": [
+                    "He's sick",
+                    "He's too busy",
+                    "He has no money",
+                    "He has no friends"
+                  ],
+                  "correct_answer": "He's too busy",
+                  "explanation": "민호는 요즘 바빠요 (Minho is busy these days) and 회사 일이 많아요 (has a lot of work)"
+                },
+                {
+                  "exercise_type": "reading",
+                  "question": "What does Minho need?",
+                  "instruction": "Read the story and answer",
+                  "content_text": "민호는 요즘 바빠요. 회사 일이 많아요. 그래서 친구들을 못 만나요. 주말에도 일해요. 민호는 휴가가 필요해요.",
+                  "options": [
+                    "돈 (money)",
+                    "시간 (time)",
+                    "휴가 (vacation)",
+                    "친구 (friend)"
+                  ],
+                  "correct_answer": "휴가 (vacation)",
+                  "explanation": "민호는 휴가가 필요해요 (Minho needs a vacation)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Writing Practice",
+          "description": "Practice writing in Korean",
+          "lessons": [
+            {
+              "title": "Sentence Completion",
+              "description": "Complete Korean sentences",
+              "estimated_minutes": 10,
+              "grammar_explanation": "Writing helps you internalize grammar patterns. Focus on:\n\n1. **Proper particles**: 은/는, 이/가, 을/를\n2. **Verb conjugations**: -어요/아요 endings\n3. **Spacing**: Korean uses spaces between words",
+              "grammar_tip": "When writing, think about particle usage - it's crucial for correct Korean!",
+              "exercises": [
+                {
+                  "exercise_type": "writing",
+                  "question": "Complete: 저는 ___ 학생이에요. (I am a student)",
+                  "instruction": "Fill in the blank with the correct word/phrase",
+                  "correct_answer": "학생이에요",
+                  "explanation": "학생이에요 means 'am a student'"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Complete: 안녕하세요. 제 이름은 ___. (Hello. My name is Kim Minsu)",
+                  "instruction": "Fill in the blank",
+                  "correct_answer": "김민수예요",
+                  "explanation": "김민수예요 is the polite form for 'is Kim Minsu'"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Complete: 저는 서울에 ___. (I live in Seoul)",
+                  "instruction": "Fill in the blank with the correct verb",
+                  "correct_answer": "살아요",
+                  "explanation": "살아요 means 'live' (present tense, polite)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Complete: 오늘 날씨가 ___. (Today's weather is good)",
+                  "instruction": "Fill in the blank",
+                  "correct_answer": "좋아요",
+                  "explanation": "좋아요 means 'is good' (polite form)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Complete: 저는 한국어를 ___. (I study Korean)",
+                  "instruction": "Fill in the blank with the correct verb",
+                  "correct_answer": "공부해요",
+                  "explanation": "공부해요 means 'study' (present tense, polite)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Complete: 매일 아침 7시에 ___. (I wake up at 7am every morning)",
+                  "instruction": "Fill in the blank",
+                  "correct_answer": "일어나요",
+                  "explanation": "일어나요 means 'wake up' (polite form)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Complete: 저는 커피를 ___. (I drink coffee)",
+                  "instruction": "Fill in the blank with the correct verb",
+                  "correct_answer": "마셔요",
+                  "explanation": "마셔요 means 'drink' (polite form)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Complete: 친구를 ___. (I meet friends)",
+                  "instruction": "Fill in the blank",
+                  "correct_answer": "만나요",
+                  "explanation": "만나요 means 'meet' (polite form)"
+                }
+              ]
+            },
+            {
+              "title": "Basic Translation",
+              "description": "Translate simple English to Korean",
+              "estimated_minutes": 12,
+              "grammar_explanation": "Translation requires understanding:\n\n**Word order**: Korean is SOV (Subject-Object-Verb)\n**Particles**: Mark grammatical roles\n**Politeness**: Choose appropriate ending (-요, -습니다)\n\nExample: 'I like apples'\n- 저는 (I) + 사과를 (apples) + 좋아해요 (like)",
+              "grammar_tip": "Remember: Korean verbs come at the end of the sentence!",
+              "exercises": [
+                {
+                  "exercise_type": "writing",
+                  "question": "Translate to Korean: Hello",
+                  "instruction": "Write in Korean (use polite form)",
+                  "correct_answer": "안녕하세요",
+                  "explanation": "안녕하세요 is the standard polite greeting"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Translate to Korean: Thank you",
+                  "instruction": "Write in Korean (use polite form)",
+                  "correct_answer": "감사합니다",
+                  "explanation": "감사합니다 is the polite way to say 'thank you'"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Translate to Korean: I am a student",
+                  "instruction": "Write in Korean (use polite form)",
+                  "correct_answer": "저는 학생이에요",
+                  "explanation": "저는 (I) + 학생 (student) + 이에요 (am)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Translate to Korean: I like coffee",
+                  "instruction": "Write in Korean (use polite form)",
+                  "correct_answer": "저는 커피를 좋아해요",
+                  "explanation": "저는 (I) + 커피를 (coffee) + 좋아해요 (like)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Translate to Korean: The weather is good",
+                  "instruction": "Write in Korean",
+                  "correct_answer": "날씨가 좋아요",
+                  "explanation": "날씨가 (weather) + 좋아요 (is good)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Translate to Korean: It's delicious",
+                  "instruction": "Write in Korean (use polite form)",
+                  "correct_answer": "맛있어요",
+                  "explanation": "맛있어요 means 'it's delicious' (polite form)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Translate to Korean: See you tomorrow",
+                  "instruction": "Write in Korean",
+                  "correct_answer": "내일 봐요",
+                  "explanation": "내일 (tomorrow) + 봐요 (see you)"
+                }
+              ]
+            },
+            {
+              "title": "Form Filling",
+              "description": "Practice writing personal information",
+              "estimated_minutes": 8,
+              "grammar_explanation": "Forms require specific information formats:\n\n**Name**: 이름 (ireum)\n**Age**: 나이 (nai) or 살 (sal)\n**Phone**: 전화번호 (jeonhwa beonho)\n**Address**: 주소 (juso)\n\nNumbers can be Sino-Korean or Native Korean depending on context.",
+              "grammar_tip": "Age uses native Korean numbers + 살 (years old).",
+              "exercises": [
+                {
+                  "exercise_type": "writing",
+                  "question": "Write 'student' in Korean",
+                  "instruction": "For occupation field",
+                  "correct_answer": "학생",
+                  "explanation": "학생 (haksaeng) means student"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write 'Seoul' in Korean",
+                  "instruction": "For address field",
+                  "correct_answer": "서울",
+                  "explanation": "서울 is Seoul in Korean"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write '25 years old' in Korean",
+                  "instruction": "For age field (use 살)",
+                  "correct_answer": "스물다섯 살",
+                  "explanation": "스물다섯 (25) + 살 (years old)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write 'South Korea' in Korean",
+                  "instruction": "For nationality field",
+                  "correct_answer": "한국",
+                  "explanation": "한국 (hanguk) means South Korea"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write 'male' in Korean",
+                  "instruction": "For gender field",
+                  "correct_answer": "남자",
+                  "explanation": "남자 (namja) means male"
+                }
+              ]
+            },
+            {
+              "title": "Short Responses",
+              "description": "Write brief answers to questions",
+              "estimated_minutes": 12,
+              "grammar_explanation": "Short answers require appropriate formality:\n\n**Informal**: -어/아 (to friends)\n**Polite**: -어요/아요 (general)\n**Formal**: -습니다/ㅂ니다 (very polite)\n\nMatch your formality level to the question!",
+              "grammar_tip": "If the question uses -요, respond with -요 too!",
+              "exercises": [
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 이름이 뭐예요? (What's your name?) A: ___",
+                  "instruction": "Write your response (use: 제 이름은 김민수예요)",
+                  "correct_answer": "제 이름은 김민수예요",
+                  "explanation": "제 이름은 (my name is) + 김민수예요"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 어디에 살아요? (Where do you live?) A: ___",
+                  "instruction": "Write your response (use Seoul: 서울)",
+                  "correct_answer": "서울에 살아요",
+                  "explanation": "서울에 (in Seoul) + 살아요 (live)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 뭐 해요? (What are you doing?) A: ___",
+                  "instruction": "Write your response (use studying: 공부)",
+                  "correct_answer": "공부해요",
+                  "explanation": "공부해요 means 'I'm studying'"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 커피 좋아해요? (Do you like coffee?) A: 네, ___",
+                  "instruction": "Write your response (yes, I like it)",
+                  "correct_answer": "좋아해요",
+                  "explanation": "네 (yes) + 좋아해요 (I like it)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 오늘 날씨가 어때요? (How's the weather today?) A: ___",
+                  "instruction": "Write your response (it's good)",
+                  "correct_answer": "좋아요",
+                  "explanation": "좋아요 means 'it's good'"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 몇 시에 일어나요? (What time do you wake up?) A: ___",
+                  "instruction": "Write your response (at 7 o'clock: 7시)",
+                  "correct_answer": "7시에 일어나요",
+                  "explanation": "7시에 (at 7 o'clock) + 일어나요 (wake up)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 취미가 뭐예요? (What's your hobby?) A: ___",
+                  "instruction": "Write your response (listening to music: 음악 듣기)",
+                  "correct_answer": "제 취미는 음악 듣기예요",
+                  "explanation": "제 취미는 (my hobby is) + 음악 듣기예요 (listening to music)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 한국어 공부해요? (Do you study Korean?) A: 네, ___",
+                  "instruction": "Write your response (yes, I study)",
+                  "correct_answer": "공부해요",
+                  "explanation": "네 (yes) + 공부해요 (I study)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 점심 먹었어요? (Did you eat lunch?) A: 네, ___",
+                  "instruction": "Write your response (yes, I ate)",
+                  "correct_answer": "먹었어요",
+                  "explanation": "네 (yes) + 먹었어요 (I ate) - past tense"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Q: 주말에 뭐 할 거예요? (What will you do on the weekend?) A: ___",
+                  "instruction": "Write your response (I'll meet friends: 친구들을 만나다)",
+                  "correct_answer": "친구들을 만날 거예요",
+                  "explanation": "친구들을 (friends) + 만날 거예요 (will meet) - future tense"
+                }
+              ]
+            },
+            {
+              "title": "Sentence Construction",
+              "description": "Build complete Korean sentences",
+              "estimated_minutes": 15,
+              "grammar_explanation": "Sentence construction follows patterns:\n\n**Basic**: Subject + Verb\n- 저는 가요 (I go)\n\n**With object**: Subject + Object + Verb\n- 저는 밥을 먹어요 (I eat rice)\n\n**With time/place**: Time/Place + Subject + Verb\n- 오늘 저는 학교에 가요 (Today I go to school)",
+              "grammar_tip": "Build sentences step by step: add subject, then object, then verb!",
+              "exercises": [
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: I eat rice (저/밥/먹다)",
+                  "instruction": "Use: 저는, 밥을, 먹어요",
+                  "correct_answer": "저는 밥을 먹어요",
+                  "explanation": "저는 (I) + 밥을 (rice) + 먹어요 (eat)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: I go to school (저/학교/가다)",
+                  "instruction": "Use: 저는, 학교에, 가요",
+                  "correct_answer": "저는 학교에 가요",
+                  "explanation": "저는 (I) + 학교에 (to school) + 가요 (go)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: I meet friends (저/친구들/만나다)",
+                  "instruction": "Use: 저는, 친구들을, 만나요",
+                  "correct_answer": "저는 친구들을 만나요",
+                  "explanation": "저는 (I) + 친구들을 (friends) + 만나요 (meet)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: I study Korean (저/한국어/공부하다)",
+                  "instruction": "Use: 저는, 한국어를, 공부해요",
+                  "correct_answer": "저는 한국어를 공부해요",
+                  "explanation": "저는 (I) + 한국어를 (Korean) + 공부해요 (study)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: I drink coffee (저/커피/마시다)",
+                  "instruction": "Use: 저는, 커피를, 마셔요",
+                  "correct_answer": "저는 커피를 마셔요",
+                  "explanation": "저는 (I) + 커피를 (coffee) + 마셔요 (drink)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: I read a book (저/책/읽다)",
+                  "instruction": "Use: 저는, 책을, 읽어요",
+                  "correct_answer": "저는 책을 읽어요",
+                  "explanation": "저는 (I) + 책을 (book) + 읽어요 (read)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: Today I go to a cafe (오늘/저/카페/가다)",
+                  "instruction": "Use: 오늘, 저는, 카페에, 가요",
+                  "correct_answer": "오늘 저는 카페에 가요",
+                  "explanation": "오늘 (today) + 저는 (I) + 카페에 (to cafe) + 가요 (go)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: Tomorrow I will meet a teacher (내일/저/선생님/만나다)",
+                  "instruction": "Use: 내일, 저는, 선생님을, 만날 거예요",
+                  "correct_answer": "내일 저는 선생님을 만날 거예요",
+                  "explanation": "내일 (tomorrow) + 저는 (I) + 선생님을 (teacher) + 만날 거예요 (will meet)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: I like music (저/음악/좋아하다)",
+                  "instruction": "Use: 저는, 음악을, 좋아해요",
+                  "correct_answer": "저는 음악을 좋아해요",
+                  "explanation": "저는 (I) + 음악을 (music) + 좋아해요 (like)"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Write a sentence: I watch a movie (저/영화/보다)",
+                  "instruction": "Use: 저는, 영화를, 봐요",
+                  "correct_answer": "저는 영화를 봐요",
+                  "explanation": "저는 (I) + 영화를 (movie) + 봐요 (watch)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Listening Practice",
+          "description": "Comprehensive listening comprehension exercises",
+          "lessons": [
+            {
+              "title": "Listening Comprehension Practice",
+              "description": "Practice understanding Korean through dialogues, announcements, and phone conversations",
+              "estimated_minutes": 20,
+              "grammar_explanation": "Listening comprehension is crucial for real-world Korean communication. This lesson includes:\n\n1. **Dialogues**: Natural conversations between two or more people\n2. **Announcements**: Public notices you might hear in stations, stores, or airports\n3. **Phone Conversations**: Common phone etiquette and expressions\n\nTips for listening:\n- Listen for keywords first\n- Pay attention to tone and context\n- Don't worry if you don't catch every word\n- Listen multiple times if needed",
+              "grammar_tip": "In spoken Korean, particles are often dropped in casual conversation. For example, '나 학교 가' instead of '나는 학교에 가'.",
+              "exercises": [
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 어디 가세요? B: 도서관에 가요. 공부하러 가요.",
+                  "audio_url": "/api/audio/b46656f8b9b237ec1ed7d1ff58277a2f.mp3",
+                  "options": [
+                    "A: 어디 가세요? B: 도서관에 가요. 공부하러 가요."
+                  ],
+                  "correct_answer": "A: 어디 가세요? B: 도서관에 가요. 공부하러 가요.",
+                  "explanation": "A: Where are you going? B: I'm going to the library. I'm going to study.\n\nContext: Casual conversation about destination"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 점심 먹었어요? B: 아니요, 아직 안 먹었어요.",
+                  "audio_url": "/api/audio/a4b56ea40dc712fbded366fe4ba6f03d.mp3",
+                  "options": [
+                    "A: 점심 먹었어요? B: 아니요, 아직 안 먹었어요."
+                  ],
+                  "correct_answer": "A: 점심 먹었어요? B: 아니요, 아직 안 먹었어요.",
+                  "explanation": "A: Did you eat lunch? B: No, I haven't eaten yet.\n\nContext: Asking about meals"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 주말에 뭐 할 거예요? B: 친구들하고 영화 볼 거예요.",
+                  "audio_url": "/api/audio/a17c7a237259d0f83fd86438277e122c.mp3",
+                  "options": [
+                    "A: 주말에 뭐 할 거예요? B: 친구들하고 영화 볼 거예요."
+                  ],
+                  "correct_answer": "A: 주말에 뭐 할 거예요? B: 친구들하고 영화 볼 거예요.",
+                  "explanation": "A: What will you do on the weekend? B: I'm going to watch a movie with friends.\n\nContext: Making weekend plans"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 이 옷 어때요? B: 정말 예쁘네요! 잘 어울려요.",
+                  "audio_url": "/api/audio/7fd628f5cda2ec84836e7797e2cc847b.mp3",
+                  "options": [
+                    "A: 이 옷 어때요? B: 정말 예쁘네요! 잘 어울려요."
+                  ],
+                  "correct_answer": "A: 이 옷 어때요? B: 정말 예쁘네요! 잘 어울려요.",
+                  "explanation": "A: How's this outfit? B: It's really pretty! It suits you well.\n\nContext: Shopping for clothes"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 커피 마실래요? B: 좋아요! 카페에 가요.",
+                  "audio_url": "/api/audio/718995daa53414034ef05115081c4606.mp3",
+                  "options": [
+                    "A: 커피 마실래요? B: 좋아요! 카페에 가요."
+                  ],
+                  "correct_answer": "A: 커피 마실래요? B: 좋아요! 카페에 가요.",
+                  "explanation": "A: Want to drink coffee? B: Sounds good! Let's go to a cafe.\n\nContext: Inviting someone for coffee"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 버스 정류장이 어디예요? B: 저기 모퉁이에 있어요.",
+                  "audio_url": "/api/audio/9e83583ef27e6d1b2532cf809826099a.mp3",
+                  "options": [
+                    "A: 버스 정류장이 어디예요? B: 저기 모퉁이에 있어요."
+                  ],
+                  "correct_answer": "A: 버스 정류장이 어디예요? B: 저기 모퉁이에 있어요.",
+                  "explanation": "A: Where's the bus stop? B: It's over there at the corner.\n\nContext: Asking for directions"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 한국어 공부한 지 얼마나 됐어요? B: 6개월 됐어요.",
+                  "audio_url": "/api/audio/9993566c31ab2da1ed138444aa590b9f.mp3",
+                  "options": [
+                    "A: 한국어 공부한 지 얼마나 됐어요? B: 6개월 됐어요."
+                  ],
+                  "correct_answer": "A: 한국어 공부한 지 얼마나 됐어요? B: 6개월 됐어요.",
+                  "explanation": "A: How long have you been studying Korean? B: It's been 6 months.\n\nContext: Talking about language learning"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 비빔밥 주문할게요. B: 네, 잠깐만 기다려 주세요.",
+                  "audio_url": "/api/audio/8aab242dee5cee33e3d3febfbb2895f0.mp3",
+                  "options": [
+                    "A: 비빔밥 주문할게요. B: 네, 잠깐만 기다려 주세요."
+                  ],
+                  "correct_answer": "A: 비빔밥 주문할게요. B: 네, 잠깐만 기다려 주세요.",
+                  "explanation": "A: I'll order bibimbap. B: Yes, please wait a moment.\n\nContext: Ordering food at a restaurant"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 오늘 날씨가 너무 더워요. B: 맞아요. 에어컨 켤까요?",
+                  "audio_url": "/api/audio/9b0ae2b77f3f2d290ee4761aa603e653.mp3",
+                  "options": [
+                    "A: 오늘 날씨가 너무 더워요. B: 맞아요. 에어컨 켤까요?"
+                  ],
+                  "correct_answer": "A: 오늘 날씨가 너무 더워요. B: 맞아요. 에어컨 켤까요?",
+                  "explanation": "A: It's so hot today. B: Right. Should I turn on the air conditioner?\n\nContext: Talking about hot weather"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this dialogue and select what you hear",
+                  "instruction": "This is a natural conversation between two people",
+                  "korean_text": "A: 생일 축하해요! B: 고마워요! 같이 케이크 먹어요.",
+                  "audio_url": "/api/audio/adebe707bef9ab43b1a1582c5a3a3b3b.mp3",
+                  "options": [
+                    "A: 생일 축하해요! B: 고마워요! 같이 케이크 먹어요."
+                  ],
+                  "correct_answer": "A: 생일 축하해요! B: 고마워요! 같이 케이크 먹어요.",
+                  "explanation": "A: Happy birthday! B: Thank you! Let's eat cake together.\n\nContext: Birthday celebration"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this announcement",
+                  "instruction": "This is a public announcement you might hear in Korea",
+                  "korean_text": "잠시 후 3호선 열차가 들어옵니다. 안전선 밖으로 물러서 주시기 바랍니다.",
+                  "audio_url": "/api/audio/63a65d55e44f39a9fce01d5edf691675.mp3",
+                  "options": [
+                    "잠시 후 3호선 열차가 들어옵니다. 안전선 밖으로 물러서 주시기 바랍니다."
+                  ],
+                  "correct_answer": "잠시 후 3호선 열차가 들어옵니다. 안전선 밖으로 물러서 주시기 바랍니다.",
+                  "explanation": "Line 3 train will arrive shortly. Please step back behind the safety line.\n\nContext: Subway announcement"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this announcement",
+                  "instruction": "This is a public announcement you might hear in Korea",
+                  "korean_text": "고객 여러분께 알려드립니다. 지금부터 30분간 전관 할인 행사를 진행합니다.",
+                  "audio_url": "/api/audio/466b03ff3a51f9decdf47c9da01eaabe.mp3",
+                  "options": [
+                    "고객 여러분께 알려드립니다. 지금부터 30분간 전관 할인 행사를 진행합니다."
+                  ],
+                  "correct_answer": "고객 여러분께 알려드립니다. 지금부터 30분간 전관 할인 행사를 진행합니다.",
+                  "explanation": "Attention customers. We will have a store-wide discount event for the next 30 minutes.\n\nContext: Store announcement"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this announcement",
+                  "instruction": "This is a public announcement you might hear in Korea",
+                  "korean_text": "서울행 KTX 열차가 곧 출발합니다. 승객 여러분은 서둘러 탑승해 주시기 바랍니다.",
+                  "audio_url": "/api/audio/6e67e8c305059e5a100cb595ccd8b296.mp3",
+                  "options": [
+                    "서울행 KTX 열차가 곧 출발합니다. 승객 여러분은 서둘러 탑승해 주시기 바랍니다."
+                  ],
+                  "correct_answer": "서울행 KTX 열차가 곧 출발합니다. 승객 여러분은 서둘러 탑승해 주시기 바랍니다.",
+                  "explanation": "The KTX train to Seoul will depart soon. Passengers please board promptly.\n\nContext: Train station announcement"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this announcement",
+                  "instruction": "This is a public announcement you might hear in Korea",
+                  "korean_text": "휴대폰은 매너 모드로 설정해 주시고, 통화는 로비에서 부탁드립니다.",
+                  "audio_url": "/api/audio/7d7e3a504aea8004da6324e8323dd7d9.mp3",
+                  "options": [
+                    "휴대폰은 매너 모드로 설정해 주시고, 통화는 로비에서 부탁드립니다."
+                  ],
+                  "correct_answer": "휴대폰은 매너 모드로 설정해 주시고, 통화는 로비에서 부탁드립니다.",
+                  "explanation": "Please set your phone to silent mode, and make calls in the lobby.\n\nContext: Library or theater announcement"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this announcement",
+                  "instruction": "This is a public announcement you might hear in Korea",
+                  "korean_text": "김영수 고객님, 1번 창구로 오시기 바랍니다.",
+                  "audio_url": "/api/audio/e37e409fe80fe76aec4481d025919493.mp3",
+                  "options": [
+                    "김영수 고객님, 1번 창구로 오시기 바랍니다."
+                  ],
+                  "correct_answer": "김영수 고객님, 1번 창구로 오시기 바랍니다.",
+                  "explanation": "Customer Kim Young-soo, please come to window number 1.\n\nContext: Bank or office announcement"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this phone conversation",
+                  "instruction": "This is a typical phone conversation in Korean",
+                  "korean_text": "여보세요? 지수 씨 계세요? 저 민호예요.",
+                  "audio_url": "/api/audio/970f10f835a26d82e89b7d543c6dae63.mp3",
+                  "options": [
+                    "여보세요? 지수 씨 계세요? 저 민호예요."
+                  ],
+                  "correct_answer": "여보세요? 지수 씨 계세요? 저 민호예요.",
+                  "explanation": "Hello? Is Jisu there? This is Minho.\n\nContext: Calling a friend"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this phone conversation",
+                  "instruction": "This is a typical phone conversation in Korean",
+                  "korean_text": "안녕하세요. 예약하려고 전화했어요. 내일 저녁 7시에 두 명이요.",
+                  "audio_url": "/api/audio/67fd82e11995abf6e280a95b339e509c.mp3",
+                  "options": [
+                    "안녕하세요. 예약하려고 전화했어요. 내일 저녁 7시에 두 명이요."
+                  ],
+                  "correct_answer": "안녕하세요. 예약하려고 전화했어요. 내일 저녁 7시에 두 명이요.",
+                  "explanation": "Hello. I'm calling to make a reservation. Tomorrow at 7 PM for two people.\n\nContext: Restaurant reservation"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this phone conversation",
+                  "instruction": "This is a typical phone conversation in Korean",
+                  "korean_text": "죄송하지만, 지금 통화하기 어려워요. 나중에 다시 전화할게요.",
+                  "audio_url": "/api/audio/bce43a718777e495781959464361af7b.mp3",
+                  "options": [
+                    "죄송하지만, 지금 통화하기 어려워요. 나중에 다시 전화할게요."
+                  ],
+                  "correct_answer": "죄송하지만, 지금 통화하기 어려워요. 나중에 다시 전화할게요.",
+                  "explanation": "Sorry, but it's difficult to talk right now. I'll call you back later.\n\nContext: Can't talk at the moment"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this phone conversation",
+                  "instruction": "This is a typical phone conversation in Korean",
+                  "korean_text": "배송 확인차 전화드렸습니다. 오늘 오후에 도착 예정입니다.",
+                  "audio_url": "/api/audio/ec893488504f26f1425cd0c9a11e38b2.mp3",
+                  "options": [
+                    "배송 확인차 전화드렸습니다. 오늘 오후에 도착 예정입니다."
+                  ],
+                  "correct_answer": "배송 확인차 전화드렸습니다. 오늘 오후에 도착 예정입니다.",
+                  "explanation": "I'm calling to confirm delivery. It's scheduled to arrive this afternoon.\n\nContext: Delivery confirmation call"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen to this phone conversation",
+                  "instruction": "This is a typical phone conversation in Korean",
+                  "korean_text": "실례지만, 전화 잘못 거셨어요. 여기는 회사예요.",
+                  "audio_url": "/api/audio/1b0be122e7247ec5619d7bffb855afa4.mp3",
+                  "options": [
+                    "실례지만, 전화 잘못 거셨어요. 여기는 회사예요."
+                  ],
+                  "correct_answer": "실례지만, 전화 잘못 거셨어요. 여기는 회사예요.",
+                  "explanation": "Excuse me, but you have the wrong number. This is a company.\n\nContext: Wrong number"
                 }
               ]
             }

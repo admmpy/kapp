@@ -31,6 +31,7 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [textAnswer, setTextAnswer] = useState('');
+  const [writingAnswer, setWritingAnswer] = useState('');
   const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1.0);
 
   const hasOptions = exercise.options && exercise.options.length > 0;
@@ -44,7 +45,9 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
   function handleSubmit() {
     if (submitting || isAnswered) return;
 
-    if (hasOptions && selectedOption) {
+    if (exercise.exercise_type === 'writing' && writingAnswer.trim()) {
+      onSubmit(writingAnswer.trim());
+    } else if (hasOptions && selectedOption) {
       onSubmit(selectedOption);
     } else if (!hasOptions && textAnswer.trim()) {
       onSubmit(textAnswer.trim());
@@ -176,7 +179,18 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
 
       {/* Answer section */}
       <div className="answer-section">
-        {hasOptions ? (
+        {exercise.exercise_type === 'writing' ? (
+          <div className="writing-answer">
+            <textarea
+              value={writingAnswer}
+              onChange={(e) => setWritingAnswer(e.target.value)}
+              placeholder="Write your answer in Korean..."
+              disabled={isAnswered || submitting}
+              rows={4}
+              autoFocus
+            />
+          </div>
+        ) : hasOptions ? (
           <div className="options-grid">
             {(exercise.options as string[]).map((option, index) => (
               <button
@@ -209,7 +223,14 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
         <button
           className="submit-button"
           onClick={handleSubmit}
-          disabled={submitting || (hasOptions ? !selectedOption : !textAnswer.trim())}
+          disabled={
+            submitting ||
+            (exercise.exercise_type === 'writing'
+              ? !writingAnswer.trim()
+              : hasOptions
+              ? !selectedOption
+              : !textAnswer.trim())
+          }
         >
           {submitting ? 'Checking...' : 'Check Answer'}
         </button>

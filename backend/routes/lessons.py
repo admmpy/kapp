@@ -31,6 +31,30 @@ def validate_sentence_arrange(user_answer, correct_answer: str) -> bool:
         return False
 
 
+def validate_writing_answer(user_answer: str, correct_answer: str) -> bool:
+    """
+    Validate writing exercises with flexible matching
+    Accepts minor variations in spacing, punctuation, and Korean romanization
+    """
+    if not user_answer or not correct_answer:
+        return False
+
+    # Normalize both answers
+    user_normalized = user_answer.strip().lower()
+    correct_normalized = correct_answer.strip().lower()
+
+    # Exact match
+    if user_normalized == correct_normalized:
+        return True
+
+    # Remove common punctuation and extra spaces for flexible matching
+    import re
+    user_clean = re.sub(r'[.,!?;:\s]+', ' ', user_normalized).strip()
+    correct_clean = re.sub(r'[.,!?;:\s]+', ' ', correct_normalized).strip()
+
+    return user_clean == correct_clean
+
+
 @lessons_bp.route("/lessons/<int:lesson_id>", methods=["GET"])
 def get_lesson(lesson_id: int):
     """
@@ -290,9 +314,11 @@ def submit_exercise(exercise_id: int):
         user_answer = data["answer"]
         correct_answer = exercise.correct_answer
 
-        # Handle sentence_arrange exercises differently
+        # Handle different exercise types with appropriate validation
         if exercise.exercise_type.value == "sentence_arrange":
             is_correct = validate_sentence_arrange(user_answer, correct_answer)
+        elif exercise.exercise_type.value == "writing":
+            is_correct = validate_writing_answer(str(user_answer), correct_answer)
         else:
             # Standard text comparison for other exercise types
             user_answer_normalized = str(user_answer).strip().lower()

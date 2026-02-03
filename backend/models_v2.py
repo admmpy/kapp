@@ -36,6 +36,7 @@ class ExerciseType(str, Enum):
     GRAMMAR = "grammar"  # Fill-in-blank, grammar rules
     READING = "reading"  # Reading comprehension
     LISTENING = "listening"  # Audio comprehension
+    WRITING = "writing"  # Free-form writing exercises
     REVIEW = "review"  # Mixed review exercises
     SENTENCE_ARRANGE = "sentence_arrange"  # Arrange words to form sentence
 
@@ -300,11 +301,18 @@ class VocabularyItem(db.Model):
     times_practiced: Mapped[int] = mapped_column(Integer, default=0)
     times_correct: Mapped[int] = mapped_column(Integer, default=0)
 
+    # Spaced Repetition (SM-2 algorithm)
+    next_review_date: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    review_interval: Mapped[int] = mapped_column(Integer, default=1)  # Days until next review
+    ease_factor: Mapped[float] = mapped_column(Float, default=2.5)  # SM-2 ease factor (min 1.3)
+    repetitions: Mapped[int] = mapped_column(Integer, default=0)  # Number of successful reviews
+
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     __table_args__ = (
         Index("idx_vocab_category", "category"),
         Index("idx_vocab_difficulty", "difficulty_level"),
+        Index("idx_vocab_next_review", "next_review_date"),
         CheckConstraint(
             "difficulty_level >= 1 AND difficulty_level <= 5",
             name="check_vocab_difficulty",
