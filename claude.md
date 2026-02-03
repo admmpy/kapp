@@ -112,3 +112,65 @@ Check `CORS_ORIGINS` in config includes frontend URL.
 - [ ] Clear variable names
 - [ ] Functions do one thing
 - [ ] Comments explain "why" not "what"
+
+## Parallel Subagent Coordination
+
+### Merge Order Strategy
+When multiple agents work in parallel on feature branches, merge in this order:
+1. **Infrastructure changes first** (PWA, build configs, dependencies)
+2. **Core data/content second** (lessons, vocabulary JSON)
+3. **Feature-dependent changes third** (components using new data)
+4. **Polish/enhancement last** (dashboard, analytics)
+
+### Common Conflict Files
+| File | Conflict Type | Resolution |
+|------|---------------|------------|
+| `korean_lessons.json` | Multiple agents add lessons | Combine all units/lessons, verify unique IDs |
+| `korean_vocab.json` | Multiple vocabulary additions | Merge all entries, dedupe by korean text |
+| `types.ts` | Type additions | Combine all new types |
+| `client.ts` | API method additions | Combine all methods, add missing imports |
+| `vite.config.*` | `.ts` vs `.js` conflicts | Keep ONE format, update tsconfig references |
+
+### TypeScript Build Issues After Merge
+
+**vite.config.ts vs .js conflict:**
+```bash
+# If both exist, keep .js and update references:
+rm packages/web/vite.config.ts
+# Edit tsconfig.json to remove tsconfig.node.json reference
+```
+
+**Missing type imports:**
+```typescript
+// Add missing imports to client.ts:
+import type { VocabularyDueResponse, VocabularyReviewResponse } from '../types';
+```
+
+**Unused variable errors:**
+```typescript
+// Either use the variable or prefix with underscore:
+const [_stats, setStats] = useState({});  // Prefix if intentionally unused
+// OR use it in JSX:
+{stats.newItems > 0 && <span>New: {stats.newItems}</span>}
+```
+
+### Sync Conflict Files
+If using file sync (Syncthing, Dropbox), clean up before building:
+```bash
+find . -name "*sync-conflict*" -type f -delete
+```
+
+### Post-Merge Verification
+```bash
+# 1. Reset to origin
+git fetch origin && git reset --hard origin/main
+
+# 2. Clean sync conflicts
+find . -name "*sync-conflict*" -delete
+
+# 3. Verify build
+npm run web:build
+
+# 4. Verify backend
+cd backend && python -c "from models_v2 import *; print('OK')"
+```
