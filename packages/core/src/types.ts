@@ -58,7 +58,7 @@ export interface LessonSummary {
 // Exercise Types
 // ============================================
 
-export type ExerciseType = 'vocabulary' | 'grammar' | 'reading' | 'listening' | 'review' | 'sentence_arrange';
+export type ExerciseType = 'vocabulary' | 'grammar' | 'reading' | 'listening' | 'writing' | 'review' | 'sentence_arrange';
 
 export interface SentenceTile {
   korean: string;
@@ -157,6 +157,11 @@ export interface VocabularyItem {
   times_practiced?: number;
   times_correct?: number;
   accuracy_rate?: number;
+  // Spaced repetition fields
+  next_review_date?: string;
+  review_interval?: number;
+  repetitions?: number;
+  ease_factor?: number;
 }
 
 export interface VocabularyCategory {
@@ -241,4 +246,34 @@ export interface VocabularyListResponse {
 
 export interface VocabularyCategoriesResponse {
   categories: VocabularyCategory[];
+}
+
+export interface VocabularyDueResponse {
+  vocabulary: VocabularyItem[];
+  total_due: number;
+  new_items: number;
+}
+
+export interface VocabularyReviewRequest {
+  quality: number; // 0-5 rating
+}
+
+export interface VocabularyReviewResponse {
+  success: boolean;
+  next_review_date: string | null;
+  review_interval: number;
+  repetitions: number;
+  ease_factor: number;
+}
+
+// Dashboard statistics
+export interface DashboardStats {
+  vocabulary_mastery_percent: number;
+  grammar_patterns_completed: number;
+  listening_hours: number;
+  reading_passages_completed: number;
+  topik1_readiness_percent: number;
+  vocabulary_due_count: number;
+  lessons_completed_this_week: number;
+  current_streak: number;
 }
