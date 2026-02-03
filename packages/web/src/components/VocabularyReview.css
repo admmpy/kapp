@@ -1,0 +1,281 @@
+.vocabulary-review {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-info h2 {
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+}
+
+.review-progress {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.session-stats {
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: #ecf0f1;
+  border-radius: 3px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.review-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-front {
+  text-align: center;
+  width: 100%;
+}
+
+.korean-text {
+  font-size: 48px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 20px 0;
+}
+
+.romanization {
+  font-size: 18px;
+  color: #7f8c8d;
+  margin: 0 0 30px 0;
+}
+
+.audio-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.audio-button:hover {
+  transform: translateY(-2px);
+}
+
+.card-back {
+  width: 100%;
+  text-align: center;
+}
+
+.english-text {
+  font-size: 28px;
+  font-weight: 600;
+  color: #27ae60;
+  margin: 0 0 10px 0;
+}
+
+.part-of-speech {
+  font-size: 14px;
+  color: #7f8c8d;
+  font-style: italic;
+  margin: 0 0 20px 0;
+}
+
+.example {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.example-korean {
+  font-size: 18px;
+  color: #2c3e50;
+  margin: 0 0 10px 0;
+}
+
+.example-english {
+  font-size: 16px;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+.quality-buttons {
+  margin-top: 30px;
+}
+
+.rating-prompt {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 15px 0;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.quality-btn {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #2c3e50;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quality-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quality-btn.quality-0,
+.quality-btn.quality-1,
+.quality-btn.quality-2 {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.quality-btn.quality-0:hover,
+.quality-btn.quality-1:hover,
+.quality-btn.quality-2:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.quality-btn.quality-3 {
+  border-color: #f39c12;
+  color: #f39c12;
+}
+
+.quality-btn.quality-3:hover {
+  background: #f39c12;
+  color: white;
+}
+
+.quality-btn.quality-4,
+.quality-btn.quality-5 {
+  border-color: #27ae60;
+  color: #27ae60;
+}
+
+.quality-btn.quality-4:hover,
+.quality-btn.quality-5:hover {
+  background: #27ae60;
+  color: white;
+}
+
+.show-answer-btn {
+  margin-top: 30px;
+  padding: 16px 48px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.show-answer-btn:hover {
+  transform: translateY(-2px);
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #95a5a6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #7f8c8d;
+}
+
+.vocabulary-review.error,
+.vocabulary-review.empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.vocabulary-review.error h2,
+.vocabulary-review.empty h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.vocabulary-review.error p,
+.vocabulary-review.empty p {
+  color: #7f8c8d;
+  margin-bottom: 20px;
+}
+
+.vocabulary-review.error button,
+.vocabulary-review.empty button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .review-card {
+    padding: 20px;
+  }
+
+  .korean-text {
+    font-size: 36px;
+  }
+
+  .english-text {
+    font-size: 24px;
+  }
+
+  .button-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

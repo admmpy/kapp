@@ -179,6 +179,22 @@ class APIClient {
   }
 
   // ============================================
+  // Spaced Repetition endpoints
+  // ============================================
+
+  async getVocabularyDue(limit?: number): Promise<{ vocabulary: VocabularyItem[]; total_due: number; new_items: number }> {
+    const response = await this.client.get<VocabularyDueResponse>('/vocabulary/due', {
+      params: { limit }
+    });
+    return response.data;
+  }
+
+  async recordVocabularyReview(itemId: number, quality: number): Promise<VocabularyReviewResponse> {
+    const response = await this.client.post<VocabularyReviewResponse>(`/vocabulary/${itemId}/review`, { quality });
+    return response.data;
+  }
+
+  // ============================================
   // Audio endpoint helper
   // ============================================
 
