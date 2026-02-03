@@ -106,6 +106,37 @@ Open http://localhost:5173 in your browser.
 
 ---
 
+## iOS PWA Testing (Recommended)
+
+To reliably test the PWA on iOS, use a stable HTTPS tunnel with same-origin API proxying.
+
+**Why this is needed:**
+- iOS requires HTTPS for service workers.
+- The app expects `/api` to be same-origin; if `/api` is not proxied, the frontend will fail to load courses.
+
+**One-command run (ngrok):**
+```bash
+scripts/run-ios-tunnel.sh
+```
+
+**Prereqs:**
+```bash
+brew install caddy
+brew install ngrok/ngrok/ngrok
+ngrok config add-authtoken YOUR_TOKEN
+```
+
+**What the script does:**
+- Builds the web app.
+- Starts the backend and a local Caddy reverse proxy that maps `/api` to `http://127.0.0.1:5001`.
+- Starts an ngrok HTTPS tunnel to the proxy and prints the URL.
+
+**Troubleshooting:**
+- If `/api` returns HTML, the proxy is not routing; ensure `scripts/Caddyfile.ios` is used.
+- If courses fail to load on iOS, verify `curl -i http://localhost:4173/api/courses` returns JSON.
+
+---
+
 ## Project Structure
 
 ```

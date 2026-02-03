@@ -30,6 +30,8 @@ export default function CourseList({ onSelectCourse, onStartConversation }: Prop
       } catch (err) {
         console.error('Failed to load courses:', err);
         setError('Failed to load courses. Please try again.');
+        setCourses([]);
+        setProgress(null);
       } finally {
         setLoading(false);
       }
