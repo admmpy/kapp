@@ -128,6 +128,7 @@ export default function VocabularyReview({ onClose }: Props) {
         <div className="session-stats">
           <span>Reviewed: {sessionStats.reviewed}</span>
           <span>Correct: {sessionStats.correct}</span>
+          {stats.newItems > 0 && <span>New: {stats.newItems}</span>}
         </div>
       </div>
 
