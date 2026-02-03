@@ -6,11 +6,14 @@ Endpoints:
 - GET /api/vocabulary/:id - Get vocabulary item details
 - GET /api/vocabulary/categories - List categories
 - POST /api/vocabulary/:id/practice - Record practice attempt
+- GET /api/vocabulary/due - Get vocabulary items due for review (spaced repetition)
+- POST /api/vocabulary/:id/review - Record a spaced repetition review
 """
 from flask import Blueprint, request, jsonify
 from database import db
 from models_v2 import VocabularyItem
 from utils import not_found_response, error_response, validation_error_response
+from datetime import datetime, timedelta
 import logging
 
 logger = logging.getLogger(__name__)
@@ -275,3 +278,173 @@ def record_practice(item_id: int):
         logger.error(f"Error recording practice for item {item_id}: {e}")
         db.session.rollback()
         return error_response("Failed to record practice", 500, str(e))
+
+
+def calculate_sm2_next_review(item: VocabularyItem, quality: int) -> None:
+    """
+    Calculate next review date using SM-2 algorithm
+
+    Args:
+        item: VocabularyItem to update
+        quality: User's quality rating (0-5)
+                 0-2: incorrect, 3-5: correct
+
+    SM-2 Algorithm:
+    - If quality < 3: reset repetitions to 0, interval to 1 day
+    - If quality >= 3: calculate new interval based on ease factor
+    - Ease factor adjusts based on quality (harder = lower EF, easier = higher EF)
+    """
+    if quality < 3:
+        # Incorrect answer - reset progress
+        item.repetitions = 0
+        item.review_interval = 1
+        item.next_review_date = datetime.utcnow() + timedelta(days=1)
+    else:
+        # Correct answer - increase interval
+        if item.repetitions == 0:
+            item.review_interval = 1
+        elif item.repetitions == 1:
+            item.review_interval = 6
+        else:
+            item.review_interval = int(item.review_interval * item.ease_factor)
+
+        item.repetitions += 1
+        item.next_review_date = datetime.utcnow() + timedelta(days=item.review_interval)
+
+    # Update ease factor (min 1.3)
+    item.ease_factor = max(1.3, item.ease_factor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)))
+
+
+@vocabulary_bp.route("/vocabulary/due", methods=["GET"])
+def get_due_vocabulary():
+    """
+    Get vocabulary items due for review based on spaced repetition
+
+    Query params:
+        - limit: Max items to return (default 20)
+
+    Response:
+        {
+            "vocabulary": [
+                {
+                    "id": 1,
+                    "korean": "안녕하세요",
+                    "english": "hello",
+                    "next_review_date": "2024-01-15T10:00:00",
+                    "review_interval": 6,
+                    "repetitions": 2,
+                    ...
+                }
+            ],
+            "total_due": 15,
+            "new_items": 5
+        }
+    """
+    try:
+        limit = min(request.args.get("limit", 20, type=int), 50)
+        now = datetime.utcnow()
+
+        # Get items due for review (next_review_date is null or past)
+        due_items = (
+            db.session.query(VocabularyItem)
+            .filter(
+                db.or_(
+                    VocabularyItem.next_review_date.is_(None),
+                    VocabularyItem.next_review_date <= now
+                )
+            )
+            .order_by(
+                VocabularyItem.next_review_date.asc().nulls_first(),
+                VocabularyItem.difficulty_level.asc()
+            )
+            .limit(limit)
+            .all()
+        )
+
+        # Count new items (never reviewed)
+        new_count = sum(1 for item in due_items if item.next_review_date is None)
+
+        vocabulary = []
+        for item in due_items:
+            vocabulary.append({
+                "id": item.id,
+                "korean": item.korean,
+                "romanization": item.romanization,
+                "english": item.english,
+                "part_of_speech": item.part_of_speech,
+                "category": item.category,
+                "difficulty_level": item.difficulty_level,
+                "audio_url": item.audio_url,
+                "next_review_date": item.next_review_date.isoformat() if item.next_review_date else None,
+                "review_interval": item.review_interval,
+                "repetitions": item.repetitions,
+                "ease_factor": item.ease_factor,
+            })
+
+        return jsonify({
+            "vocabulary": vocabulary,
+            "total_due": len(due_items),
+            "new_items": new_count,
+        }), 200
+
+    except Exception as e:
+        logger.error(f"Error getting due vocabulary: {e}")
+        return error_response("Failed to get due vocabulary", 500, str(e))
+
+
+@vocabulary_bp.route("/vocabulary/<int:item_id>/review", methods=["POST"])
+def record_review(item_id: int):
+    """
+    Record a spaced repetition review for a vocabulary item
+
+    Request body:
+        {
+            "quality": 4  // 0-5 rating (0=complete blackout, 5=perfect recall)
+        }
+
+    Response:
+        {
+            "success": true,
+            "next_review_date": "2024-01-21T10:00:00",
+            "review_interval": 6,
+            "repetitions": 3,
+            "ease_factor": 2.6
+        }
+    """
+    try:
+        item = db.session.get(VocabularyItem, item_id)
+        if not item:
+            return not_found_response("Vocabulary item")
+
+        data = request.get_json()
+        if data is None or "quality" not in data:
+            return validation_error_response("quality field is required")
+
+        quality = int(data["quality"])
+        if quality < 0 or quality > 5:
+            return validation_error_response("quality must be between 0 and 5")
+
+        # Update practice statistics
+        item.times_practiced += 1
+        if quality >= 3:
+            item.times_correct += 1
+
+        # Calculate next review using SM-2
+        calculate_sm2_next_review(item, quality)
+
+        db.session.commit()
+
+        return jsonify({
+            "success": True,
+            "next_review_date": item.next_review_date.isoformat() if item.next_review_date else None,
+            "review_interval": item.review_interval,
+            "repetitions": item.repetitions,
+            "ease_factor": item.ease_factor,
+        }), 200
+
+    except ValueError:
+        return validation_error_response("quality must be an integer")
+    except Exception as e:
+        logger.error(f"Error recording review for item {item_id}: {e}")
+        db.session.rollback()
+        return error_response("Failed to record review", 500, str(e))
