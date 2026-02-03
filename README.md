@@ -25,6 +25,7 @@ Kapp is a lesson-based learning platform with structured curriculum progression:
 - **Audio Support:** Text-to-speech for Korean pronunciation
 - **AI Explanations (Optional):** GPT-4o mini via OpenAI API
 - **Security:** Input validation, SECRET_KEY enforcement, prompt injection protection
+- **Offline PWA:** Service worker + IndexedDB caching for mobile use
 
 ---
 
