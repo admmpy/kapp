@@ -15,6 +15,9 @@ interface Props {
 }
 
 export default function ExerciseRenderer({ exercise, onSubmit, result, submitting }: Props) {
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [textAnswer, setTextAnswer] = useState('');
+
   // Route sentence_arrange exercises to dedicated component
   if (exercise.exercise_type === 'sentence_arrange') {
     return (
@@ -26,9 +29,6 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
       />
     );
   }
-
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [textAnswer, setTextAnswer] = useState('');
 
   const hasOptions = exercise.options && exercise.options.length > 0;
   const isAnswered = result !== null;

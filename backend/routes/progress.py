@@ -5,14 +5,15 @@ Endpoints:
 - GET /api/progress - Overall progress
 - GET /api/progress/recent - Recent activity
 - GET /api/progress/stats - Learning statistics
+- POST /api/progress/<lesson_id> - Sync offline progress
 """
 from datetime import datetime, timedelta
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from sqlalchemy import func
 from database import db
 from models_v2 import Course, Unit, Lesson, UserProgress
 from utils import error_response
-from routes.helpers import get_current_user_id
+from routes.helpers import get_current_user_id, get_or_create_user_progress
 import logging
 
 logger = logging.getLogger(__name__)
@@ -131,6 +132,59 @@ def get_overall_progress():
     except Exception as e:
         logger.error(f"Error getting overall progress: {e}")
         return error_response("Failed to get progress", 500, str(e))
+
+
+@progress_bp.route("/progress/<int:lesson_id>", methods=["POST"])
+def submit_progress(lesson_id: int):
+    """
+    Sync offline progress for a lesson.
+
+    Request body:
+        {
+            "completed": true,
+            "score": 85.0
+        }
+    """
+    data = request.get_json(silent=True) or {}
+    completed = data.get("completed")
+    score = data.get("score")
+
+    if not isinstance(completed, bool):
+        return error_response("Invalid progress payload", 400)
+
+    if not isinstance(score, (int, float)):
+        return error_response("Invalid progress payload", 400)
+
+    if score < 0 or score > 100:
+        return error_response("Invalid progress payload", 400)
+
+    try:
+        lesson = db.session.get(Lesson, lesson_id)
+        if not lesson:
+            return error_response("Lesson not found", 404)
+
+        user_id = get_current_user_id()
+        progress = get_or_create_user_progress(lesson_id, lesson.exercise_count, user_id)
+
+        if not progress.is_started:
+            progress.is_started = True
+            progress.started_at = datetime.utcnow()
+            progress.total_exercises = lesson.exercise_count
+
+        if completed:
+            progress.is_completed = True
+            progress.completed_at = datetime.utcnow()
+
+        progress.score = float(score)
+        progress.last_activity_at = datetime.utcnow()
+
+        db.session.commit()
+        return jsonify({"success": True}), 200
+
+    except Exception as e:
+        logger.error(f"Error syncing progress: {e}")
+        db.session.rollback()
+        return error_response("Failed to sync progress", 500, str(e))
 
 
 def calculate_streak(user_id: int) -> int:

@@ -52,7 +52,7 @@ export default defineConfig({
         navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/.*\/api\/audio\/.*/i,
+            urlPattern: ({ url }) => url.pathname.startsWith('/api/audio/'),
             handler: 'CacheFirst',
             options: {
               cacheName: 'audio-cache',
@@ -66,7 +66,7 @@ export default defineConfig({
             }
           },
           {
-            urlPattern: /^https:\/\/.*\/api\/.*/i,
+            urlPattern: ({ url }) => url.pathname.startsWith('/api/'),
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-cache',
