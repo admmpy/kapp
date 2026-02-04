@@ -10,6 +10,12 @@ Structured curriculum progression: **Course → Unit → Lesson → Exercises** 
 
 ---
 
+## Thoughts
+
+This project initially started in Cursor but later shifted into Claude Code, and later also used Codex both in CLI. The exposure I've gained through using both CC and Codex has definetely shown me the how strong 'vibe-coding' has become as this isn't my first rodeo using AI to code but it is my first time using CLI tools (mixture of Ghostty and Cursor Terminal). The project is essentially finished with a functioning web app available on to use on iOS as well as desktop. I believe going forward this will be easier, both because the tools and models will become better but also beacuse I was very dillegent with my use of these tools learning good practices from trial and error in other projects as well as reading articles and posts on X, Medium and Substack. 
+
+In the future, I think I would use local LLMs again (to completion) assuming I have the hardware to support better models (Potentially a Mac Studios with sizeable RAM). Also, investing and setting up a home server as a side project to keep certain projects up and running at all times (in generally I really think this is a good idea with the current state of everything being subscription and cloud based).
+
 ## Features
 
 - **Structured Lessons:** Grammar explanations + contextual examples
