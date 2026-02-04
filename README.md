@@ -1,30 +1,24 @@
-# 🇰🇷 Kapp - Korean Language Learning Platform
+# Kapp - Korean Language Learning Platform
 
-A structured lesson-based Korean learning app with grammar explanations, vocabulary exercises, reading/listening practice, and word-ordering exercises.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![React](https://img.shields.io/badge/React-19.0+-61DAFB.svg)](https://reactjs.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.0+-000000.svg)](https://flask.palletsprojects.com/)
+Lesson-based Korean learning app with grammar explanations, vocabulary exercises, reading/listening practice, and word-ordering exercises.
 
 ---
 
 ## Overview
 
-Kapp is a lesson-based learning platform with structured curriculum progression: **Course → Unit → Lesson → Exercises**. Each lesson includes grammar explanations and multiple exercise types with immediate feedback.
-
-**Current Content:** 1 course, 3 units, 7 lessons, 48 exercises
+Structured curriculum progression: **Course → Unit → Lesson → Exercises** with immediate feedback.
 
 ---
 
 ## Features
 
-- **Structured Lessons:** Grammar explanations + contextual examples
-- **5 Exercise Types:** Vocabulary, Grammar, Reading, Listening, Sentence Arrangement
-- **Progress Tracking:** Completion status, scores per lesson, activity history
-- **Audio Support:** Text-to-speech for Korean pronunciation
-- **AI Explanations (Optional):** GPT-4o mini via OpenAI API
-- **Security:** Input validation, SECRET_KEY enforcement, prompt injection protection
+- Structured lessons with grammar explanations and examples
+- 5 exercise types: Vocabulary, Grammar, Reading, Listening, Sentence Arrangement
+- Progress tracking: completion status, scores, activity history
+- Audio support (TTS) for Korean pronunciation
+- Optional AI explanations via OpenAI
+- Security: input validation, SECRET_KEY enforcement, prompt injection protection
+- iOS PWA support with install prompt and offline caching
 
 ---
 
@@ -33,8 +27,8 @@ Kapp is a lesson-based learning platform with structured curriculum progression:
 | Component | Tech |
 |-----------|------|
 | **Backend** | Flask 3.0 (Python 3.9+) with SQLAlchemy ORM, SQLite |
-| **Frontend** | React 19 + TypeScript, Vite 7, Axios, CSS |
-| **Audio** | gTTS (Google Text-to-Speech) |
+| **Web** | React 19 + TypeScript, Vite 7, Axios, CSS |
+| **Audio** | gTTS |
 
 ---
 
@@ -52,21 +46,13 @@ python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
-# Configure environment
 cp .env.example .env
-# Generate secure SECRET_KEY (required):
 python -c "import secrets; print(secrets.token_hex(32))" >> .env
-
-# Optional: Enable AI explanations (OpenAI)
-# Add to backend/.env:
-# OPENAI_API_KEY=your-openai-api-key-here
-# OPENAI_MODEL=gpt-4o-mini
-# LLM_ENABLED=true
 ```
 
-**2. Frontend Setup**
+**2. Web Setup**
 ```bash
-cd ../frontend
+cd ../
 npm install
 ```
 
@@ -82,58 +68,41 @@ npm install
 ```bash
 # Terminal 1 - Backend
 cd backend && source venv/bin/activate && python app.py
-# Runs on http://localhost:5001
 
-# Terminal 2 - Frontend
-cd frontend && npm run dev
-# Runs on http://localhost:5173
+# Terminal 2 - Web
+npm --workspace packages/web run dev
 ```
 
-Open http://localhost:5173 in your browser.
+Open http://localhost:5173.
 
 ---
 
 ## Usage
 
-1. **Select a course** from the home page
-2. **Choose a unit** to see available lessons
-3. **Start a lesson:**
-   - Read grammar explanation
-   - Complete 4-6 practice exercises
-   - See immediate feedback
-   - View final score
-4. **Track progress** on the course page
+1. Select a course
+2. Choose a unit
+3. Start a lesson (grammar → exercises → score)
+4. Track progress on the course page
 
 ---
 
 ## iOS PWA Testing (Recommended)
 
-To reliably test the PWA on iOS, use a stable HTTPS tunnel with same-origin API proxying.
+iOS requires HTTPS and same-origin `/api` routing. Use the ngrok tunnel script:
 
-**Why this is needed:**
-- iOS requires HTTPS for service workers.
-- The app expects `/api` to be same-origin; if `/api` is not proxied, the frontend will fail to load courses.
-
-**One-command run (ngrok):**
 ```bash
 scripts/run-ios-tunnel.sh
 ```
 
-**Prereqs:**
+**Prereqs**
 ```bash
 brew install caddy
 brew install ngrok/ngrok/ngrok
 ngrok config add-authtoken YOUR_TOKEN
 ```
 
-**What the script does:**
-- Builds the web app.
-- Starts the backend and a local Caddy reverse proxy that maps `/api` to `http://127.0.0.1:5001`.
-- Starts an ngrok HTTPS tunnel to the proxy and prints the URL.
-
-**Troubleshooting:**
-- If `/api` returns HTML, the proxy is not routing; ensure `scripts/Caddyfile.ios` is used.
-- If courses fail to load on iOS, verify `curl -i http://localhost:4173/api/courses` returns JSON.
+**Troubleshooting**
+- `curl -i http://localhost:4173/api/courses` should return JSON (not HTML).
 
 ---
 
@@ -146,9 +115,10 @@ kapp/
 │   ├── routes/ (courses, lessons, progress, vocabulary, audio, llm, debug)
 │   ├── data/ (korean_lessons.json, korean_vocab.json, audio_cache/)
 │   └── migrations/, scripts/
-├── frontend/
-│   └── src/ (App.tsx, components/, api/, types/)
-├── claude.md (development notes & security lessons)
+├── packages/
+│   └── web/ (React + Vite)
+├── scripts/ (tunnel + proxy helpers)
+├── claude.md
 └── README.md
 ```
 
@@ -156,50 +126,51 @@ kapp/
 
 ## Testing
 
-**API Endpoints:**
+**API**
 ```bash
-curl http://localhost:5001/api/health        # Health check
-curl http://localhost:5001/api/courses       # All courses
-curl http://localhost:5001/api/courses/1    # Course with units/lessons
-curl http://localhost:5001/api/progress     # User progress
+curl http://localhost:5001/api/health
+curl http://localhost:5001/api/courses
+curl http://localhost:5001/api/courses/1
+curl http://localhost:5001/api/progress
 ```
 
-**Frontend:** Navigate to http://localhost:5173 and complete a lesson
+**Web:** open http://localhost:5173 and complete a lesson
 
 ---
 
 ## Security
 
-- **SECRET_KEY validation:** Rejects weak/missing keys (min 32 chars)
-- **Input sanitization:** Length limits, type checking
-- **Prompt injection protection:** Sanitizes LLM inputs
-- See `CLAUDE.md` for security design decisions
+- SECRET_KEY validation (min 32 chars)
+- Input sanitization and rate limiting
+- LLM prompt protections
+- See `CLAUDE.md`
 
 ---
 
 ## Content
 
-**Korean Fundamentals Course:**
-- Unit 1: Greetings & Introductions (3 lessons)
-- Unit 2: Numbers & Counting (2 lessons)
-- Unit 3: Basic Phrases (2 lessons)
+Korean Fundamentals:
+- Unit 1: Greetings & Introductions
+- Unit 2: Numbers & Counting
+- Unit 3: Basic Phrases
 
 ---
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit changes: `git commit -m "Add your feature"`
-4. Push: `git push origin feature/your-feature`
-5. Open a Pull Request
+1. `git checkout -b feature/your-feature`
+2. `git commit -m "Add your feature"`
+3. `git push origin feature/your-feature`
+4. Open a Pull Request
+
+---
+
+## Working On
+
+- Practice Speaking audio failure in PWA: `23:59:00.609 GMT GET /api/audio/안녕하세요! 어떻게 지내세요?.mp3 500 Internal Server Error`
 
 ---
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file
-
----
-
-**Happy Learning! 화이팅! 💪**
+MIT License - see `LICENSE`
