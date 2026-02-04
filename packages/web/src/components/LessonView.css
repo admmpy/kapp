@@ -205,10 +205,32 @@
 
 @media (max-width: 640px) {
   .lesson-view {
-    padding: 1rem;
+    padding: 1rem 1rem 2rem;
   }
 
   .grammar-section {
     padding: 1.25rem;
+  }
+
+  .lesson-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .exercise-container {
+    padding: 1.25rem;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .result-actions .explain-button,
+  .result-actions .next-button {
+    width: 100%;
+  }
+
+  .lesson-progress-summary {
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 }

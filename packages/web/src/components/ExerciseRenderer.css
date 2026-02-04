@@ -195,6 +195,7 @@
   border: 2px solid var(--color-border);
   border-radius: var(--radius-lg);
   font-size: 1rem;
+  min-height: 48px;
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;
@@ -266,9 +267,18 @@
   opacity: 0.9;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .options-grid {
     grid-template-columns: 1fr;
+  }
+
+  .exercise-question {
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .option-button {
+    padding: 0.9rem 1rem;
   }
 
   .korean-text {
