@@ -12,13 +12,13 @@ Structured curriculum progression: **Course → Unit → Lesson → Exercises** 
 
 ## Features
 
-- Structured lessons with grammar explanations and examples
-- 5 exercise types: Vocabulary, Grammar, Reading, Listening, Sentence Arrangement
-- Progress tracking: completion status, scores, activity history
-- Audio support (TTS) for Korean pronunciation
-- Optional AI explanations via OpenAI
-- Security: input validation, SECRET_KEY enforcement, prompt injection protection
-- iOS PWA support with install prompt and offline caching
+- **Structured Lessons:** Grammar explanations + contextual examples
+- **5 Exercise Types:** Vocabulary, Grammar, Reading, Listening, Sentence Arrangement
+- **Progress Tracking:** Completion status, scores per lesson, activity history
+- **Audio Support:** Text-to-speech for Korean pronunciation
+- **AI Explanations (Optional):** GPT-4o mini via OpenAI API
+- **Security:** Input validation, SECRET_KEY enforcement, prompt injection protection
+- **Offline PWA:** Service worker + IndexedDB caching for mobile use
 
 ---
 
