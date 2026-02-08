@@ -404,3 +404,36 @@ class GrammarMastery(db.Model):
     __table_args__ = (
         Index("idx_grammar_mastery_user_pattern", "user_id", "pattern_id", unique=True),
     )
+
+
+class ExerciseSRS(db.Model):
+    """Spaced repetition tracking for individual exercises (sentence-level SRS)"""
+
+    __tablename__ = "exercise_srs"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(Integer, default=1)
+    exercise_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("exercise.id"), nullable=False
+    )
+
+    # SM-2 fields
+    next_review_date: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    review_interval: Mapped[int] = mapped_column(Integer, default=1)
+    ease_factor: Mapped[float] = mapped_column(Float, default=2.5)
+    repetitions: Mapped[int] = mapped_column(Integer, default=0)
+
+    # Performance tracking
+    times_practiced: Mapped[int] = mapped_column(Integer, default=0)
+    times_correct: Mapped[int] = mapped_column(Integer, default=0)
+
+    last_reviewed_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+    # Relationships
+    exercise: Mapped["Exercise"] = relationship("Exercise", backref="srs_records")
+
+    __table_args__ = (
+        Index("idx_exercise_srs_user_exercise", "user_id", "exercise_id", unique=True),
+        Index("idx_exercise_srs_next_review", "user_id", "next_review_date"),
+    )

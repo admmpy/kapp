@@ -1,0 +1,231 @@
+.exercise-review {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.exercise-review .review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.exercise-review .header-info h2 {
+  margin: 0 0 5px 0;
+  color: var(--color-text);
+}
+
+.exercise-review .review-progress {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.exercise-review .session-stats {
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.exercise-review .progress-bar {
+  height: 6px;
+  background-color: var(--color-border);
+  border-radius: 3px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.exercise-review .progress-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.exercise-source {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0 0 15px 0;
+  font-style: italic;
+}
+
+.exercise-review .exercise-container {
+  margin-bottom: 20px;
+}
+
+.exercise-review .result-feedback {
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.exercise-review .result-feedback.correct {
+  background: var(--color-success-bg, #d4edda);
+  border: 1px solid var(--color-success-border, #c3e6cb);
+}
+
+.exercise-review .result-feedback.incorrect {
+  background: var(--color-error-bg, #f8d7da);
+  border: 1px solid var(--color-error-border, #f5c6cb);
+}
+
+.exercise-review .result-icon {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.exercise-review .result-feedback.correct .result-icon {
+  color: #27ae60;
+}
+
+.exercise-review .result-feedback.incorrect .result-icon {
+  color: #e74c3c;
+}
+
+.exercise-review .result-message {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.exercise-review .correct-answer {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.exercise-review .result-explanation {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 15px;
+}
+
+.exercise-review .next-button {
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.exercise-review .next-button:hover {
+  transform: translateY(-2px);
+}
+
+.exercise-review .close-btn {
+  display: block;
+  margin: 20px auto 0;
+  padding: 12px 24px;
+  background: var(--color-text-muted);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.exercise-review .close-btn:hover {
+  background: var(--color-text);
+}
+
+/* Session complete */
+.exercise-review.session-complete {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.exercise-review.session-complete h2 {
+  color: var(--color-text);
+  margin-bottom: 30px;
+}
+
+.session-summary {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.summary-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.done-btn {
+  padding: 14px 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.done-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Error / empty states */
+.exercise-review.error,
+.exercise-review.empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.exercise-review.error h2,
+.exercise-review.empty h2 {
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.exercise-review.error p,
+.exercise-review.empty p {
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.exercise-review.error button,
+.exercise-review.empty button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .session-summary {
+    gap: 20px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+}

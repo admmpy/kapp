@@ -2,7 +2,7 @@
  * Dashboard - Progress and statistics overview
  */
 import { useState, useEffect } from 'react';
-import { apiClient, WEAKNESS_REVIEW_ENABLED } from '@kapp/core';
+import { apiClient, WEAKNESS_REVIEW_ENABLED, SENTENCE_SRS_ENABLED } from '@kapp/core';
 import type { OverallProgress, LearningStats } from '@kapp/core';
 import { Skeleton } from './Skeleton';
 import './Dashboard.css';
@@ -11,12 +11,14 @@ interface Props {
   onClose?: () => void;
   onStartReview?: () => void;
   onStartWeaknessReview?: () => void;
+  onStartExerciseReview?: () => void;
 }
 
-export default function Dashboard({ onClose, onStartReview, onStartWeaknessReview }: Props) {
+export default function Dashboard({ onClose, onStartReview, onStartWeaknessReview, onStartExerciseReview }: Props) {
   const [progress, setProgress] = useState<OverallProgress | null>(null);
   const [stats, setStats] = useState<LearningStats | null>(null);
   const [vocabDueCount, setVocabDueCount] = useState<number>(0);
+  const [exerciseDueCount, setExerciseDueCount] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,14 +29,21 @@ export default function Dashboard({ onClose, onStartReview, onStartWeaknessRevie
   async function loadDashboardData() {
     try {
       setLoading(true);
-      const [progressData, statsData, vocabData] = await Promise.all([
+      const promises: Promise<unknown>[] = [
         apiClient.getProgress(),
         apiClient.getStats(),
-        apiClient.getVocabularyDue(1)
-      ]);
-      setProgress(progressData);
-      setStats(statsData);
-      setVocabDueCount(vocabData.total_due);
+        apiClient.getVocabularyDue(1),
+      ];
+      if (SENTENCE_SRS_ENABLED) {
+        promises.push(apiClient.getExercisesDue(1));
+      }
+      const results = await Promise.all(promises);
+      setProgress(results[0] as OverallProgress);
+      setStats(results[1] as LearningStats);
+      setVocabDueCount((results[2] as { total_due: number }).total_due);
+      if (SENTENCE_SRS_ENABLED && results[3]) {
+        setExerciseDueCount((results[3] as { total_due: number }).total_due);
+      }
     } catch (err) {
       console.error('Failed to load dashboard data:', err);
       setError('Failed to load dashboard. Please try again.');
@@ -165,6 +174,19 @@ export default function Dashboard({ onClose, onStartReview, onStartWeaknessRevie
             </div>
           )}
         </div>
+
+        {SENTENCE_SRS_ENABLED && exerciseDueCount > 0 && (
+          <div className="stat-card-detailed">
+            <h3>Exercise Review</h3>
+            <div className="stat-value-large">{exerciseDueCount}</div>
+            <p className="stat-subtitle">Exercises due for review</p>
+            <div className="stat-action">
+              {onStartExerciseReview && (
+                <button onClick={onStartExerciseReview}>Review Exercises</button>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="stat-card-detailed">
           <h3>Grammar Patterns</h3>

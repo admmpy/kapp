@@ -78,6 +78,7 @@ class Config:
     # Feature flags
     GRAMMAR_MASTERY_ENABLED = os.getenv("GRAMMAR_MASTERY_ENABLED", "false").lower() == "true"
     WEAKNESS_REVIEW_ENABLED = os.getenv("WEAKNESS_REVIEW_ENABLED", "false").lower() == "true"
+    SENTENCE_SRS_ENABLED = os.getenv("SENTENCE_SRS_ENABLED", "false").lower() == "true"
 
     @staticmethod
     def init_app(app):

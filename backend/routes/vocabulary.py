@@ -282,37 +282,11 @@ def record_practice(item_id: int):
 
 def calculate_sm2_next_review(item: VocabularyItem, quality: int) -> None:
     """
-    Calculate next review date using SM-2 algorithm
-
-    Args:
-        item: VocabularyItem to update
-        quality: User's quality rating (0-5)
-                 0-2: incorrect, 3-5: correct
-
-    SM-2 Algorithm:
-    - If quality < 3: reset repetitions to 0, interval to 1 day
-    - If quality >= 3: calculate new interval based on ease factor
-    - Ease factor adjusts based on quality (harder = lower EF, easier = higher EF)
+    Calculate next review date using SM-2 algorithm.
+    Delegates to shared srs_utils.apply_sm2.
     """
-    if quality < 3:
-        # Incorrect answer - reset progress
-        item.repetitions = 0
-        item.review_interval = 1
-        item.next_review_date = datetime.utcnow() + timedelta(days=1)
-    else:
-        # Correct answer - increase interval
-        if item.repetitions == 0:
-            item.review_interval = 1
-        elif item.repetitions == 1:
-            item.review_interval = 6
-        else:
-            item.review_interval = int(item.review_interval * item.ease_factor)
-
-        item.repetitions += 1
-        item.next_review_date = datetime.utcnow() + timedelta(days=item.review_interval)
-
-    # Update ease factor (min 1.3)
-    item.ease_factor = max(1.3, item.ease_factor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)))
+    from srs_utils import apply_sm2
+    apply_sm2(item, quality)
 
 
 @vocabulary_bp.route("/vocabulary/due", methods=["GET"])
