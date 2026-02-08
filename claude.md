@@ -52,6 +52,12 @@ All training-enhancement features are behind env-var flags, disabled by default:
 - `overflow: hidden` does NOT clip `position: absolute` children unless parent has `position: relative/absolute/fixed`
 - Always add `position: relative` to containers with `overflow: hidden` that have absolutely-positioned children
 
+### Bottom Nav & Safe Areas
+- Z-index layering: bottom nav `1000` < offline banner `9999` < iOS install prompt `10000`
+- `.app.has-bottom-nav` sets `--bottom-nav-height: calc(56px + env(safe-area-inset-bottom, 0px))`
+- Full-viewport components (e.g. ConversationView) must use `height: calc(100vh - var(--bottom-nav-height, 0px))` to avoid content hidden behind the nav
+- Use `env(safe-area-inset-top)` / `env(safe-area-inset-bottom)` with `viewport-fit=cover` for iPhone notch/home indicator
+
 ### React State Patterns
 **Exercise State Pollution Fix:**
 When one state change should trigger another, use `useEffect` with dependencies:
