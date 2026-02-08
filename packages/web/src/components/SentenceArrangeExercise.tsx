@@ -32,6 +32,7 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
   const tiles = exercise.options as SentenceTile[] | undefined;
   const isAnswered = result !== null;
   const hideRomanization = immersionLevel >= 2;
+  const hideEnglishHints = immersionLevel >= 3;
 
   // Play audio for a tile
   function playTileAudio(tile: SentenceTile) {
@@ -116,8 +117,8 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
       {/* Exercise type badge */}
       <div className="exercise-type-badge">Sentence Arrange</div>
 
-      {/* Instruction */}
-      {exercise.instruction && (
+      {/* Instruction (hidden at level 3 — minimal immersion) */}
+      {exercise.instruction && !hideEnglishHints && (
         <p className="exercise-instruction">{exercise.instruction}</p>
       )}
 
@@ -186,7 +187,7 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
               disabled={submitting}
             >
               <span className="tile-korean">{tile.korean}</span>
-              <span className="tile-romanization">{tile.romanization}</span>
+              {!hideRomanization && <span className="tile-romanization">{tile.romanization}</span>}
               {tile.audio_url && <span className="tile-audio-icon">🔊</span>}
             </button>
           ))}

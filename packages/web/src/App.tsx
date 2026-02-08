@@ -34,7 +34,12 @@ function App() {
     lessonId: null
   });
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [immersionLevel, setImmersionLevel] = useState<ImmersionLevel>(1);
+  const [immersionLevel, setImmersionLevel] = useState<ImmersionLevel>(() => {
+    const stored = localStorage.getItem('immersion_level');
+    if (stored === '2') return 2;
+    if (stored === '3') return 3;
+    return 1;
+  });
   const [theme, setTheme] = useState<Theme>(() => {
     const stored = localStorage.getItem('theme');
     if (stored === 'light' || stored === 'dark') return stored;
@@ -50,6 +55,7 @@ function App() {
     if (IMMERSION_MODE_ENABLED) {
       apiClient.getSettings().then(s => {
         setImmersionLevel(s.immersion_level);
+        localStorage.setItem('immersion_level', String(s.immersion_level));
       }).catch(err => {
         console.error('Failed to load settings:', err);
       });
@@ -182,9 +188,13 @@ function App() {
   }
 
   function handleImmersionChange(level: ImmersionLevel) {
+    const prev = immersionLevel;
     setImmersionLevel(level);
+    localStorage.setItem('immersion_level', String(level));
     apiClient.updateSettings({ immersion_level: level }).catch(err => {
       console.error('Failed to save immersion setting:', err);
+      setImmersionLevel(prev);
+      localStorage.setItem('immersion_level', String(prev));
     });
   }
 

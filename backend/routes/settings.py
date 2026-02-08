@@ -38,6 +38,7 @@ def get_settings():
 
     except Exception as e:
         logger.error(f"Error getting settings: {e}")
+        db.session.rollback()
         return error_response("Failed to get settings", 500)
 
 

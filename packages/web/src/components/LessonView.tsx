@@ -7,6 +7,7 @@ import type { Lesson, Exercise, ExerciseResult, ImmersionLevel } from '@kapp/cor
 import ExerciseRenderer from './ExerciseRenderer';
 import ProgressBar from './ProgressBar';
 import Breadcrumb from './Breadcrumb';
+import ImmersionSelector from './ImmersionSelector';
 import LessonCompleteModal from './LessonCompleteModal';
 import ExerciseExplanationModal from './ExerciseExplanationModal';
 import { Skeleton, ExerciseSkeleton } from './Skeleton';
@@ -30,12 +31,6 @@ interface Props {
   immersionLevel?: ImmersionLevel;
   onImmersionChange?: (level: ImmersionLevel) => void;
 }
-
-const IMMERSION_LABELS: Record<ImmersionLevel, string> = {
-  1: 'Full',
-  2: 'Reduced',
-  3: 'Minimal',
-};
 
 function sortExercisesForSpeakingFirst(exercises: Exercise[]): Exercise[] {
   const audioFirst = exercises.filter(
@@ -279,21 +274,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
             </div>
           )}
           {IMMERSION_MODE_ENABLED && onImmersionChange && (
-            <div className="immersion-selector">
-              <span className="immersion-selector-label">Immersion Level</span>
-              <div className="immersion-buttons">
-                {([1, 2, 3] as ImmersionLevel[]).map(level => (
-                  <button
-                    key={level}
-                    className={`immersion-btn ${immersionLevel === level ? 'active' : ''}`}
-                    onClick={() => onImmersionChange(level)}
-                    title={level === 1 ? 'Korean + romanization + English' : level === 2 ? 'Korean + English (no romanization)' : 'Korean only (English in feedback)'}
-                  >
-                    {IMMERSION_LABELS[level]}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <ImmersionSelector level={immersionLevel} onChange={onImmersionChange} />
           )}
           <button className="start-exercises-btn" onClick={handleStartExercises}>
             Start Exercises ({exercises.length})

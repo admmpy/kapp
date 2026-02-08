@@ -159,7 +159,7 @@ export default function VocabularyReview({ onClose, immersionLevel = 1 }: Props)
             {currentItem.example_sentence_korean && (
               <div className="example">
                 <p className="example-korean">{currentItem.example_sentence_korean}</p>
-                {currentItem.example_sentence_english && (
+                {currentItem.example_sentence_english && immersionLevel < 3 && (
                   <p className="example-english">{currentItem.example_sentence_english}</p>
                 )}
               </div>

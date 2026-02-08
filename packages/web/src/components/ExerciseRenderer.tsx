@@ -26,6 +26,7 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
   const [selfCheckRating, setSelfCheckRating] = useState<PronCheck['rating'] | null>(null);
 
   const hideRomanization = immersionLevel >= 2;
+  const hideEnglishHints = immersionLevel >= 3;
 
   // Route sentence_arrange exercises to dedicated component
   if (exercise.exercise_type === 'sentence_arrange') {
@@ -118,8 +119,8 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
         {exercise.exercise_type.charAt(0).toUpperCase() + exercise.exercise_type.slice(1)}
       </div>
 
-      {/* Instruction */}
-      {exercise.instruction && (
+      {/* Instruction (hidden at level 3 — minimal immersion) */}
+      {exercise.instruction && !hideEnglishHints && (
         <p className="exercise-instruction">{exercise.instruction}</p>
       )}
 

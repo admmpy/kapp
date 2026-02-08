@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { apiClient, IMMERSION_MODE_ENABLED } from '@kapp/core';
 import type { Course, OverallProgress, ImmersionLevel } from '@kapp/core';
 import { CourseCardSkeleton, Skeleton } from './Skeleton';
+import ImmersionSelector from './ImmersionSelector';
 import './CourseList.css';
 
 interface Props {
@@ -15,12 +16,6 @@ interface Props {
   immersionLevel?: ImmersionLevel;
   onImmersionChange?: (level: ImmersionLevel) => void;
 }
-
-const IMMERSION_LABELS: Record<ImmersionLevel, string> = {
-  1: 'Full',
-  2: 'Reduced',
-  3: 'Minimal',
-};
 
 export default function CourseList({
   onSelectCourse,
@@ -124,21 +119,7 @@ export default function CourseList({
               </label>
             </div>
             {IMMERSION_MODE_ENABLED && onImmersionChange && (
-              <div className="immersion-toggle">
-                <span className="immersion-label">Immersion</span>
-                <div className="immersion-buttons">
-                  {([1, 2, 3] as ImmersionLevel[]).map(level => (
-                    <button
-                      key={level}
-                      className={`immersion-btn ${immersionLevel === level ? 'active' : ''}`}
-                      onClick={() => onImmersionChange(level)}
-                      title={level === 1 ? 'Korean + romanization + English' : level === 2 ? 'Korean + English (no romanization)' : 'Korean only (English in feedback)'}
-                    >
-                      {IMMERSION_LABELS[level]}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <ImmersionSelector level={immersionLevel} onChange={onImmersionChange} compact />
             )}
           </div>
         </div>
