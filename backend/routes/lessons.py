@@ -156,16 +156,23 @@ def get_lesson(lesson_id: int):
         # Include grammar patterns with mastery data when feature is enabled
         if current_app.config.get("GRAMMAR_MASTERY_ENABLED"):
             user_id = get_current_user_id()
-            grammar_patterns = []
-            for gp in lesson.grammar_patterns:
-                mastery = (
+            pattern_ids = [gp.id for gp in lesson.grammar_patterns]
+
+            # Single query for all mastery records (avoids N+1)
+            mastery_map = {}
+            if pattern_ids:
+                mastery_records = (
                     db.session.query(GrammarMastery)
                     .filter(
-                        GrammarMastery.pattern_id == gp.id,
                         GrammarMastery.user_id == user_id,
+                        GrammarMastery.pattern_id.in_(pattern_ids),
                     )
-                    .first()
+                    .all()
                 )
+                mastery_map = {m.pattern_id: m for m in mastery_records}
+
+            grammar_patterns = []
+            for gp in lesson.grammar_patterns:
                 pattern_data = {
                     "id": gp.id,
                     "title": gp.title,
@@ -174,6 +181,7 @@ def get_lesson(lesson_id: int):
                     "example_korean": gp.example_korean,
                     "example_english": gp.example_english,
                 }
+                mastery = mastery_map.get(gp.id)
                 if mastery:
                     pattern_data["mastery"] = {
                         "mastery_score": mastery.mastery_score,
@@ -187,7 +195,7 @@ def get_lesson(lesson_id: int):
 
     except Exception as e:
         logger.error(f"Error getting lesson {lesson_id}: {e}")
-        return error_response("Failed to get lesson", 500, str(e))
+        return error_response("Failed to get lesson", 500)
 
 
 @lessons_bp.route("/lessons/<int:lesson_id>/start", methods=["POST"])
@@ -237,7 +245,7 @@ def start_lesson(lesson_id: int):
     except Exception as e:
         logger.error(f"Error starting lesson {lesson_id}: {e}")
         db.session.rollback()
-        return error_response("Failed to start lesson", 500, str(e))
+        return error_response("Failed to start lesson", 500)
 
 
 @lessons_bp.route("/lessons/<int:lesson_id>/complete", methods=["POST"])
@@ -307,7 +315,7 @@ def complete_lesson(lesson_id: int):
     except Exception as e:
         logger.error(f"Error completing lesson {lesson_id}: {e}")
         db.session.rollback()
-        return error_response("Failed to complete lesson", 500, str(e))
+        return error_response("Failed to complete lesson", 500)
 
 
 @lessons_bp.route("/exercises/<int:exercise_id>/submit", methods=["POST"])
@@ -407,7 +415,7 @@ def submit_exercise(exercise_id: int):
     except Exception as e:
         logger.error(f"Error submitting exercise {exercise_id}: {e}")
         db.session.rollback()
-        return error_response("Failed to submit exercise", 500, str(e))
+        return error_response("Failed to submit exercise", 500)
 
 
 @lessons_bp.route("/lessons/<int:lesson_id>/next", methods=["GET"])
@@ -492,4 +500,4 @@ def get_next_lesson(lesson_id: int):
 
     except Exception as e:
         logger.error(f"Error getting next lesson for {lesson_id}: {e}")
-        return error_response("Failed to get next lesson", 500, str(e))
+        return error_response("Failed to get next lesson", 500)

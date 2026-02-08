@@ -57,14 +57,8 @@ export async function syncOfflineChanges(): Promise<{ synced: number; failed: nu
 
 export function setupOnlineListener(): () => void {
   const handleOnline = () => {
-    console.log('Back online - syncing changes...');
-    syncOfflineChanges().then(({ synced, failed }) => {
-      if (synced > 0) {
-        console.log(`Synced ${synced} items`);
-      }
-      if (failed > 0) {
-        console.warn(`Failed to sync ${failed} items`);
-      }
+    syncOfflineChanges().catch(() => {
+      // Sync errors are already handled inside syncOfflineChanges
     });
   };
 

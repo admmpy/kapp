@@ -154,8 +154,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     } else {
       // Lesson complete - show completion modal
       const timeSpent = Math.round((Date.now() - startTime) / 1000);
-      // Use correctAnswers + 1 if current answer is correct (since state hasn't updated yet)
-      const finalCorrect = lastResult?.correct ? correctAnswers : correctAnswers;
+      const finalCorrect = correctAnswers;
       const finalTotal = totalAnswered;
       const score = finalTotal > 0 ? (finalCorrect / finalTotal) * 100 : 0;
 
