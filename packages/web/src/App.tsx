@@ -9,14 +9,15 @@ import ConversationView from './components/ConversationView';
 import Dashboard from './components/Dashboard';
 import VocabularyReview from './components/VocabularyReview';
 import WeaknessReview from './components/WeaknessReview';
+import ExerciseReview from './components/ExerciseReview';
 import ErrorBoundary from './components/ErrorBoundary';
 import IosInstallPrompt from './components/IosInstallPrompt';
 import BottomNav from './components/BottomNav';
 import type { Tab } from './components/BottomNav';
-import { initDB, setupOnlineListener, WEAKNESS_REVIEW_ENABLED } from '@kapp/core';
+import { initDB, setupOnlineListener, WEAKNESS_REVIEW_ENABLED, SENTENCE_SRS_ENABLED } from '@kapp/core';
 import './App.css';
 
-type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'dashboard' | 'vocabulary-review' | 'weakness-review';
+type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'dashboard' | 'vocabulary-review' | 'weakness-review' | 'exercise-review';
 type Theme = 'light' | 'dark';
 
 interface AppState {
@@ -89,6 +90,11 @@ function App() {
         return;
       }
 
+      if (hash === 'exercise-review') {
+        setState({ page: 'exercise-review', courseId: null, lessonId: null });
+        return;
+      }
+
       if (hash.startsWith('lesson/')) {
         const lessonId = parseInt(hash.split('/')[1]);
         if (!isNaN(lessonId)) {
@@ -156,6 +162,11 @@ function App() {
     setState({ page: 'weakness-review', courseId: null, lessonId: null });
   }
 
+  function navigateToExerciseReview() {
+    window.location.hash = 'exercise-review';
+    setState({ page: 'exercise-review', courseId: null, lessonId: null });
+  }
+
   function handleToggleTheme() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   }
@@ -169,13 +180,15 @@ function App() {
     }
   }
 
-  const showBottomNav = ['courses', 'dashboard', 'vocabulary-review', 'weakness-review', 'conversation'].includes(state.page);
+  const showBottomNav = ['courses', 'dashboard', 'vocabulary-review', 'weakness-review', 'exercise-review', 'conversation'].includes(state.page);
 
   // Map current page to a bottom nav tab (units maps to courses since it's a drill-down)
   const activeTab: Tab = (state.page === 'units' || state.page === 'lesson')
     ? 'courses'
     : state.page === 'weakness-review'
     ? 'dashboard'
+    : state.page === 'exercise-review'
+    ? 'vocabulary-review'
     : state.page as Tab;
 
   return (
@@ -206,7 +219,7 @@ function App() {
 
         {state.page === 'dashboard' && (
           <ErrorBoundary>
-            <Dashboard onClose={navigateToCourses} onStartReview={navigateToReview} onStartWeaknessReview={navigateToWeaknessReview} />
+            <Dashboard onClose={navigateToCourses} onStartReview={navigateToReview} onStartWeaknessReview={navigateToWeaknessReview} onStartExerciseReview={navigateToExerciseReview} />
           </ErrorBoundary>
         )}
 
@@ -219,6 +232,12 @@ function App() {
         {state.page === 'weakness-review' && WEAKNESS_REVIEW_ENABLED && (
           <ErrorBoundary>
             <WeaknessReview onClose={navigateToDashboard} />
+          </ErrorBoundary>
+        )}
+
+        {state.page === 'exercise-review' && SENTENCE_SRS_ENABLED && (
+          <ErrorBoundary>
+            <ExerciseReview onClose={navigateToDashboard} />
           </ErrorBoundary>
         )}
 

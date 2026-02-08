@@ -29,6 +29,8 @@ import type {
   LLMHealth,
   WeaknessData,
   Exercise,
+  ExerciseDueResponse,
+  ExerciseReviewResponse,
 } from '../types';
 
 import { API_BASE_URL } from '../config';
@@ -216,6 +218,22 @@ class APIClient {
     const response = await this.client.get<{ exercises: Exercise[] }>('/review/weakness-exercises', {
       params: { limit },
     });
+    return response.data;
+  }
+
+  // ============================================
+  // Exercise SRS endpoints (Sentence-Based SRS)
+  // ============================================
+
+  async getExercisesDue(limit?: number): Promise<ExerciseDueResponse> {
+    const response = await this.client.get<ExerciseDueResponse>('/exercises/due', {
+      params: { limit },
+    });
+    return response.data;
+  }
+
+  async recordExerciseReview(exerciseId: number, quality: number): Promise<ExerciseReviewResponse> {
+    const response = await this.client.post<ExerciseReviewResponse>(`/exercises/${exerciseId}/review`, { quality });
     return response.data;
   }
 

@@ -11,7 +11,7 @@ import json
 from datetime import datetime
 from flask import Blueprint, request, jsonify, current_app
 from database import db
-from models_v2 import Lesson, Exercise, UserProgress, GrammarMastery
+from models_v2 import Lesson, Exercise, UserProgress, GrammarMastery, ExerciseSRS
 from utils import not_found_response, error_response, validation_error_response
 from routes.helpers import get_user_progress, get_or_create_user_progress, get_current_user_id
 import logging
@@ -407,6 +407,30 @@ def submit_exercise(exercise_id: int):
                 "mastery_score": mastery.mastery_score,
                 "attempts": mastery.attempts,
             }
+
+        # Auto-seed SRS record when sentence SRS is enabled
+        if current_app.config.get("SENTENCE_SRS_ENABLED"):
+            from srs_utils import apply_sm2
+
+            user_id = get_current_user_id()
+            srs = (
+                db.session.query(ExerciseSRS)
+                .filter(
+                    ExerciseSRS.user_id == user_id,
+                    ExerciseSRS.exercise_id == exercise_id,
+                )
+                .first()
+            )
+            if not srs:
+                srs = ExerciseSRS(user_id=user_id, exercise_id=exercise_id)
+                db.session.add(srs)
+
+            srs.times_practiced += 1
+            if is_correct:
+                srs.times_correct += 1
+
+            quality = 4 if is_correct else 1
+            apply_sm2(srs, quality)
 
         db.session.commit()
 

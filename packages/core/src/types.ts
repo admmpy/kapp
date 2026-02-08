@@ -349,6 +349,37 @@ export interface WeaknessData {
   weak_vocabulary: WeakVocabularyItem[];
 }
 
+// ============================================
+// Exercise SRS Types (Sentence-Based SRS)
+// ============================================
+
+export interface ExerciseSRSData {
+  exercise_id: number;
+  next_review_date?: string;
+  review_interval: number;
+  repetitions: number;
+  ease_factor: number;
+}
+
+export interface DueExercise extends Exercise {
+  srs?: ExerciseSRSData;
+  lesson_title?: string;
+}
+
+export interface ExerciseDueResponse {
+  exercises: DueExercise[];
+  total_due: number;
+  new_items: number;
+}
+
+export interface ExerciseReviewResponse {
+  success: boolean;
+  next_review_date: string | null;
+  review_interval: number;
+  repetitions: number;
+  ease_factor: number;
+}
+
 // Dashboard statistics
 export interface DashboardStats {
   vocabulary_mastery_percent: number;

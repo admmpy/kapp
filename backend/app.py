@@ -110,6 +110,10 @@ def register_blueprints(app):
     from routes.weakness import weakness_bp
     app.register_blueprint(weakness_bp, url_prefix="/api")
 
+    # Exercise SRS review routes (feature-flagged)
+    from routes.exercise_review import exercise_review_bp
+    app.register_blueprint(exercise_review_bp, url_prefix="/api")
+
     # Register shared blueprints
     app.register_blueprint(audio_bp, url_prefix="/api")
     app.register_blueprint(llm_bp, url_prefix="/api")
