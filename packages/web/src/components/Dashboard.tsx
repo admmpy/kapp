@@ -136,7 +136,7 @@ export default function Dashboard({ onClose, onStartReview }: Props) {
                 cy="50"
                 r="45"
                 fill="none"
-                stroke="#e0e0e0"
+                stroke="var(--color-border)"
                 strokeWidth="8"
               />
               <circle
@@ -144,13 +144,13 @@ export default function Dashboard({ onClose, onStartReview }: Props) {
                 cy="50"
                 r="45"
                 fill="none"
-                stroke="#667eea"
+                stroke="var(--color-accent)"
                 strokeWidth="8"
                 strokeDasharray={`${vocabularyMasteryPercent * 2.827} 282.7`}
                 strokeLinecap="round"
                 transform="rotate(-90 50 50)"
               />
-              <text x="50" y="55" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#2c3e50">
+              <text x="50" y="55" textAnchor="middle" fontSize="20" fontWeight="bold" fill="var(--color-text)">
                 {Math.round(vocabularyMasteryPercent)}%
               </text>
             </svg>
