@@ -381,6 +381,9 @@ def submit_exercise(exercise_id: int):
                 mastery = GrammarMastery(
                     user_id=user_id,
                     pattern_id=exercise.grammar_pattern_id,
+                    attempts=0,
+                    correct=0,
+                    mastery_score=0.0,
                 )
                 db.session.add(mastery)
 
