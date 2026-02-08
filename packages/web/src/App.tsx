@@ -177,6 +177,7 @@ function App() {
         {state.page === 'lesson' && state.lessonId && (
           <ErrorBoundary>
             <LessonView
+              key={state.lessonId}
               lessonId={state.lessonId}
               courseId={state.courseId}
               onComplete={handleLessonExit}

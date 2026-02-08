@@ -34,12 +34,24 @@
   background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
 }
 
+[data-theme='dark'] .score-section.excellent {
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+}
+
 .score-section.good {
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
 }
 
+[data-theme='dark'] .score-section.good {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+}
+
 .score-section.needs-work {
   background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+}
+
+[data-theme='dark'] .score-section.needs-work {
+  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
 }
 
 .score-circle {
@@ -233,14 +245,29 @@
   color: #16a34a;
 }
 
+[data-theme='dark'] .pattern-score.score-high {
+  background: #064e3b;
+  color: #86efac;
+}
+
 .pattern-score.score-mid {
   background: #fef9c3;
   color: #ca8a04;
 }
 
+[data-theme='dark'] .pattern-score.score-mid {
+  background: #422006;
+  color: #fde047;
+}
+
 .pattern-score.score-low {
   background: #fee2e2;
   color: #dc2626;
+}
+
+[data-theme='dark'] .pattern-score.score-low {
+  background: #7f1d1d;
+  color: #fca5a5;
 }
 
 .modal-footer {
