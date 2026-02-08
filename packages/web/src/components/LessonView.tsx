@@ -63,6 +63,13 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     Array<{ pattern_title: string; mastery_score: number; attempts: number }>
   >([]);
 
+  const exercises = useMemo(() => {
+    if (!lesson?.exercises) return [];
+    return SPEAKING_FIRST_ENABLED
+      ? sortExercisesForSpeakingFirst(lesson.exercises)
+      : lesson.exercises;
+  }, [lesson]);
+
   useEffect(() => {
     async function loadLesson() {
       try {
@@ -236,13 +243,6 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
       </div>
     );
   }
-
-  const exercises = useMemo(() => {
-    if (!lesson?.exercises) return [];
-    return SPEAKING_FIRST_ENABLED
-      ? sortExercisesForSpeakingFirst(lesson.exercises)
-      : lesson.exercises;
-  }, [lesson]);
 
   const currentExercise = exercises[currentExerciseIndex];
   const isLastExercise = currentExerciseIndex === exercises.length - 1;
