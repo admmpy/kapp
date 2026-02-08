@@ -60,6 +60,50 @@ Don't call multiple state setters sequentially for dependent state.
 - Memoize callbacks with `useCallback`
 - Use `key` prop strategically to control remounts
 
+### Lint Hygiene (Recent Fixes)
+- Avoid `any` in TSX; use a targeted type extension instead:
+  - Example: `const nav = navigator as Navigator & { standalone?: boolean };`
+- For hooks, keep dependency arrays correct:
+  - Wrap async functions in `useCallback` and include them in `useEffect` deps.
+  - For memoized values, include only true inputs (avoid unnecessary deps).
+
+### Theme / Dark Mode
+**Initializing from localStorage — avoid FOUC:**
+Always read persisted preferences synchronously via a lazy initializer, never in a `useEffect` (which runs after paint):
+```typescript
+// GOOD — no flash
+const [theme, setTheme] = useState<Theme>(() => {
+  const stored = localStorage.getItem('theme');
+  if (stored === 'light' || stored === 'dark') return stored;
+  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+});
+
+// BAD — causes flash of wrong theme
+const [theme, setTheme] = useState<Theme>('light');
+useEffect(() => { setTheme(readFromStorage()); }, []);
+```
+
+### useCallback with Object Props
+**Never put object/array props directly in `useCallback`/`useMemo` dependency arrays** — they are new references every render, defeating memoization. Use a ref instead:
+```typescript
+const ctxRef = useRef(userContext);
+ctxRef.current = userContext;
+
+const doFetch = useCallback(async () => {
+  await api.call(id, ctxRef.current); // stable callback, fresh value at call-time
+}, [id]);
+```
+
+### useMemo Dependency Stability
+**For `useMemo` that should only recompute on identity changes (e.g., shuffling tiles), use a stable primitive key like `entity.id`, not the array/object itself:**
+```typescript
+// GOOD — reshuffles only when exercise changes
+useMemo(() => shuffle(tiles), [exercise.id]);
+
+// BAD — reshuffles on every parent re-render (new array reference)
+useMemo(() => shuffle(tiles), [tiles]);
+```
+
 ## Git Workflow
 
 ### Branch Rule

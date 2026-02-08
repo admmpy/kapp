@@ -23,13 +23,13 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-surface);
   border-radius: var(--radius-xl);
   max-width: 600px;
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-lg);
   animation: slideUp 0.3s ease-out;
 }
 
@@ -62,7 +62,7 @@
   background: none;
   border: none;
   font-size: 2rem;
-  color: #999;
+  color: var(--color-text-muted);
   cursor: pointer;
   padding: 0;
   width: 40px;
@@ -75,8 +75,8 @@
 }
 
 .close-button:hover {
-  background: #f5f5f5;
-  color: #333;
+  background: var(--color-surface-muted);
+  color: var(--color-text);
 }
 
 .modal-body {
@@ -117,7 +117,7 @@
 }
 
 .loading-state .spinner {
-  border: 3px solid #f3f3f3;
+  border: 3px solid var(--color-border);
   border-top: 3px solid var(--color-primary);
   border-radius: 50%;
   width: 40px;
@@ -132,7 +132,7 @@
 }
 
 .error-state p {
-  color: #d32f2f;
+  color: var(--color-error);
   margin-bottom: 1rem;
 }
 
@@ -170,6 +170,5 @@
     font-size: 1.5rem;
   }
 }
-
 
 

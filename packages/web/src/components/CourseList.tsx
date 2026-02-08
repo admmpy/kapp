@@ -10,9 +10,16 @@ import './CourseList.css';
 interface Props {
   onSelectCourse: (courseId: number) => void;
   onStartConversation?: () => void;
+  theme: 'light' | 'dark';
+  onToggleTheme: () => void;
 }
 
-export default function CourseList({ onSelectCourse, onStartConversation }: Props) {
+export default function CourseList({
+  onSelectCourse,
+  onStartConversation,
+  theme,
+  onToggleTheme
+}: Props) {
   const [courses, setCourses] = useState<Course[]>([]);
   const [progress, setProgress] = useState<OverallProgress | null>(null);
   const [loading, setLoading] = useState(true);
@@ -88,11 +95,25 @@ export default function CourseList({ onSelectCourse, onStartConversation }: Prop
       <header className="course-list-header">
         <div className="header-top">
           <h1>Korean Learning</h1>
-          {onStartConversation && (
-            <button className="practice-speaking-btn" onClick={onStartConversation}>
-              Practice Speaking
-            </button>
-          )}
+          <div className="header-actions">
+            {onStartConversation && (
+              <button className="practice-speaking-btn" onClick={onStartConversation}>
+                Practice Speaking
+              </button>
+            )}
+            <div className="theme-toggle">
+              <span className="theme-label">{theme === 'dark' ? 'Dark' : 'Light'}</span>
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  checked={theme === 'dark'}
+                  onChange={onToggleTheme}
+                  aria-label="Toggle dark mode"
+                />
+                <span className="slider" />
+              </label>
+            </div>
+          </div>
         </div>
         {progress && (
           <div className="overall-stats">

@@ -1,7 +1,7 @@
 /**
  * Explanation Modal - displays AI-generated card explanations
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { apiClient } from '@kapp/core';
 import type { Card } from '@kapp/core';
 import './ExplanationModal.css';
@@ -21,19 +21,15 @@ export default function ExplanationModal({ card, isOpen, onClose, userContext }:
   const [explanation, setExplanation] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const userContextRef = useRef(userContext);
+  userContextRef.current = userContext;
 
-  useEffect(() => {
-    if (isOpen) {
-      fetchExplanation();
-    }
-  }, [isOpen, card.id]);
-
-  const fetchExplanation = async () => {
+  const fetchExplanation = useCallback(async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      const result = await apiClient.getLLMExplanation(card.id, userContext);
+      const result = await apiClient.getLLMExplanation(card.id, userContextRef.current);
       setExplanation(result.explanation);
     } catch (err) {
       console.error('Error fetching explanation:', err);
@@ -41,7 +37,13 @@ export default function ExplanationModal({ card, isOpen, onClose, userContext }:
     } finally {
       setLoading(false);
     }
-  };
+  }, [card.id]);
+
+  useEffect(() => {
+    if (isOpen) {
+      fetchExplanation();
+    }
+  }, [isOpen, fetchExplanation]);
 
   if (!isOpen) return null;
 
@@ -98,5 +100,4 @@ export default function ExplanationModal({ card, isOpen, onClose, userContext }:
     </div>
   );
 }
-
 

@@ -21,14 +21,14 @@
 }
 
 .breadcrumb-separator {
-  color: #999;
+  color: var(--color-text-muted);
   margin: 0 4px;
 }
 
 .breadcrumb-link {
   background: none;
   border: none;
-  color: #007AFF;
+  color: var(--color-accent);
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 4px;
@@ -37,15 +37,15 @@
 }
 
 .breadcrumb-link:hover {
-  background-color: rgba(0, 122, 255, 0.1);
+  background-color: rgba(74, 144, 217, 0.15);
 }
 
 .breadcrumb-link:active {
-  background-color: rgba(0, 122, 255, 0.2);
+  background-color: rgba(74, 144, 217, 0.3);
 }
 
 .breadcrumb-current {
-  color: #333;
+  color: var(--color-text);
   padding: 4px 8px;
   font-weight: 500;
 }

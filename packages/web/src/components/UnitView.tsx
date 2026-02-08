@@ -1,7 +1,7 @@
 /**
  * UnitView - Displays units and lessons within a course
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { apiClient } from '@kapp/core';
 import type { Course, Unit, LessonSummary } from '@kapp/core';
 import Breadcrumb from './Breadcrumb';
@@ -19,6 +19,25 @@ export default function UnitView({ courseId, onSelectLesson, onBack }: Props) {
   const [unitLessons, setUnitLessons] = useState<Record<number, LessonSummary[]>>({});
   const [loading, setLoading] = useState(true);
   const [loadingLessons, setLoadingLessons] = useState<number | null>(null);
+  const unitLessonsRef = useRef<Record<number, LessonSummary[]>>({});
+
+  useEffect(() => {
+    unitLessonsRef.current = unitLessons;
+  }, [unitLessons]);
+
+  const loadUnitLessons = useCallback(async (unitId: number) => {
+    if (unitLessonsRef.current[unitId]) return; // Already loaded
+
+    setLoadingLessons(unitId);
+    try {
+      const data = await apiClient.getUnitLessons(unitId);
+      setUnitLessons(prev => ({ ...prev, [unitId]: data.lessons }));
+    } catch (err) {
+      console.error('Failed to load unit lessons:', err);
+    } finally {
+      setLoadingLessons(null);
+    }
+  }, []);
 
   useEffect(() => {
     async function loadCourse() {
@@ -37,21 +56,7 @@ export default function UnitView({ courseId, onSelectLesson, onBack }: Props) {
       }
     }
     loadCourse();
-  }, [courseId]);
-
-  async function loadUnitLessons(unitId: number) {
-    if (unitLessons[unitId]) return; // Already loaded
-
-    setLoadingLessons(unitId);
-    try {
-      const data = await apiClient.getUnitLessons(unitId);
-      setUnitLessons(prev => ({ ...prev, [unitId]: data.lessons }));
-    } catch (err) {
-      console.error('Failed to load unit lessons:', err);
-    } finally {
-      setLoadingLessons(null);
-    }
-  }
+  }, [courseId, loadUnitLessons]);
 
   function toggleUnit(unitId: number) {
     if (expandedUnit === unitId) {

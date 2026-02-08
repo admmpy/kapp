@@ -3,7 +3,7 @@
   background: linear-gradient(
     90deg,
     var(--color-border) 25%,
-    #e8e8e8 50%,
+    var(--color-surface-muted) 50%,
     var(--color-border) 75%
   );
   background-size: 200% 100%;
@@ -48,7 +48,7 @@
 
 /* Course card skeleton */
 .skeleton-course-card {
-  background: white;
+  background: var(--color-surface);
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -80,7 +80,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.25rem;
-  background: white;
+  background: var(--color-surface);
   border-radius: var(--radius-lg);
   margin-bottom: 0.75rem;
 }

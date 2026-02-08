@@ -12,6 +12,7 @@ import { initDB, setupOnlineListener } from '@kapp/core';
 import './App.css';
 
 type Page = 'courses' | 'units' | 'lesson' | 'conversation';
+type Theme = 'light' | 'dark';
 
 interface AppState {
   page: Page;
@@ -26,6 +27,11 @@ function App() {
     lessonId: null
   });
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [theme, setTheme] = useState<Theme>(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') return stored;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
 
   // Initialize IndexedDB and setup online/offline listeners
   useEffect(() => {
@@ -47,6 +53,11 @@ function App() {
       window.removeEventListener('offline', handleOfflineStatus);
     };
   }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   // Parse URL hash for routing
   useEffect(() => {
@@ -110,6 +121,10 @@ function App() {
     setState({ page: 'conversation', courseId: null, lessonId: null });
   }
 
+  function handleToggleTheme() {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  }
+
   return (
     <ErrorBoundary>
       <div className="app">
@@ -137,6 +152,8 @@ function App() {
             <CourseList
               onSelectCourse={navigateToCourse}
               onStartConversation={navigateToConversation}
+              theme={theme}
+              onToggleTheme={handleToggleTheme}
             />
           </ErrorBoundary>
         )}
