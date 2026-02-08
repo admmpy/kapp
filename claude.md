@@ -39,10 +39,10 @@
 ## Frontend
 
 ### Feature Flags
-All training-enhancement features are behind env-var flags, disabled by default:
-- `VITE_PRONUNCIATION_SELF_CHECK_ENABLED` — pronunciation self-rating after audio
-- `VITE_SPEAKING_FIRST_ENABLED` — reorder exercises (audio first)
-- `VITE_GRAMMAR_MASTERY_ENABLED` — mastery pill + weakest patterns UI (requires backend `GRAMMAR_MASTERY_ENABLED`)
+All training-enhancement features are behind env-var flags:
+- `VITE_PRONUNCIATION_SELF_CHECK_ENABLED` — pronunciation self-rating after audio (default: disabled)
+- `VITE_SPEAKING_FIRST_ENABLED` — reorder exercises, audio first (default: **enabled**; set `false` to disable)
+- `VITE_GRAMMAR_MASTERY_ENABLED` — mastery pill + weakest patterns UI (default: disabled; requires backend `GRAMMAR_MASTERY_ENABLED`)
 
 ### API URLs
 - Use environment variables: `import.meta.env.VITE_API_URL`

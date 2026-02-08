@@ -90,7 +90,7 @@ GRAMMAR_MASTERY_ENABLED=false
 ```bash
 VITE_API_URL=http://localhost:5001
 VITE_PRONUNCIATION_SELF_CHECK_ENABLED=false
-VITE_SPEAKING_FIRST_ENABLED=false
+VITE_SPEAKING_FIRST_ENABLED=true   # enabled by default; set 'false' to disable
 VITE_GRAMMAR_MASTERY_ENABLED=false
 ```
 
@@ -99,7 +99,7 @@ VITE_GRAMMAR_MASTERY_ENABLED=false
 | Flag | Layer | Default | Purpose |
 |------|-------|---------|---------|
 | `VITE_PRONUNCIATION_SELF_CHECK_ENABLED` | Frontend | `false` | Show self-rating after audio playback |
-| `VITE_SPEAKING_FIRST_ENABLED` | Frontend | `false` | Reorder exercises: audio-based first |
+| `VITE_SPEAKING_FIRST_ENABLED` | Frontend | `true` | Reorder exercises: audio-based first (set `false` to disable) |
 | `VITE_GRAMMAR_MASTERY_ENABLED` | Frontend | `false` | Show mastery pill + weakest patterns UI |
 | `GRAMMAR_MASTERY_ENABLED` | Backend | `false` | Track grammar pattern mastery in DB |
 
