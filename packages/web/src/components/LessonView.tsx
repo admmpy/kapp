@@ -2,8 +2,8 @@
  * LessonView - Main lesson interface with exercises
  */
 import { useState, useEffect } from 'react';
-import { apiClient, cacheLesson, getCachedLesson, saveProgress } from '@kapp/core';
-import type { Lesson, ExerciseResult } from '@kapp/core';
+import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED } from '@kapp/core';
+import type { Lesson, Exercise, ExerciseResult } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
 import ProgressBar from './ProgressBar';
 import Breadcrumb from './Breadcrumb';
@@ -27,6 +27,15 @@ interface Props {
   onBackToCourse?: (courseId: number) => void;
   onBackToCourses?: () => void;
   onNavigateToLesson?: (lessonId: number) => void;
+}
+
+function sortExercisesForSpeakingFirst(exercises: Exercise[]): Exercise[] {
+  const audioFirst = exercises.filter(
+    ex => ex.exercise_type === 'listening'
+      || ((ex.exercise_type === 'vocabulary' || ex.exercise_type === 'sentence_arrange') && ex.audio_url)
+  );
+  const rest = exercises.filter(ex => !audioFirst.includes(ex));
+  return [...audioFirst, ...rest];
 }
 
 export default function LessonView({ lessonId, courseId, onComplete, onBack, onBackToCourse, onBackToCourses, onNavigateToLesson }: Props) {
@@ -210,7 +219,9 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     );
   }
 
-  const exercises = lesson.exercises || [];
+  const exercises = SPEAKING_FIRST_ENABLED
+    ? sortExercisesForSpeakingFirst(lesson.exercises || [])
+    : (lesson.exercises || []);
   const currentExercise = exercises[currentExerciseIndex];
   const isLastExercise = currentExerciseIndex === exercises.length - 1;
 
