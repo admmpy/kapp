@@ -406,6 +406,29 @@ class GrammarMastery(db.Model):
     )
 
 
+class UserSettings(db.Model):
+    """User preferences (immersion level, etc.)"""
+
+    __tablename__ = "user_settings"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(Integer, default=1, unique=True)
+    immersion_level: Mapped[int] = mapped_column(Integer, default=1)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
+
+    __table_args__ = (
+        CheckConstraint(
+            "immersion_level >= 1 AND immersion_level <= 3",
+            name="check_immersion_level",
+        ),
+    )
+
+    def __repr__(self) -> str:
+        return f"<UserSettings user={self.user_id} immersion={self.immersion_level}>"
+
+
 class ExerciseSRS(db.Model):
     """Spaced repetition tracking for individual exercises (sentence-level SRS)"""
 

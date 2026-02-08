@@ -3,15 +3,16 @@
  */
 import { useState, useEffect } from 'react';
 import { apiClient } from '@kapp/core';
-import type { VocabularyItem } from '@kapp/core';
+import type { VocabularyItem, ImmersionLevel } from '@kapp/core';
 import { Skeleton } from './Skeleton';
 import './VocabularyReview.css';
 
 interface Props {
   onClose?: () => void;
+  immersionLevel?: ImmersionLevel;
 }
 
-export default function VocabularyReview({ onClose }: Props) {
+export default function VocabularyReview({ onClose, immersionLevel = 1 }: Props) {
   const [dueItems, setDueItems] = useState<VocabularyItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -139,7 +140,7 @@ export default function VocabularyReview({ onClose }: Props) {
       <div className="review-card">
         <div className="card-front">
           <h3 className="korean-text">{currentItem.korean}</h3>
-          {currentItem.romanization && !showAnswer && (
+          {currentItem.romanization && !showAnswer && immersionLevel < 2 && (
             <p className="romanization">{currentItem.romanization}</p>
           )}
           {currentItem.audio_url && (

@@ -31,6 +31,7 @@ import type {
   Exercise,
   ExerciseDueResponse,
   ExerciseReviewResponse,
+  UserSettings,
 } from '../types';
 
 import { API_BASE_URL } from '../config';
@@ -234,6 +235,20 @@ class APIClient {
 
   async recordExerciseReview(exerciseId: number, quality: number): Promise<ExerciseReviewResponse> {
     const response = await this.client.post<ExerciseReviewResponse>(`/exercises/${exerciseId}/review`, { quality });
+    return response.data;
+  }
+
+  // ============================================
+  // User Settings endpoints
+  // ============================================
+
+  async getSettings(): Promise<UserSettings> {
+    const response = await this.client.get<UserSettings>('/settings');
+    return response.data;
+  }
+
+  async updateSettings(settings: Partial<UserSettings>): Promise<UserSettings> {
+    const response = await this.client.put<UserSettings>('/settings', settings);
     return response.data;
   }
 

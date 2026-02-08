@@ -15,3 +15,4 @@ export const SPEAKING_FIRST_ENABLED: boolean = env.VITE_SPEAKING_FIRST_ENABLED !
 export const GRAMMAR_MASTERY_ENABLED: boolean = env.VITE_GRAMMAR_MASTERY_ENABLED === 'true';
 export const WEAKNESS_REVIEW_ENABLED: boolean = env.VITE_WEAKNESS_REVIEW_ENABLED === 'true';
 export const SENTENCE_SRS_ENABLED: boolean = env.VITE_SENTENCE_SRS_ENABLED === 'true';
+export const IMMERSION_MODE_ENABLED: boolean = env.VITE_IMMERSION_MODE_ENABLED === 'true';

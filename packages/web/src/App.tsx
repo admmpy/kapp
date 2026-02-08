@@ -14,7 +14,8 @@ import ErrorBoundary from './components/ErrorBoundary';
 import IosInstallPrompt from './components/IosInstallPrompt';
 import BottomNav from './components/BottomNav';
 import type { Tab } from './components/BottomNav';
-import { initDB, setupOnlineListener, WEAKNESS_REVIEW_ENABLED, SENTENCE_SRS_ENABLED } from '@kapp/core';
+import { initDB, setupOnlineListener, WEAKNESS_REVIEW_ENABLED, SENTENCE_SRS_ENABLED, IMMERSION_MODE_ENABLED, apiClient } from '@kapp/core';
+import type { ImmersionLevel } from '@kapp/core';
 import './App.css';
 
 type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'dashboard' | 'vocabulary-review' | 'weakness-review' | 'exercise-review';
@@ -33,17 +34,26 @@ function App() {
     lessonId: null
   });
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [immersionLevel, setImmersionLevel] = useState<ImmersionLevel>(1);
   const [theme, setTheme] = useState<Theme>(() => {
     const stored = localStorage.getItem('theme');
     if (stored === 'light' || stored === 'dark') return stored;
     return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
-  // Initialize IndexedDB and setup online/offline listeners
+  // Initialize IndexedDB, fetch settings, and setup online/offline listeners
   useEffect(() => {
     initDB().catch(err => {
       console.error('Failed to initialize IndexedDB:', err);
     });
+
+    if (IMMERSION_MODE_ENABLED) {
+      apiClient.getSettings().then(s => {
+        setImmersionLevel(s.immersion_level);
+      }).catch(err => {
+        console.error('Failed to load settings:', err);
+      });
+    }
 
     const cleanup = setupOnlineListener();
 
@@ -171,6 +181,13 @@ function App() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   }
 
+  function handleImmersionChange(level: ImmersionLevel) {
+    setImmersionLevel(level);
+    apiClient.updateSettings({ immersion_level: level }).catch(err => {
+      console.error('Failed to save immersion setting:', err);
+    });
+  }
+
   function handleBottomNavNavigate(tab: Tab) {
     switch (tab) {
       case 'courses': navigateToCourses(); break;
@@ -207,6 +224,8 @@ function App() {
               onStartConversation={navigateToConversation}
               theme={theme}
               onToggleTheme={handleToggleTheme}
+              immersionLevel={immersionLevel}
+              onImmersionChange={handleImmersionChange}
             />
           </ErrorBoundary>
         )}
@@ -225,7 +244,7 @@ function App() {
 
         {state.page === 'vocabulary-review' && (
           <ErrorBoundary>
-            <VocabularyReview onClose={navigateToDashboard} />
+            <VocabularyReview onClose={navigateToDashboard} immersionLevel={immersionLevel} />
           </ErrorBoundary>
         )}
 
@@ -261,6 +280,8 @@ function App() {
               onBackToCourse={navigateToCourse}
               onBackToCourses={navigateToCourses}
               onNavigateToLesson={navigateToLesson}
+              immersionLevel={immersionLevel}
+              onImmersionChange={handleImmersionChange}
             />
           </ErrorBoundary>
         )}

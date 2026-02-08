@@ -123,6 +123,55 @@
   transform: translateX(20px);
 }
 
+/* Immersion level toggle */
+.immersion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.35rem 0.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.immersion-label {
+  min-width: fit-content;
+}
+
+.immersion-buttons {
+  display: flex;
+  gap: 2px;
+  background: var(--color-border);
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.immersion-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-text-muted);
+  transition: all 0.15s ease;
+}
+
+.immersion-btn.active {
+  background: var(--color-surface);
+  color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.immersion-btn:hover:not(.active) {
+  color: var(--color-text);
+}
+
 .practice-speaking-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
@@ -290,6 +339,11 @@
   }
 
   .theme-toggle {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .immersion-toggle {
     justify-content: space-between;
     width: 100%;
   }

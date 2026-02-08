@@ -2,8 +2,8 @@
  * LessonView - Main lesson interface with exercises
  */
 import { useState, useEffect } from 'react';
-import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED, GRAMMAR_MASTERY_ENABLED } from '@kapp/core';
-import type { Lesson, Exercise, ExerciseResult } from '@kapp/core';
+import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED, GRAMMAR_MASTERY_ENABLED, IMMERSION_MODE_ENABLED } from '@kapp/core';
+import type { Lesson, Exercise, ExerciseResult, ImmersionLevel } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
 import ProgressBar from './ProgressBar';
 import Breadcrumb from './Breadcrumb';
@@ -27,7 +27,15 @@ interface Props {
   onBackToCourse?: (courseId: number) => void;
   onBackToCourses?: () => void;
   onNavigateToLesson?: (lessonId: number) => void;
+  immersionLevel?: ImmersionLevel;
+  onImmersionChange?: (level: ImmersionLevel) => void;
 }
+
+const IMMERSION_LABELS: Record<ImmersionLevel, string> = {
+  1: 'Full',
+  2: 'Reduced',
+  3: 'Minimal',
+};
 
 function sortExercisesForSpeakingFirst(exercises: Exercise[]): Exercise[] {
   const audioFirst = exercises.filter(
@@ -38,7 +46,7 @@ function sortExercisesForSpeakingFirst(exercises: Exercise[]): Exercise[] {
   return [...audioFirst, ...rest];
 }
 
-export default function LessonView({ lessonId, courseId, onComplete, onBack, onBackToCourse, onBackToCourses, onNavigateToLesson }: Props) {
+export default function LessonView({ lessonId, courseId, onComplete, onBack, onBackToCourse, onBackToCourses, onNavigateToLesson, immersionLevel = 1, onImmersionChange }: Props) {
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [showGrammar, setShowGrammar] = useState(true);
@@ -270,6 +278,23 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
               <strong>Tip:</strong> {lesson.grammar_tip}
             </div>
           )}
+          {IMMERSION_MODE_ENABLED && onImmersionChange && (
+            <div className="immersion-selector">
+              <span className="immersion-selector-label">Immersion Level</span>
+              <div className="immersion-buttons">
+                {([1, 2, 3] as ImmersionLevel[]).map(level => (
+                  <button
+                    key={level}
+                    className={`immersion-btn ${immersionLevel === level ? 'active' : ''}`}
+                    onClick={() => onImmersionChange(level)}
+                    title={level === 1 ? 'Korean + romanization + English' : level === 2 ? 'Korean + English (no romanization)' : 'Korean only (English in feedback)'}
+                  >
+                    {IMMERSION_LABELS[level]}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <button className="start-exercises-btn" onClick={handleStartExercises}>
             Start Exercises ({exercises.length})
           </button>
@@ -322,6 +347,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
           onSubmit={handleSubmitAnswer}
           result={lastResult}
           submitting={submitting}
+          immersionLevel={immersionLevel}
         />
 
         {lastResult && (

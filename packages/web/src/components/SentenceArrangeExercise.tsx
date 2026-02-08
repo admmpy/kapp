@@ -3,7 +3,7 @@
  * LingoDeer-style exercise implementing Active Recall and Context Learning
  */
 import { useState, useMemo, useEffect, useRef } from 'react';
-import type { Exercise, ExerciseResult, SentenceTile } from '@kapp/core';
+import type { Exercise, ExerciseResult, SentenceTile, ImmersionLevel } from '@kapp/core';
 import { API_BASE_URL } from '@kapp/core';
 import './SentenceArrangeExercise.css';
 
@@ -12,6 +12,7 @@ interface Props {
   onSubmit: (answer: string) => void;
   result: ExerciseResult | null;
   submitting: boolean;
+  immersionLevel?: ImmersionLevel;
 }
 
 // Fisher-Yates shuffle algorithm
@@ -24,12 +25,13 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-export default function SentenceArrangeExercise({ exercise, onSubmit, result, submitting }: Props) {
+export default function SentenceArrangeExercise({ exercise, onSubmit, result, submitting, immersionLevel = 1 }: Props) {
   const [selectedTiles, setSelectedTiles] = useState<SentenceTile[]>([]);
   const lastSelectedIdRef = useRef<number | null>(null);
 
   const tiles = exercise.options as SentenceTile[] | undefined;
   const isAnswered = result !== null;
+  const hideRomanization = immersionLevel >= 2;
 
   // Play audio for a tile
   function playTileAudio(tile: SentenceTile) {
@@ -151,7 +153,7 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
                 disabled={submitting}
               >
                 <span className="tile-korean">{tile.korean}</span>
-                <span className="tile-romanization">{tile.romanization}</span>
+                {!hideRomanization && <span className="tile-romanization">{tile.romanization}</span>}
                 {tile.audio_url && <span className="tile-audio-icon">🔊</span>}
               </button>
             ))}
