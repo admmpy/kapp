@@ -2,11 +2,12 @@
  * LessonView - Main lesson interface with exercises
  */
 import { useState, useEffect } from 'react';
-import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED, GRAMMAR_MASTERY_ENABLED } from '@kapp/core';
-import type { Lesson, Exercise, ExerciseResult } from '@kapp/core';
+import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED, GRAMMAR_MASTERY_ENABLED, IMMERSION_MODE_ENABLED } from '@kapp/core';
+import type { Lesson, Exercise, ExerciseResult, ImmersionLevel } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
 import ProgressBar from './ProgressBar';
 import Breadcrumb from './Breadcrumb';
+import ImmersionSelector from './ImmersionSelector';
 import LessonCompleteModal from './LessonCompleteModal';
 import ExerciseExplanationModal from './ExerciseExplanationModal';
 import { Skeleton, ExerciseSkeleton } from './Skeleton';
@@ -27,6 +28,8 @@ interface Props {
   onBackToCourse?: (courseId: number) => void;
   onBackToCourses?: () => void;
   onNavigateToLesson?: (lessonId: number) => void;
+  immersionLevel?: ImmersionLevel;
+  onImmersionChange?: (level: ImmersionLevel) => void;
 }
 
 function sortExercisesForSpeakingFirst(exercises: Exercise[]): Exercise[] {
@@ -38,7 +41,7 @@ function sortExercisesForSpeakingFirst(exercises: Exercise[]): Exercise[] {
   return [...audioFirst, ...rest];
 }
 
-export default function LessonView({ lessonId, courseId, onComplete, onBack, onBackToCourse, onBackToCourses, onNavigateToLesson }: Props) {
+export default function LessonView({ lessonId, courseId, onComplete, onBack, onBackToCourse, onBackToCourses, onNavigateToLesson, immersionLevel = 1, onImmersionChange }: Props) {
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [showGrammar, setShowGrammar] = useState(true);
@@ -270,6 +273,9 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
               <strong>Tip:</strong> {lesson.grammar_tip}
             </div>
           )}
+          {IMMERSION_MODE_ENABLED && onImmersionChange && (
+            <ImmersionSelector level={immersionLevel} onChange={onImmersionChange} />
+          )}
           <button className="start-exercises-btn" onClick={handleStartExercises}>
             Start Exercises ({exercises.length})
           </button>
@@ -322,6 +328,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
           onSubmit={handleSubmitAnswer}
           result={lastResult}
           submitting={submitting}
+          immersionLevel={immersionLevel}
         />
 
         {lastResult && (

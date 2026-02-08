@@ -114,6 +114,10 @@ def register_blueprints(app):
     from routes.exercise_review import exercise_review_bp
     app.register_blueprint(exercise_review_bp, url_prefix="/api")
 
+    # User settings routes (feature-flagged)
+    from routes.settings import settings_bp
+    app.register_blueprint(settings_bp, url_prefix="/api")
+
     # Register shared blueprints
     app.register_blueprint(audio_bp, url_prefix="/api")
     app.register_blueprint(llm_bp, url_prefix="/api")

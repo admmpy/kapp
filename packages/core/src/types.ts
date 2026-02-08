@@ -380,6 +380,16 @@ export interface ExerciseReviewResponse {
   ease_factor: number;
 }
 
+// ============================================
+// User Settings Types
+// ============================================
+
+export type ImmersionLevel = 1 | 2 | 3;
+
+export interface UserSettings {
+  immersion_level: ImmersionLevel;
+}
+
 // Dashboard statistics
 export interface DashboardStats {
   vocabulary_mastery_percent: number;
