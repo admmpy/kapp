@@ -78,11 +78,11 @@
 }
 
 .exercise-review .result-feedback.correct .result-icon {
-  color: #27ae60;
+  color: var(--color-success);
 }
 
 .exercise-review .result-feedback.incorrect .result-icon {
-  color: #e74c3c;
+  color: var(--color-error);
 }
 
 .exercise-review .result-message {
