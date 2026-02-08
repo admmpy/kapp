@@ -2,9 +2,10 @@
  * CourseList - Displays available courses
  */
 import { useState, useEffect } from 'react';
-import { apiClient } from '@kapp/core';
-import type { Course, OverallProgress } from '@kapp/core';
+import { apiClient, IMMERSION_MODE_ENABLED } from '@kapp/core';
+import type { Course, OverallProgress, ImmersionLevel } from '@kapp/core';
 import { CourseCardSkeleton, Skeleton } from './Skeleton';
+import ImmersionSelector from './ImmersionSelector';
 import './CourseList.css';
 
 interface Props {
@@ -12,13 +13,17 @@ interface Props {
   onStartConversation?: () => void;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
+  immersionLevel?: ImmersionLevel;
+  onImmersionChange?: (level: ImmersionLevel) => void;
 }
 
 export default function CourseList({
   onSelectCourse,
   onStartConversation,
   theme,
-  onToggleTheme
+  onToggleTheme,
+  immersionLevel = 1,
+  onImmersionChange,
 }: Props) {
   const [courses, setCourses] = useState<Course[]>([]);
   const [progress, setProgress] = useState<OverallProgress | null>(null);
@@ -113,6 +118,9 @@ export default function CourseList({
                 <span className="slider" />
               </label>
             </div>
+            {IMMERSION_MODE_ENABLED && onImmersionChange && (
+              <ImmersionSelector level={immersionLevel} onChange={onImmersionChange} compact />
+            )}
           </div>
         </div>
         {progress && (

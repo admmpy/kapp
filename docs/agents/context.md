@@ -86,6 +86,7 @@ LLM_ENABLED=true
 GRAMMAR_MASTERY_ENABLED=false
 WEAKNESS_REVIEW_ENABLED=false
 SENTENCE_SRS_ENABLED=false
+IMMERSION_MODE_ENABLED=false
 ```
 
 ### Frontend (.env)
@@ -96,6 +97,7 @@ VITE_SPEAKING_FIRST_ENABLED=true   # enabled by default; set 'false' to disable
 VITE_GRAMMAR_MASTERY_ENABLED=false
 VITE_WEAKNESS_REVIEW_ENABLED=false
 VITE_SENTENCE_SRS_ENABLED=false
+VITE_IMMERSION_MODE_ENABLED=false
 ```
 
 ### Feature Flags
@@ -107,9 +109,11 @@ VITE_SENTENCE_SRS_ENABLED=false
 | `VITE_GRAMMAR_MASTERY_ENABLED` | Frontend | `false` | Show mastery pill + weakest patterns UI |
 | `VITE_WEAKNESS_REVIEW_ENABLED` | Frontend | `false` | Show weakness-driven review for grammar & vocabulary |
 | `VITE_SENTENCE_SRS_ENABLED` | Frontend | `false` | Show sentence-based exercise SRS review |
+| `VITE_IMMERSION_MODE_ENABLED` | Frontend | `false` | Controlled immersion: hide romanization/English |
 | `GRAMMAR_MASTERY_ENABLED` | Backend | `false` | Track grammar pattern mastery in DB |
 | `WEAKNESS_REVIEW_ENABLED` | Backend | `false` | Enable weakness analysis endpoints |
 | `SENTENCE_SRS_ENABLED` | Backend | `false` | Enable sentence-level spaced repetition |
+| `IMMERSION_MODE_ENABLED` | Backend | `false` | Enable user settings for immersion level |
 
 ### Data Models (Grammar Mastery)
 
