@@ -31,7 +31,18 @@
 - Export data to JSON as secondary backup
 - Test migration on copy first
 
+### Grammar Pattern Data
+- `korean_lessons.json` may contain `grammar_patterns` arrays on lessons and `grammar_pattern_key` on exercises
+- Import script (`scripts/import_lessons.py`) resolves keys to FK IDs
+- New tables: `grammar_pattern`, `grammar_mastery` (behind `GRAMMAR_MASTERY_ENABLED` flag)
+
 ## Frontend
+
+### Feature Flags
+All training-enhancement features are behind env-var flags, disabled by default:
+- `VITE_PRONUNCIATION_SELF_CHECK_ENABLED` — pronunciation self-rating after audio
+- `VITE_SPEAKING_FIRST_ENABLED` — reorder exercises (audio first)
+- `VITE_GRAMMAR_MASTERY_ENABLED` — mastery pill + weakest patterns UI (requires backend `GRAMMAR_MASTERY_ENABLED`)
 
 ### API URLs
 - Use environment variables: `import.meta.env.VITE_API_URL`
