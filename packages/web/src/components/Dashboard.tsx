@@ -2,7 +2,7 @@
  * Dashboard - Progress and statistics overview
  */
 import { useState, useEffect } from 'react';
-import { apiClient } from '@kapp/core';
+import { apiClient, WEAKNESS_REVIEW_ENABLED } from '@kapp/core';
 import type { OverallProgress, LearningStats } from '@kapp/core';
 import { Skeleton } from './Skeleton';
 import './Dashboard.css';
@@ -10,9 +10,10 @@ import './Dashboard.css';
 interface Props {
   onClose?: () => void;
   onStartReview?: () => void;
+  onStartWeaknessReview?: () => void;
 }
 
-export default function Dashboard({ onClose, onStartReview }: Props) {
+export default function Dashboard({ onClose, onStartReview, onStartWeaknessReview }: Props) {
   const [progress, setProgress] = useState<OverallProgress | null>(null);
   const [stats, setStats] = useState<LearningStats | null>(null);
   const [vocabDueCount, setVocabDueCount] = useState<number>(0);
@@ -195,6 +196,15 @@ export default function Dashboard({ onClose, onStartReview }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Weakness Review */}
+      {WEAKNESS_REVIEW_ENABLED && onStartWeaknessReview && (
+        <div className="weakness-card" onClick={onStartWeaknessReview} style={{ cursor: 'pointer' }}>
+          <h3>Weak Areas</h3>
+          <p>Practice your weakest grammar patterns and vocabulary to improve faster.</p>
+          <button onClick={onStartWeaknessReview}>Review Weak Areas</button>
+        </div>
+      )}
 
       {/* TOPIK Readiness */}
       <div className="topik-readiness">

@@ -106,6 +106,10 @@ def register_blueprints(app):
     app.register_blueprint(progress_bp, url_prefix="/api")
     app.register_blueprint(vocabulary_bp, url_prefix="/api")
 
+    # Weakness review routes (feature-flagged)
+    from routes.weakness import weakness_bp
+    app.register_blueprint(weakness_bp, url_prefix="/api")
+
     # Register shared blueprints
     app.register_blueprint(audio_bp, url_prefix="/api")
     app.register_blueprint(llm_bp, url_prefix="/api")

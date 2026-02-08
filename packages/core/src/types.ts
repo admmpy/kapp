@@ -322,6 +322,33 @@ export interface PronunciationSelfCheck {
   timestamp: number;
 }
 
+// ============================================
+// Weakness Review Types
+// ============================================
+
+export interface WeakGrammarItem {
+  pattern_id: number;
+  pattern_title: string;
+  mastery_score: number;
+  attempts: number;
+  correct: number;
+  exercise_ids: number[];
+}
+
+export interface WeakVocabularyItem {
+  id: number;
+  korean: string;
+  english: string;
+  romanization?: string;
+  accuracy_rate: number;
+  times_practiced: number;
+}
+
+export interface WeaknessData {
+  weak_grammar: WeakGrammarItem[];
+  weak_vocabulary: WeakVocabularyItem[];
+}
+
 // Dashboard statistics
 export interface DashboardStats {
   vocabulary_mastery_percent: number;
