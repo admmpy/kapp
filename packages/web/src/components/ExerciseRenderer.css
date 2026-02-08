@@ -179,6 +179,73 @@
   transform: scale(1.05);
 }
 
+/* Pronunciation self-check */
+.pronunciation-self-check {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface, #f8f9fa);
+  border-radius: var(--radius-lg);
+}
+
+.self-check-prompt {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin: 0 0 0.5rem 0;
+}
+
+.self-check-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.self-check-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.self-check-btn.good {
+  background: #dcfce7;
+  color: var(--color-success, #16a34a);
+  border-color: var(--color-success, #16a34a);
+}
+
+.self-check-btn.good:hover {
+  background: #bbf7d0;
+}
+
+.self-check-btn.okay {
+  background: #fef9c3;
+  color: var(--color-warning, #ca8a04);
+  border-color: var(--color-warning, #ca8a04);
+}
+
+.self-check-btn.okay:hover {
+  background: #fef08a;
+}
+
+.self-check-btn.again {
+  background: #fee2e2;
+  color: var(--color-error, #dc2626);
+  border-color: var(--color-error, #dc2626);
+}
+
+.self-check-btn.again:hover {
+  background: #fecaca;
+}
+
+.self-check-confirmation {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
 .answer-section {
   margin-bottom: 1.5rem;
 }

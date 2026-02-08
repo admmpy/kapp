@@ -286,6 +286,16 @@ export interface VocabularyReviewResponse {
   ease_factor: number;
 }
 
+// ============================================
+// Pronunciation Self-Check Types
+// ============================================
+
+export interface PronunciationSelfCheck {
+  exerciseId: number;
+  rating: 'good' | 'okay' | 'again';
+  timestamp: number;
+}
+
 // Dashboard statistics
 export interface DashboardStats {
   vocabulary_mastery_percent: number;

@@ -7,7 +7,12 @@
 export * from './types';
 
 // Config
-export { API_BASE_URL } from './config';
+export {
+  API_BASE_URL,
+  PRONUNCIATION_SELF_CHECK_ENABLED,
+  SPEAKING_FIRST_ENABLED,
+  GRAMMAR_MASTERY_ENABLED,
+} from './config';
 
 // API clients
 export { apiClient, default as APIClient } from './api/client';
