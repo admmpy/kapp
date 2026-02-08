@@ -66,4 +66,7 @@ backend/backend_log.txt
 !TESTING.md
 !LICENSE.md
 
+# Claude Markdown Files
 .markdown/
+
+AGENTS.md
