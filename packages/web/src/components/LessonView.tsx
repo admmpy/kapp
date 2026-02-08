@@ -1,7 +1,7 @@
 /**
  * LessonView - Main lesson interface with exercises
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED, GRAMMAR_MASTERY_ENABLED, IMMERSION_MODE_ENABLED } from '@kapp/core';
 import type { Lesson, Exercise, ExerciseResult, ImmersionLevel } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
@@ -63,6 +63,13 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     Array<{ pattern_title: string; mastery_score: number; attempts: number }>
   >([]);
 
+  const exercises = useMemo(() => {
+    if (!lesson?.exercises) return [];
+    return SPEAKING_FIRST_ENABLED
+      ? sortExercisesForSpeakingFirst(lesson.exercises)
+      : lesson.exercises;
+  }, [lesson]);
+
   useEffect(() => {
     async function loadLesson() {
       try {
@@ -114,9 +121,9 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
   }, [currentExerciseIndex]);
 
   async function handleSubmitAnswer(answer: string) {
-    if (!lesson?.exercises || submitting) return;
+    if (!exercises.length || submitting) return;
 
-    const exercise = lesson.exercises[currentExerciseIndex];
+    const exercise = exercises[currentExerciseIndex];
     setSubmitting(true);
 
     try {
@@ -147,12 +154,12 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
   }
 
   async function handleNextExercise() {
-    if (!lesson?.exercises) return;
+    if (!exercises.length) return;
 
     // Note: setLastResult(null) is handled by useEffect when currentExerciseIndex changes
     // This prevents race conditions with async state updates
 
-    if (currentExerciseIndex < lesson.exercises.length - 1) {
+    if (currentExerciseIndex < exercises.length - 1) {
       setCurrentExerciseIndex(prev => prev + 1);
     } else {
       // Lesson complete - show completion modal
@@ -237,9 +244,6 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     );
   }
 
-  const exercises = SPEAKING_FIRST_ENABLED
-    ? sortExercisesForSpeakingFirst(lesson.exercises || [])
-    : (lesson.exercises || []);
   const currentExercise = exercises[currentExerciseIndex];
   const isLastExercise = currentExerciseIndex === exercises.length - 1;
 
