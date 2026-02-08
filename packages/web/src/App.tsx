@@ -6,12 +6,16 @@ import CourseList from './components/CourseList';
 import UnitView from './components/UnitView';
 import LessonView from './components/LessonView';
 import ConversationView from './components/ConversationView';
+import Dashboard from './components/Dashboard';
+import VocabularyReview from './components/VocabularyReview';
 import ErrorBoundary from './components/ErrorBoundary';
 import IosInstallPrompt from './components/IosInstallPrompt';
+import BottomNav from './components/BottomNav';
+import type { Tab } from './components/BottomNav';
 import { initDB, setupOnlineListener } from '@kapp/core';
 import './App.css';
 
-type Page = 'courses' | 'units' | 'lesson' | 'conversation';
+type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'dashboard' | 'vocabulary-review';
 type Theme = 'light' | 'dark';
 
 interface AppState {
@@ -69,6 +73,16 @@ function App() {
         return;
       }
 
+      if (hash === 'dashboard') {
+        setState({ page: 'dashboard', courseId: null, lessonId: null });
+        return;
+      }
+
+      if (hash === 'review') {
+        setState({ page: 'vocabulary-review', courseId: null, lessonId: null });
+        return;
+      }
+
       if (hash.startsWith('lesson/')) {
         const lessonId = parseInt(hash.split('/')[1]);
         if (!isNaN(lessonId)) {
@@ -121,28 +135,41 @@ function App() {
     setState({ page: 'conversation', courseId: null, lessonId: null });
   }
 
+  function navigateToDashboard() {
+    window.location.hash = 'dashboard';
+    setState({ page: 'dashboard', courseId: null, lessonId: null });
+  }
+
+  function navigateToReview() {
+    window.location.hash = 'review';
+    setState({ page: 'vocabulary-review', courseId: null, lessonId: null });
+  }
+
   function handleToggleTheme() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   }
 
+  function handleBottomNavNavigate(tab: Tab) {
+    switch (tab) {
+      case 'courses': navigateToCourses(); break;
+      case 'dashboard': navigateToDashboard(); break;
+      case 'vocabulary-review': navigateToReview(); break;
+      case 'conversation': navigateToConversation(); break;
+    }
+  }
+
+  const showBottomNav = ['courses', 'dashboard', 'vocabulary-review', 'conversation'].includes(state.page);
+
+  // Map current page to a bottom nav tab (units maps to courses since it's a drill-down)
+  const activeTab: Tab = (state.page === 'units' || state.page === 'lesson')
+    ? 'courses'
+    : state.page as Tab;
+
   return (
     <ErrorBoundary>
-      <div className="app">
+      <div className={`app ${showBottomNav ? 'has-bottom-nav' : ''}`}>
         {!isOnline && (
-          <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            backgroundColor: '#f59e0b',
-            color: 'white',
-            padding: '8px 16px',
-            textAlign: 'center',
-            fontSize: '14px',
-            fontWeight: '500',
-            zIndex: 9999,
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-          }}>
+          <div className="offline-banner">
             Offline - Your progress will sync when reconnected
           </div>
         )}
@@ -161,6 +188,18 @@ function App() {
         {state.page === 'conversation' && (
           <ErrorBoundary>
             <ConversationView onBack={navigateToCourses} />
+          </ErrorBoundary>
+        )}
+
+        {state.page === 'dashboard' && (
+          <ErrorBoundary>
+            <Dashboard onClose={navigateToCourses} onStartReview={navigateToReview} />
+          </ErrorBoundary>
+        )}
+
+        {state.page === 'vocabulary-review' && (
+          <ErrorBoundary>
+            <VocabularyReview onClose={navigateToDashboard} />
           </ErrorBoundary>
         )}
 
@@ -186,6 +225,10 @@ function App() {
               onNavigateToLesson={navigateToLesson}
             />
           </ErrorBoundary>
+        )}
+
+        {showBottomNav && (
+          <BottomNav activeTab={activeTab} onNavigate={handleBottomNavNavigate} />
         )}
       </div>
     </ErrorBoundary>

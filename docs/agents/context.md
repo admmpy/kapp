@@ -32,6 +32,14 @@
 ### Hash Routing
 - Uses `window.location.hash` intentionally
 - Simpler deployment, no server config needed
+- Hash routes: `#conversation`, `#dashboard`, `#review`, `#course/{id}`, `#lesson/{id}`
+
+### Bottom Navigation
+- 4-tab bar: Home (`courses`), Progress (`dashboard`), Review (`vocabulary-review`), Chat (`conversation`)
+- Visible on top-level pages; hidden on `units` and `lesson` (drill-down views)
+- `z-index: 1000` (below offline banner 9999, iOS prompt 10000)
+- Safe area: `padding-bottom: env(safe-area-inset-bottom)` for iPhone home indicator
+- Layout: `.app.has-bottom-nav` sets `--bottom-nav-height` CSS var; full-viewport components (ConversationView) subtract it from height
 
 ## DON'T Suggest
 

@@ -1,7 +1,7 @@
 .conversation-view {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - var(--bottom-nav-height, 0px));
   background: var(--color-background);
   overflow: hidden;
 }

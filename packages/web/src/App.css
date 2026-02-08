@@ -5,6 +5,11 @@
   background: var(--color-background);
 }
 
+.app.has-bottom-nav {
+  --bottom-nav-height: calc(56px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: var(--bottom-nav-height);
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   line-height: 1.2;
@@ -18,4 +23,21 @@ button {
 button:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+/* Offline banner */
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-warning);
+  color: white;
+  padding: 8px 16px;
+  padding-top: calc(8px + env(safe-area-inset-top, 0px));
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 9999;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -1,6 +1,6 @@
 .ios-install-prompt {
   position: fixed;
-  bottom: 16px;
+  bottom: calc(16px + var(--bottom-nav-height, 0px));
   left: 16px;
   right: 16px;
   display: flex;
