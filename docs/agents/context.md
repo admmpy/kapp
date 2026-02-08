@@ -32,7 +32,7 @@
 ### Hash Routing
 - Uses `window.location.hash` intentionally
 - Simpler deployment, no server config needed
-- Hash routes: `#conversation`, `#dashboard`, `#review`, `#course/{id}`, `#lesson/{id}`
+- Hash routes: `#conversation`, `#dashboard`, `#review`, `#weakness-review`, `#course/{id}`, `#lesson/{id}`
 
 ### Bottom Navigation
 - 4-tab bar: Home (`courses`), Progress (`dashboard`), Review (`vocabulary-review`), Chat (`conversation`)
@@ -84,6 +84,7 @@ OPENAI_API_KEY=your-openai-api-key-here
 OPENAI_MODEL=gpt-4o-mini
 LLM_ENABLED=true
 GRAMMAR_MASTERY_ENABLED=false
+WEAKNESS_REVIEW_ENABLED=false
 ```
 
 ### Frontend (.env)
@@ -92,6 +93,7 @@ VITE_API_URL=http://localhost:5001
 VITE_PRONUNCIATION_SELF_CHECK_ENABLED=false
 VITE_SPEAKING_FIRST_ENABLED=true   # enabled by default; set 'false' to disable
 VITE_GRAMMAR_MASTERY_ENABLED=false
+VITE_WEAKNESS_REVIEW_ENABLED=false
 ```
 
 ### Feature Flags
@@ -101,7 +103,9 @@ VITE_GRAMMAR_MASTERY_ENABLED=false
 | `VITE_PRONUNCIATION_SELF_CHECK_ENABLED` | Frontend | `false` | Show self-rating after audio playback |
 | `VITE_SPEAKING_FIRST_ENABLED` | Frontend | `true` | Reorder exercises: audio-based first (set `false` to disable) |
 | `VITE_GRAMMAR_MASTERY_ENABLED` | Frontend | `false` | Show mastery pill + weakest patterns UI |
+| `VITE_WEAKNESS_REVIEW_ENABLED` | Frontend | `false` | Show weakness-driven review for grammar & vocabulary |
 | `GRAMMAR_MASTERY_ENABLED` | Backend | `false` | Track grammar pattern mastery in DB |
+| `WEAKNESS_REVIEW_ENABLED` | Backend | `false` | Enable weakness analysis endpoints |
 
 ### Data Models (Grammar Mastery)
 

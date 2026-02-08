@@ -27,6 +27,8 @@ import type {
   VocabularyDueResponse,
   VocabularyReviewResponse,
   LLMHealth,
+  WeaknessData,
+  Exercise,
 } from '../types';
 
 import { API_BASE_URL } from '../config';
@@ -196,6 +198,24 @@ class APIClient {
 
   async recordVocabularyReview(itemId: number, quality: number): Promise<VocabularyReviewResponse> {
     const response = await this.client.post<VocabularyReviewResponse>(`/vocabulary/${itemId}/review`, { quality });
+    return response.data;
+  }
+
+  // ============================================
+  // Weakness Review endpoints
+  // ============================================
+
+  async getWeaknesses(limit?: number): Promise<WeaknessData> {
+    const response = await this.client.get<WeaknessData>('/review/weaknesses', {
+      params: { limit },
+    });
+    return response.data;
+  }
+
+  async getWeaknessExercises(limit?: number): Promise<{ exercises: Exercise[] }> {
+    const response = await this.client.get<{ exercises: Exercise[] }>('/review/weakness-exercises', {
+      params: { limit },
+    });
     return response.data;
   }
 

@@ -13,3 +13,4 @@ export const API_BASE_URL: string = env.VITE_API_URL || '';
 export const PRONUNCIATION_SELF_CHECK_ENABLED: boolean = env.VITE_PRONUNCIATION_SELF_CHECK_ENABLED === 'true';
 export const SPEAKING_FIRST_ENABLED: boolean = env.VITE_SPEAKING_FIRST_ENABLED !== 'false';
 export const GRAMMAR_MASTERY_ENABLED: boolean = env.VITE_GRAMMAR_MASTERY_ENABLED === 'true';
+export const WEAKNESS_REVIEW_ENABLED: boolean = env.VITE_WEAKNESS_REVIEW_ENABLED === 'true';
