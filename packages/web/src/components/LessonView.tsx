@@ -2,7 +2,7 @@
  * LessonView - Main lesson interface with exercises
  */
 import { useState, useEffect } from 'react';
-import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED } from '@kapp/core';
+import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED, GRAMMAR_MASTERY_ENABLED } from '@kapp/core';
 import type { Lesson, Exercise, ExerciseResult } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
 import ProgressBar from './ProgressBar';
@@ -56,6 +56,9 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
   const [isLastInCourse, setIsLastInCourse] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const [showExplanationModal, setShowExplanationModal] = useState(false);
+  const [patternMasteryResults, setPatternMasteryResults] = useState<
+    Array<{ pattern_title: string; mastery_score: number; attempts: number }>
+  >([]);
 
   useEffect(() => {
     async function loadLesson() {
@@ -119,6 +122,19 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
       setTotalAnswered(prev => prev + 1);
       if (result.correct) {
         setCorrectAnswers(prev => prev + 1);
+      }
+      if (GRAMMAR_MASTERY_ENABLED && result.pattern_mastery) {
+        setPatternMasteryResults(prev => {
+          const existing = prev.findIndex(
+            p => p.pattern_title === result.pattern_mastery!.pattern_title
+          );
+          if (existing >= 0) {
+            const updated = [...prev];
+            updated[existing] = result.pattern_mastery!;
+            return updated;
+          }
+          return [...prev, result.pattern_mastery!];
+        });
       }
     } catch (err) {
       console.error('Failed to submit answer:', err);
@@ -327,6 +343,14 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
                 {lastResult.explanation}
               </div>
             )}
+            {GRAMMAR_MASTERY_ENABLED && lastResult.pattern_mastery && (
+              <div className={`mastery-pill ${
+                lastResult.pattern_mastery.mastery_score >= 80 ? 'mastery-high' :
+                lastResult.pattern_mastery.mastery_score >= 50 ? 'mastery-mid' : 'mastery-low'
+              }`}>
+                {lastResult.pattern_mastery.pattern_title} — {Math.round(lastResult.pattern_mastery.mastery_score)}%
+              </div>
+            )}
             <div className="result-actions">
               {!lastResult.correct && (
                 <button
@@ -360,6 +384,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
           isLastInCourse={isLastInCourse}
           onNextLesson={handleNextLesson}
           onBackToCourse={handleBackToCourse}
+          patternMasteryResults={GRAMMAR_MASTERY_ENABLED ? patternMasteryResults : undefined}
         />
       )}
 

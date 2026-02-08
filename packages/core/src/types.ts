@@ -39,6 +39,7 @@ export interface Lesson {
   exercise_count: number;
   exercises?: Exercise[];
   progress?: LessonProgress;
+  grammar_patterns?: GrammarPattern[];
 }
 
 export interface LessonSummary {
@@ -89,6 +90,11 @@ export interface ExerciseResult {
   correct: boolean;
   correct_answer: string;
   explanation?: string;
+  pattern_mastery?: {
+    pattern_title: string;
+    mastery_score: number;
+    attempts: number;
+  };
 }
 
 // ============================================
@@ -284,6 +290,26 @@ export interface VocabularyReviewResponse {
   review_interval: number;
   repetitions: number;
   ease_factor: number;
+}
+
+// ============================================
+// Grammar Pattern & Mastery Types
+// ============================================
+
+export interface GrammarPattern {
+  id: number;
+  title: string;
+  pattern: string;
+  meaning?: string;
+  example_korean?: string;
+  example_english?: string;
+  mastery?: GrammarMastery;
+}
+
+export interface GrammarMastery {
+  mastery_score: number;
+  attempts: number;
+  correct: number;
 }
 
 // ============================================

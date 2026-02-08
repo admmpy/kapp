@@ -10,6 +10,12 @@ interface Lesson {
   exercise_count: number;
 }
 
+interface PatternMasteryResult {
+  pattern_title: string;
+  mastery_score: number;
+  attempts: number;
+}
+
 interface Props {
   lessonTitle: string;
   score: number;
@@ -20,6 +26,7 @@ interface Props {
   isLastInCourse: boolean;
   onNextLesson?: (lessonId: number) => void;
   onBackToCourse: () => void;
+  patternMasteryResults?: PatternMasteryResult[];
 }
 
 export default function LessonCompleteModal({
@@ -31,7 +38,8 @@ export default function LessonCompleteModal({
   isLastInUnit,
   isLastInCourse,
   onNextLesson,
-  onBackToCourse
+  onBackToCourse,
+  patternMasteryResults
 }: Props) {
   const percentage = totalAnswers > 0 ? (correctAnswers / totalAnswers) * 100 : 0;
   const getScoreColor = () => {
@@ -94,6 +102,30 @@ export default function LessonCompleteModal({
               </div>
             </div>
           )}
+
+          {patternMasteryResults && patternMasteryResults.length > 0 && (() => {
+            const weakest = [...patternMasteryResults]
+              .sort((a, b) => a.mastery_score - b.mastery_score)
+              .slice(0, 2);
+            return (
+              <div className="weakest-patterns">
+                <h3>Weakest Patterns</h3>
+                <ul className="weakest-patterns-list">
+                  {weakest.map((p, i) => (
+                    <li key={i} className="weakest-pattern-item">
+                      <span className="pattern-name">{p.pattern_title}</span>
+                      <span className={`pattern-score ${
+                        p.mastery_score >= 80 ? 'score-high' :
+                        p.mastery_score >= 50 ? 'score-mid' : 'score-low'
+                      }`}>
+                        {Math.round(p.mastery_score)}%
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })()}
         </div>
 
         <div className="modal-footer">

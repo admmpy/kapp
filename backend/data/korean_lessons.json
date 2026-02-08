@@ -16,6 +16,32 @@
               "estimated_minutes": 5,
               "grammar_explanation": "Korean greetings change based on formality level. The most common polite greeting is 안녕하세요 (annyeonghaseyo).\n\nKey points:\n- 안녕하세요 is used for both 'hello' and 'goodbye' (when leaving someone behind)\n- 안녕히 가세요 means 'goodbye' when someone is leaving\n- 안녕히 계세요 means 'goodbye' when you are the one leaving",
               "grammar_tip": "When in doubt, use 안녕하세요 - it's polite and works in most situations!",
+              "grammar_patterns": [
+                {
+                  "key": "formal_greeting",
+                  "title": "Formal Greeting",
+                  "pattern": "안녕하세요",
+                  "meaning": "Polite hello/goodbye (to someone staying)",
+                  "example_korean": "안녕하세요, 선생님!",
+                  "example_english": "Hello, teacher!"
+                },
+                {
+                  "key": "goodbye_leaving",
+                  "title": "Goodbye (speaker leaving)",
+                  "pattern": "안녕히 계세요",
+                  "meaning": "Stay in peace (said when you leave)",
+                  "example_korean": "안녕히 계세요. 내일 봐요.",
+                  "example_english": "Goodbye. See you tomorrow."
+                },
+                {
+                  "key": "goodbye_staying",
+                  "title": "Goodbye (other person leaving)",
+                  "pattern": "안녕히 가세요",
+                  "meaning": "Go in peace (said when the other person leaves)",
+                  "example_korean": "안녕히 가세요!",
+                  "example_english": "Goodbye! (to someone leaving)"
+                }
+              ],
               "exercises": [
                 {
                   "exercise_type": "vocabulary",
@@ -105,6 +131,7 @@
                 },
                 {
                   "exercise_type": "grammar",
+                  "grammar_pattern_key": "goodbye_staying",
                   "question": "You are at a store and the cashier is about to leave for the day. What do you say?",
                   "instruction": "Choose the appropriate goodbye",
                   "options": [
@@ -178,6 +205,24 @@
               "estimated_minutes": 5,
               "grammar_explanation": "Expressing thanks and apologies is essential in Korean culture.\n\n감사합니다 (gamsahamnida) - Thank you (formal)\n고마워요 (gomawoyo) - Thank you (informal polite)\n\n죄송합니다 (joesonghamnida) - I'm sorry (formal apology)\n미안해요 (mianhaeyo) - I'm sorry (informal polite)",
               "grammar_tip": "Use 감사합니다 with strangers and in formal situations. Use 고마워요 with friends.",
+              "grammar_patterns": [
+                {
+                  "key": "formal_thanks",
+                  "title": "Formal Thanks",
+                  "pattern": "감사합니다",
+                  "meaning": "Thank you (formal, to elders/strangers/bosses)",
+                  "example_korean": "도와 주셔서 감사합니다.",
+                  "example_english": "Thank you for your help."
+                },
+                {
+                  "key": "formal_apology",
+                  "title": "Formal Apology",
+                  "pattern": "죄송합니다",
+                  "meaning": "I'm sorry (formal, to strangers/elders)",
+                  "example_korean": "늦어서 죄송합니다.",
+                  "example_english": "I'm sorry for being late."
+                }
+              ],
               "exercises": [
                 {
                   "exercise_type": "vocabulary",
@@ -243,6 +288,7 @@
                 },
                 {
                   "exercise_type": "grammar",
+                  "grammar_pattern_key": "formal_thanks",
                   "question": "Your boss helped you. How do you thank them?",
                   "instruction": "Select the most appropriate response",
                   "options": [
@@ -256,6 +302,7 @@
                 },
                 {
                   "exercise_type": "grammar",
+                  "grammar_pattern_key": "formal_apology",
                   "question": "You accidentally bump into a stranger. What do you say?",
                   "instruction": "Select the appropriate apology",
                   "options": [

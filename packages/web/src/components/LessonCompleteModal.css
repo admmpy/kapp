@@ -179,6 +179,70 @@
   margin-right: 0;
 }
 
+/* Weakest patterns section */
+.weakest-patterns {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.weakest-patterns h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.weakest-patterns-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weakest-pattern-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.pattern-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.pattern-score {
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+.pattern-score.score-high {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.pattern-score.score-mid {
+  background: #fef9c3;
+  color: #ca8a04;
+}
+
+.pattern-score.score-low {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
 .modal-footer {
   padding: 16px 20px;
   border-top: 1px solid #eee;

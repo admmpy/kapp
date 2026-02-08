@@ -75,6 +75,9 @@ class Config:
     RATELIMIT_LLM = os.getenv("RATELIMIT_LLM", "10/hour")
     RATELIMIT_STORAGE_URI = os.getenv("RATELIMIT_STORAGE_URI", "memory://")
 
+    # Feature flags
+    GRAMMAR_MASTERY_ENABLED = os.getenv("GRAMMAR_MASTERY_ENABLED", "false").lower() == "true"
+
     @staticmethod
     def init_app(app):
         """Initialize app with configuration

@@ -23,15 +23,19 @@ export async function syncOfflineChanges(): Promise<{ synced: number; failed: nu
   try {
     const unsyncedItems = await getUnsyncedItems();
 
-    for (const item of unsyncedItems as Array<{ type: string; data: { lessonId: string; completed: boolean; score: number } }>) {
+    for (const item of unsyncedItems as Array<{ type: string; data: Record<string, unknown> }>) {
       try {
         if (item.type === 'progress') {
-          // Sync progress to server
-          await apiClient.submitProgress(item.data.lessonId, {
-            completed: item.data.completed,
-            score: item.data.score
+          const data = item.data as { lessonId: string; completed: boolean; score: number };
+          await apiClient.submitProgress(data.lessonId, {
+            completed: data.completed,
+            score: data.score
           });
-          await markProgressSynced(item.data.lessonId);
+          await markProgressSynced(data.lessonId);
+          synced++;
+        } else if (item.type === 'grammar_mastery') {
+          const data = item.data as { exerciseId: number; answer: string };
+          await apiClient.submitExercise(data.exerciseId, data.answer);
           synced++;
         }
       } catch (error) {
