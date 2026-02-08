@@ -41,6 +41,10 @@
   position: relative;
 }
 
+[data-theme='dark'] .drop-zone {
+  background: var(--color-surface-muted);
+}
+
 .drop-zone-placeholder {
   color: var(--color-text-muted);
   font-size: 0.875rem;
@@ -69,7 +73,7 @@
   flex-direction: column;
   align-items: center;
   padding: 0.75rem 1rem;
-  background: white;
+  background: var(--color-surface);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-lg);
   cursor: pointer;
@@ -142,6 +146,10 @@
   border-radius: var(--radius-lg);
   margin-bottom: 1.5rem;
   min-height: 80px;
+}
+
+[data-theme='dark'] .word-bank {
+  background: var(--color-surface-muted);
 }
 
 /* Correct answer display */
