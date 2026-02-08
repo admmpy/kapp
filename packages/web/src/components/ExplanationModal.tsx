@@ -1,7 +1,7 @@
 /**
  * Explanation Modal - displays AI-generated card explanations
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { apiClient } from '@kapp/core';
 import type { Card } from '@kapp/core';
 import './ExplanationModal.css';
@@ -22,13 +22,7 @@ export default function ExplanationModal({ card, isOpen, onClose, userContext }:
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (isOpen) {
-      fetchExplanation();
-    }
-  }, [isOpen, card.id]);
-
-  const fetchExplanation = async () => {
+  const fetchExplanation = useCallback(async () => {
     setLoading(true);
     setError(null);
     
@@ -41,7 +35,13 @@ export default function ExplanationModal({ card, isOpen, onClose, userContext }:
     } finally {
       setLoading(false);
     }
-  };
+  }, [card.id, userContext]);
+
+  useEffect(() => {
+    if (isOpen) {
+      fetchExplanation();
+    }
+  }, [isOpen, fetchExplanation]);
 
   if (!isOpen) return null;
 
@@ -98,5 +98,4 @@ export default function ExplanationModal({ card, isOpen, onClose, userContext }:
     </div>
   );
 }
-
 

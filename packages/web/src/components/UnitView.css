@@ -50,7 +50,7 @@
 }
 
 .unit-card {
-  background: white;
+  background: var(--color-surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
@@ -65,7 +65,7 @@
 }
 
 .unit-header:hover {
-  background-color: #f8f9fa;
+  background-color: var(--color-surface-muted);
 }
 
 .unit-number {
@@ -103,7 +103,7 @@
   display: flex;
   gap: 1rem;
   font-size: 0.75rem;
-  color: #888;
+  color: var(--color-text-muted);
 }
 
 .unit-progress {
@@ -112,7 +112,7 @@
 }
 
 .expand-icon {
-  color: #888;
+  color: var(--color-text-muted);
   font-size: 0.75rem;
   transition: transform 0.3s;
 }
@@ -148,7 +148,7 @@
 }
 
 .lesson-item:hover:not(.locked) {
-  background-color: #f0f4ff;
+  background-color: var(--color-surface-muted);
 }
 
 .lesson-item.locked {
@@ -196,7 +196,7 @@
   display: flex;
   gap: 0.75rem;
   font-size: 0.75rem;
-  color: #888;
+  color: var(--color-text-muted);
 }
 
 .lesson-score {

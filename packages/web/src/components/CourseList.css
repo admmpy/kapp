@@ -40,6 +40,12 @@
   margin-bottom: 0;
 }
 
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .practice-speaking-btn {
   display: inline-flex;
   align-items: center;
@@ -53,6 +59,68 @@
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.35rem 0.5rem 0.35rem 0.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-label {
+  min-width: 3rem;
+  text-align: right;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--color-border);
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  top: 3px;
+  background-color: var(--color-surface);
+  border-radius: 50%;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switch input:checked + .slider {
+  background-color: var(--color-accent);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
 }
 
 .practice-speaking-btn:hover {
@@ -96,7 +164,7 @@
 }
 
 .course-card {
-  background: white;
+  background: var(--color-card);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
@@ -144,12 +212,12 @@
   display: flex;
   gap: 1rem;
   font-size: 0.75rem;
-  color: #888;
+  color: var(--color-text-muted);
   margin-bottom: 1rem;
 }
 
 .course-level {
-  background: #e8f4fd;
+  background: var(--color-surface-muted);
   color: var(--color-accent);
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
@@ -206,6 +274,11 @@
     gap: 0.75rem;
   }
 
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .course-list-header h1 {
     font-size: 1.5rem;
   }
@@ -214,6 +287,11 @@
     width: 100%;
     justify-content: center;
     padding: 0.85rem 1rem;
+  }
+
+  .theme-toggle {
+    justify-content: space-between;
+    width: 100%;
   }
 
   .overall-stats {
