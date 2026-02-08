@@ -2,8 +2,10 @@
  * IndexedDB storage for offline support
  */
 
+import type { PronunciationSelfCheck } from '../types';
+
 const DB_NAME = 'kapp-offline';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 interface ProgressRecord {
   lessonId: string;
@@ -36,23 +38,30 @@ export async function initDB(): Promise<IDBDatabase> {
 
     request.onupgradeneeded = (event) => {
       const database = (event.target as IDBOpenDBRequest).result;
+      const oldVersion = event.oldVersion;
 
-      // Progress store - tracks lesson completion
-      if (!database.objectStoreNames.contains('progress')) {
+      if (oldVersion < 1) {
+        // Progress store - tracks lesson completion
         const progressStore = database.createObjectStore('progress', { keyPath: 'lessonId' });
         progressStore.createIndex('synced', 'synced', { unique: false });
         progressStore.createIndex('timestamp', 'timestamp', { unique: false });
-      }
 
-      // Lessons cache - stores lesson data for offline use
-      if (!database.objectStoreNames.contains('lessons')) {
+        // Lessons cache - stores lesson data for offline use
         const lessonsStore = database.createObjectStore('lessons', { keyPath: 'id' });
         lessonsStore.createIndex('cachedAt', 'cachedAt', { unique: false });
+
+        // Sync queue - tracks changes to sync when online
+        database.createObjectStore('syncQueue', { keyPath: 'id', autoIncrement: true });
       }
 
-      // Sync queue - tracks changes to sync when online
-      if (!database.objectStoreNames.contains('syncQueue')) {
-        database.createObjectStore('syncQueue', { keyPath: 'id', autoIncrement: true });
+      if (oldVersion < 2) {
+        // Pronunciation self-check store
+        const pronStore = database.createObjectStore('pronunciation_checks', {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
+        pronStore.createIndex('exerciseId', 'exerciseId', { unique: false });
+        pronStore.createIndex('timestamp', 'timestamp', { unique: false });
       }
     };
   });
@@ -193,6 +202,20 @@ export async function markProgressSynced(lessonId: string): Promise<void> {
         store.put(record);
       }
     };
+
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error);
+  });
+}
+
+export async function savePronunciationCheck(check: PronunciationSelfCheck): Promise<void> {
+  const database = await initDB();
+
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction('pronunciation_checks', 'readwrite');
+    const store = transaction.objectStore('pronunciation_checks');
+
+    store.add(check);
 
     transaction.oncomplete = () => resolve();
     transaction.onerror = () => reject(transaction.error);

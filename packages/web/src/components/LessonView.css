@@ -183,6 +183,31 @@
   background: var(--color-text-muted);
 }
 
+/* Grammar mastery pill */
+.mastery-pill {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.mastery-pill.mastery-high {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.mastery-pill.mastery-mid {
+  background: #fef9c3;
+  color: #ca8a04;
+}
+
+.mastery-pill.mastery-low {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
 .lesson-progress-summary {
   display: flex;
   justify-content: center;

@@ -1,6 +1,6 @@
 .lesson-complete-modal {
-  background: white;
-  border-radius: 16px;
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   max-width: 500px;
@@ -15,19 +15,19 @@
 .modal-header h1 {
   margin: 0;
   font-size: 28px;
-  color: #333;
+  color: var(--color-text);
 }
 
 .lesson-title {
   margin: 8px 0 0 0;
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-muted);
 }
 
 .score-section {
   padding: 24px 20px;
   text-align: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .score-section.excellent {
@@ -46,7 +46,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: white;
+  background: var(--color-surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,19 +57,19 @@
 .score-value {
   font-size: 48px;
   font-weight: 700;
-  color: #007AFF;
+  color: var(--color-accent);
 }
 
 .score-message {
   font-size: 18px;
   font-weight: 600;
   margin: 12px 0 0 0;
-  color: #333;
+  color: var(--color-text);
 }
 
 .score-details {
   font-size: 13px;
-  color: #666;
+  color: var(--color-text-muted);
   margin-top: 8px;
 }
 
@@ -84,8 +84,8 @@
 .completion-message {
   text-align: center;
   padding: 16px;
-  background: #f5f5f5;
-  border-radius: 8px;
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-md);
   margin-bottom: 20px;
 }
 
@@ -96,29 +96,29 @@
 
 .completion-message p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-muted);
   margin: 0;
 }
 
 .next-lesson-preview {
-  background: #f9f9f9;
-  border-radius: 8px;
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-md);
   padding: 16px;
 }
 
 .next-lesson-preview h3 {
   font-size: 13px;
   font-weight: 600;
-  color: #666;
+  color: var(--color-text-muted);
   margin: 0 0 12px 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .lesson-card {
-  background: white;
-  border: 1px solid #eee;
-  border-radius: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   padding: 12px;
   display: flex;
   gap: 12px;
@@ -128,14 +128,14 @@
 }
 
 .lesson-card:hover {
-  border-color: #007AFF;
-  background: #f5f9ff;
+  border-color: var(--color-accent);
+  background: var(--color-surface-muted);
 }
 
 .lesson-icon {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #007AFF, #0051D5);
+  background: var(--gradient-primary);
   color: white;
   border-radius: 6px;
   display: flex;
@@ -153,13 +153,13 @@
   margin: 0 0 4px 0;
   font-size: 14px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text);
 }
 
 .lesson-meta {
   margin: 0;
   font-size: 12px;
-  color: #999;
+  color: var(--color-text-muted);
   display: flex;
   gap: 12px;
 }
@@ -179,9 +179,73 @@
   margin-right: 0;
 }
 
+/* Weakest patterns section */
+.weakest-patterns {
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.weakest-patterns h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.weakest-patterns-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weakest-pattern-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.pattern-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.pattern-score {
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+.pattern-score.score-high {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.pattern-score.score-mid {
+  background: #fef9c3;
+  color: #ca8a04;
+}
+
+.pattern-score.score-low {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
 .modal-footer {
   padding: 16px 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -190,7 +254,7 @@
 .button {
   padding: 12px 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -198,7 +262,7 @@
 }
 
 .button-primary {
-  background: linear-gradient(135deg, #007AFF, #0051D5);
+  background: var(--gradient-primary);
   color: white;
 }
 
@@ -209,17 +273,17 @@
 }
 
 .button-secondary {
-  background: #f0f0f0;
-  color: #333;
+  background: var(--color-surface-muted);
+  color: var(--color-text);
 }
 
 .button-secondary:hover {
-  background: #e0e0e0;
+  background: var(--color-border);
 }
 
 @media (max-width: 600px) {
   .lesson-complete-modal {
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
   }
 
   .modal-header {

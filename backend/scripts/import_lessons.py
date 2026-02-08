@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from database import db
 from app import create_app
-from models_v2 import Course, Unit, Lesson, Exercise, VocabularyItem, ExerciseType
+from models_v2 import Course, Unit, Lesson, Exercise, VocabularyItem, ExerciseType, GrammarPattern, GrammarMastery
 
 
 def load_lessons_json():
@@ -86,6 +86,23 @@ def import_courses(data):
                 db.session.add(lesson)
                 db.session.flush()  # Get lesson.id
 
+                # Import grammar patterns (if present)
+                pattern_key_to_id = {}
+                for gp_order, gp_data in enumerate(lesson_data.get("grammar_patterns", [])):
+                    gp = GrammarPattern(
+                        lesson_id=lesson.id,
+                        key=gp_data["key"],
+                        title=gp_data["title"],
+                        pattern=gp_data["pattern"],
+                        meaning=gp_data.get("meaning"),
+                        example_korean=gp_data.get("example_korean"),
+                        example_english=gp_data.get("example_english"),
+                        display_order=gp_order,
+                    )
+                    db.session.add(gp)
+                    db.session.flush()
+                    pattern_key_to_id[gp_data["key"]] = gp.id
+
                 # Import exercises
                 for ex_order, ex_data in enumerate(lesson_data.get("exercises", [])):
                     exercise_type_str = ex_data.get("exercise_type", "vocabulary")
@@ -93,6 +110,12 @@ def import_courses(data):
                         exercise_type = ExerciseType(exercise_type_str)
                     except ValueError:
                         exercise_type = ExerciseType.VOCABULARY
+
+                    # Resolve grammar_pattern_key to grammar_pattern_id
+                    grammar_pattern_id = None
+                    gp_key = ex_data.get("grammar_pattern_key")
+                    if gp_key and gp_key in pattern_key_to_id:
+                        grammar_pattern_id = pattern_key_to_id[gp_key]
 
                     exercise = Exercise(
                         lesson_id=lesson.id,
@@ -110,6 +133,7 @@ def import_courses(data):
                         correct_answer=ex_data["correct_answer"],
                         explanation=ex_data.get("explanation"),
                         display_order=ex_order,
+                        grammar_pattern_id=grammar_pattern_id,
                     )
                     db.session.add(exercise)
 
@@ -146,7 +170,9 @@ def check_existing_data():
 def clear_existing_data():
     """Clear all existing lesson data"""
     print("Clearing existing data...")
+    db.session.query(GrammarMastery).delete()
     db.session.query(Exercise).delete()
+    db.session.query(GrammarPattern).delete()
     db.session.query(Lesson).delete()
     db.session.query(Unit).delete()
     db.session.query(Course).delete()

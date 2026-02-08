@@ -154,6 +154,12 @@ class Lesson(db.Model):
     progress: Mapped[List["UserProgress"]] = relationship(
         "UserProgress", back_populates="lesson", cascade="all, delete-orphan"
     )
+    grammar_patterns: Mapped[List["GrammarPattern"]] = relationship(
+        "GrammarPattern",
+        back_populates="lesson",
+        cascade="all, delete-orphan",
+        order_by="GrammarPattern.display_order",
+    )
 
     __table_args__ = (Index("idx_lesson_unit_order", "unit_id", "display_order"),)
 
@@ -208,10 +214,18 @@ class Exercise(db.Model):
 
     display_order: Mapped[int] = mapped_column(Integer, default=0)
 
+    # Optional link to grammar pattern for mastery tracking
+    grammar_pattern_id: Mapped[Optional[int]] = mapped_column(
+        Integer, ForeignKey("grammar_pattern.id"), nullable=True
+    )
+
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     # Relationships
     lesson: Mapped["Lesson"] = relationship("Lesson", back_populates="exercises")
+    grammar_pattern: Mapped[Optional["GrammarPattern"]] = relationship(
+        "GrammarPattern", back_populates="exercises"
+    )
 
     __table_args__ = (
         Index("idx_exercise_lesson_order", "lesson_id", "display_order"),
@@ -328,3 +342,65 @@ class VocabularyItem(db.Model):
         if self.times_practiced == 0:
             return None
         return (self.times_correct / self.times_practiced) * 100
+
+
+class GrammarPattern(db.Model):
+    """Grammar pattern associated with a lesson for mastery tracking"""
+
+    __tablename__ = "grammar_pattern"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    lesson_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("lesson.id"), nullable=False
+    )
+    key: Mapped[str] = mapped_column(String(100), nullable=False)
+    title: Mapped[str] = mapped_column(String(200), nullable=False)
+    pattern: Mapped[str] = mapped_column(Text, nullable=False)
+    meaning: Mapped[Optional[str]] = mapped_column(Text)
+    example_korean: Mapped[Optional[str]] = mapped_column(Text)
+    example_english: Mapped[Optional[str]] = mapped_column(Text)
+    display_order: Mapped[int] = mapped_column(Integer, default=0)
+
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+    # Relationships
+    lesson: Mapped["Lesson"] = relationship("Lesson", back_populates="grammar_patterns")
+    exercises: Mapped[List["Exercise"]] = relationship(
+        "Exercise", back_populates="grammar_pattern"
+    )
+    mastery_records: Mapped[List["GrammarMastery"]] = relationship(
+        "GrammarMastery", back_populates="pattern", cascade="all, delete-orphan"
+    )
+
+    __table_args__ = (
+        Index("idx_grammar_pattern_lesson", "lesson_id", "display_order"),
+    )
+
+    def __repr__(self) -> str:
+        return f"<GrammarPattern {self.id}: {self.title}>"
+
+
+class GrammarMastery(db.Model):
+    """Tracks user mastery of individual grammar patterns"""
+
+    __tablename__ = "grammar_mastery"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(Integer, default=1)
+    pattern_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("grammar_pattern.id"), nullable=False
+    )
+
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    correct: Mapped[int] = mapped_column(Integer, default=0)
+    mastery_score: Mapped[float] = mapped_column(Float, default=0.0)
+    last_practiced_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
+
+    # Relationships
+    pattern: Mapped["GrammarPattern"] = relationship(
+        "GrammarPattern", back_populates="mastery_records"
+    )
+
+    __table_args__ = (
+        Index("idx_grammar_mastery_user_pattern", "user_id", "pattern_id", unique=True),
+    )

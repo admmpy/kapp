@@ -2,8 +2,8 @@
  * ExerciseRenderer - Renders different types of exercises
  */
 import { useState } from 'react';
-import type { Exercise, ExerciseResult } from '@kapp/core';
-import { API_BASE_URL } from '@kapp/core';
+import type { Exercise, ExerciseResult, PronunciationSelfCheck as PronCheck } from '@kapp/core';
+import { API_BASE_URL, PRONUNCIATION_SELF_CHECK_ENABLED, savePronunciationCheck } from '@kapp/core';
 import SentenceArrangeExercise from './SentenceArrangeExercise';
 import './ExerciseRenderer.css';
 
@@ -21,6 +21,8 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
   const [textAnswer, setTextAnswer] = useState('');
   const [writingAnswer, setWritingAnswer] = useState('');
   const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1.0);
+  const [selfCheckDone, setSelfCheckDone] = useState(false);
+  const [selfCheckRating, setSelfCheckRating] = useState<PronCheck['rating'] | null>(null);
 
   // Route sentence_arrange exercises to dedicated component
   if (exercise.exercise_type === 'sentence_arrange') {
@@ -84,6 +86,24 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
       const audio = new Audio(`${API_BASE_URL}${exercise.audio_url}`);
       audio.playbackRate = speed;
       audio.play().catch(err => console.error('Audio playback failed:', err));
+    }
+  }
+
+  const showSelfCheck = PRONUNCIATION_SELF_CHECK_ENABLED
+    && exercise.audio_url
+    && (exercise.exercise_type === 'listening' || exercise.exercise_type === 'vocabulary');
+
+  async function handleSelfCheck(rating: PronCheck['rating']) {
+    setSelfCheckRating(rating);
+    setSelfCheckDone(true);
+    try {
+      await savePronunciationCheck({
+        exerciseId: exercise.id,
+        rating,
+        timestamp: Date.now(),
+      });
+    } catch (err) {
+      console.error('Failed to save pronunciation check:', err);
     }
   }
 
@@ -176,6 +196,32 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
               1.2x
             </button>
           </div>
+        </div>
+      )}
+
+      {/* Pronunciation self-check */}
+      {showSelfCheck && (
+        <div className="pronunciation-self-check">
+          {selfCheckDone ? (
+            <p className="self-check-confirmation">
+              Pronunciation marked: <strong>{selfCheckRating}</strong>
+            </p>
+          ) : (
+            <>
+              <p className="self-check-prompt">How did your pronunciation sound?</p>
+              <div className="self-check-buttons">
+                <button className="self-check-btn good" onClick={() => handleSelfCheck('good')}>
+                  Good
+                </button>
+                <button className="self-check-btn okay" onClick={() => handleSelfCheck('okay')}>
+                  Okay
+                </button>
+                <button className="self-check-btn again" onClick={() => handleSelfCheck('again')}>
+                  Again
+                </button>
+              </div>
+            </>
+          )}
         </div>
       )}
 

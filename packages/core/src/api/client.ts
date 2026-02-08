@@ -46,11 +46,6 @@ class APIClient {
       timeout: 10000, // 10 seconds
     });
 
-    // Add interceptor to log requests
-    this.client.interceptors.request.use((config) => {
-      console.log(`API Request: ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`);
-      return config;
-    });
   }
 
   // ============================================

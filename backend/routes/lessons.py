@@ -9,9 +9,9 @@ Endpoints:
 """
 import json
 from datetime import datetime
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from database import db
-from models_v2 import Lesson, Exercise, UserProgress
+from models_v2 import Lesson, Exercise, UserProgress, GrammarMastery
 from utils import not_found_response, error_response, validation_error_response
 from routes.helpers import get_user_progress, get_or_create_user_progress, get_current_user_id
 import logging
@@ -140,29 +140,62 @@ def get_lesson(lesson_id: int):
                 "score": progress.score,
             }
 
-        return (
-            jsonify(
-                {
-                    "lesson": {
-                        "id": lesson.id,
-                        "title": lesson.title,
-                        "description": lesson.description,
-                        "grammar_explanation": lesson.grammar_explanation,
-                        "grammar_tip": lesson.grammar_tip,
-                        "estimated_minutes": lesson.estimated_minutes,
-                        "unit_id": lesson.unit_id,
-                        "exercise_count": lesson.exercise_count,
-                        "exercises": exercises,
-                        "progress": progress_data,
-                    }
+        lesson_data = {
+            "id": lesson.id,
+            "title": lesson.title,
+            "description": lesson.description,
+            "grammar_explanation": lesson.grammar_explanation,
+            "grammar_tip": lesson.grammar_tip,
+            "estimated_minutes": lesson.estimated_minutes,
+            "unit_id": lesson.unit_id,
+            "exercise_count": lesson.exercise_count,
+            "exercises": exercises,
+            "progress": progress_data,
+        }
+
+        # Include grammar patterns with mastery data when feature is enabled
+        if current_app.config.get("GRAMMAR_MASTERY_ENABLED"):
+            user_id = get_current_user_id()
+            pattern_ids = [gp.id for gp in lesson.grammar_patterns]
+
+            # Single query for all mastery records (avoids N+1)
+            mastery_map = {}
+            if pattern_ids:
+                mastery_records = (
+                    db.session.query(GrammarMastery)
+                    .filter(
+                        GrammarMastery.user_id == user_id,
+                        GrammarMastery.pattern_id.in_(pattern_ids),
+                    )
+                    .all()
+                )
+                mastery_map = {m.pattern_id: m for m in mastery_records}
+
+            grammar_patterns = []
+            for gp in lesson.grammar_patterns:
+                pattern_data = {
+                    "id": gp.id,
+                    "title": gp.title,
+                    "pattern": gp.pattern,
+                    "meaning": gp.meaning,
+                    "example_korean": gp.example_korean,
+                    "example_english": gp.example_english,
                 }
-            ),
-            200,
-        )
+                mastery = mastery_map.get(gp.id)
+                if mastery:
+                    pattern_data["mastery"] = {
+                        "mastery_score": mastery.mastery_score,
+                        "attempts": mastery.attempts,
+                        "correct": mastery.correct,
+                    }
+                grammar_patterns.append(pattern_data)
+            lesson_data["grammar_patterns"] = grammar_patterns
+
+        return jsonify({"lesson": lesson_data}), 200
 
     except Exception as e:
         logger.error(f"Error getting lesson {lesson_id}: {e}")
-        return error_response("Failed to get lesson", 500, str(e))
+        return error_response("Failed to get lesson", 500)
 
 
 @lessons_bp.route("/lessons/<int:lesson_id>/start", methods=["POST"])
@@ -212,7 +245,7 @@ def start_lesson(lesson_id: int):
     except Exception as e:
         logger.error(f"Error starting lesson {lesson_id}: {e}")
         db.session.rollback()
-        return error_response("Failed to start lesson", 500, str(e))
+        return error_response("Failed to start lesson", 500)
 
 
 @lessons_bp.route("/lessons/<int:lesson_id>/complete", methods=["POST"])
@@ -282,7 +315,7 @@ def complete_lesson(lesson_id: int):
     except Exception as e:
         logger.error(f"Error completing lesson {lesson_id}: {e}")
         db.session.rollback()
-        return error_response("Failed to complete lesson", 500, str(e))
+        return error_response("Failed to complete lesson", 500)
 
 
 @lessons_bp.route("/exercises/<int:exercise_id>/submit", methods=["POST"])
@@ -331,23 +364,58 @@ def submit_exercise(exercise_id: int):
             if is_correct and progress.completed_exercises < progress.total_exercises:
                 progress.completed_exercises += 1
             progress.last_activity_at = datetime.utcnow()
-            db.session.commit()
 
-        return (
-            jsonify(
-                {
-                    "correct": is_correct,
-                    "correct_answer": exercise.correct_answer,
-                    "explanation": exercise.explanation,
-                }
-            ),
-            200,
-        )
+        response_data = {
+            "correct": is_correct,
+            "correct_answer": exercise.correct_answer,
+            "explanation": exercise.explanation,
+        }
+
+        # Update grammar mastery when feature is enabled and exercise is linked to a pattern
+        if (
+            current_app.config.get("GRAMMAR_MASTERY_ENABLED")
+            and exercise.grammar_pattern_id
+        ):
+            user_id = get_current_user_id()
+            mastery = (
+                db.session.query(GrammarMastery)
+                .filter(
+                    GrammarMastery.user_id == user_id,
+                    GrammarMastery.pattern_id == exercise.grammar_pattern_id,
+                )
+                .first()
+            )
+            if not mastery:
+                mastery = GrammarMastery(
+                    user_id=user_id,
+                    pattern_id=exercise.grammar_pattern_id,
+                    attempts=0,
+                    correct=0,
+                    mastery_score=0.0,
+                )
+                db.session.add(mastery)
+
+            mastery.attempts += 1
+            if is_correct:
+                mastery.correct += 1
+            mastery.mastery_score = (mastery.correct / mastery.attempts) * 100
+            mastery.last_practiced_at = datetime.utcnow()
+
+            pattern = exercise.grammar_pattern
+            response_data["pattern_mastery"] = {
+                "pattern_title": pattern.title if pattern else "Unknown",
+                "mastery_score": mastery.mastery_score,
+                "attempts": mastery.attempts,
+            }
+
+        db.session.commit()
+
+        return jsonify(response_data), 200
 
     except Exception as e:
         logger.error(f"Error submitting exercise {exercise_id}: {e}")
         db.session.rollback()
-        return error_response("Failed to submit exercise", 500, str(e))
+        return error_response("Failed to submit exercise", 500)
 
 
 @lessons_bp.route("/lessons/<int:lesson_id>/next", methods=["GET"])
@@ -432,4 +500,4 @@ def get_next_lesson(lesson_id: int):
 
     except Exception as e:
         logger.error(f"Error getting next lesson for {lesson_id}: {e}")
-        return error_response("Failed to get next lesson", 500, str(e))
+        return error_response("Failed to get next lesson", 500)

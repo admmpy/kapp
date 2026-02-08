@@ -75,12 +75,33 @@ CORS_ORIGINS=http://localhost:5173
 OPENAI_API_KEY=your-openai-api-key-here
 OPENAI_MODEL=gpt-4o-mini
 LLM_ENABLED=true
+GRAMMAR_MASTERY_ENABLED=false
 ```
 
 ### Frontend (.env)
 ```bash
 VITE_API_URL=http://localhost:5001
+VITE_PRONUNCIATION_SELF_CHECK_ENABLED=false
+VITE_SPEAKING_FIRST_ENABLED=false
+VITE_GRAMMAR_MASTERY_ENABLED=false
 ```
+
+### Feature Flags
+
+| Flag | Layer | Default | Purpose |
+|------|-------|---------|---------|
+| `VITE_PRONUNCIATION_SELF_CHECK_ENABLED` | Frontend | `false` | Show self-rating after audio playback |
+| `VITE_SPEAKING_FIRST_ENABLED` | Frontend | `false` | Reorder exercises: audio-based first |
+| `VITE_GRAMMAR_MASTERY_ENABLED` | Frontend | `false` | Show mastery pill + weakest patterns UI |
+| `GRAMMAR_MASTERY_ENABLED` | Backend | `false` | Track grammar pattern mastery in DB |
+
+### Data Models (Grammar Mastery)
+
+When `GRAMMAR_MASTERY_ENABLED=true`, two new tables are used:
+- **`grammar_pattern`** — patterns linked to lessons (key, title, pattern, meaning, examples)
+- **`grammar_mastery`** — per-user mastery tracking (attempts, correct, mastery_score)
+
+Exercises can link to a grammar pattern via `grammar_pattern_id`. The import script resolves `grammar_pattern_key` from lesson JSON to the FK.
 
 ## Quick Reference
 

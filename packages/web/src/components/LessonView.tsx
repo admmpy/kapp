@@ -2,8 +2,8 @@
  * LessonView - Main lesson interface with exercises
  */
 import { useState, useEffect } from 'react';
-import { apiClient, cacheLesson, getCachedLesson, saveProgress } from '@kapp/core';
-import type { Lesson, ExerciseResult } from '@kapp/core';
+import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED, GRAMMAR_MASTERY_ENABLED } from '@kapp/core';
+import type { Lesson, Exercise, ExerciseResult } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
 import ProgressBar from './ProgressBar';
 import Breadcrumb from './Breadcrumb';
@@ -29,6 +29,15 @@ interface Props {
   onNavigateToLesson?: (lessonId: number) => void;
 }
 
+function sortExercisesForSpeakingFirst(exercises: Exercise[]): Exercise[] {
+  const audioFirst = exercises.filter(
+    ex => ex.exercise_type === 'listening'
+      || ((ex.exercise_type === 'vocabulary' || ex.exercise_type === 'sentence_arrange') && ex.audio_url)
+  );
+  const rest = exercises.filter(ex => !audioFirst.includes(ex));
+  return [...audioFirst, ...rest];
+}
+
 export default function LessonView({ lessonId, courseId, onComplete, onBack, onBackToCourse, onBackToCourses, onNavigateToLesson }: Props) {
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
@@ -47,6 +56,9 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
   const [isLastInCourse, setIsLastInCourse] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const [showExplanationModal, setShowExplanationModal] = useState(false);
+  const [patternMasteryResults, setPatternMasteryResults] = useState<
+    Array<{ pattern_title: string; mastery_score: number; attempts: number }>
+  >([]);
 
   useEffect(() => {
     async function loadLesson() {
@@ -111,6 +123,19 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
       if (result.correct) {
         setCorrectAnswers(prev => prev + 1);
       }
+      if (GRAMMAR_MASTERY_ENABLED && result.pattern_mastery) {
+        setPatternMasteryResults(prev => {
+          const existing = prev.findIndex(
+            p => p.pattern_title === result.pattern_mastery!.pattern_title
+          );
+          if (existing >= 0) {
+            const updated = [...prev];
+            updated[existing] = result.pattern_mastery!;
+            return updated;
+          }
+          return [...prev, result.pattern_mastery!];
+        });
+      }
     } catch (err) {
       console.error('Failed to submit answer:', err);
     } finally {
@@ -129,8 +154,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     } else {
       // Lesson complete - show completion modal
       const timeSpent = Math.round((Date.now() - startTime) / 1000);
-      // Use correctAnswers + 1 if current answer is correct (since state hasn't updated yet)
-      const finalCorrect = lastResult?.correct ? correctAnswers : correctAnswers;
+      const finalCorrect = correctAnswers;
       const finalTotal = totalAnswered;
       const score = finalTotal > 0 ? (finalCorrect / finalTotal) * 100 : 0;
 
@@ -210,7 +234,9 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     );
   }
 
-  const exercises = lesson.exercises || [];
+  const exercises = SPEAKING_FIRST_ENABLED
+    ? sortExercisesForSpeakingFirst(lesson.exercises || [])
+    : (lesson.exercises || []);
   const currentExercise = exercises[currentExerciseIndex];
   const isLastExercise = currentExerciseIndex === exercises.length - 1;
 
@@ -316,6 +342,14 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
                 {lastResult.explanation}
               </div>
             )}
+            {GRAMMAR_MASTERY_ENABLED && lastResult.pattern_mastery && (
+              <div className={`mastery-pill ${
+                lastResult.pattern_mastery.mastery_score >= 80 ? 'mastery-high' :
+                lastResult.pattern_mastery.mastery_score >= 50 ? 'mastery-mid' : 'mastery-low'
+              }`}>
+                {lastResult.pattern_mastery.pattern_title} — {Math.round(lastResult.pattern_mastery.mastery_score)}%
+              </div>
+            )}
             <div className="result-actions">
               {!lastResult.correct && (
                 <button
@@ -349,6 +383,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
           isLastInCourse={isLastInCourse}
           onNextLesson={handleNextLesson}
           onBackToCourse={handleBackToCourse}
+          patternMasteryResults={GRAMMAR_MASTERY_ENABLED ? patternMasteryResults : undefined}
         />
       )}
 
