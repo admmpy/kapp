@@ -50,22 +50,27 @@ def get_weaknesses():
             .all()
         )
 
+        # Batch query: get all exercise IDs grouped by pattern_id
+        pattern_ids = [pattern.id for _, pattern in weak_grammar_records]
+        exercise_id_map: dict[int, list[int]] = {pid: [] for pid in pattern_ids}
+        if pattern_ids:
+            exercise_rows = (
+                db.session.query(Exercise.grammar_pattern_id, Exercise.id)
+                .filter(Exercise.grammar_pattern_id.in_(pattern_ids))
+                .all()
+            )
+            for pat_id, ex_id in exercise_rows:
+                exercise_id_map[pat_id].append(ex_id)
+
         weak_grammar = []
         for mastery, pattern in weak_grammar_records:
-            # Get exercise IDs linked to this pattern
-            exercise_ids = [
-                ex.id for ex in
-                db.session.query(Exercise.id)
-                .filter(Exercise.grammar_pattern_id == pattern.id)
-                .all()
-            ]
             weak_grammar.append({
                 "pattern_id": pattern.id,
                 "pattern_title": pattern.title,
                 "mastery_score": mastery.mastery_score,
                 "attempts": mastery.attempts,
                 "correct": mastery.correct,
-                "exercise_ids": exercise_ids,
+                "exercise_ids": exercise_id_map.get(pattern.id, []),
             })
 
         # Get weak vocabulary (accuracy < 80%, at least 1 practice)

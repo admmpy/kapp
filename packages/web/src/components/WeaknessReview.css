@@ -166,8 +166,8 @@
   margin-bottom: 8px;
 }
 
-.weakness-review .result-feedback.correct .result-icon { color: #27ae60; }
-.weakness-review .result-feedback.incorrect .result-icon { color: #e74c3c; }
+.weakness-review .result-feedback.correct .result-icon { color: var(--color-success); }
+.weakness-review .result-feedback.incorrect .result-icon { color: var(--color-error); }
 
 .weakness-review .result-message {
   font-size: 18px;

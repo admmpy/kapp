@@ -193,6 +193,49 @@
   transform: translateY(-2px);
 }
 
+/* Weakness Card */
+.weakness-card {
+  background: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  margin-bottom: 30px;
+  transition: transform 0.2s;
+}
+
+.weakness-card:hover {
+  transform: translateY(-2px);
+}
+
+.weakness-card h3 {
+  margin: 0 0 8px 0;
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.weakness-card p {
+  margin: 0 0 16px 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.weakness-card button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #e74c3c 0%, #f39c12 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.weakness-card button:hover {
+  transform: translateY(-2px);
+}
+
 /* TOPIK Readiness */
 .topik-readiness {
   background: var(--color-surface);

@@ -43,6 +43,7 @@ All training-enhancement features are behind env-var flags:
 - `VITE_PRONUNCIATION_SELF_CHECK_ENABLED` — pronunciation self-rating after audio (default: disabled)
 - `VITE_SPEAKING_FIRST_ENABLED` — reorder exercises, audio first (default: **enabled**; set `false` to disable)
 - `VITE_GRAMMAR_MASTERY_ENABLED` — mastery pill + weakest patterns UI (default: disabled; requires backend `GRAMMAR_MASTERY_ENABLED`)
+- `VITE_WEAKNESS_REVIEW_ENABLED` — weakness-driven review for grammar & vocabulary (default: disabled; requires backend `WEAKNESS_REVIEW_ENABLED`)
 
 ### API URLs
 - Use environment variables: `import.meta.env.VITE_API_URL`
