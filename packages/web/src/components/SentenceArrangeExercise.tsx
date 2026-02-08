@@ -57,7 +57,7 @@ export default function SentenceArrangeExercise({ exercise, onSubmit, result, su
   const shuffledTiles = useMemo(() => {
     if (!tiles) return [];
     return shuffleArray(tiles);
-  }, [tiles]);
+  }, [exercise.id]);
 
   if (!tiles || tiles.length === 0) {
     return <div className="error">No tiles available for this exercise</div>;

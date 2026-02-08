@@ -27,7 +27,11 @@ function App() {
     lessonId: null
   });
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') return stored;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
 
   // Initialize IndexedDB and setup online/offline listeners
   useEffect(() => {
@@ -48,16 +52,6 @@ function App() {
       window.removeEventListener('online', handleOnlineStatus);
       window.removeEventListener('offline', handleOfflineStatus);
     };
-  }, []);
-
-  useEffect(() => {
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme === 'light' || storedTheme === 'dark') {
-      setTheme(storedTheme);
-      return;
-    }
-    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-    setTheme(prefersDark ? 'dark' : 'light');
   }, []);
 
   useEffect(() => {
