@@ -303,6 +303,34 @@ class APIClient {
   }
 
   // ============================================
+  // Audio generation
+  // ============================================
+
+  async generateAudio(text: string): Promise<{ filename: string }> {
+    const response = await this.client.post<{ filename: string }>('/audio/generate', {
+      text,
+      lang: 'ko',
+      slow: false,
+    }, {
+      timeout: 30000,
+    });
+    return response.data;
+  }
+
+  // ============================================
+  // Translation
+  // ============================================
+
+  async translateText(text: string): Promise<{ translation: string }> {
+    const response = await this.client.post<{ translation: string }>('/llm/translate', {
+      text,
+    }, {
+      timeout: 30000,
+    });
+    return response.data;
+  }
+
+  // ============================================
   // Conversation endpoints
   // ============================================
 

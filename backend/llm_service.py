@@ -285,6 +285,10 @@ Respond in English only. Focus on:
 2) One common mistake to avoid.
 3) One helpful tip for remembering or using it correctly.""",
     },
+    "translate": {
+        "system": "You are a Korean-to-English translator. Provide a natural, accurate English translation. Return ONLY the translation, no extra commentary.",
+        "user": "Translate the following Korean text to English:\n\n{text}",
+    },
     "conversation": {
         "system": """You are a friendly Korean language conversation partner.
 Help the learner practice by having natural conversations.

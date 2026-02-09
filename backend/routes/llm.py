@@ -281,6 +281,50 @@ def explain_exercise():
         return error_response("Failed to generate explanation", 500)
 
 
+@llm_bp.route("/llm/translate", methods=["POST"])
+@limiter.limit("30/hour")
+def translate_text():
+    """
+    Translate Korean text to English using LLM
+
+    Request body:
+        { "text": "한국어 텍스트" }
+
+    Response:
+        { "translation": "English text" }
+    """
+    try:
+        disabled_response = ensure_llm_enabled()
+        if disabled_response:
+            return disabled_response
+
+        data = request.get_json(silent=True) or {}
+        text = (data.get("text") or "").strip()
+
+        if not text:
+            return validation_error_response("text is required")
+
+        if len(text) > 500:
+            return validation_error_response("text must be 500 characters or fewer")
+
+        template = PROMPT_TEMPLATES["translate"]
+        user_prompt = template["user"].format(text=text)
+
+        client = get_llm_client()
+        response = client.chat(
+            prompt=user_prompt,
+            system=template["system"],
+            temperature=0.3,
+            max_tokens=200,
+        )
+
+        return jsonify({"translation": response}), 200
+
+    except Exception as e:
+        logger.error(f"Error in translate_text: {e}")
+        return error_response("Failed to translate text", 500)
+
+
 @llm_bp.route("/llm/conversation", methods=["POST"])
 @limiter.limit("10/hour")
 def conversation():
