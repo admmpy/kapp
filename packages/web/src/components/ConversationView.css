@@ -148,21 +148,32 @@
   margin: 0;
   font-size: 14px;
   line-height: 1.4;
-  padding-right: 32px;
 }
 
-.message-group.user .message-content {
-  padding-right: 0;
+.translation-text {
+  margin: 8px 0 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
 }
 
-.audio-button {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
-  border-radius: 50%;
-  width: 28px;
+.translation-loading {
+  font-style: italic;
+}
+
+.message-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.action-button {
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  width: 32px;
   height: 28px;
   display: flex;
   align-items: center;
@@ -170,10 +181,17 @@
   cursor: pointer;
   font-size: 14px;
   transition: background 0.2s;
+  color: var(--color-text-muted);
 }
 
-.audio-button:hover {
-  background: rgba(255, 255, 255, 0.5);
+.action-button:hover:not(:disabled) {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.action-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .message-time {
