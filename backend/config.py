@@ -76,10 +76,10 @@ class Config:
     RATELIMIT_STORAGE_URI = os.getenv("RATELIMIT_STORAGE_URI", "memory://")
 
     # Feature flags
-    GRAMMAR_MASTERY_ENABLED = os.getenv("GRAMMAR_MASTERY_ENABLED", "false").lower() == "true"
-    WEAKNESS_REVIEW_ENABLED = os.getenv("WEAKNESS_REVIEW_ENABLED", "false").lower() == "true"
-    SENTENCE_SRS_ENABLED = os.getenv("SENTENCE_SRS_ENABLED", "false").lower() == "true"
-    IMMERSION_MODE_ENABLED = os.getenv("IMMERSION_MODE_ENABLED", "false").lower() == "true"
+    GRAMMAR_MASTERY_ENABLED = os.getenv("GRAMMAR_MASTERY_ENABLED", "true").lower() != "false"
+    WEAKNESS_REVIEW_ENABLED = os.getenv("WEAKNESS_REVIEW_ENABLED", "true").lower() != "false"
+    SENTENCE_SRS_ENABLED = os.getenv("SENTENCE_SRS_ENABLED", "true").lower() != "false"
+    IMMERSION_MODE_ENABLED = os.getenv("IMMERSION_MODE_ENABLED", "true").lower() != "false"
 
     @staticmethod
     def init_app(app):

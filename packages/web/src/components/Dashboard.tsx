@@ -135,6 +135,25 @@ export default function Dashboard({ onClose, onStartReview, onStartWeaknessRevie
         </div>
       </div>
 
+      <div className="stat-card-detailed">
+        <h3>Adaptive Review Loops</h3>
+        <p className="stat-subtitle">
+          Vocab due: {vocabDueCount}
+          {SENTENCE_SRS_ENABLED ? ` • Sentence due: ${exerciseDueCount}` : ''}
+        </p>
+        <div className="stat-action" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          {onStartReview && (
+            <button onClick={onStartReview}>Review Vocabulary</button>
+          )}
+          {SENTENCE_SRS_ENABLED && onStartExerciseReview && (
+            <button onClick={onStartExerciseReview}>Review Sentences</button>
+          )}
+          {WEAKNESS_REVIEW_ENABLED && onStartWeaknessReview && (
+            <button onClick={onStartWeaknessReview}>Review Weak Areas</button>
+          )}
+        </div>
+      </div>
+
       {/* Detailed Stats Grid */}
       <div className="stats-grid">
         <div className="stat-card-detailed">

@@ -62,14 +62,14 @@ export default function WeaknessReview({ onClose }: Props) {
     }
   }
 
-  async function handleSubmitAnswer(answer: string) {
+  async function handleSubmitAnswer(answer: string, meta?: { peeked?: boolean }) {
     if (submitting || lastResult) return;
     const exercise = exercises[currentIndex];
     if (!exercise) return;
 
     setSubmitting(true);
     try {
-      const result = await apiClient.submitExercise(exercise.id, answer);
+      const result = await apiClient.submitExercise(exercise.id, { answer, peeked: meta?.peeked });
       setLastResult(result);
       setSessionStats(prev => ({
         reviewed: prev.reviewed + 1,

@@ -104,6 +104,43 @@
   margin-bottom: 15px;
 }
 
+.exercise-review .quality-selector {
+  margin: 16px 0;
+}
+
+.exercise-review .quality-title {
+  margin: 0 0 4px 0;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.exercise-review .quality-hint {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.exercise-review .quality-buttons {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.exercise-review .quality-btn {
+  padding: 8px 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: white;
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.exercise-review .quality-btn.active {
+  border-color: var(--color-primary);
+  background: #eef4ff;
+}
+
 .exercise-review .next-button {
   padding: 12px 32px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -118,6 +155,12 @@
 
 .exercise-review .next-button:hover {
   transform: translateY(-2px);
+}
+
+.exercise-review .next-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .exercise-review .close-btn {
@@ -221,6 +264,10 @@
 }
 
 @media (max-width: 768px) {
+  .exercise-review .quality-buttons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .session-summary {
     gap: 20px;
   }

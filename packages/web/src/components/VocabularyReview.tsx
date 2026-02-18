@@ -20,6 +20,7 @@ export default function VocabularyReview({ onClose, immersionLevel = 1 }: Props)
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState({ totalDue: 0, newItems: 0 });
   const [sessionStats, setSessionStats] = useState({ reviewed: 0, correct: 0 });
+  const [peekedCurrent, setPeekedCurrent] = useState(false);
 
   useEffect(() => {
     loadDueVocabulary();
@@ -44,21 +45,23 @@ export default function VocabularyReview({ onClose, immersionLevel = 1 }: Props)
     if (!currentItem) return;
 
     try {
-      await apiClient.recordVocabularyReview(currentItem.id, quality);
+      const effectiveQuality = peekedCurrent ? Math.min(quality, 3) : quality;
+      await apiClient.recordVocabularyReview(currentItem.id, effectiveQuality);
 
       // Update session stats
       setSessionStats(prev => ({
         reviewed: prev.reviewed + 1,
-        correct: prev.correct + (quality >= 3 ? 1 : 0)
+        correct: prev.correct + (effectiveQuality >= 3 ? 1 : 0)
       }));
 
       // Move to next item or finish
       if (currentIndex < dueItems.length - 1) {
         setCurrentIndex(prev => prev + 1);
         setShowAnswer(false);
+        setPeekedCurrent(false);
       } else {
         // Session complete
-        handleSessionComplete();
+        handleSessionComplete(effectiveQuality);
       }
     } catch (err) {
       console.error('Failed to record review:', err);
@@ -66,8 +69,10 @@ export default function VocabularyReview({ onClose, immersionLevel = 1 }: Props)
     }
   }
 
-  function handleSessionComplete() {
-    alert(`Review session complete!\n\nReviewed: ${sessionStats.reviewed + 1}\nCorrect: ${sessionStats.correct + (showAnswer ? 1 : 0)}`);
+  function handleSessionComplete(lastQuality: number) {
+    const finalReviewed = sessionStats.reviewed + 1;
+    const finalCorrect = sessionStats.correct + (lastQuality >= 3 ? 1 : 0);
+    alert(`Review session complete!\n\nReviewed: ${finalReviewed}\nCorrect: ${finalCorrect}`);
     if (onClose) {
       onClose();
     }
@@ -167,6 +172,9 @@ export default function VocabularyReview({ onClose, immersionLevel = 1 }: Props)
 
             <div className="quality-buttons">
               <p className="rating-prompt">How well did you remember this?</p>
+              {peekedCurrent && (
+                <p className="peeked-note">Hint path used: max rating capped at 3.</p>
+              )}
               <div className="button-grid">
                 <button
                   className="quality-btn quality-0"
@@ -200,6 +208,7 @@ export default function VocabularyReview({ onClose, immersionLevel = 1 }: Props)
                   className="quality-btn quality-4"
                   onClick={() => handleQualityRating(4)}
                   title="Correct with hesitation"
+                  disabled={peekedCurrent}
                 >
                   4 - Easy
                 </button>
@@ -207,6 +216,7 @@ export default function VocabularyReview({ onClose, immersionLevel = 1 }: Props)
                   className="quality-btn quality-5"
                   onClick={() => handleQualityRating(5)}
                   title="Perfect recall"
+                  disabled={peekedCurrent}
                 >
                   5 - Perfect
                 </button>
@@ -218,7 +228,10 @@ export default function VocabularyReview({ onClose, immersionLevel = 1 }: Props)
         {!showAnswer && (
           <button
             className="show-answer-btn"
-            onClick={() => setShowAnswer(true)}
+            onClick={() => {
+              setShowAnswer(true);
+              setPeekedCurrent(true);
+            }}
           >
             Show Answer
           </button>

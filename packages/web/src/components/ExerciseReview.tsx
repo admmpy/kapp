@@ -12,6 +12,31 @@ interface Props {
   onClose?: () => void;
 }
 
+function normalizeAnswer(value: string): string {
+  return value.trim().toLowerCase().replace(/[.,!?;:\s]+/g, ' ');
+}
+
+function evaluateAnswer(answer: string, exercise: DueExercise): boolean {
+  const expected = exercise.correct_answer || '';
+  if (!expected) return false;
+
+  if (exercise.exercise_type === 'sentence_arrange') {
+    try {
+      const answerArray = JSON.parse(answer);
+      const expectedArray = JSON.parse(expected);
+      return JSON.stringify(answerArray) === JSON.stringify(expectedArray);
+    } catch {
+      return false;
+    }
+  }
+
+  if (exercise.exercise_type === 'writing') {
+    return normalizeAnswer(answer) === normalizeAnswer(expected);
+  }
+
+  return answer.trim().toLowerCase() === expected.trim().toLowerCase();
+}
+
 export default function ExerciseReview({ onClose }: Props) {
   const [dueExercises, setDueExercises] = useState<DueExercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,14 +46,20 @@ export default function ExerciseReview({ onClose }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [sessionStats, setSessionStats] = useState({ reviewed: 0, correct: 0 });
   const [sessionComplete, setSessionComplete] = useState(false);
+  const [pendingAnswer, setPendingAnswer] = useState<string | null>(null);
+  const [pendingPeeked, setPendingPeeked] = useState(false);
+  const [selectedQuality, setSelectedQuality] = useState<number | null>(null);
 
   useEffect(() => {
     loadDueExercises();
   }, []);
 
-  // Clear result when exercise changes
+  // Clear result and pending review state when exercise changes
   useEffect(() => {
     setLastResult(null);
+    setPendingAnswer(null);
+    setPendingPeeked(false);
+    setSelectedQuality(null);
   }, [currentIndex]);
 
   async function loadDueExercises() {
@@ -44,37 +75,55 @@ export default function ExerciseReview({ onClose }: Props) {
     }
   }
 
-  async function handleSubmitAnswer(answer: string) {
+  async function handleSubmitAnswer(answer: string, meta?: { peeked?: boolean }) {
     if (submitting || lastResult) return;
     const exercise = dueExercises[currentIndex];
     if (!exercise) return;
 
-    setSubmitting(true);
-    try {
-      const result = await apiClient.submitExercise(exercise.id, answer);
-      setLastResult(result);
+    const isCorrect = evaluateAnswer(answer, exercise);
+    setPendingAnswer(answer);
+    setPendingPeeked(Boolean(meta?.peeked));
+    setSelectedQuality(null);
+    setLastResult({
+      correct: isCorrect,
+      correct_answer: exercise.correct_answer || '',
+      explanation: exercise.explanation,
+    });
+  }
 
-      // Auto-rate: correct = quality 4, incorrect = quality 1
-      const quality = result.correct ? 4 : 1;
-      await apiClient.recordExerciseReview(exercise.id, quality);
+  async function handleNextExercise() {
+    if (selectedQuality === null || !pendingAnswer) {
+      setError('Choose a quality rating before moving to the next exercise.');
+      return;
+    }
+
+    const exercise = dueExercises[currentIndex];
+    if (!exercise) return;
+
+    setSubmitting(true);
+    setError(null);
+    try {
+      const result = await apiClient.submitExercise(exercise.id, {
+        answer: pendingAnswer,
+        quality: selectedQuality,
+        peeked: pendingPeeked,
+      });
 
       setSessionStats(prev => ({
         reviewed: prev.reviewed + 1,
         correct: prev.correct + (result.correct ? 1 : 0),
       }));
+
+      if (currentIndex < dueExercises.length - 1) {
+        setCurrentIndex(prev => prev + 1);
+      } else {
+        setSessionComplete(true);
+      }
     } catch (err) {
       console.error('Failed to submit review:', err);
       setError('Failed to save review. Please try again.');
     } finally {
       setSubmitting(false);
-    }
-  }
-
-  function handleNextExercise() {
-    if (currentIndex < dueExercises.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-    } else {
-      setSessionComplete(true);
     }
   }
 
@@ -192,7 +241,32 @@ export default function ExerciseReview({ onClose }: Props) {
                 {lastResult.explanation}
               </div>
             )}
-            <button className="next-button" onClick={handleNextExercise}>
+
+            <div className="quality-selector">
+              <p className="quality-title">Rate your recall quality before continuing</p>
+              <p className="quality-hint">
+                {lastResult.correct
+                  ? 'Correct with hesitation: 3, easy recall: 4-5.'
+                  : 'Incorrect recall is usually 1.'}
+              </p>
+              <div className="quality-buttons">
+                {[0, 1, 2, 3, 4, 5].map(q => (
+                  <button
+                    key={q}
+                    className={`quality-btn quality-${q} ${selectedQuality === q ? 'active' : ''}`}
+                    onClick={() => setSelectedQuality(q)}
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button
+              className="next-button"
+              onClick={handleNextExercise}
+              disabled={selectedQuality === null || submitting}
+            >
               {isLastExercise ? 'Finish Review' : 'Next Exercise'}
             </button>
           </div>

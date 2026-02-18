@@ -14,7 +14,7 @@ backend_dir = Path(__file__).parent.parent
 sys.path.insert(0, str(backend_dir))
 
 from database import db
-from models_v2 import GrammarPattern, GrammarMastery, Exercise
+from models_v2 import GrammarPattern, GrammarMastery, Exercise, ExerciseSRS
 
 
 # ===========================================
@@ -381,6 +381,80 @@ class TestExerciseSubmitBaseline:
         )
         data = resp.get_json()
         assert data["correct"] is True
+
+
+class TestExerciseSubmitSrsQuality:
+    """Test optional submit quality signal for sentence SRS."""
+
+    def test_submit_accepts_quality_and_applies_to_srs(self, client, sample_course, app):
+        exercise_id = sample_course["exercise_ids"][0]
+
+        resp = client.post(
+            f"/api/exercises/{exercise_id}/submit",
+            json={"answer": "Hello", "quality": 5},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["applied_quality"] == 5
+
+        with app.app_context():
+            srs = (
+                db.session.query(ExerciseSRS)
+                .filter(ExerciseSRS.exercise_id == exercise_id, ExerciseSRS.user_id == 1)
+                .first()
+            )
+            assert srs is not None
+            assert srs.times_practiced == 1
+            assert srs.times_correct == 1
+            assert srs.repetitions == 1
+            assert abs(srs.ease_factor - 2.6) < 0.0001
+
+    def test_submit_rejects_invalid_quality(self, client, sample_course):
+        exercise_id = sample_course["exercise_ids"][0]
+
+        bad_resp = client.post(
+            f"/api/exercises/{exercise_id}/submit",
+            json={"answer": "Hello", "quality": 8},
+        )
+        assert bad_resp.status_code == 400
+
+        type_resp = client.post(
+            f"/api/exercises/{exercise_id}/submit",
+            json={"answer": "Hello", "quality": "high"},
+        )
+        assert type_resp.status_code == 400
+
+    def test_submit_falls_back_to_legacy_quality_when_omitted(self, client, sample_course, app):
+        exercise_id = sample_course["exercise_ids"][0]
+
+        resp = client.post(
+            f"/api/exercises/{exercise_id}/submit",
+            json={"answer": "Hello"},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["applied_quality"] == 4
+
+        with app.app_context():
+            srs = (
+                db.session.query(ExerciseSRS)
+                .filter(ExerciseSRS.exercise_id == exercise_id, ExerciseSRS.user_id == 1)
+                .first()
+            )
+            assert srs is not None
+            assert srs.times_correct == 1
+            assert srs.repetitions == 1
+
+    def test_submit_applies_peeked_penalty(self, client, sample_course):
+        exercise_id = sample_course["exercise_ids"][0]
+
+        resp = client.post(
+            f"/api/exercises/{exercise_id}/submit",
+            json={"answer": "Hello", "quality": 5, "peeked": True},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["applied_quality"] == 3
 
 
 class TestLessonEndpoint:

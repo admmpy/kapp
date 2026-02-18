@@ -138,6 +138,12 @@
   margin: 0 0 15px 0;
 }
 
+.peeked-note {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
 .button-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -159,6 +165,13 @@
 .quality-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quality-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .quality-btn.quality-0,

@@ -60,15 +60,9 @@
                   "audio_url": "/api/audio/6572762d43073c46ad22c9e6bf08bd37.mp3"
                 },
                 {
-                  "exercise_type": "vocabulary",
+                  "exercise_type": "writing",
                   "question": "How do you say goodbye when YOU are leaving?",
-                  "instruction": "Select the correct phrase",
-                  "options": [
-                    "안녕하세요",
-                    "안녕히 가세요",
-                    "안녕히 계세요",
-                    "감사합니다"
-                  ],
+                  "instruction": "Type your Korean answer before checking.",
                   "correct_answer": "안녕히 계세요",
                   "explanation": "안녕히 계세요 (stay in peace) is said when you are the one leaving"
                 },
@@ -257,16 +251,10 @@
                   "audio_url": "/api/audio/96cb025e8c5c9d7a81afaf3a5f39a724.mp3"
                 },
                 {
-                  "exercise_type": "listening",
-                  "question": "Listen to the sentence and select what you hear",
-                  "instruction": "Pay attention to the formality",
+                  "exercise_type": "writing",
+                  "question": "Listen to the sentence and type what you hear",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "도와 주셔서 정말 감사합니다.",
-                  "options": [
-                    "도와 주셔서 정말 감사합니다.",
-                    "도와 주셔서 고마워요.",
-                    "죄송합니다. 도와 주세요.",
-                    "감사합니다. 잘 지내요."
-                  ],
                   "correct_answer": "도와 주셔서 정말 감사합니다.",
                   "explanation": "The sentence means 'Thank you very much for your help.'",
                   "audio_url": "/api/audio/99d94ba0d44298ff6ed36184b787bc31.mp3"
@@ -422,16 +410,10 @@
                   "audio_url": "/api/audio/a91d02fb0e5bdd01876e81b5dab24013.mp3"
                 },
                 {
-                  "exercise_type": "grammar",
+                  "exercise_type": "writing",
                   "question": "Complete the sentence: 저는 민수___",
-                  "instruction": "Fill in the blank to say 'I am Minsu'",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "저는 민수___",
-                  "options": [
-                    "이에요",
-                    "입니다",
-                    "예요",
-                    "있어요"
-                  ],
                   "correct_answer": "입니다",
                   "explanation": "입니다 is the formal copula ('to be') used in introductions",
                   "audio_url": "/api/audio/90d5e6cb6c739ccbfa658eaf8ee29d0f.mp3"
@@ -625,17 +607,11 @@
               "grammar_tip": "Think of Sino-Korean numbers as the 'official' numbers for formal things like documents and prices.",
               "exercises": [
                 {
-                  "exercise_type": "vocabulary",
+                  "exercise_type": "writing",
                   "question": "What is 'one' in Sino-Korean?",
-                  "instruction": "Select the correct number",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "일",
                   "romanization": "il",
-                  "options": [
-                    "일",
-                    "이",
-                    "하나",
-                    "둘"
-                  ],
                   "correct_answer": "일",
                   "explanation": "일 (il) is 'one' in Sino-Korean",
                   "audio_url": "/api/audio/c94a3a32a9633dacc841d2fb9d8080bf.mp3"
@@ -809,17 +785,11 @@
               "grammar_tip": "Native Korean numbers are used when counting things you can touch or see!",
               "exercises": [
                 {
-                  "exercise_type": "vocabulary",
+                  "exercise_type": "writing",
                   "question": "What is 'one' in Native Korean?",
-                  "instruction": "Select the correct number",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "하나",
                   "romanization": "hana",
-                  "options": [
-                    "하나",
-                    "일",
-                    "둘",
-                    "이"
-                  ],
                   "correct_answer": "하나",
                   "explanation": "하나 (hana) is 'one' in Native Korean",
                   "audio_url": "/api/audio/db31bc2cfc7207406bca59d9c4e98345.mp3"
@@ -1032,6 +1002,33 @@
                   "audio_url": "/api/audio/155c89f2e21d799b7a66150e04a55a70.mp3"
                 },
                 {
+                  "question": "Of course! Would you like ice with that?",
+                  "instruction": "Arrange the Korean words to form the response",
+                  "options": [
+                    {
+                      "korean": "물론이죠",
+                      "romanization": "mullonijyo",
+                      "id": 0,
+                      "audio_url": "/api/audio/b89b6e720e2f332422359f273eaf1b31.mp3"
+                    },
+                    {
+                      "korean": "얼음도",
+                      "romanization": "eoreumdo",
+                      "id": 1,
+                      "audio_url": "/api/audio/b2ff1ca3e249bbbac89b8ed06c210652.mp3"
+                    },
+                    {
+                      "korean": "드릴까요",
+                      "romanization": "deurilkkayo",
+                      "id": 2,
+                      "audio_url": "/api/audio/18f5ca9d06d7a0ace7c021d39a0d3976.mp3"
+                    }
+                  ],
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "물론이죠 (of course) + 얼음도 (ice too) + 드릴까요 (shall I give you) = Of course! Would you like ice with that?",
+                  "exercise_type": "sentence_arrange"
+                },
+                {
                   "exercise_type": "grammar",
                   "question": "How do you say 'Water, please'?",
                   "instruction": "Select the correct phrase",
@@ -1089,33 +1086,6 @@
                   "correct_answer": "네, 알겠습니다. 잠깐만 기다려 주세요.",
                   "explanation": "The sentence means 'Yes, I understand. Please wait a moment.'",
                   "audio_url": "/api/audio/9aef8d76ae6e305727411f36dfafa115.mp3"
-                },
-                {
-                  "question": "Of course! Would you like ice with that?",
-                  "instruction": "Arrange the Korean words to form the response",
-                  "options": [
-                    {
-                      "korean": "물론이죠",
-                      "romanization": "mullonijyo",
-                      "id": 0,
-                      "audio_url": "/api/audio/b89b6e720e2f332422359f273eaf1b31.mp3"
-                    },
-                    {
-                      "korean": "얼음도",
-                      "romanization": "eoreumdo",
-                      "id": 1,
-                      "audio_url": "/api/audio/b2ff1ca3e249bbbac89b8ed06c210652.mp3"
-                    },
-                    {
-                      "korean": "드릴까요",
-                      "romanization": "deurilkkayo",
-                      "id": 2,
-                      "audio_url": "/api/audio/18f5ca9d06d7a0ace7c021d39a0d3976.mp3"
-                    }
-                  ],
-                  "correct_answer": "[0, 1, 2]",
-                  "explanation": "물론이죠 (of course) + 얼음도 (ice too) + 드릴까요 (shall I give you) = Of course! Would you like ice with that?",
-                  "exercise_type": "sentence_arrange"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -1199,17 +1169,11 @@
               "grammar_tip": "Use 저기요 when calling a waiter - it's like saying 'over there!'",
               "exercises": [
                 {
-                  "exercise_type": "vocabulary",
+                  "exercise_type": "writing",
                   "question": "How do you get a waiter's attention?",
-                  "instruction": "Select the correct phrase",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "저기요",
                   "romanization": "jeogiyo",
-                  "options": [
-                    "저기요",
-                    "잠깐만요",
-                    "감사합니다",
-                    "안녕하세요"
-                  ],
                   "correct_answer": "저기요",
                   "explanation": "저기요 is used to get someone's attention, like 'Excuse me!'",
                   "audio_url": "/api/audio/b77b10447c4152a88691538dd82b4de1.mp3"
@@ -1410,6 +1374,13 @@
                   "explanation": "마시다 (masida) means 'to drink' in Korean"
                 },
                 {
+                  "exercise_type": "writing",
+                  "question": "How do you say 'I eat' politely?",
+                  "instruction": "Type your Korean answer before checking.",
+                  "correct_answer": "먹어요",
+                  "explanation": "먹다 becomes 먹어요 in polite informal speech"
+                },
+                {
                   "exercise_type": "vocabulary",
                   "question": "What does 가다 mean?",
                   "instruction": "Select the correct translation",
@@ -1440,43 +1411,18 @@
                   "explanation": "오다 (oda) means 'to come' in Korean"
                 },
                 {
-                  "exercise_type": "grammar",
-                  "question": "How do you say 'I eat' politely?",
-                  "instruction": "Select the correct polite form",
-                  "options": [
-                    "먹다",
-                    "먹어요",
-                    "먹어",
-                    "먹습니다"
-                  ],
-                  "correct_answer": "먹어요",
-                  "explanation": "먹다 becomes 먹어요 in polite informal speech"
-                },
-                {
-                  "exercise_type": "grammar",
+                  "exercise_type": "writing",
                   "question": "Complete: 저는 물을 _____ (I drink water)",
-                  "instruction": "Select the correct verb form",
-                  "options": [
-                    "마시다",
-                    "마셔요",
-                    "먹어요",
-                    "가요"
-                  ],
+                  "instruction": "Type your Korean answer before checking.",
                   "correct_answer": "마셔요",
                   "explanation": "마시다 becomes 마셔요 in polite speech"
                 },
                 {
-                  "exercise_type": "listening",
-                  "question": "Listen and select what you hear",
-                  "instruction": "Play the audio and choose the correct text",
+                  "exercise_type": "writing",
+                  "question": "Listen and type what you hear",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "저는 공부해요.",
                   "audio_url": "/api/audio/add9fdd87c1ad053097347e17bb415c0.mp3",
-                  "options": [
-                    "저는 공부해요.",
-                    "저는 일해요.",
-                    "저는 먹어요.",
-                    "저는 가요."
-                  ],
                   "correct_answer": "저는 공부해요.",
                   "explanation": "The sentence means: I study."
                 },
@@ -1535,6 +1481,13 @@
                   "explanation": "보다 (boda) means 'to see' or 'to watch' in Korean"
                 },
                 {
+                  "exercise_type": "writing",
+                  "question": "How do you say 'I watch TV' politely?",
+                  "instruction": "Type your Korean answer before checking.",
+                  "correct_answer": "TV를 봐요",
+                  "explanation": "보다 contracts to 봐요 in polite informal speech"
+                },
+                {
                   "exercise_type": "vocabulary",
                   "question": "What does 읽다 mean?",
                   "instruction": "Select the correct translation",
@@ -1550,43 +1503,18 @@
                   "explanation": "읽다 (ikda) means 'to read' in Korean"
                 },
                 {
-                  "exercise_type": "grammar",
-                  "question": "How do you say 'I watch TV' politely?",
-                  "instruction": "Select the correct sentence",
-                  "options": [
-                    "TV를 보다",
-                    "TV를 봐요",
-                    "TV를 본다",
-                    "TV를 보아요"
-                  ],
-                  "correct_answer": "TV를 봐요",
-                  "explanation": "보다 contracts to 봐요 in polite informal speech"
-                },
-                {
-                  "exercise_type": "grammar",
+                  "exercise_type": "writing",
                   "question": "Complete: 저는 책을 _____ (I read a book)",
-                  "instruction": "Select the correct verb form",
-                  "options": [
-                    "읽다",
-                    "읽어요",
-                    "봐요",
-                    "써요"
-                  ],
+                  "instruction": "Type your Korean answer before checking.",
                   "correct_answer": "읽어요",
                   "explanation": "읽다 becomes 읽어요 in polite speech"
                 },
                 {
-                  "exercise_type": "listening",
-                  "question": "Listen and select what you hear",
-                  "instruction": "Play the audio and choose the correct text",
+                  "exercise_type": "writing",
+                  "question": "Listen and type what you hear",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "저는 매일 운동해요.",
                   "audio_url": "/api/audio/1ea0b6933df957b792191088865e35d0.mp3",
-                  "options": [
-                    "저는 매일 운동해요.",
-                    "저는 매일 공부해요.",
-                    "저는 매일 일해요.",
-                    "저는 매일 자요."
-                  ],
                   "correct_answer": "저는 매일 운동해요.",
                   "explanation": "The sentence means: I exercise every day."
                 },
@@ -1651,28 +1579,16 @@
                   "explanation": "얼마예요? is used to ask the price of something"
                 },
                 {
-                  "exercise_type": "grammar",
+                  "exercise_type": "writing",
                   "question": "How do you ask 'How much is this?'",
-                  "instruction": "Select the correct phrase",
-                  "options": [
-                    "이거 뭐예요?",
-                    "이거 얼마예요?",
-                    "이거 어디예요?",
-                    "이거 있어요?"
-                  ],
+                  "instruction": "Type your Korean answer before checking.",
                   "correct_answer": "이거 얼마예요?",
                   "explanation": "이거 (this) + 얼마예요 (how much) = How much is this?"
                 },
                 {
-                  "exercise_type": "grammar",
+                  "exercise_type": "writing",
                   "question": "How do you say 'Please give me this'?",
-                  "instruction": "Select the correct phrase",
-                  "options": [
-                    "이거 있어요",
-                    "이거 주세요",
-                    "이거 얼마예요",
-                    "이거 뭐예요"
-                  ],
+                  "instruction": "Type your Korean answer before checking.",
                   "correct_answer": "이거 주세요",
                   "explanation": "이거 (this) + 주세요 (please give me) = Please give me this"
                 },
@@ -1705,17 +1621,11 @@
                   "explanation": "만 (man) means 10,000, so 만 원 = 10,000 won"
                 },
                 {
-                  "exercise_type": "listening",
-                  "question": "Listen and select what you hear",
-                  "instruction": "Play the audio and choose the correct text",
+                  "exercise_type": "writing",
+                  "question": "Listen and type what you hear",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "이거 얼마예요?",
                   "audio_url": "/api/audio/8b13301ace96b42c805ae0630632b062.mp3",
-                  "options": [
-                    "이거 얼마예요?",
-                    "저거 얼마예요?",
-                    "그거 뭐예요?",
-                    "이거 좋아요?"
-                  ],
                   "correct_answer": "이거 얼마예요?",
                   "explanation": "The sentence means: How much is this?"
                 },
@@ -1774,6 +1684,13 @@
                   "explanation": "싸요 means 'it's cheap' - the opposite of 비싸요"
                 },
                 {
+                  "exercise_type": "writing",
+                  "question": "How do you say 'It's too expensive'?",
+                  "instruction": "Type your Korean answer before checking.",
+                  "correct_answer": "너무 비싸요",
+                  "explanation": "너무 (too much) + 비싸요 (expensive) = It's too expensive"
+                },
+                {
                   "exercise_type": "vocabulary",
                   "question": "What does 없어요 mean?",
                   "instruction": "Select the correct translation",
@@ -1789,43 +1706,18 @@
                   "explanation": "없어요 is the opposite of 있어요 - it means 'there isn't' or 'don't have'"
                 },
                 {
-                  "exercise_type": "grammar",
-                  "question": "How do you say 'It's too expensive'?",
-                  "instruction": "Select the correct phrase",
-                  "options": [
-                    "너무 싸요",
-                    "너무 비싸요",
-                    "조금 비싸요",
-                    "아주 싸요"
-                  ],
-                  "correct_answer": "너무 비싸요",
-                  "explanation": "너무 (too much) + 비싸요 (expensive) = It's too expensive"
-                },
-                {
-                  "exercise_type": "grammar",
+                  "exercise_type": "writing",
                   "question": "How do you ask for a discount?",
-                  "instruction": "Select the correct phrase",
-                  "options": [
-                    "더 주세요",
-                    "깎아 주세요",
-                    "싸게 주세요",
-                    "많이 주세요"
-                  ],
+                  "instruction": "Type your Korean answer before checking.",
                   "correct_answer": "깎아 주세요",
                   "explanation": "깎아 주세요 literally means 'please cut (the price)' - used to ask for a discount"
                 },
                 {
-                  "exercise_type": "listening",
-                  "question": "Listen and select what you hear",
-                  "instruction": "Play the audio and choose the correct text",
+                  "exercise_type": "writing",
+                  "question": "Listen and type what you hear",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "할인해 주세요.",
                   "audio_url": "/api/audio/d1e68cf5046a27a3a06e6c0a75aea588.mp3",
-                  "options": [
-                    "할인해 주세요.",
-                    "포장해 주세요.",
-                    "계산해 주세요.",
-                    "보여 주세요."
-                  ],
                   "correct_answer": "할인해 주세요.",
                   "explanation": "The sentence means: Please give me a discount."
                 },
@@ -1890,6 +1782,13 @@
                   "explanation": "내일 (naeil) means 'tomorrow'"
                 },
                 {
+                  "exercise_type": "writing",
+                  "question": "How do you say 'I'm going tomorrow'?",
+                  "instruction": "Type your Korean answer before checking.",
+                  "correct_answer": "내일 가요",
+                  "explanation": "내일 (tomorrow) + 가요 (go) = I'm going tomorrow"
+                },
+                {
                   "exercise_type": "vocabulary",
                   "question": "What does 어제 mean?",
                   "instruction": "Select the correct translation",
@@ -1920,45 +1819,20 @@
                   "explanation": "지금 (jigeum) means 'now'"
                 },
                 {
-                  "exercise_type": "grammar",
-                  "question": "How do you say 'I'm going tomorrow'?",
-                  "instruction": "Select the correct sentence",
-                  "options": [
-                    "오늘 가요",
-                    "내일 가요",
-                    "어제 가요",
-                    "지금 가요"
-                  ],
-                  "correct_answer": "내일 가요",
-                  "explanation": "내일 (tomorrow) + 가요 (go) = I'm going tomorrow"
-                },
-                {
-                  "exercise_type": "listening",
-                  "question": "Listen and select what you hear",
-                  "instruction": "Play the audio and choose the correct text",
+                  "exercise_type": "writing",
+                  "question": "Listen and type what you hear",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "지금 몇 시예요?",
                   "audio_url": "/api/audio/574f93eb5a46f17de8cb751122e1f252.mp3",
-                  "options": [
-                    "지금 몇 시예요?",
-                    "내일 몇 시예요?",
-                    "어제 몇 시예요?",
-                    "오늘 몇 시예요?"
-                  ],
                   "correct_answer": "지금 몇 시예요?",
                   "explanation": "The sentence means: What time is it now?"
                 },
                 {
-                  "exercise_type": "listening",
-                  "question": "Listen and select what you hear",
-                  "instruction": "Play the audio and choose the correct text",
+                  "exercise_type": "writing",
+                  "question": "Listen and type what you hear",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "세 시 삼십 분이에요.",
                   "audio_url": "/api/audio/a9462a0d093e7a6afb3e91ae09f51e34.mp3",
-                  "options": [
-                    "세 시 삼십 분이에요.",
-                    "네 시 삼십 분이에요.",
-                    "세 시 사십 분이에요.",
-                    "두 시 삼십 분이에요."
-                  ],
                   "correct_answer": "세 시 삼십 분이에요.",
                   "explanation": "The sentence means: It's 3:30."
                 }
