@@ -508,7 +508,8 @@ class TestExerciseAttemptCheck:
         data = resp.get_json()
         assert data["status"] == "unscored"
         assert data["method"] == "unscored"
-        assert data["challenge_state"]["can_retry"] is True
+        assert data["challenge_state"]["can_retry"] is False
+        assert data["challenge_state"]["force_options"] is True
 
     def test_attempt_check_validates_payload(self, client, sample_course):
         exercise_id = sample_course["exercise_ids"][0]

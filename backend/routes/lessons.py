@@ -650,8 +650,8 @@ def check_exercise_attempt(exercise_id: int):
                 status = "correct" if exact_match else "wrong"
                 method = "exact_fallback"
 
-        can_retry = attempt_number == 1 and status != "correct"
-        force_options = attempt_number == 2 and status != "correct"
+        can_retry = attempt_number == 1 and status == "wrong"
+        force_options = (attempt_number == 2 and status != "correct") or status == "unscored"
         micro_hint = None
         if attempt_number == 1 and status != "correct":
             micro_hint = (
