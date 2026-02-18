@@ -2,7 +2,7 @@
  * ExerciseRenderer - Renders different types of exercises
  */
 import { useState } from 'react';
-import type { Exercise, ExerciseResult, PronunciationSelfCheck as PronCheck, ImmersionLevel } from '@kapp/core';
+import type { Exercise, ExerciseResult, PronunciationSelfCheck as PronCheck, ImmersionLevel, OptionTile } from '@kapp/core';
 import { API_BASE_URL, PRONUNCIATION_SELF_CHECK_ENABLED, apiClient, savePronunciationCheck } from '@kapp/core';
 import SentenceArrangeExercise from './SentenceArrangeExercise';
 import './ExerciseRenderer.css';
@@ -39,6 +39,8 @@ export default function ExerciseRenderer({
   const [attemptError, setAttemptError] = useState<string | null>(null);
   const [checkingAttempt, setCheckingAttempt] = useState(false);
   const [usedAssist, setUsedAssist] = useState(false);
+  const [optionTiles, setOptionTiles] = useState<OptionTile[] | null>(null);
+  const [optionMode, setOptionMode] = useState<'english' | 'korean' | null>(null);
   const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1.0);
   const [selfCheckDone, setSelfCheckDone] = useState(false);
   const [selfCheckRating, setSelfCheckRating] = useState<PronCheck['rating'] | null>(null);
@@ -110,6 +112,8 @@ export default function ExerciseRenderer({
       }
 
       if (response.challenge_state.force_options) {
+        setOptionTiles(response.option_tiles || null);
+        setOptionMode(response.option_mode || null);
         setAttemptUnlocked(true);
         setAttemptLocked(true);
         setUsedAssist(true);
@@ -130,6 +134,8 @@ export default function ExerciseRenderer({
     setAttemptStatus('unscored');
     setAttemptFeedback('Hint path used. Continue with options.');
     setMicroHint('Focus on the core meaning in plain English.');
+    setOptionTiles(null);
+    setOptionMode(null);
   }
 
   function handleKeyPress(e: React.KeyboardEvent) {
@@ -365,18 +371,26 @@ export default function ExerciseRenderer({
             )}
 
             {canShowOptions && (
-          <div className="options-grid">
-            {(exercise.options as string[]).map((option, index) => (
-              <button
-                key={index}
-                className={getOptionClass(option)}
-                onClick={() => handleOptionSelect(option)}
-                disabled={isAnswered || submitting}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
+              <>
+                {optionMode === 'english' && (
+                  <p className="attempt-first-title">Meaning options</p>
+                )}
+                <div className="options-grid">
+                  {((optionTiles && optionTiles.length > 0)
+                    ? optionTiles
+                    : ((exercise.options as string[]) || []).map((option) => ({ key: option, label: option, translated: false }))
+                  ).map((tile, index) => (
+                    <button
+                      key={index}
+                      className={getOptionClass(tile.key)}
+                      onClick={() => handleOptionSelect(tile.key)}
+                      disabled={isAnswered || submitting}
+                    >
+                      {tile.label}
+                    </button>
+                  ))}
+                </div>
+              </>
             )}
           </>
         ) : (

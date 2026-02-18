@@ -96,11 +96,20 @@ export interface AttemptCheckRequest {
   used_hint: boolean;
 }
 
+export interface OptionTile {
+  key: string;
+  label: string;
+  translated: boolean;
+}
+
 export interface AttemptCheckResponse {
   status: 'correct' | 'wrong' | 'unscored';
   method: 'llm_semantic' | 'exact_fallback' | 'unscored';
+  resolved_target_english?: string | null;
   micro_hint?: string | null;
   feedback: string;
+  option_tiles?: OptionTile[] | null;
+  option_mode?: 'english' | 'korean' | null;
   challenge_state: {
     attempts_used: number;
     can_retry: boolean;

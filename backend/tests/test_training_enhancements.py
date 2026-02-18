@@ -497,19 +497,38 @@ class TestExerciseAttemptCheck:
         assert data["status"] == "wrong"
         assert data["challenge_state"]["can_retry"] is False
         assert data["challenge_state"]["force_options"] is True
+        assert data["option_tiles"] is not None
+        assert len(data["option_tiles"]) == 4
+        assert data["option_mode"] == "english"
 
     def test_attempt_check_returns_unscored_without_english_target(self, client, sample_course):
         exercise_id = sample_course["exercise_ids"][2]  # listening correct answer is Korean
+        # deterministic phrase map should allow english-first check here
         resp = client.post(
             f"/api/exercises/{exercise_id}/attempt-check",
             json={"attempt": "hello", "attempt_number": 1, "used_hint": False},
         )
         assert resp.status_code == 200
         data = resp.get_json()
-        assert data["status"] == "unscored"
-        assert data["method"] == "unscored"
+        assert data["status"] == "correct"
+        assert data["method"] == "exact_fallback"
         assert data["challenge_state"]["can_retry"] is False
+        assert data["challenge_state"]["force_options"] is False
+
+    def test_attempt_check_listening_second_wrong_returns_translated_tiles(self, client, sample_course):
+        exercise_id = sample_course["exercise_ids"][2]
+        resp = client.post(
+            f"/api/exercises/{exercise_id}/attempt-check",
+            json={"attempt": "wrong meaning", "attempt_number": 2, "used_hint": True},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["status"] == "wrong"
         assert data["challenge_state"]["force_options"] is True
+        assert data["option_tiles"] is not None
+        labels = [tile["label"] for tile in data["option_tiles"]]
+        assert any("hello" in label.lower() for label in labels)
+        assert all("key" in tile for tile in data["option_tiles"])
 
     def test_attempt_check_validates_payload(self, client, sample_course):
         exercise_id = sample_course["exercise_ids"][0]
