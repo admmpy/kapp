@@ -34,15 +34,9 @@
                   "audio_url": "/api/audio/6572762d43073c46ad22c9e6bf08bd37.mp3"
                 },
                 {
-                  "exercise_type": "vocabulary",
+                  "exercise_type": "writing",
                   "question": "How do you say goodbye when YOU are leaving?",
-                  "instruction": "Select the correct phrase",
-                  "options": [
-                    "안녕하세요",
-                    "안녕히 가세요",
-                    "안녕히 계세요",
-                    "감사합니다"
-                  ],
+                  "instruction": "Type your Korean answer before checking.",
                   "correct_answer": "안녕히 계세요",
                   "explanation": "안녕히 계세요 (stay in peace) is said when you are the one leaving"
                 },
@@ -212,16 +206,10 @@
                   "audio_url": "/api/audio/96cb025e8c5c9d7a81afaf3a5f39a724.mp3"
                 },
                 {
-                  "exercise_type": "listening",
-                  "question": "Listen to the sentence and select what you hear",
-                  "instruction": "Pay attention to the formality",
+                  "exercise_type": "writing",
+                  "question": "Listen to the sentence and type what you hear",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "도와 주셔서 정말 감사합니다.",
-                  "options": [
-                    "도와 주셔서 정말 감사합니다.",
-                    "도와 주셔서 고마워요.",
-                    "죄송합니다. 도와 주세요.",
-                    "감사합니다. 잘 지내요."
-                  ],
                   "correct_answer": "도와 주셔서 정말 감사합니다.",
                   "explanation": "The sentence means 'Thank you very much for your help.'",
                   "audio_url": "/api/audio/99d94ba0d44298ff6ed36184b787bc31.mp3"
@@ -375,16 +363,10 @@
                   "audio_url": "/api/audio/a91d02fb0e5bdd01876e81b5dab24013.mp3"
                 },
                 {
-                  "exercise_type": "grammar",
+                  "exercise_type": "writing",
                   "question": "Complete the sentence: 저는 민수___",
-                  "instruction": "Fill in the blank to say 'I am Minsu'",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "저는 민수___",
-                  "options": [
-                    "이에요",
-                    "입니다",
-                    "예요",
-                    "있어요"
-                  ],
                   "correct_answer": "입니다",
                   "explanation": "입니다 is the formal copula ('to be') used in introductions",
                   "audio_url": "/api/audio/90d5e6cb6c739ccbfa658eaf8ee29d0f.mp3"
@@ -578,17 +560,11 @@
               "grammar_tip": "Think of Sino-Korean numbers as the 'official' numbers for formal things like documents and prices.",
               "exercises": [
                 {
-                  "exercise_type": "vocabulary",
+                  "exercise_type": "writing",
                   "question": "What is 'one' in Sino-Korean?",
-                  "instruction": "Select the correct number",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "일",
                   "romanization": "il",
-                  "options": [
-                    "일",
-                    "이",
-                    "하나",
-                    "둘"
-                  ],
                   "correct_answer": "일",
                   "explanation": "일 (il) is 'one' in Sino-Korean",
                   "audio_url": "/api/audio/c94a3a32a9633dacc841d2fb9d8080bf.mp3"
@@ -762,17 +738,11 @@
               "grammar_tip": "Native Korean numbers are used when counting things you can touch or see!",
               "exercises": [
                 {
-                  "exercise_type": "vocabulary",
+                  "exercise_type": "writing",
                   "question": "What is 'one' in Native Korean?",
-                  "instruction": "Select the correct number",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "하나",
                   "romanization": "hana",
-                  "options": [
-                    "하나",
-                    "일",
-                    "둘",
-                    "이"
-                  ],
                   "correct_answer": "하나",
                   "explanation": "하나 (hana) is 'one' in Native Korean",
                   "audio_url": "/api/audio/db31bc2cfc7207406bca59d9c4e98345.mp3"
@@ -985,6 +955,33 @@
                   "audio_url": "/api/audio/155c89f2e21d799b7a66150e04a55a70.mp3"
                 },
                 {
+                  "question": "Of course! Would you like ice with that?",
+                  "instruction": "Arrange the Korean words to form the response",
+                  "options": [
+                    {
+                      "korean": "물론이죠",
+                      "romanization": "mullonijyo",
+                      "id": 0,
+                      "audio_url": "/api/audio/b89b6e720e2f332422359f273eaf1b31.mp3"
+                    },
+                    {
+                      "korean": "얼음도",
+                      "romanization": "eoreumdo",
+                      "id": 1,
+                      "audio_url": "/api/audio/b2ff1ca3e249bbbac89b8ed06c210652.mp3"
+                    },
+                    {
+                      "korean": "드릴까요",
+                      "romanization": "deurilkkayo",
+                      "id": 2,
+                      "audio_url": "/api/audio/18f5ca9d06d7a0ace7c021d39a0d3976.mp3"
+                    }
+                  ],
+                  "correct_answer": "[0, 1, 2]",
+                  "explanation": "물론이죠 (of course) + 얼음도 (ice too) + 드릴까요 (shall I give you) = Of course! Would you like ice with that?",
+                  "exercise_type": "sentence_arrange"
+                },
+                {
                   "exercise_type": "grammar",
                   "question": "How do you say 'Water, please'?",
                   "instruction": "Select the correct phrase",
@@ -1042,33 +1039,6 @@
                   "correct_answer": "네, 알겠습니다. 잠깐만 기다려 주세요.",
                   "explanation": "The sentence means 'Yes, I understand. Please wait a moment.'",
                   "audio_url": "/api/audio/9aef8d76ae6e305727411f36dfafa115.mp3"
-                },
-                {
-                  "question": "Of course! Would you like ice with that?",
-                  "instruction": "Arrange the Korean words to form the response",
-                  "options": [
-                    {
-                      "korean": "물론이죠",
-                      "romanization": "mullonijyo",
-                      "id": 0,
-                      "audio_url": "/api/audio/b89b6e720e2f332422359f273eaf1b31.mp3"
-                    },
-                    {
-                      "korean": "얼음도",
-                      "romanization": "eoreumdo",
-                      "id": 1,
-                      "audio_url": "/api/audio/b2ff1ca3e249bbbac89b8ed06c210652.mp3"
-                    },
-                    {
-                      "korean": "드릴까요",
-                      "romanization": "deurilkkayo",
-                      "id": 2,
-                      "audio_url": "/api/audio/18f5ca9d06d7a0ace7c021d39a0d3976.mp3"
-                    }
-                  ],
-                  "correct_answer": "[0, 1, 2]",
-                  "explanation": "물론이죠 (of course) + 얼음도 (ice too) + 드릴까요 (shall I give you) = Of course! Would you like ice with that?",
-                  "exercise_type": "sentence_arrange"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -1152,17 +1122,11 @@
               "grammar_tip": "Use 저기요 when calling a waiter - it's like saying 'over there!'",
               "exercises": [
                 {
-                  "exercise_type": "vocabulary",
+                  "exercise_type": "writing",
                   "question": "How do you get a waiter's attention?",
-                  "instruction": "Select the correct phrase",
+                  "instruction": "Type your Korean answer before checking.",
                   "korean_text": "저기요",
                   "romanization": "jeogiyo",
-                  "options": [
-                    "저기요",
-                    "잠깐만요",
-                    "감사합니다",
-                    "안녕하세요"
-                  ],
                   "correct_answer": "저기요",
                   "explanation": "저기요 is used to get someone's attention, like 'Excuse me!'",
                   "audio_url": "/api/audio/b77b10447c4152a88691538dd82b4de1.mp3"

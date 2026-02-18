@@ -325,7 +325,9 @@ def submit_exercise(exercise_id: int):
 
     Request body:
         {
-            "answer": "hello"
+            "answer": "hello",
+            "quality": 4,
+            "peeked": false
         }
 
     Response:
@@ -345,6 +347,17 @@ def submit_exercise(exercise_id: int):
             return validation_error_response("answer is required")
 
         user_answer = data["answer"]
+        quality = data.get("quality")
+        peeked = data.get("peeked", False)
+
+        if quality is not None:
+            if not isinstance(quality, int):
+                return validation_error_response("quality must be an integer")
+            if quality < 0 or quality > 5:
+                return validation_error_response("quality must be between 0 and 5")
+
+        if not isinstance(peeked, bool):
+            return validation_error_response("peeked must be a boolean")
         correct_answer = exercise.correct_answer
 
         # Handle different exercise types with appropriate validation
@@ -422,15 +435,27 @@ def submit_exercise(exercise_id: int):
                 .first()
             )
             if not srs:
-                srs = ExerciseSRS(user_id=user_id, exercise_id=exercise_id)
+                srs = ExerciseSRS(
+                    user_id=user_id,
+                    exercise_id=exercise_id,
+                    times_practiced=0,
+                    times_correct=0,
+                    review_interval=1,
+                    ease_factor=2.5,
+                    repetitions=0,
+                )
                 db.session.add(srs)
 
             srs.times_practiced += 1
             if is_correct:
                 srs.times_correct += 1
 
-            quality = 4 if is_correct else 1
-            apply_sm2(srs, quality)
+            effective_quality = 4 if is_correct else 1
+            if quality is not None:
+                effective_quality = min(quality, 3) if peeked else quality
+
+            apply_sm2(srs, effective_quality)
+            response_data["applied_quality"] = effective_quality
 
         db.session.commit()
 

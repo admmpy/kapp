@@ -101,11 +101,11 @@ Feature flags are set via environment variables in `packages/web/.env.local`:
 | Flag | Default | Description |
 |------|---------|-------------|
 | `VITE_SPEAKING_FIRST_ENABLED` | `true` | Reorder exercises, audio first |
-| `VITE_WEAKNESS_REVIEW_ENABLED` | `false` | Weakness-driven review sessions |
-| `VITE_SENTENCE_SRS_ENABLED` | `false` | Sentence-level spaced repetition |
-| `VITE_IMMERSION_MODE_ENABLED` | `false` | Hide romanization/English |
-| `VITE_GRAMMAR_MASTERY_ENABLED` | `false` | Grammar mastery tracking UI |
-| `VITE_PRONUNCIATION_SELF_CHECK_ENABLED` | `false` | Self-rating after audio exercises |
+| `VITE_WEAKNESS_REVIEW_ENABLED` | `true` | Weakness-driven review sessions |
+| `VITE_SENTENCE_SRS_ENABLED` | `true` | Sentence-level spaced repetition |
+| `VITE_IMMERSION_MODE_ENABLED` | `true` | Hide romanization/English |
+| `VITE_GRAMMAR_MASTERY_ENABLED` | `true` | Grammar mastery tracking UI |
+| `VITE_PRONUNCIATION_SELF_CHECK_ENABLED` | `true` | Self-rating after audio exercises |
 
 Backend flags with matching names must also be enabled for features that require server support.
 
@@ -145,10 +145,13 @@ scripts/run-ios-tunnel.sh
 
 ## Contributing
 
-1. `git checkout -b feature/your-feature`
-2. `git commit -m "Add your feature"`
-3. `git push origin feature/your-feature`
-4. Open a Pull Request
+1. `git checkout -b feat/your-feature`
+2. `git commit -m "feat: add your feature"`
+3. `git push origin feat/your-feature`
+4. Create PR docs:
+   - `docs/prs/<topic>-pr.md`
+   - `docs/reviews/<topic>-architecture-review.md`
+5. Open a Pull Request with verification evidence
 
 ---
 

@@ -32,6 +32,7 @@ import type {
   ExerciseDueResponse,
   ExerciseReviewResponse,
   UserSettings,
+  ExerciseSubmission,
 } from '../types';
 
 import { API_BASE_URL } from '../config';
@@ -125,8 +126,10 @@ class APIClient {
     return response.data;
   }
 
-  async submitExercise(exerciseId: number, answer: string): Promise<ExerciseResult> {
-    const response = await this.client.post<ExerciseResult>(`/exercises/${exerciseId}/submit`, { answer });
+  async submitExercise(exerciseId: number, submission: ExerciseSubmission | string): Promise<ExerciseResult> {
+    const payload: ExerciseSubmission =
+      typeof submission === 'string' ? { answer: submission } : submission;
+    const response = await this.client.post<ExerciseResult>(`/exercises/${exerciseId}/submit`, payload);
     return response.data;
   }
 

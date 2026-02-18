@@ -56,6 +56,26 @@ function App() {
       apiClient.getSettings().then(s => {
         setImmersionLevel(s.immersion_level);
         localStorage.setItem('immersion_level', String(s.immersion_level));
+
+        apiClient.getProgress().then(progress => {
+          let recommended: ImmersionLevel = 1;
+          if (progress.completed_lessons >= 8 || (progress.average_score || 0) >= 75) {
+            recommended = 2;
+          }
+          if (progress.completed_lessons >= 20 && (progress.average_score || 0) >= 80) {
+            recommended = 3;
+          }
+
+          if (recommended > s.immersion_level) {
+            setImmersionLevel(recommended);
+            localStorage.setItem('immersion_level', String(recommended));
+            apiClient.updateSettings({ immersion_level: recommended }).catch(err => {
+              console.error('Failed to apply immersion recommendation:', err);
+            });
+          }
+        }).catch(err => {
+          console.error('Failed to load progress for immersion recommendation:', err);
+        });
       }).catch(err => {
         console.error('Failed to load settings:', err);
       });

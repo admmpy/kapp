@@ -74,6 +74,9 @@ def get_due_exercises():
                 "question": ex.question,
                 "instruction": ex.instruction,
                 "display_order": ex.display_order,
+                # Review mode requires local answer reveal before final quality submit.
+                "correct_answer": ex.correct_answer,
+                "explanation": ex.explanation,
             }
 
             if ex.korean_text:
@@ -169,6 +172,11 @@ def record_exercise_review(exercise_id: int):
             srs = ExerciseSRS(
                 user_id=user_id,
                 exercise_id=exercise_id,
+                times_practiced=0,
+                times_correct=0,
+                review_interval=1,
+                ease_factor=2.5,
+                repetitions=0,
             )
             db.session.add(srs)
 

@@ -9,18 +9,29 @@ import './ExerciseRenderer.css';
 
 interface Props {
   exercise: Exercise;
-  onSubmit: (answer: string) => void;
+  onSubmit: (answer: string, meta?: { peeked?: boolean }) => void;
   result: ExerciseResult | null;
   submitting: boolean;
   immersionLevel?: ImmersionLevel;
+  forceAttemptFirst?: boolean;
 }
 
 type PlaybackSpeed = 0.5 | 1.0 | 1.2;
 
-export default function ExerciseRenderer({ exercise, onSubmit, result, submitting, immersionLevel = 1 }: Props) {
+export default function ExerciseRenderer({
+  exercise,
+  onSubmit,
+  result,
+  submitting,
+  immersionLevel = 1,
+  forceAttemptFirst = false,
+}: Props) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [textAnswer, setTextAnswer] = useState('');
   const [writingAnswer, setWritingAnswer] = useState('');
+  const [attemptText, setAttemptText] = useState('');
+  const [attemptUnlocked, setAttemptUnlocked] = useState(false);
+  const [usedAssist, setUsedAssist] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1.0);
   const [selfCheckDone, setSelfCheckDone] = useState(false);
   const [selfCheckRating, setSelfCheckRating] = useState<PronCheck['rating'] | null>(null);
@@ -43,6 +54,11 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
 
   const hasOptions = exercise.options && exercise.options.length > 0;
   const isAnswered = result !== null;
+  const attemptFirstRequired =
+    forceAttemptFirst
+    && hasOptions
+    && (exercise.exercise_type === 'vocabulary' || exercise.exercise_type === 'listening');
+  const canShowOptions = !attemptFirstRequired || attemptUnlocked || isAnswered;
 
   function handleOptionSelect(option: string) {
     if (isAnswered || submitting) return;
@@ -55,10 +71,21 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
     if (exercise.exercise_type === 'writing' && writingAnswer.trim()) {
       onSubmit(writingAnswer.trim());
     } else if (hasOptions && selectedOption) {
-      onSubmit(selectedOption);
+      onSubmit(selectedOption, { peeked: usedAssist });
     } else if (!hasOptions && textAnswer.trim()) {
       onSubmit(textAnswer.trim());
     }
+  }
+
+  function unlockOptionsFromAttempt() {
+    if (submitting || isAnswered || !attemptText.trim()) return;
+    setAttemptUnlocked(true);
+  }
+
+  function unlockOptionsWithHint() {
+    if (submitting || isAnswered) return;
+    setAttemptUnlocked(true);
+    setUsedAssist(true);
   }
 
   function handleKeyPress(e: React.KeyboardEvent) {
@@ -244,6 +271,38 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
             />
           </div>
         ) : hasOptions ? (
+          <>
+            {attemptFirstRequired && !canShowOptions && (
+              <div className="attempt-first-gate">
+                <p className="attempt-first-title">Attempt first, then use options.</p>
+                <input
+                  type="text"
+                  value={attemptText}
+                  onChange={(e) => setAttemptText(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Type your Korean recall..."
+                  disabled={isAnswered || submitting}
+                />
+                <div className="attempt-first-actions">
+                  <button
+                    className="attempt-first-btn primary"
+                    onClick={unlockOptionsFromAttempt}
+                    disabled={!attemptText.trim() || isAnswered || submitting}
+                  >
+                    Check Attempt
+                  </button>
+                  <button
+                    className="attempt-first-btn secondary"
+                    onClick={unlockOptionsWithHint}
+                    disabled={isAnswered || submitting}
+                  >
+                    Need a Hint
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {canShowOptions && (
           <div className="options-grid">
             {(exercise.options as string[]).map((option, index) => (
               <button
@@ -256,6 +315,8 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
               </button>
             ))}
           </div>
+            )}
+          </>
         ) : (
           <div className="text-answer">
             <input
@@ -281,7 +342,7 @@ export default function ExerciseRenderer({ exercise, onSubmit, result, submittin
             (exercise.exercise_type === 'writing'
               ? !writingAnswer.trim()
               : hasOptions
-              ? !selectedOption
+              ? !selectedOption || !canShowOptions
               : !textAnswer.trim())
           }
         >

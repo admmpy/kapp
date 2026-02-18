@@ -80,10 +80,14 @@ export interface Exercise {
   content_text?: string;
   audio_url?: string;
   options?: string[] | SentenceTile[];
+  correct_answer?: string;
+  explanation?: string;
 }
 
 export interface ExerciseSubmission {
   answer: string;
+  quality?: number;
+  peeked?: boolean;
 }
 
 export interface ExerciseResult {

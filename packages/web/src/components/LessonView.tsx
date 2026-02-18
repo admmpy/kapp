@@ -38,7 +38,23 @@ function sortExercisesForSpeakingFirst(exercises: Exercise[]): Exercise[] {
       || ((ex.exercise_type === 'vocabulary' || ex.exercise_type === 'sentence_arrange') && ex.audio_url)
   );
   const rest = exercises.filter(ex => !audioFirst.includes(ex));
-  return [...audioFirst, ...rest];
+  const sorted = [...audioFirst, ...rest];
+  const firstThirdEnd = Math.max(1, Math.ceil(sorted.length / 3));
+  const hasEarlyProduction = sorted
+    .slice(0, firstThirdEnd)
+    .some(ex => ex.exercise_type === 'writing' || ex.exercise_type === 'sentence_arrange');
+
+  if (!hasEarlyProduction) {
+    const productionIndex = sorted.findIndex(
+      ex => ex.exercise_type === 'writing' || ex.exercise_type === 'sentence_arrange'
+    );
+    if (productionIndex > -1) {
+      const [productionExercise] = sorted.splice(productionIndex, 1);
+      sorted.splice(firstThirdEnd - 1, 0, productionExercise);
+    }
+  }
+
+  return sorted;
 }
 
 export default function LessonView({ lessonId, courseId, onComplete, onBack, onBackToCourse, onBackToCourses, onNavigateToLesson, immersionLevel = 1, onImmersionChange }: Props) {
@@ -120,14 +136,14 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     setLastResult(null);
   }, [currentExerciseIndex]);
 
-  async function handleSubmitAnswer(answer: string) {
+  async function handleSubmitAnswer(answer: string, meta?: { peeked?: boolean }) {
     if (!exercises.length || submitting) return;
 
     const exercise = exercises[currentExerciseIndex];
     setSubmitting(true);
 
     try {
-      const result = await apiClient.submitExercise(exercise.id, answer);
+      const result = await apiClient.submitExercise(exercise.id, { answer, peeked: meta?.peeked });
       setLastResult(result);
       setTotalAnswered(prev => prev + 1);
       if (result.correct) {
@@ -333,6 +349,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
           result={lastResult}
           submitting={submitting}
           immersionLevel={immersionLevel}
+          forceAttemptFirst
         />
 
         {lastResult && (
