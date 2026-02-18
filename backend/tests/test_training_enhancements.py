@@ -457,6 +457,74 @@ class TestExerciseSubmitSrsQuality:
         assert data["applied_quality"] == 3
 
 
+class TestExerciseAttemptCheck:
+    """Test attempt-first English checking endpoint."""
+
+    def test_attempt_check_exact_fallback_correct(self, client, sample_course):
+        exercise_id = sample_course["exercise_ids"][0]  # vocab, answer: Hello
+        resp = client.post(
+            f"/api/exercises/{exercise_id}/attempt-check",
+            json={"attempt": "hello", "attempt_number": 1, "used_hint": False},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["status"] == "correct"
+        assert data["method"] == "exact_fallback"
+        assert data["challenge_state"]["can_retry"] is False
+        assert data["challenge_state"]["force_options"] is False
+
+    def test_attempt_check_wrong_first_attempt_has_retry_and_hint(self, client, sample_course):
+        exercise_id = sample_course["exercise_ids"][0]
+        resp = client.post(
+            f"/api/exercises/{exercise_id}/attempt-check",
+            json={"attempt": "goodbye", "attempt_number": 1, "used_hint": False},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["status"] == "wrong"
+        assert data["challenge_state"]["can_retry"] is True
+        assert data["challenge_state"]["force_options"] is False
+        assert data["micro_hint"] is not None
+
+    def test_attempt_check_wrong_second_attempt_forces_options(self, client, sample_course):
+        exercise_id = sample_course["exercise_ids"][0]
+        resp = client.post(
+            f"/api/exercises/{exercise_id}/attempt-check",
+            json={"attempt": "goodbye", "attempt_number": 2, "used_hint": True},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["status"] == "wrong"
+        assert data["challenge_state"]["can_retry"] is False
+        assert data["challenge_state"]["force_options"] is True
+
+    def test_attempt_check_returns_unscored_without_english_target(self, client, sample_course):
+        exercise_id = sample_course["exercise_ids"][2]  # listening correct answer is Korean
+        resp = client.post(
+            f"/api/exercises/{exercise_id}/attempt-check",
+            json={"attempt": "hello", "attempt_number": 1, "used_hint": False},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["status"] == "unscored"
+        assert data["method"] == "unscored"
+        assert data["challenge_state"]["can_retry"] is True
+
+    def test_attempt_check_validates_payload(self, client, sample_course):
+        exercise_id = sample_course["exercise_ids"][0]
+        bad_resp = client.post(
+            f"/api/exercises/{exercise_id}/attempt-check",
+            json={"attempt": "", "attempt_number": 1, "used_hint": False},
+        )
+        assert bad_resp.status_code == 400
+
+        bad_attempt_number = client.post(
+            f"/api/exercises/{exercise_id}/attempt-check",
+            json={"attempt": "hello", "attempt_number": 3, "used_hint": False},
+        )
+        assert bad_attempt_number.status_code == 400
+
+
 class TestLessonEndpoint:
     """Test the lesson endpoint returns correct data"""
 

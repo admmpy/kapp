@@ -73,6 +73,38 @@ This project is explicitly **local-only and single-user**, so most web‑app sec
 
 ---
 
+## Change Delta (2026-02-18 Attempt-Check)
+- Reviewed `POST /api/exercises/{id}/attempt-check` and attempt-first challenge UI flow.
+
+### Findings (Severity-Ranked)
+1) **No Critical findings**
+   - **Severity:** Critical
+   - **Status:** None identified.
+
+2) **No High findings**
+   - **Severity:** High
+   - **Status:** None identified.
+
+3) **SBP-MED-004: LLM semantic-judge output trust boundary**
+   - **Severity:** Medium
+   - **Location:** `backend/routes/lessons.py:160`, `backend/routes/lessons.py:603`
+   - **Detail:** Semantic correctness is model-derived when LLM is enabled; malformed or inconsistent model output is possible.
+   - **Current mitigation:** Strict output parsing with fallback to deterministic exact match and safe `unscored` path.
+   - **Residual risk:** Classification quality variability, not a direct exploit path in current local-only model.
+
+4) **SBP-LOW-006: Attempt-check endpoint remains unauthenticated in local-only model**
+   - **Severity:** Low (becomes High/Critical if network-exposed)
+   - **Location:** `backend/routes/lessons.py:603`, `backend/routes/helpers.py:10`
+   - **Detail:** Endpoint depends on same single-user trust model (`user_id=1`) as the rest of app.
+   - **Current mitigation:** Local-only deployment assumption plus input length/type validation.
+   - **Residual risk:** If exposed publicly, endpoint is callable without auth like other stateful routes.
+
+### Security Gate Decision
+- **Critical fixes required:** None.
+- Proceeded without scope expansion per critical-only gate policy.
+
+---
+
 ## Next Steps (Local‑Only)
 - No immediate changes required for local‑only usage.
 - If you later expose the app, implement authentication and per‑user scoping first.
