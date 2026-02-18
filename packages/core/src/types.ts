@@ -421,6 +421,29 @@ export interface UserSettings {
   immersion_level: ImmersionLevel;
 }
 
+// ============================================
+// Listening Practice Types
+// ============================================
+
+export interface ListeningPracticeRequest {
+  topic: string;
+  level?: number;
+}
+
+export interface ListeningPracticeResponse {
+  audio_url: string;
+  korean_text: string;
+  romanization?: string;
+  english_translation?: string;
+  question: string;
+  options: string[];
+  correct_answer: string;
+  explanation?: string;
+  topic: string;
+  level: number;
+  generated_at: string;
+}
+
 // Dashboard statistics
 export interface DashboardStats {
   vocabulary_mastery_percent: number;
