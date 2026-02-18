@@ -35,6 +35,8 @@ import type {
   ExerciseSubmission,
   AttemptCheckRequest,
   AttemptCheckResponse,
+  ListeningPracticeRequest,
+  ListeningPracticeResponse,
 } from '../types';
 
 import { API_BASE_URL } from '../config';
@@ -358,7 +360,21 @@ class APIClient {
       message,
       context
     }, {
-      timeout: 90000  // 90 seconds for LLM requests
+      timeout: 90000
+    });
+    return response.data;
+  }
+
+  // ============================================
+  // Listening Practice endpoints
+  // ============================================
+
+  async generateListeningPractice(request: ListeningPracticeRequest): Promise<ListeningPracticeResponse> {
+    const response = await this.client.post<ListeningPracticeResponse>('/llm/listening-practice', {
+      topic: request.topic,
+      level: request.level ?? 1,
+    }, {
+      timeout: 90000
     });
     return response.data;
   }

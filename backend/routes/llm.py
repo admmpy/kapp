@@ -18,6 +18,7 @@ from utils import error_response, not_found_response, validation_error_response
 from security import sanitize_user_input, validate_conversation_history
 from datetime import datetime
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +50,7 @@ def get_llm_client() -> OpenAIClient:
     """Get or create LLM client instance"""
     global _llm_client
     if _llm_client is None:
-        model = current_app.config.get("OPENAI_MODEL", "gpt-4o-mini")
+        model = current_app.config.get("OPENAI_MODEL", "deepseek/deepseek-v3.2")
         api_key = current_app.config.get("OPENAI_API_KEY")
         cache_dir = current_app.config.get("LLM_CACHE_DIR", "data/llm_cache")
         _llm_client = OpenAIClient(api_key=api_key, model=model, cache_dir=cache_dir)
@@ -433,3 +434,114 @@ def normalize_conversation_history(history):
         return exchanges
 
     return history
+
+
+@llm_bp.route("/llm/listening-practice", methods=["POST"])
+@limiter.limit("20/hour")
+def listening_practice():
+    """
+    Generate AI-powered listening comprehension practice.
+
+    Request body:
+        {
+            "topic": "ordering coffee at a cafe",
+            "level": 2
+        }
+
+    Response:
+        {
+            "audio_url": "/api/audio/abc123.mp3",
+            "korean_text": "...",
+            "romanization": "...",
+            "english_translation": "...",
+            "question": "...",
+            "options": ["...", "...", "...", "..."],
+            "correct_answer": "...",
+            "explanation": "...",
+            "generated_at": "..."
+        }
+    """
+    try:
+        disabled_response = ensure_llm_enabled()
+        if disabled_response:
+            return disabled_response
+
+        data = request.get_json(silent=True) or {}
+        topic = (data.get("topic") or "").strip()
+        level = validate_level(data.get("level", 1), default=1)
+
+        if not topic:
+            return validation_error_response("topic is required")
+
+        if len(topic) > 200:
+            return validation_error_response("topic must be 200 characters or fewer")
+
+        topic, topic_warnings = sanitize_user_input(topic, max_length=200)
+        if topic_warnings:
+            logger.info(f"Topic sanitization warnings: {topic_warnings}")
+
+        template = PROMPT_TEMPLATES["listening_practice"]
+        user_prompt = template["user"].format(
+            topic=topic,
+            level=level,
+            level_name=get_level_name(level),
+        )
+
+        client = get_llm_client()
+        response_text = client.chat(
+            prompt=user_prompt,
+            system=template["system"],
+            temperature=0.8,
+            max_tokens=600,
+            use_cache=False,
+        )
+
+        import json as json_module
+        try:
+            response_text_cleaned = response_text.strip()
+            if response_text_cleaned.startswith("```"):
+                response_text_cleaned = re.sub(r"^```[a-zA-Z]*\s*", "", response_text_cleaned)
+                response_text_cleaned = re.sub(r"\s*```$", "", response_text_cleaned)
+            exercise_data = json_module.loads(response_text_cleaned)
+        except json_module.JSONDecodeError as e:
+            logger.error(f"Failed to parse LLM response as JSON: {e}")
+            logger.error(f"Raw response: {response_text[:500]}")
+            return error_response("Failed to generate valid exercise. Please try again.", 500)
+
+        required_fields = ["korean_text", "question", "options", "correct_answer"]
+        for field in required_fields:
+            if field not in exercise_data:
+                logger.error(f"Missing required field in exercise: {field}")
+                return error_response(f"Generated exercise is missing {field}. Please try again.", 500)
+
+        if not isinstance(exercise_data["options"], list) or len(exercise_data["options"]) < 2:
+            return error_response("Generated exercise has invalid options. Please try again.", 500)
+
+        from tts_service import get_tts_service
+
+        tts = get_tts_service(current_app.config.get("TTS_CACHE_DIR", "data/audio_cache"))
+        slow = level <= 2
+        audio_filename = tts.generate_audio(exercise_data["korean_text"], lang="ko", slow=slow)
+
+        if not audio_filename:
+            return error_response("Failed to generate audio. Please try again.", 500)
+
+        audio_url = tts.get_audio_url(audio_filename)
+
+        return jsonify({
+            "audio_url": audio_url,
+            "korean_text": exercise_data.get("korean_text"),
+            "romanization": exercise_data.get("romanization"),
+            "english_translation": exercise_data.get("english_translation"),
+            "question": exercise_data["question"],
+            "options": exercise_data["options"],
+            "correct_answer": exercise_data["correct_answer"],
+            "explanation": exercise_data.get("explanation"),
+            "topic": topic,
+            "level": level,
+            "generated_at": datetime.now().isoformat(),
+        }), 200
+
+    except Exception as e:
+        logger.error(f"Error in listening_practice: {e}")
+        return error_response("Failed to generate listening practice", 500)

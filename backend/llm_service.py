@@ -1,5 +1,5 @@
 """
-LLM Service for OpenAI integration (GPT-4o mini)
+LLM Service for OpenAI integration (DeepSeek V3.2)
 
 This service provides:
 - Connection to OpenAI Responses API
@@ -25,7 +25,7 @@ class OpenAIClient:
     def __init__(
         self,
         api_key: str,
-        model: str = "gpt-4o-mini",
+        model: str = "deepseek/deepseek-v3.2",
         timeout: int = 60,
         cache_dir: str = "./data/llm_cache",
     ):
@@ -301,6 +301,37 @@ Previous context: {context}
 Learner says: {message}
 
 Respond naturally in Korean. If they made mistakes, model the correct form in your response without explicitly pointing out errors.""",
+    },
+    "listening_practice": {
+        "system": """You are a Korean language listening practice generator.
+Create natural Korean audio content for listening comprehension practice.
+Return ONLY valid JSON with no additional text or markdown.
+
+Your response must be a JSON object with exactly these fields:
+{
+  "korean_text": "The Korean sentence or dialogue to be spoken",
+  "romanization": "Romanization of the Korean text",
+  "english_translation": "English translation of the Korean text",
+  "question": "A comprehension question in English about the Korean text",
+  "options": ["Option A", "Option B", "Option C", "Option D"],
+  "correct_answer": "The correct option (exact text from options array)",
+  "explanation": "Brief explanation of why the answer is correct"
+}
+
+Rules:
+- Korean text should be appropriate for the specified level
+- The question should test comprehension, not just translation
+- Options should be plausible distractors
+- Keep Korean text to 1-3 sentences for beginner/intermediate levels""",
+        "user": """Generate a listening comprehension exercise for Korean language learners.
+
+Topic: {topic}
+Level: {level_name} (TOPIK Level {level})
+
+Create a natural Korean sentence or short dialogue about the topic.
+Make the vocabulary and grammar appropriate for the specified level.
+
+Return ONLY the JSON object, no other text.""",
     },
 }
 

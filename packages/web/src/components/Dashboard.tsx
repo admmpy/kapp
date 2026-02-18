@@ -12,9 +12,10 @@ interface Props {
   onStartReview?: () => void;
   onStartWeaknessReview?: () => void;
   onStartExerciseReview?: () => void;
+  onStartListeningPractice?: () => void;
 }
 
-export default function Dashboard({ onClose, onStartReview, onStartWeaknessReview, onStartExerciseReview }: Props) {
+export default function Dashboard({ onClose, onStartReview, onStartWeaknessReview, onStartExerciseReview, onStartListeningPractice }: Props) {
   const [progress, setProgress] = useState<OverallProgress | null>(null);
   const [stats, setStats] = useState<LearningStats | null>(null);
   const [vocabDueCount, setVocabDueCount] = useState<number>(0);
@@ -226,6 +227,11 @@ export default function Dashboard({ onClose, onStartReview, onStartWeaknessRevie
           <div className="stat-detail">
             <span>🎧 {Math.round(progress.total_time_spent_minutes)} minutes practiced</span>
           </div>
+          {onStartListeningPractice && (
+            <div className="stat-action" style={{ marginTop: '12px' }}>
+              <button onClick={onStartListeningPractice}>Practice Listening</button>
+            </div>
+          )}
         </div>
 
         <div className="stat-card-detailed">
