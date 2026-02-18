@@ -3,7 +3,7 @@
  */
 import { useState } from 'react';
 import type { Exercise, ExerciseResult, PronunciationSelfCheck as PronCheck, ImmersionLevel } from '@kapp/core';
-import { API_BASE_URL, PRONUNCIATION_SELF_CHECK_ENABLED, savePronunciationCheck } from '@kapp/core';
+import { API_BASE_URL, PRONUNCIATION_SELF_CHECK_ENABLED, apiClient, savePronunciationCheck } from '@kapp/core';
 import SentenceArrangeExercise from './SentenceArrangeExercise';
 import './ExerciseRenderer.css';
 
@@ -31,6 +31,13 @@ export default function ExerciseRenderer({
   const [writingAnswer, setWritingAnswer] = useState('');
   const [attemptText, setAttemptText] = useState('');
   const [attemptUnlocked, setAttemptUnlocked] = useState(false);
+  const [attemptLocked, setAttemptLocked] = useState(false);
+  const [attemptNumber, setAttemptNumber] = useState(1);
+  const [attemptStatus, setAttemptStatus] = useState<'correct' | 'wrong' | 'unscored' | null>(null);
+  const [attemptFeedback, setAttemptFeedback] = useState<string | null>(null);
+  const [microHint, setMicroHint] = useState<string | null>(null);
+  const [attemptError, setAttemptError] = useState<string | null>(null);
+  const [checkingAttempt, setCheckingAttempt] = useState(false);
   const [usedAssist, setUsedAssist] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1.0);
   const [selfCheckDone, setSelfCheckDone] = useState(false);
@@ -56,8 +63,7 @@ export default function ExerciseRenderer({
   const isAnswered = result !== null;
   const attemptFirstRequired =
     forceAttemptFirst
-    && hasOptions
-    && (exercise.exercise_type === 'vocabulary' || exercise.exercise_type === 'listening');
+    && hasOptions;
   const canShowOptions = !attemptFirstRequired || attemptUnlocked || isAnswered;
 
   function handleOptionSelect(option: string) {
@@ -77,21 +83,66 @@ export default function ExerciseRenderer({
     }
   }
 
-  function unlockOptionsFromAttempt() {
-    if (submitting || isAnswered || !attemptText.trim()) return;
-    setAttemptUnlocked(true);
+  async function unlockOptionsFromAttempt() {
+    if (submitting || isAnswered || checkingAttempt || !attemptText.trim() || attemptLocked) return;
+
+    setCheckingAttempt(true);
+    setAttemptError(null);
+    try {
+      const response = await apiClient.checkExerciseAttempt(exercise.id, {
+        attempt: attemptText.trim(),
+        attempt_number: attemptNumber,
+        used_hint: attemptNumber > 1,
+      });
+      setAttemptStatus(response.status);
+      setAttemptFeedback(response.feedback);
+      setMicroHint(response.micro_hint || null);
+
+      if (response.status === 'correct') {
+        setAttemptUnlocked(true);
+        setAttemptLocked(true);
+        return;
+      }
+
+      if (response.challenge_state.can_retry) {
+        setAttemptNumber(2);
+        return;
+      }
+
+      if (response.challenge_state.force_options) {
+        setAttemptUnlocked(true);
+        setAttemptLocked(true);
+        setUsedAssist(true);
+      }
+    } catch (err) {
+      console.error('Attempt check failed:', err);
+      setAttemptError('Could not check attempt. Retry or use hint to continue.');
+    } finally {
+      setCheckingAttempt(false);
+    }
   }
 
   function unlockOptionsWithHint() {
-    if (submitting || isAnswered) return;
+    if (submitting || isAnswered || checkingAttempt) return;
     setAttemptUnlocked(true);
+    setAttemptLocked(true);
     setUsedAssist(true);
+    setAttemptStatus('unscored');
+    setAttemptFeedback('Hint path used. Continue with options.');
+    setMicroHint('Focus on the core meaning in plain English.');
   }
 
   function handleKeyPress(e: React.KeyboardEvent) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit();
+    }
+  }
+
+  function handleAttemptKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      unlockOptionsFromAttempt();
     }
   }
 
@@ -272,6 +323,11 @@ export default function ExerciseRenderer({
           </div>
         ) : hasOptions ? (
           <>
+            {attemptFirstRequired && attemptFeedback && (
+              <div className={`attempt-feedback ${attemptStatus || 'unscored'}`}>
+                {attemptFeedback}
+              </div>
+            )}
             {attemptFirstRequired && !canShowOptions && (
               <div className="attempt-first-gate">
                 <p className="attempt-first-title">Attempt first, then use options.</p>
@@ -279,22 +335,28 @@ export default function ExerciseRenderer({
                   type="text"
                   value={attemptText}
                   onChange={(e) => setAttemptText(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Type your Korean recall..."
-                  disabled={isAnswered || submitting}
+                  onKeyDown={handleAttemptKeyDown}
+                  placeholder="Type your English meaning..."
+                  disabled={isAnswered || submitting || attemptLocked}
                 />
+                {microHint && !canShowOptions && (
+                  <div className="attempt-micro-hint">{microHint}</div>
+                )}
+                {attemptError && (
+                  <div className="attempt-error">{attemptError}</div>
+                )}
                 <div className="attempt-first-actions">
                   <button
                     className="attempt-first-btn primary"
                     onClick={unlockOptionsFromAttempt}
-                    disabled={!attemptText.trim() || isAnswered || submitting}
+                    disabled={!attemptText.trim() || isAnswered || submitting || checkingAttempt || attemptLocked}
                   >
-                    Check Attempt
+                    {checkingAttempt ? 'Checking...' : `Check Attempt${attemptNumber === 2 ? ' (2/2)' : ''}`}
                   </button>
                   <button
                     className="attempt-first-btn secondary"
                     onClick={unlockOptionsWithHint}
-                    disabled={isAnswered || submitting}
+                    disabled={isAnswered || submitting || checkingAttempt || attemptLocked}
                   >
                     Need a Hint
                   </button>

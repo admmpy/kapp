@@ -8,10 +8,14 @@ Endpoints:
 - POST /api/exercises/:id/submit - Submit exercise answer
 """
 import json
+import re
 from datetime import datetime
+from typing import Optional
 from flask import Blueprint, request, jsonify, current_app
 from database import db
 from models_v2 import Lesson, Exercise, UserProgress, GrammarMastery, ExerciseSRS
+from llm_service import OpenAIClient
+from security import sanitize_user_input
 from utils import not_found_response, error_response, validation_error_response
 from routes.helpers import get_user_progress, get_or_create_user_progress, get_current_user_id
 import logging
@@ -19,6 +23,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 lessons_bp = Blueprint("lessons", __name__)
+_attempt_llm_client = None
 
 
 def validate_sentence_arrange(user_answer, correct_answer: str) -> bool:
@@ -53,6 +58,134 @@ def validate_writing_answer(user_answer: str, correct_answer: str) -> bool:
     correct_clean = re.sub(r'[.,!?;:\s]+', ' ', correct_normalized).strip()
 
     return user_clean == correct_clean
+
+
+def normalize_english_text(value: str) -> str:
+    """Normalize English text for deterministic fallback comparisons."""
+    normalized = re.sub(r"[.,!?;:\s]+", " ", value.strip().lower())
+    return normalized.strip()
+
+
+def looks_like_english(value: str) -> bool:
+    """Heuristic check: mostly Latin text and contains at least one English letter."""
+    if not value:
+        return False
+    if re.search(r"[가-힣]", value):
+        return False
+    return bool(re.search(r"[a-zA-Z]", value))
+
+
+def extract_english_target(exercise: Exercise) -> Optional[str]:
+    """
+    Best-effort English target used by exact fallback.
+    Priority:
+    1) exercise.english_text
+    2) correct_answer if it looks English
+    """
+    if exercise.english_text and exercise.english_text.strip():
+        return exercise.english_text.strip()
+
+    if exercise.correct_answer and looks_like_english(exercise.correct_answer):
+        return exercise.correct_answer.strip()
+
+    return None
+
+
+def build_micro_hint(target: Optional[str]) -> str:
+    """Generate a constrained clue without revealing the full answer."""
+    if not target:
+        return "Focus on the core meaning in plain English, then retry."
+
+    words = [w for w in re.split(r"\s+", target.strip()) if w]
+    if not words:
+        return "Focus on the core meaning in plain English, then retry."
+
+    hinted = []
+    for word in words[:2]:
+        letters = re.sub(r"[^a-zA-Z0-9]", "", word)
+        if letters:
+            hinted.append(f"{letters[0].lower()}... ({len(letters)} letters)")
+
+    if hinted:
+        return f"Micro-hint: start with {', '.join(hinted)}."
+
+    return "Micro-hint: think of a short everyday English phrase."
+
+
+def parse_llm_attempt_status(raw: str) -> Optional[str]:
+    """Parse model output and return correct/wrong status when possible."""
+    text = raw.strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```[a-zA-Z]*\s*", "", text)
+        text = re.sub(r"\s*```$", "", text)
+
+    try:
+        parsed = json.loads(text)
+        status = str(parsed.get("status", "")).lower().strip()
+        if status in {"correct", "wrong"}:
+            return status
+    except Exception:
+        pass
+
+    lowered = text.lower()
+    if '"status":"correct"' in lowered or '"status": "correct"' in lowered:
+        return "correct"
+    if '"status":"wrong"' in lowered or '"status": "wrong"' in lowered:
+        return "wrong"
+    return None
+
+
+def get_attempt_llm_client() -> Optional[OpenAIClient]:
+    """Get or create LLM client for attempt semantic checks."""
+    global _attempt_llm_client
+
+    if not current_app.config.get("LLM_ENABLED", False):
+        return None
+
+    api_key = current_app.config.get("OPENAI_API_KEY")
+    if not api_key:
+        return None
+
+    if _attempt_llm_client is None:
+        _attempt_llm_client = OpenAIClient(
+            api_key=api_key,
+            model=current_app.config.get("OPENAI_MODEL", "gpt-4o-mini"),
+            timeout=6,
+            cache_dir=current_app.config.get("LLM_CACHE_DIR", "data/llm_cache"),
+        )
+
+    return _attempt_llm_client
+
+
+def judge_attempt_with_llm(attempt: str, target: str) -> Optional[str]:
+    """Semantic English correctness check using LLM, returns correct/wrong or None on failure."""
+    client = get_attempt_llm_client()
+    if client is None:
+        return None
+
+    system_prompt = (
+        "You are a strict grader. Compare learner English attempt to target meaning. "
+        "Return JSON only: {\"status\":\"correct\"} or {\"status\":\"wrong\"}. "
+        "Mark correct only when meaning is clearly equivalent."
+    )
+    user_prompt = (
+        f"Target meaning: {target}\n"
+        f"Learner attempt: {attempt}\n"
+        "Return JSON only."
+    )
+
+    try:
+        response = client.chat(
+            prompt=user_prompt,
+            system=system_prompt,
+            temperature=0.0,
+            max_tokens=40,
+            use_cache=False,
+        )
+        return parse_llm_attempt_status(response)
+    except Exception as err:
+        logger.warning(f"Attempt LLM check failed, using fallback: {err}")
+        return None
 
 
 @lessons_bp.route("/lessons/<int:lesson_id>", methods=["GET"])
@@ -465,6 +598,93 @@ def submit_exercise(exercise_id: int):
         logger.error(f"Error submitting exercise {exercise_id}: {e}")
         db.session.rollback()
         return error_response("Failed to submit exercise", 500)
+
+
+@lessons_bp.route("/exercises/<int:exercise_id>/attempt-check", methods=["POST"])
+def check_exercise_attempt(exercise_id: int):
+    """
+    Evaluate attempt-first input with semantic LLM + deterministic fallback.
+
+    Request body:
+        {
+            "attempt": "hello",
+            "attempt_number": 1,
+            "used_hint": false
+        }
+    """
+    try:
+        exercise = db.session.get(Exercise, exercise_id)
+        if not exercise:
+            return not_found_response("Exercise")
+
+        if not exercise.options:
+            return validation_error_response("attempt-check only supports option exercises")
+
+        data = request.get_json(silent=True) or {}
+        attempt = data.get("attempt")
+        attempt_number = data.get("attempt_number")
+        used_hint = data.get("used_hint")
+
+        if not isinstance(attempt, str):
+            return validation_error_response("attempt must be a string")
+        if not isinstance(attempt_number, int) or attempt_number not in (1, 2):
+            return validation_error_response("attempt_number must be 1 or 2")
+        if not isinstance(used_hint, bool):
+            return validation_error_response("used_hint must be a boolean")
+
+        sanitized_attempt, _ = sanitize_user_input(attempt, max_length=200, check_injection=True)
+        if not sanitized_attempt.strip():
+            return validation_error_response("attempt is required")
+
+        target = extract_english_target(exercise)
+        status = "unscored"
+        method = "unscored"
+
+        if target:
+            exact_match = normalize_english_text(sanitized_attempt) == normalize_english_text(target)
+            llm_status = judge_attempt_with_llm(sanitized_attempt, target)
+            if llm_status in {"correct", "wrong"} and not exact_match:
+                status = llm_status
+                method = "llm_semantic"
+            else:
+                status = "correct" if exact_match else "wrong"
+                method = "exact_fallback"
+
+        can_retry = attempt_number == 1 and status != "correct"
+        force_options = attempt_number == 2 and status != "correct"
+        micro_hint = None
+        if attempt_number == 1 and status != "correct":
+            micro_hint = (
+                build_micro_hint(target)
+                if status != "unscored"
+                else "Micro-hint: think about the core meaning in simple English."
+            )
+
+        feedback_map = {
+            "correct": "Correct attempt. Now confirm with options.",
+            "wrong": "Not yet. Use the clue and try once more.",
+            "unscored": "Could not score automatically. Continue with scaffold.",
+        }
+
+        return (
+            jsonify(
+                {
+                    "status": status,
+                    "method": method,
+                    "micro_hint": micro_hint,
+                    "feedback": feedback_map[status],
+                    "challenge_state": {
+                        "attempts_used": attempt_number,
+                        "can_retry": can_retry,
+                        "force_options": force_options,
+                    },
+                }
+            ),
+            200,
+        )
+    except Exception as e:
+        logger.error(f"Error checking attempt for exercise {exercise_id}: {e}")
+        return error_response("Failed to check attempt", 500)
 
 
 @lessons_bp.route("/lessons/<int:lesson_id>/next", methods=["GET"])

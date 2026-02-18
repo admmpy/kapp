@@ -33,6 +33,8 @@ import type {
   ExerciseReviewResponse,
   UserSettings,
   ExerciseSubmission,
+  AttemptCheckRequest,
+  AttemptCheckResponse,
 } from '../types';
 
 import { API_BASE_URL } from '../config';
@@ -130,6 +132,17 @@ class APIClient {
     const payload: ExerciseSubmission =
       typeof submission === 'string' ? { answer: submission } : submission;
     const response = await this.client.post<ExerciseResult>(`/exercises/${exerciseId}/submit`, payload);
+    return response.data;
+  }
+
+  async checkExerciseAttempt(
+    exerciseId: number,
+    payload: AttemptCheckRequest
+  ): Promise<AttemptCheckResponse> {
+    const response = await this.client.post<AttemptCheckResponse>(
+      `/exercises/${exerciseId}/attempt-check`,
+      payload
+    );
     return response.data;
   }
 

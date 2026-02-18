@@ -90,6 +90,24 @@ export interface ExerciseSubmission {
   peeked?: boolean;
 }
 
+export interface AttemptCheckRequest {
+  attempt: string;
+  attempt_number: number;
+  used_hint: boolean;
+}
+
+export interface AttemptCheckResponse {
+  status: 'correct' | 'wrong' | 'unscored';
+  method: 'llm_semantic' | 'exact_fallback' | 'unscored';
+  micro_hint?: string | null;
+  feedback: string;
+  challenge_state: {
+    attempts_used: number;
+    can_retry: boolean;
+    force_options: boolean;
+  };
+}
+
 export interface ExerciseResult {
   correct: boolean;
   correct_answer: string;
