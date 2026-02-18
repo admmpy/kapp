@@ -60,6 +60,16 @@ This project is explicitly **local-only and single-user**, so most web‑app sec
 ## Notes / Positive Observations
 - `SECRET_KEY` is required and validated for length and weak values in `backend/config.py`, which is a strong baseline.
 - CORS is restricted to configured origins by default.
+- `POST /api/exercises/{id}/submit` now validates optional `quality` (0-5 int) and `peeked` (bool), reducing malformed-input risk for the new SRS signal path.
+
+---
+
+## Change Delta (2026-02-18)
+- Reviewed the Korean learning speed change set:
+  - adaptive flags default-on with explicit opt-out,
+  - unified submit contract for optional SRS quality signal,
+  - review UX gating and low-confidence reveal handling.
+- No new critical or high security findings introduced by this change set.
 
 ---
 

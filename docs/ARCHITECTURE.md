@@ -23,7 +23,7 @@ kapp/
 | `getCourses()` | List all courses |
 | `getCourse(id)` | Get course with units |
 | `getLesson(id)` | Get lesson with exercises |
-| `submitExercise(id, answer)` | Submit answer |
+| `submitExercise(id, { answer, quality?, peeked? })` | Submit answer with optional SRS quality signal |
 | `completeLesson(id, data)` | Mark lesson complete |
 | `getProgress()` | Get overall progress |
 | `getLLMExplanation(vocabId, context)` | LLM vocab explanation |
@@ -48,7 +48,8 @@ kapp/
 | GET | `/api/lessons/{id}` | Lesson with exercises |
 | POST | `/api/lessons/{id}/start` | Start lesson |
 | POST | `/api/lessons/{id}/complete` | Complete lesson |
-| POST | `/api/exercises/{id}/submit` | Submit answer |
+| POST | `/api/exercises/{id}/submit` | Submit answer (`answer` required, `quality`/`peeked` optional) |
+| POST | `/api/exercises/{id}/review` | Legacy sentence-SRS review endpoint (backward compatibility) |
 | GET | `/api/progress` | Overall progress |
 | GET | `/api/llm/health` | LLM available? |
 | POST | `/api/llm/explain` | Explain vocabulary |

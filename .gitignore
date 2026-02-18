@@ -68,5 +68,6 @@ backend/backend_log.txt
 
 # Claude Markdown Files
 .markdown/
+docs/recommendations/
 
 AGENTS.md
