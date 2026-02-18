@@ -1,5 +1,5 @@
 """
-LLM Service for OpenAI integration (DeepSeek V3.2)
+LLM service for OpenAI-compatible providers (default: OpenRouter + DeepSeek V3.2)
 
 This service provides:
 - Connection to OpenAI Responses API
@@ -28,12 +28,13 @@ class OpenAIClient:
         model: str = "deepseek/deepseek-v3.2",
         timeout: int = 60,
         cache_dir: str = "./data/llm_cache",
+        base_url: str = "https://openrouter.ai/api/v1",
     ):
         self.api_key = api_key
         self.model = model
         self.timeout = timeout
         self.cache_dir = cache_dir
-        self.base_url = "https://api.openai.com/v1"
+        self.base_url = base_url.rstrip("/")
 
         # Ensure cache directory exists
         os.makedirs(cache_dir, exist_ok=True)

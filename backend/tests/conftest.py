@@ -26,7 +26,8 @@ class TestingConfig:
     TTS_CACHE_DIR = "data/audio_cache"
     LLM_CACHE_DIR = "data/llm_cache"
     OPENAI_API_KEY = "test-openai-key"
-    OPENAI_MODEL = "gpt-4o-mini"
+    OPENAI_MODEL = "deepseek/deepseek-v3.2"
+    OPENAI_BASE_URL = "https://openrouter.ai/api/v1"
     LLM_ENABLED = False
     CORS_ORIGINS = ["http://localhost:5173"]
     RATELIMIT_ENABLED = False

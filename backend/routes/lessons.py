@@ -215,9 +215,10 @@ def get_attempt_llm_client() -> Optional[OpenAIClient]:
     if _attempt_llm_client is None:
         _attempt_llm_client = OpenAIClient(
             api_key=api_key,
-            model=current_app.config.get("OPENAI_MODEL", "gpt-4o-mini"),
+            model=current_app.config.get("OPENAI_MODEL", "deepseek/deepseek-v3.2"),
             timeout=6,
             cache_dir=current_app.config.get("LLM_CACHE_DIR", "data/llm_cache"),
+            base_url=current_app.config.get("OPENAI_BASE_URL", "https://openrouter.ai/api/v1"),
         )
 
     return _attempt_llm_client

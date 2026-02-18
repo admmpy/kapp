@@ -53,7 +53,7 @@ In the future, I think I would use local LLMs again (to completion) assuming I h
 | **Backend** | Flask 3.0, Python 3.9+, SQLAlchemy, SQLite |
 | **Frontend** | React 19, TypeScript, Vite 7 |
 | **Audio** | gTTS with MD5-based file caching |
-| **AI** | OpenAI API (gpt-4o-mini) |
+| **AI** | OpenRouter (deepseek/deepseek-v3.2, OpenAI-compatible API) |
 
 ---
 

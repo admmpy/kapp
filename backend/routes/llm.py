@@ -52,8 +52,14 @@ def get_llm_client() -> OpenAIClient:
     if _llm_client is None:
         model = current_app.config.get("OPENAI_MODEL", "deepseek/deepseek-v3.2")
         api_key = current_app.config.get("OPENAI_API_KEY")
+        base_url = current_app.config.get("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
         cache_dir = current_app.config.get("LLM_CACHE_DIR", "data/llm_cache")
-        _llm_client = OpenAIClient(api_key=api_key, model=model, cache_dir=cache_dir)
+        _llm_client = OpenAIClient(
+            api_key=api_key,
+            model=model,
+            cache_dir=cache_dir,
+            base_url=base_url,
+        )
     return _llm_client
 
 

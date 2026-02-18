@@ -50,9 +50,10 @@ class Config:
     # TTS configuration
     TTS_CACHE_DIR = os.getenv("TTS_CACHE_DIR", "data/audio_cache")
 
-    # LLM Configuration (OpenAI)
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-    OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+    # LLM Configuration (OpenAI-compatible, defaults tuned for OpenRouter)
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or os.getenv("OPENROUTER_API_KEY")
+    OPENAI_MODEL = os.getenv("OPENAI_MODEL", "deepseek/deepseek-v3.2")
+    OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
     LLM_CACHE_DIR = os.getenv("LLM_CACHE_DIR", "data/llm_cache")
     LLM_ENABLED = os.getenv("LLM_ENABLED", "false").lower() == "true"
     WEAK_OPENAI_KEYS = {
@@ -61,6 +62,7 @@ class Config:
         "changeme",
         "your-openai-api-key-here",
         "your-openai-api-key",
+        "your-openrouter-api-key-here",
     }
 
     # CORS configuration - Allow both common Vite ports by default
@@ -114,8 +116,8 @@ class Config:
             openai_key = app.config.get("OPENAI_API_KEY")
             if openai_key in Config.WEAK_OPENAI_KEYS:
                 raise ValueError(
-                    "OPENAI_API_KEY is missing or weak! "
-                    "Set it in backend/.env as OPENAI_API_KEY=..."
+                    "LLM API key is missing or weak! "
+                    "Set OPENAI_API_KEY or OPENROUTER_API_KEY in backend/.env"
                 )
 
 
