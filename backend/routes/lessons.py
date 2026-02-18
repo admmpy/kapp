@@ -24,6 +24,68 @@ logger = logging.getLogger(__name__)
 
 lessons_bp = Blueprint("lessons", __name__)
 _attempt_llm_client = None
+ENGLISH_PHRASE_MAP = {
+    "감사합니다": "Thank you.",
+    "감사합니다. 잘 들었어요.": "Thank you. I heard well.",
+    "내일 날씨가 좋을까요?": "Will the weather be good tomorrow?",
+    "네, 감사합니다.": "Yes, thank you.",
+    "네, 알겠습니다. 잠깐만 기다려 주세요.": "Yes, understood. Please wait a moment.",
+    "물 있어요?": "Do you have water?",
+    "물 한 잔 주세요.": "Please give me a glass of water.",
+    "미안합니다": "I'm sorry.",
+    "미안해요. 뭐라고요?": "Sorry. What did you say?",
+    "사과 네 개 주세요.": "Please give me four apples.",
+    "사과 다섯 개 주세요.": "Please give me five apples.",
+    "사과 두 개 주세요.": "Please give me two apples.",
+    "사과 세 개 주세요.": "Please give me three apples.",
+    "식당이 어디에 있어요?": "Where is the restaurant?",
+    "실례합니다. 지나갈게요.": "Excuse me. Let me pass.",
+    "아니요, 괜찮습니다.": "No, it's okay.",
+    "아니요, 모르겠어요.": "No, I don't know.",
+    "안녕하세요": "Hello.",
+    "안녕하세요. 만나서 반갑습니다.": "Hello. Nice to meet you.",
+    "안녕하세요. 죄송합니다.": "Hello. I'm sorry.",
+    "안녕히 가세요": "Goodbye (to someone leaving).",
+    "안녕히 가세요. 감사합니다.": "Goodbye. Thank you.",
+    "안녕히 계세요. 고마워요.": "Goodbye (when leaving). Thanks.",
+    "어제 날씨가 나빴어요.": "The weather was bad yesterday.",
+    "여기서 기다리세요. 가지 마세요.": "Wait here. Don't go.",
+    "오늘 날씨가 좋아요.": "The weather is good today.",
+    "오늘 뭐 해요?": "What are you doing today?",
+    "오늘은 사월 이십일입니다.": "Today is April 21st.",
+    "오늘은 삼월 십오일입니다.": "Today is March 15th.",
+    "오늘은 오월 십일입니다.": "Today is May 11th.",
+    "오늘은 일월 오일입니다.": "Today is January 5th.",
+    "이것은 만 원입니다.": "This is ten thousand won.",
+    "이것은 삼천 원입니다.": "This is three thousand won.",
+    "이것은 오천 원입니다.": "This is five thousand won.",
+    "이것은 천 원입니다.": "This is one thousand won.",
+    "잠깐만 기다려 주세요. 금방 돌아올게요.": "Please wait a moment. I'll be right back.",
+    "저기요, 도와주세요.": "Excuse me, please help.",
+    "저는 김민수입니다. 학생이 아니에요.": "I am Kim Min-su. I am not a student.",
+    "저는 미국에서 왔습니다.": "I came from the United States.",
+    "저는 서른 살입니다.": "I am thirty years old.",
+    "저는 스무 살입니다.": "I am twenty years old.",
+    "저는 스물다섯 살입니다.": "I am twenty-five years old.",
+    "저는 열아홉 살입니다.": "I am nineteen years old.",
+    "저는 일본에서 왔습니다.": "I came from Japan.",
+    "저는 중국에서 왔어요.": "I came from China.",
+    "저는 한국에서 왔어요.": "I came from Korea.",
+    "제 이름은 김민수입니다. 대학생이에요.": "My name is Kim Min-su. I am a college student.",
+    "제 이름은 김민수입니다. 선생님이에요.": "My name is Kim Min-su. I am a teacher.",
+    "제 이름은 박지현입니다. 회사원이에요.": "My name is Park Ji-hyeon. I am an office worker.",
+    "죄송합니다. 다시 말해 주세요.": "I'm sorry. Please say it again.",
+    "죄송합니다. 잘 못 들었어요.": "I'm sorry. I didn't hear well.",
+    "주스 두 잔 주세요.": "Please give me two glasses of juice.",
+    "지하철역이 어디에 있어요?": "Where is the subway station?",
+    "출구가 어디에 있어요?": "Where is the exit?",
+    "커피 주세요.": "Coffee, please.",
+    "한국어를 가르쳐요.": "I teach Korean.",
+    "한국어를 공부해요.": "I study Korean.",
+    "한국어를 배우고 싶어요.": "I want to learn Korean.",
+    "한국어를 잘 해요.": "I speak Korean well.",
+    "화장실이 어디에 있어요?": "Where is the bathroom?",
+}
 
 
 def validate_sentence_arrange(user_answer, correct_answer: str) -> bool:
@@ -87,6 +149,10 @@ def extract_english_target(exercise: Exercise) -> Optional[str]:
 
     if exercise.correct_answer and looks_like_english(exercise.correct_answer):
         return exercise.correct_answer.strip()
+
+    mapped = ENGLISH_PHRASE_MAP.get((exercise.correct_answer or "").strip())
+    if mapped:
+        return mapped
 
     return None
 
@@ -186,6 +252,76 @@ def judge_attempt_with_llm(attempt: str, target: str) -> Optional[str]:
     except Exception as err:
         logger.warning(f"Attempt LLM check failed, using fallback: {err}")
         return None
+
+
+def translate_text_with_llm(text: str) -> Optional[str]:
+    """Translate Korean phrase to concise natural English with LLM, if available."""
+    client = get_attempt_llm_client()
+    if client is None:
+        return None
+
+    system_prompt = (
+        "You are a Korean-to-English translator. "
+        "Return only the English translation as plain text, no notes."
+    )
+    user_prompt = f"Translate this Korean phrase to English: {text}"
+
+    try:
+        translated = client.chat(
+            prompt=user_prompt,
+            system=system_prompt,
+            temperature=0.0,
+            max_tokens=60,
+            use_cache=True,
+        ).strip()
+        return translated or None
+    except Exception as err:
+        logger.warning(f"Option translation failed, fallback to source text: {err}")
+        return None
+
+
+def build_option_tiles(exercise: Exercise) -> tuple[list[dict], str]:
+    """
+    Build display tiles for option-based exercises.
+    Returns (tiles, option_mode) where option_mode is english|korean.
+    """
+    if not exercise.options:
+        return [], "korean"
+
+    try:
+        raw_options = json.loads(exercise.options)
+    except json.JSONDecodeError:
+        return [], "korean"
+
+    if not isinstance(raw_options, list):
+        return [], "korean"
+
+    tiles = []
+    english_count = 0
+    for raw in raw_options:
+        key = str(raw)
+        label = key
+        translated = False
+
+        if looks_like_english(key):
+            english_count += 1
+        else:
+            mapped = ENGLISH_PHRASE_MAP.get(key.strip())
+            if mapped:
+                label = mapped
+                translated = True
+                english_count += 1
+            else:
+                llm_translation = translate_text_with_llm(key)
+                if llm_translation:
+                    label = llm_translation
+                    translated = True
+                    english_count += 1
+
+        tiles.append({"key": key, "label": label, "translated": translated})
+
+    option_mode = "english" if english_count == len(tiles) and tiles else "korean"
+    return tiles, option_mode
 
 
 @lessons_bp.route("/lessons/<int:lesson_id>", methods=["GET"])
@@ -637,6 +773,8 @@ def check_exercise_attempt(exercise_id: int):
             return validation_error_response("attempt is required")
 
         target = extract_english_target(exercise)
+        if not target and exercise.correct_answer and not looks_like_english(exercise.correct_answer):
+            target = translate_text_with_llm(exercise.correct_answer)
         status = "unscored"
         method = "unscored"
 
@@ -665,14 +803,23 @@ def check_exercise_attempt(exercise_id: int):
             "wrong": "Not yet. Use the clue and try once more.",
             "unscored": "Could not score automatically. Continue with scaffold.",
         }
+        option_tiles = None
+        option_mode = None
+        if force_options and status != "correct":
+            built_tiles, built_mode = build_option_tiles(exercise)
+            option_tiles = built_tiles
+            option_mode = built_mode
 
         return (
             jsonify(
                 {
                     "status": status,
                     "method": method,
+                    "resolved_target_english": target,
                     "micro_hint": micro_hint,
                     "feedback": feedback_map[status],
+                    "option_tiles": option_tiles,
+                    "option_mode": option_mode,
                     "challenge_state": {
                         "attempts_used": attempt_number,
                         "can_retry": can_retry,
