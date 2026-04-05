@@ -21,6 +21,7 @@ interface Props {
   score: number;
   correctAnswers: number;
   totalAnswers: number;
+  skippedCount?: number;
   nextLesson?: Lesson;
   isLastInUnit: boolean;
   isLastInCourse: boolean;
@@ -34,6 +35,7 @@ export default function LessonCompleteModal({
   score,
   correctAnswers,
   totalAnswers,
+  skippedCount = 0,
   nextLesson,
   isLastInUnit,
   isLastInCourse,
@@ -71,6 +73,9 @@ export default function LessonCompleteModal({
             <p>
               <strong>{correctAnswers}</strong> correct out of <strong>{totalAnswers}</strong> exercises
             </p>
+            {skippedCount > 0 && (
+              <p className="skipped-count">{skippedCount} skipped</p>
+            )}
           </div>
         </div>
 

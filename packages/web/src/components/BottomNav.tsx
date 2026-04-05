@@ -1,6 +1,6 @@
 import './BottomNav.css';
 
-export type Tab = 'courses' | 'dashboard' | 'vocabulary-review' | 'conversation';
+export type Tab = 'courses' | 'dashboard' | 'vocabulary-review' | 'listening-practice' | 'conversation';
 
 interface Props {
   activeTab: Tab;
@@ -11,6 +11,7 @@ const tabs: { id: Tab; icon: string; label: string }[] = [
   { id: 'courses', icon: '\uD83D\uDCDA', label: 'Home' },
   { id: 'dashboard', icon: '\uD83D\uDCCA', label: 'Progress' },
   { id: 'vocabulary-review', icon: '\uD83D\uDD04', label: 'Review' },
+  { id: 'listening-practice', icon: '\uD83C\uDFA7', label: 'Listen' },
   { id: 'conversation', icon: '\uD83D\uDCAC', label: 'Chat' },
 ];
 

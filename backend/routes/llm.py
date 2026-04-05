@@ -16,9 +16,12 @@ from llm_service import OpenAIClient, PROMPT_TEMPLATES, get_level_name
 from extensions import limiter
 from utils import error_response, not_found_response, validation_error_response
 from security import sanitize_user_input, validate_conversation_history
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 import re
+import threading
+import uuid
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -44,13 +47,20 @@ def ensure_llm_enabled():
 
 # Initialise LLM client (lazy loading)
 _llm_client = None
+_listening_answer_store = {}
+_listening_answer_store_lock = threading.Lock()
+LISTENING_ANSWER_TTL_MINUTES = 20
+LISTENING_ANSWER_MAX_STORE_SIZE = 2000
 
 
 def get_llm_client() -> OpenAIClient:
     """Get or create LLM client instance"""
     global _llm_client
     if _llm_client is None:
-        model = current_app.config.get("OPENAI_MODEL", "deepseek/deepseek-v3.2")
+        model = str(current_app.config.get("OPENAI_MODEL", "deepseek/deepseek-v3.2"))
+        if "4o-mini" in model.lower():
+            logger.warning("OPENAI_MODEL requested 4o-mini; forcing deepseek/deepseek-v3.2")
+            model = "deepseek/deepseek-v3.2"
         api_key = current_app.config.get("OPENAI_API_KEY")
         base_url = current_app.config.get("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
         cache_dir = current_app.config.get("LLM_CACHE_DIR", "data/llm_cache")
@@ -61,6 +71,111 @@ def get_llm_client() -> OpenAIClient:
             base_url=base_url,
         )
     return _llm_client
+
+
+def _prune_listening_answer_store(now: datetime) -> None:
+    expired = [
+        key for key, payload in _listening_answer_store.items()
+        if payload.get("expires_at") <= now
+    ]
+    for key in expired:
+        _listening_answer_store.pop(key, None)
+
+
+def _store_listening_answer(correct_answer: str, options: list[str]) -> str:
+    now = datetime.utcnow()
+    answer_key = str(uuid.uuid4())
+    with _listening_answer_store_lock:
+        _prune_listening_answer_store(now)
+        if len(_listening_answer_store) >= LISTENING_ANSWER_MAX_STORE_SIZE:
+            oldest = min(
+                _listening_answer_store.items(),
+                key=lambda item: item[1].get("created_at", now),
+            )[0]
+            _listening_answer_store.pop(oldest, None)
+        _listening_answer_store[answer_key] = {
+            "correct_answer": correct_answer,
+            "options": set(options),
+            "created_at": now,
+            "expires_at": now + timedelta(minutes=LISTENING_ANSWER_TTL_MINUTES),
+        }
+    return answer_key
+
+
+def _consume_listening_answer(answer_key: str):
+    now = datetime.utcnow()
+    with _listening_answer_store_lock:
+        _prune_listening_answer_store(now)
+        payload = _listening_answer_store.pop(answer_key, None)
+    if payload is None:
+        return None
+    if payload.get("expires_at") <= now:
+        return None
+    return payload
+
+
+def _build_listening_fallback_exercise(topic: str, level: int) -> dict:
+    """Provide a deterministic exercise when live LLM generation fails."""
+    topic_lower = (topic or "").lower()
+
+    if "coffee" in topic_lower or "cafe" in topic_lower:
+        return {
+            "korean_text": "저는 카페에서 아이스 아메리카노 한 잔 주세요 라고 말했어요.",
+            "romanization": "jeoneun kapeeseo aiseu amerikhano han jan juseyo rago marhaesseoyo.",
+            "english_translation": "I said, 'One iced Americano, please,' at the cafe.",
+            "question": "What is the speaker doing?",
+            "options": [
+                "Ordering a coffee",
+                "Asking for a bus schedule",
+                "Buying a train ticket",
+                "Meeting a teacher",
+            ],
+            "correct_answer": "Ordering a coffee",
+            "explanation": "The phrase includes ordering an iced Americano at a cafe.",
+        }
+
+    if "direction" in topic_lower or "way" in topic_lower or "street" in topic_lower:
+        return {
+            "korean_text": "지하철역이 어디에 있는지 물어봤어요.",
+            "romanization": "jihacheoryeogi eodie inneunji mureobwasseoyo.",
+            "english_translation": "I asked where the subway station is.",
+            "question": "What is the speaker doing?",
+            "options": [
+                "Asking for directions",
+                "Ordering lunch",
+                "Introducing a friend",
+                "Paying a bill",
+            ],
+            "correct_answer": "Asking for directions",
+            "explanation": "The sentence says the speaker asked where the subway station is.",
+        }
+
+    return {
+        "korean_text": "오늘은 한국어 공부를 한 시간 했어요.",
+        "romanization": "oneureun hangugeo gongbureul han sigan haesseoyo.",
+        "english_translation": "Today I studied Korean for one hour.",
+        "question": "What did the speaker do today?",
+        "options": [
+            "Studied Korean",
+            "Watched a movie",
+            "Went shopping",
+            "Cooked dinner",
+        ],
+        "correct_answer": "Studied Korean",
+        "explanation": "The sentence explicitly says they studied Korean for one hour.",
+    }
+
+
+def _get_cached_audio_fallback_url(cache_dir: str) -> str | None:
+    """Return any cached audio URL if fresh generation fails."""
+    try:
+        audio_dir = Path(current_app.root_path) / cache_dir
+        candidates = sorted(audio_dir.glob("*.mp3"))
+        if not candidates:
+            return None
+        return f"/api/audio/{candidates[0].name}"
+    except Exception:
+        return None
 
 
 @llm_bp.route("/llm/health", methods=["GET"])
@@ -462,7 +577,7 @@ def listening_practice():
             "english_translation": "...",
             "question": "...",
             "options": ["...", "...", "...", "..."],
-            "correct_answer": "...",
+            "answer_key": "...",
             "explanation": "...",
             "generated_at": "..."
         }
@@ -493,26 +608,31 @@ def listening_practice():
             level_name=get_level_name(level),
         )
 
+        exercise_data = None
         client = get_llm_client()
-        response_text = client.chat(
-            prompt=user_prompt,
-            system=template["system"],
-            temperature=0.8,
-            max_tokens=600,
-            use_cache=False,
-        )
-
-        import json as json_module
         try:
-            response_text_cleaned = response_text.strip()
-            if response_text_cleaned.startswith("```"):
-                response_text_cleaned = re.sub(r"^```[a-zA-Z]*\s*", "", response_text_cleaned)
-                response_text_cleaned = re.sub(r"\s*```$", "", response_text_cleaned)
-            exercise_data = json_module.loads(response_text_cleaned)
-        except json_module.JSONDecodeError as e:
-            logger.error(f"Failed to parse LLM response as JSON: {e}")
-            logger.error(f"Raw response: {response_text[:500]}")
-            return error_response("Failed to generate valid exercise. Please try again.", 500)
+            response_text = client.chat(
+                prompt=user_prompt,
+                system=template["system"],
+                temperature=0.8,
+                max_tokens=600,
+                use_cache=False,
+            )
+
+            import json as json_module
+            try:
+                response_text_cleaned = response_text.strip()
+                if response_text_cleaned.startswith("```"):
+                    response_text_cleaned = re.sub(r"^```[a-zA-Z]*\s*", "", response_text_cleaned)
+                    response_text_cleaned = re.sub(r"\s*```$", "", response_text_cleaned)
+                exercise_data = json_module.loads(response_text_cleaned)
+            except json_module.JSONDecodeError as e:
+                logger.error(f"Failed to parse LLM response as JSON: {e}")
+                logger.error(f"Raw response: {response_text[:500]}")
+                return error_response("Failed to generate valid exercise. Please try again.", 500)
+        except Exception as llm_error:
+            logger.warning(f"Using fallback listening exercise because LLM call failed: {llm_error}")
+            exercise_data = _build_listening_fallback_exercise(topic, level)
 
         required_fields = ["korean_text", "question", "options", "correct_answer"]
         for field in required_fields:
@@ -520,8 +640,37 @@ def listening_practice():
                 logger.error(f"Missing required field in exercise: {field}")
                 return error_response(f"Generated exercise is missing {field}. Please try again.", 500)
 
-        if not isinstance(exercise_data["options"], list) or len(exercise_data["options"]) < 2:
+        korean_text = exercise_data.get("korean_text")
+        question = exercise_data.get("question")
+        options_raw = exercise_data.get("options")
+        correct_answer_raw = exercise_data.get("correct_answer")
+
+        if not isinstance(korean_text, str) or not korean_text.strip():
+            return error_response("Generated exercise has invalid korean_text. Please try again.", 500)
+
+        if not isinstance(question, str) or not question.strip():
+            return error_response("Generated exercise has invalid question. Please try again.", 500)
+
+        if not isinstance(options_raw, list) or len(options_raw) != 4:
             return error_response("Generated exercise has invalid options. Please try again.", 500)
+
+        options = []
+        for option in options_raw:
+            if not isinstance(option, str) or not option.strip():
+                return error_response("Generated exercise has invalid options. Please try again.", 500)
+            options.append(option.strip())
+
+        if len(set(options)) != len(options):
+            return error_response("Generated exercise has duplicate options. Please try again.", 500)
+
+        if not isinstance(correct_answer_raw, str) or not correct_answer_raw.strip():
+            return error_response("Generated exercise has invalid correct_answer. Please try again.", 500)
+
+        correct_answer = correct_answer_raw.strip()
+        if correct_answer not in options:
+            return error_response("Generated exercise has mismatched correct_answer. Please try again.", 500)
+
+        answer_key = _store_listening_answer(correct_answer=correct_answer, options=options)
 
         from tts_service import get_tts_service
 
@@ -529,19 +678,23 @@ def listening_practice():
         slow = level <= 2
         audio_filename = tts.generate_audio(exercise_data["korean_text"], lang="ko", slow=slow)
 
-        if not audio_filename:
-            return error_response("Failed to generate audio. Please try again.", 500)
-
-        audio_url = tts.get_audio_url(audio_filename)
+        if audio_filename:
+            audio_url = tts.get_audio_url(audio_filename)
+        else:
+            audio_url = _get_cached_audio_fallback_url(
+                current_app.config.get("TTS_CACHE_DIR", "data/audio_cache")
+            )
+            if not audio_url:
+                return error_response("Failed to generate audio. Please try again.", 500)
 
         return jsonify({
             "audio_url": audio_url,
-            "korean_text": exercise_data.get("korean_text"),
+            "korean_text": korean_text.strip(),
             "romanization": exercise_data.get("romanization"),
             "english_translation": exercise_data.get("english_translation"),
-            "question": exercise_data["question"],
-            "options": exercise_data["options"],
-            "correct_answer": exercise_data["correct_answer"],
+            "question": question.strip(),
+            "options": options,
+            "answer_key": answer_key,
             "explanation": exercise_data.get("explanation"),
             "topic": topic,
             "level": level,
@@ -551,3 +704,41 @@ def listening_practice():
     except Exception as e:
         logger.error(f"Error in listening_practice: {e}")
         return error_response("Failed to generate listening practice", 500)
+
+
+@llm_bp.route("/llm/listening-practice/check", methods=["POST"])
+@limiter.limit("60/hour")
+def listening_practice_check():
+    """Validate selected answer for a generated listening exercise."""
+    try:
+        disabled_response = ensure_llm_enabled()
+        if disabled_response:
+            return disabled_response
+
+        data = request.get_json(silent=True) or {}
+        answer_key = (data.get("answer_key") or "").strip()
+        selected_answer = (data.get("selected_answer") or "").strip()
+
+        if not answer_key:
+            return validation_error_response("answer_key is required")
+        if not selected_answer:
+            return validation_error_response("selected_answer is required")
+
+        payload = _consume_listening_answer(answer_key)
+        if payload is None:
+            return validation_error_response("answer_key is invalid or expired")
+
+        if selected_answer not in payload["options"]:
+            return validation_error_response("selected_answer is not in the generated options")
+
+        correct_answer = payload["correct_answer"]
+        return jsonify(
+            {
+                "correct": selected_answer == correct_answer,
+                "correct_answer": correct_answer,
+            }
+        ), 200
+
+    except Exception as e:
+        logger.error(f"Error in listening_practice_check: {e}")
+        return error_response("Failed to check listening practice answer", 500)

@@ -1,0 +1,132 @@
+/* HangulKeyboard — virtual dubeolsik keyboard */
+
+@keyframes slideUpKeyboard {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes keyPulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hangul-keyboard,
+  .hangul-key {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.hangul-keyboard {
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.5rem 0.5rem;
+  /* Keyboard container sits one level below surface so keys stand out */
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  animation: slideUpKeyboard 0.25s ease;
+  will-change: transform, opacity;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hangul-keyboard-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hangul-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.hangul-key {
+  min-width: 30px;
+  height: 40px;
+  padding: 0 6px;
+  /* Use --color-surface for keys — contrasts against muted container */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.1s, border-color 0.1s;
+  will-change: transform;
+  touch-action: manipulation;
+  flex-shrink: 0;
+}
+
+.hangul-key:hover {
+  border-color: var(--color-primary, #667eea);
+  background: var(--color-border);
+}
+
+.hangul-key:active,
+.hangul-key.pressed {
+  animation: keyPulse 0.15s ease;
+  background: var(--color-border);
+}
+
+.hangul-key.wide {
+  min-width: 60px;
+  font-size: 0.875rem;
+}
+
+.hangul-key.shift-key,
+.hangul-key.backspace-key {
+  min-width: 44px;
+  background: var(--color-border);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.hangul-key.shift-key.active {
+  background: var(--color-primary, #667eea);
+  color: #ffffff;
+  border-color: var(--color-primary, #667eea);
+}
+
+.hangul-key.space-key {
+  flex: 1;
+  min-width: 120px;
+  max-width: 240px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--color-border);
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 400px) {
+  .hangul-key {
+    min-width: 26px;
+    height: 36px;
+    font-size: 0.9rem;
+    padding: 0 4px;
+  }
+
+  .hangul-key.wide {
+    min-width: 50px;
+  }
+
+  .hangul-key.shift-key,
+  .hangul-key.backspace-key {
+    min-width: 36px;
+  }
+}

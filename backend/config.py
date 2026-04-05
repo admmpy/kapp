@@ -52,7 +52,8 @@ class Config:
 
     # LLM Configuration (OpenAI-compatible, defaults tuned for OpenRouter)
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or os.getenv("OPENROUTER_API_KEY")
-    OPENAI_MODEL = os.getenv("OPENAI_MODEL", "deepseek/deepseek-v3.2")
+    # Enforce DeepSeek as the primary LLM model across environments.
+    OPENAI_MODEL = "deepseek/deepseek-v3.2"
     OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
     LLM_CACHE_DIR = os.getenv("LLM_CACHE_DIR", "data/llm_cache")
     LLM_ENABLED = os.getenv("LLM_ENABLED", "false").lower() == "true"

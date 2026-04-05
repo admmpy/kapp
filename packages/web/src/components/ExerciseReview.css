@@ -43,6 +43,87 @@
   transition: width 0.3s ease;
 }
 
+/* Nav toolbar (shared pattern with LessonView) */
+.review-nav-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.nav-back-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.nav-back-btn:hover:not(:disabled) {
+  color: var(--color-text);
+  transform: scale(1.02);
+}
+
+.nav-back-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.nav-counter {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.nav-skip-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.nav-skip-btn:hover {
+  color: var(--color-accent, #667eea);
+  transform: scale(1.02);
+}
+
+.nav-skip-placeholder {
+  width: 52px;
+}
+
+/* Slide animations (imported pattern) */
+@keyframes slideInFromRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exercise-slide-forward,
+  .exercise-slide-backward {
+    animation: none !important;
+  }
+}
+
+.exercise-slide-forward {
+  animation: slideInFromRight 0.25s ease;
+}
+
+.exercise-slide-backward {
+  animation: slideInFromLeft 0.25s ease;
+}
+
 .exercise-source {
   font-size: 13px;
   color: var(--color-text-muted);

@@ -13,6 +13,7 @@ interface Props {
   result: ExerciseResult | null;
   submitting: boolean;
   immersionLevel?: ImmersionLevel;
+  previousAnswer?: string | null;
 }
 
 // Fisher-Yates shuffle algorithm
@@ -25,11 +26,20 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-export default function SentenceArrangeExercise({ exercise, onSubmit, result, submitting, immersionLevel = 1 }: Props) {
-  const [selectedTiles, setSelectedTiles] = useState<SentenceTile[]>([]);
+export default function SentenceArrangeExercise({ exercise, onSubmit, result, submitting, immersionLevel = 1, previousAnswer }: Props) {
+  const tiles = exercise.options as SentenceTile[] | undefined;
+
+  const [selectedTiles, setSelectedTiles] = useState<SentenceTile[]>(() => {
+    if (!previousAnswer || !tiles) return [];
+    try {
+      const ids = JSON.parse(previousAnswer) as number[];
+      return ids.map(id => tiles.find(t => t.id === id)).filter((t): t is SentenceTile => t !== undefined);
+    } catch {
+      return [];
+    }
+  });
   const lastSelectedIdRef = useRef<number | null>(null);
 
-  const tiles = exercise.options as SentenceTile[] | undefined;
   const isAnswered = result !== null;
   const hideRomanization = immersionLevel >= 2;
   const hideEnglishHints = immersionLevel >= 3;
