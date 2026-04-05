@@ -37,6 +37,8 @@ import type {
   AttemptCheckResponse,
   ListeningPracticeRequest,
   ListeningPracticeResponse,
+  ListeningPracticeCheckRequest,
+  ListeningPracticeCheckResponse,
 } from '../types';
 
 import { API_BASE_URL } from '../config';
@@ -376,6 +378,16 @@ class APIClient {
     }, {
       timeout: 90000
     });
+    return response.data;
+  }
+
+  async checkListeningPracticeAnswer(
+    request: ListeningPracticeCheckRequest
+  ): Promise<ListeningPracticeCheckResponse> {
+    const response = await this.client.post<ListeningPracticeCheckResponse>(
+      '/llm/listening-practice/check',
+      request
+    );
     return response.data;
   }
 }

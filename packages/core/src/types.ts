@@ -437,11 +437,21 @@ export interface ListeningPracticeResponse {
   english_translation?: string;
   question: string;
   options: string[];
-  correct_answer: string;
+  answer_key: string;
   explanation?: string;
   topic: string;
   level: number;
   generated_at: string;
+}
+
+export interface ListeningPracticeCheckRequest {
+  answer_key: string;
+  selected_answer: string;
+}
+
+export interface ListeningPracticeCheckResponse {
+  correct: boolean;
+  correct_answer: string;
 }
 
 // Dashboard statistics

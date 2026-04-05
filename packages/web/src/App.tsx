@@ -234,6 +234,7 @@ function App() {
       case 'courses': navigateToCourses(); break;
       case 'dashboard': navigateToDashboard(); break;
       case 'vocabulary-review': navigateToReview(); break;
+      case 'listening-practice': navigateToListeningPractice(); break;
       case 'conversation': navigateToConversation(); break;
     }
   }
@@ -303,7 +304,7 @@ function App() {
 
         {state.page === 'listening-practice' && (
           <ErrorBoundary>
-            <ListeningPractice onBack={navigateToDashboard} />
+            <ListeningPractice onBack={navigateToCourses} />
           </ErrorBoundary>
         )}
 

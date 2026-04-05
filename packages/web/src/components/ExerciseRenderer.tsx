@@ -5,6 +5,7 @@ import { useState } from 'react';
 import type { Exercise, ExerciseResult, PronunciationSelfCheck as PronCheck, ImmersionLevel, OptionTile } from '@kapp/core';
 import { API_BASE_URL, PRONUNCIATION_SELF_CHECK_ENABLED, apiClient, savePronunciationCheck } from '@kapp/core';
 import SentenceArrangeExercise from './SentenceArrangeExercise';
+import HangulKeyboard from './HangulKeyboard';
 import './ExerciseRenderer.css';
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
   submitting: boolean;
   immersionLevel?: ImmersionLevel;
   forceAttemptFirst?: boolean;
+  previousAnswer?: string | null;
 }
 
 type PlaybackSpeed = 0.5 | 1.0 | 1.2;
@@ -25,10 +27,23 @@ export default function ExerciseRenderer({
   submitting,
   immersionLevel = 1,
   forceAttemptFirst = false,
+  previousAnswer,
 }: Props) {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [textAnswer, setTextAnswer] = useState('');
-  const [writingAnswer, setWritingAnswer] = useState('');
+  const [selectedOption, setSelectedOption] = useState<string | null>(
+    () => {
+      if (!previousAnswer) return null;
+      const opts = exercise.options as string[] | undefined;
+      return opts?.includes(previousAnswer) ? previousAnswer : null;
+    }
+  );
+  const [textAnswer, setTextAnswer] = useState(() => {
+    if (!previousAnswer) return '';
+    const opts = exercise.options as string[] | undefined;
+    return opts ? '' : previousAnswer;
+  });
+  const [writingAnswer, setWritingAnswer] = useState(() =>
+    exercise.exercise_type === 'writing' ? (previousAnswer ?? '') : ''
+  );
   const [attemptText, setAttemptText] = useState('');
   const [attemptUnlocked, setAttemptUnlocked] = useState(false);
   const [attemptLocked, setAttemptLocked] = useState(false);
@@ -44,6 +59,7 @@ export default function ExerciseRenderer({
   const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1.0);
   const [selfCheckDone, setSelfCheckDone] = useState(false);
   const [selfCheckRating, setSelfCheckRating] = useState<PronCheck['rating'] | null>(null);
+  const [showHangulKeyboard, setShowHangulKeyboard] = useState(false);
 
   const hideRomanization = immersionLevel >= 2;
   const hideEnglishHints = immersionLevel >= 3;
@@ -57,6 +73,7 @@ export default function ExerciseRenderer({
         result={result}
         submitting={submitting}
         immersionLevel={immersionLevel}
+        previousAnswer={previousAnswer}
       />
     );
   }
@@ -67,6 +84,11 @@ export default function ExerciseRenderer({
     forceAttemptFirst
     && hasOptions;
   const canShowOptions = !attemptFirstRequired || attemptUnlocked || isAnswered;
+
+  // Should we show the Hangul keyboard toggle?
+  const needsKoreanInput =
+    exercise.exercise_type === 'writing' ||
+    (!hasOptions && exercise.exercise_type !== 'listening');
 
   function handleOptionSelect(option: string) {
     if (isAnswered || submitting) return;
@@ -324,8 +346,25 @@ export default function ExerciseRenderer({
               placeholder="Write your answer in Korean..."
               disabled={isAnswered || submitting}
               rows={4}
-              autoFocus
+              autoFocus={!showHangulKeyboard}
             />
+            {!isAnswered && (
+              <button
+                className={`hangul-toggle-btn${showHangulKeyboard ? ' active' : ''}`}
+                onClick={() => setShowHangulKeyboard(v => !v)}
+                title="Toggle Korean keyboard"
+                type="button"
+              >
+                ㄱ
+              </button>
+            )}
+            {!isAnswered && (
+              <HangulKeyboard
+                text={writingAnswer}
+                onTextChange={setWritingAnswer}
+                visible={showHangulKeyboard}
+              />
+            )}
           </div>
         ) : hasOptions ? (
           <>
@@ -395,15 +434,34 @@ export default function ExerciseRenderer({
           </>
         ) : (
           <div className="text-answer">
-            <input
-              type="text"
-              value={textAnswer}
-              onChange={(e) => setTextAnswer(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Type your answer..."
-              disabled={isAnswered || submitting}
-              autoFocus
-            />
+            <div className="text-input-wrapper">
+              <input
+                type="text"
+                value={textAnswer}
+                onChange={(e) => setTextAnswer(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your answer..."
+                disabled={isAnswered || submitting}
+                autoFocus={!showHangulKeyboard}
+              />
+              {!isAnswered && needsKoreanInput && (
+                <button
+                  className={`hangul-toggle-btn${showHangulKeyboard ? ' active' : ''}`}
+                  onClick={() => setShowHangulKeyboard(v => !v)}
+                  title="Toggle Korean keyboard"
+                  type="button"
+                >
+                  ㄱ
+                </button>
+              )}
+            </div>
+            {!isAnswered && needsKoreanInput && (
+              <HangulKeyboard
+                text={textAnswer}
+                onTextChange={setTextAnswer}
+                visible={showHangulKeyboard}
+              />
+            )}
           </div>
         )}
       </div>

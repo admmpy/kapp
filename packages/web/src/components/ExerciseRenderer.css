@@ -80,8 +80,8 @@
 }
 
 .audio-button {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.25);
   border: none;
@@ -107,7 +107,7 @@
 }
 
 .speed-button {
-  padding: 6px 10px;
+  padding: 8px 12px;
   border: none;
   border-radius: 16px;
   background: transparent;
@@ -388,6 +388,17 @@
   opacity: 1;
 }
 
+.text-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.text-input-wrapper input {
+  flex: 1;
+}
+
 .text-answer input {
   width: 100%;
   padding: 1rem;
@@ -404,6 +415,45 @@
 
 .text-answer input:disabled {
   background: #f5f5f5;
+}
+
+/* Hangul keyboard toggle button */
+.hangul-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+  flex-shrink: 0;
+}
+
+.hangul-toggle-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.hangul-toggle-btn.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Hangul toggle inside writing-answer */
+.writing-answer {
+  position: relative;
+}
+
+.writing-answer .hangul-toggle-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 .submit-button {
@@ -453,13 +503,13 @@
   }
 
   .audio-button {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     font-size: 1rem;
   }
 
   .speed-button {
-    padding: 4px 8px;
+    padding: 8px 10px;
     font-size: 0.65rem;
   }
 }

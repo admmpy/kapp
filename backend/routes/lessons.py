@@ -213,9 +213,13 @@ def get_attempt_llm_client() -> Optional[OpenAIClient]:
         return None
 
     if _attempt_llm_client is None:
+        model = str(current_app.config.get("OPENAI_MODEL", "deepseek/deepseek-v3.2"))
+        if "4o-mini" in model.lower():
+            logger.warning("OPENAI_MODEL requested 4o-mini for attempt checks; forcing deepseek/deepseek-v3.2")
+            model = "deepseek/deepseek-v3.2"
         _attempt_llm_client = OpenAIClient(
             api_key=api_key,
-            model=current_app.config.get("OPENAI_MODEL", "deepseek/deepseek-v3.2"),
+            model=model,
             timeout=6,
             cache_dir=current_app.config.get("LLM_CACHE_DIR", "data/llm_cache"),
             base_url=current_app.config.get("OPENAI_BASE_URL", "https://openrouter.ai/api/v1"),
