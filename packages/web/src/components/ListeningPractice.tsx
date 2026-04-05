@@ -3,7 +3,7 @@
  */
 import { useState } from 'react';
 import { apiClient, API_BASE_URL } from '@kapp/core';
-import type { ListeningPracticeResponse } from '@kapp/core';
+import type { ListeningPracticeResponse, ListeningPracticeCheckResponse } from '@kapp/core';
 import './ListeningPractice.css';
 
 type PlaybackSpeed = 0.5 | 1.0 | 1.2;
@@ -28,6 +28,8 @@ export default function ListeningPractice({ onBack }: Props) {
   const [exercise, setExercise] = useState<ListeningPracticeResponse | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [checkingAnswer, setCheckingAnswer] = useState(false);
+  const [checkResult, setCheckResult] = useState<ListeningPracticeCheckResponse | null>(null);
   const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1.0);
   const [hasPlayed, setHasPlayed] = useState(false);
 
@@ -42,6 +44,8 @@ export default function ListeningPractice({ onBack }: Props) {
     setExercise(null);
     setSelectedAnswer(null);
     setIsAnswered(false);
+    setCheckingAnswer(false);
+    setCheckResult(null);
     setHasPlayed(false);
 
     try {
@@ -66,15 +70,32 @@ export default function ListeningPractice({ onBack }: Props) {
     setHasPlayed(true);
   }
 
-  function handleSubmit() {
-    if (!selectedAnswer || isAnswered) return;
-    setIsAnswered(true);
+  async function handleSubmit() {
+    if (!selectedAnswer || isAnswered || !exercise) return;
+    setCheckingAnswer(true);
+    setError(null);
+
+    try {
+      const result = await apiClient.checkListeningPracticeAnswer({
+        answer_key: exercise.answer_key,
+        selected_answer: selectedAnswer,
+      });
+      setCheckResult(result);
+      setIsAnswered(true);
+    } catch (err) {
+      console.error('Failed to check listening practice answer:', err);
+      setError(err instanceof Error ? err.message : 'Failed to check answer. Please try again.');
+    } finally {
+      setCheckingAnswer(false);
+    }
   }
 
   function handleNext() {
     setExercise(null);
     setSelectedAnswer(null);
     setIsAnswered(false);
+    setCheckingAnswer(false);
+    setCheckResult(null);
     setHasPlayed(false);
   }
 
@@ -85,8 +106,8 @@ export default function ListeningPractice({ onBack }: Props) {
       classes += ' selected';
     }
 
-    if (isAnswered && exercise) {
-      if (option === exercise.correct_answer) {
+    if (isAnswered && checkResult) {
+      if (option === checkResult.correct_answer) {
         classes += ' correct';
       } else if (selectedAnswer === option) {
         classes += ' incorrect';
@@ -213,17 +234,17 @@ export default function ListeningPractice({ onBack }: Props) {
               ))}
             </div>
 
-            {isAnswered && (
-              <div className={`result-feedback ${selectedAnswer === exercise.correct_answer ? 'correct' : 'incorrect'}`}>
+            {isAnswered && checkResult && (
+              <div className={`result-feedback ${checkResult.correct ? 'correct' : 'incorrect'}`}>
                 <div className="result-icon">
-                  {selectedAnswer === exercise.correct_answer ? '✓' : '✗'}
+                  {checkResult.correct ? '✓' : '✗'}
                 </div>
                 <div className="result-message">
-                  {selectedAnswer === exercise.correct_answer ? 'Correct!' : 'Not quite...'}
+                  {checkResult.correct ? 'Correct!' : 'Not quite...'}
                 </div>
-                {selectedAnswer !== exercise.correct_answer && (
+                {!checkResult.correct && (
                   <div className="correct-answer">
-                    Correct answer: <strong>{exercise.correct_answer}</strong>
+                    Correct answer: <strong>{checkResult.correct_answer}</strong>
                   </div>
                 )}
                 {exercise.explanation && (
@@ -251,9 +272,9 @@ export default function ListeningPractice({ onBack }: Props) {
                 <button
                   className="submit-button"
                   onClick={handleSubmit}
-                  disabled={!selectedAnswer}
+                  disabled={!selectedAnswer || checkingAnswer}
                 >
-                  Check Answer
+                  {checkingAnswer ? 'Checking...' : 'Check Answer'}
                 </button>
               ) : (
                 <button className="next-button" onClick={handleNext}>

@@ -1,7 +1,7 @@
 /**
  * LessonView - Main lesson interface with exercises
  */
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { apiClient, cacheLesson, getCachedLesson, saveProgress, SPEAKING_FIRST_ENABLED, GRAMMAR_MASTERY_ENABLED, IMMERSION_MODE_ENABLED } from '@kapp/core';
 import type { Lesson, Exercise, ExerciseResult, ImmersionLevel } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
@@ -18,6 +18,11 @@ interface NextLessonInfo {
   title: string;
   estimated_minutes: number;
   exercise_count: number;
+}
+
+interface ExerciseHistoryEntry {
+  result: ExerciseResult | null;
+  answer: string | null;
 }
 
 interface Props {
@@ -79,6 +84,13 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     Array<{ pattern_title: string; mastery_score: number; attempts: number }>
   >([]);
 
+  // Skip / Back navigation
+  const [skippedCount, setSkippedCount] = useState(0);
+  const [navDirection, setNavDirection] = useState<'forward' | 'backward'>('forward');
+  const exerciseHistoryRef = useRef<Map<number, ExerciseHistoryEntry>>(new Map());
+  // Pending answer for storing before API result arrives
+  const pendingAnswerRef = useRef<string | null>(null);
+
   const exercises = useMemo(() => {
     if (!lesson?.exercises) return [];
     return SPEAKING_FIRST_ENABLED
@@ -131,20 +143,26 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     loadLesson();
   }, [lessonId, courseId]);
 
-  // Clear result when exercise changes to prevent state pollution
+  // Restore or clear result when exercise index changes
   useEffect(() => {
-    setLastResult(null);
+    const history = exerciseHistoryRef.current.get(currentExerciseIndex);
+    setLastResult(history?.result ?? null);
   }, [currentExerciseIndex]);
 
   async function handleSubmitAnswer(answer: string, meta?: { peeked?: boolean }) {
     if (!exercises.length || submitting) return;
 
     const exercise = exercises[currentExerciseIndex];
+    pendingAnswerRef.current = answer;
     setSubmitting(true);
 
     try {
       const result = await apiClient.submitExercise(exercise.id, { answer, peeked: meta?.peeked });
       setLastResult(result);
+
+      // Store in history
+      exerciseHistoryRef.current.set(currentExerciseIndex, { result, answer });
+
       setTotalAnswered(prev => prev + 1);
       if (result.correct) {
         setCorrectAnswers(prev => prev + 1);
@@ -166,58 +184,78 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
       console.error('Failed to submit answer:', err);
     } finally {
       setSubmitting(false);
+      pendingAnswerRef.current = null;
     }
   }
 
   async function handleNextExercise() {
     if (!exercises.length) return;
 
-    // Note: setLastResult(null) is handled by useEffect when currentExerciseIndex changes
-    // This prevents race conditions with async state updates
+    setNavDirection('forward');
 
     if (currentExerciseIndex < exercises.length - 1) {
       setCurrentExerciseIndex(prev => prev + 1);
     } else {
-      // Lesson complete - show completion modal
-      const timeSpent = Math.round((Date.now() - startTime) / 1000);
-      const finalCorrect = correctAnswers;
-      const finalTotal = totalAnswered;
-      const score = finalTotal > 0 ? (finalCorrect / finalTotal) * 100 : 0;
-
-      try {
-        // Save progress offline (will sync when online)
-        await saveProgress(lessonId.toString(), true, score);
-
-        if (navigator.onLine) {
-          await apiClient.completeLesson(lessonId, {
-            score,
-            time_spent_seconds: timeSpent
-          });
-
-          // Fetch next lesson info
-          const nextLessonData = await apiClient.getNextLesson(lessonId);
-          if (nextLessonData.next_lesson) {
-            setNextLessonInfo({
-              id: nextLessonData.next_lesson.id,
-              title: nextLessonData.next_lesson.title,
-              estimated_minutes: nextLessonData.next_lesson.estimated_minutes,
-              exercise_count: nextLessonData.next_lesson.exercise_count
-            });
-          }
-          setIsLastInUnit(nextLessonData.is_last_in_unit);
-          setIsLastInCourse(nextLessonData.is_last_in_course);
-        } else {
-          setNextLessonInfo(null);
-          setIsLastInUnit(false);
-          setIsLastInCourse(false);
-        }
-      } catch (err) {
-        console.error('Failed to complete lesson:', err);
-      }
-
-      setFinalScore(score);
-      setShowCompleteModal(true);
+      await completLesson();
     }
+  }
+
+  function handleSkipExercise() {
+    if (!exercises.length || lastResult) return; // don't skip after answering
+
+    // Record as skipped (no result, no answer)
+    exerciseHistoryRef.current.set(currentExerciseIndex, { result: null, answer: null });
+    setSkippedCount(prev => prev + 1);
+    setNavDirection('forward');
+
+    if (currentExerciseIndex < exercises.length - 1) {
+      setCurrentExerciseIndex(prev => prev + 1);
+    } else {
+      completLesson();
+    }
+  }
+
+  function handlePreviousExercise() {
+    if (currentExerciseIndex === 0) return;
+    setNavDirection('backward');
+    setCurrentExerciseIndex(prev => prev - 1);
+  }
+
+  async function completLesson() {
+    const timeSpent = Math.round((Date.now() - startTime) / 1000);
+    const score = totalAnswered > 0 ? (correctAnswers / totalAnswered) * 100 : 0;
+
+    try {
+      await saveProgress(lessonId.toString(), true, score);
+
+      if (navigator.onLine) {
+        await apiClient.completeLesson(lessonId, {
+          score,
+          time_spent_seconds: timeSpent
+        });
+
+        const nextLessonData = await apiClient.getNextLesson(lessonId);
+        if (nextLessonData.next_lesson) {
+          setNextLessonInfo({
+            id: nextLessonData.next_lesson.id,
+            title: nextLessonData.next_lesson.title,
+            estimated_minutes: nextLessonData.next_lesson.estimated_minutes,
+            exercise_count: nextLessonData.next_lesson.exercise_count
+          });
+        }
+        setIsLastInUnit(nextLessonData.is_last_in_unit);
+        setIsLastInCourse(nextLessonData.is_last_in_course);
+      } else {
+        setNextLessonInfo(null);
+        setIsLastInUnit(false);
+        setIsLastInCourse(false);
+      }
+    } catch (err) {
+      console.error('Failed to complete lesson:', err);
+    }
+
+    setFinalScore(score);
+    setShowCompleteModal(true);
   }
 
   function handleNextLesson(nextLessonId: number) {
@@ -262,6 +300,9 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
 
   const currentExercise = exercises[currentExerciseIndex];
   const isLastExercise = currentExerciseIndex === exercises.length - 1;
+  const isFirstExercise = currentExerciseIndex === 0;
+  const currentHistory = exerciseHistoryRef.current.get(currentExerciseIndex);
+  const previousAnswer = currentHistory?.answer ?? null;
 
   // Show grammar explanation first
   if (showGrammar && lesson.grammar_explanation) {
@@ -341,7 +382,32 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
         />
       </header>
 
-      <div className="exercise-container">
+      {/* Navigation toolbar */}
+      <div className="exercise-nav-toolbar">
+        <button
+          className="nav-back-btn"
+          onClick={handlePreviousExercise}
+          disabled={isFirstExercise}
+          aria-label="Previous exercise"
+        >
+          ← Back
+        </button>
+        <span className="nav-counter">
+          {currentExerciseIndex + 1} / {exercises.length}
+        </span>
+        {!lastResult && (
+          <button
+            className="nav-skip-btn"
+            onClick={handleSkipExercise}
+            aria-label="Skip exercise"
+          >
+            Skip →
+          </button>
+        )}
+        {lastResult && <span className="nav-skip-placeholder" />}
+      </div>
+
+      <div className={`exercise-container exercise-slide-${navDirection}`}>
         <ExerciseRenderer
           key={currentExercise.id}
           exercise={currentExercise}
@@ -350,6 +416,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
           submitting={submitting}
           immersionLevel={immersionLevel}
           forceAttemptFirst
+          previousAnswer={previousAnswer}
         />
 
         {lastResult && (
@@ -398,6 +465,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
       <div className="lesson-progress-summary">
         <span>{correctAnswers} correct</span>
         <span>{totalAnswered - correctAnswers} incorrect</span>
+        {skippedCount > 0 && <span>{skippedCount} skipped</span>}
       </div>
 
       {showCompleteModal && (
@@ -406,6 +474,7 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
           score={finalScore}
           correctAnswers={correctAnswers}
           totalAnswers={totalAnswered}
+          skippedCount={skippedCount}
           nextLesson={nextLessonInfo || undefined}
           isLastInUnit={isLastInUnit}
           isLastInCourse={isLastInCourse}

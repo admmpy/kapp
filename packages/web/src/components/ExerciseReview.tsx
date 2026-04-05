@@ -1,7 +1,7 @@
 /**
  * ExerciseReview - Sentence-level spaced repetition review
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { apiClient } from '@kapp/core';
 import type { DueExercise, ExerciseResult } from '@kapp/core';
 import ExerciseRenderer from './ExerciseRenderer';
@@ -10,6 +10,12 @@ import './ExerciseReview.css';
 
 interface Props {
   onClose?: () => void;
+}
+
+interface ReviewHistoryEntry {
+  result: ExerciseResult | null;
+  answer: string | null;
+  quality: number | null;
 }
 
 function normalizeAnswer(value: string): string {
@@ -49,17 +55,21 @@ export default function ExerciseReview({ onClose }: Props) {
   const [pendingAnswer, setPendingAnswer] = useState<string | null>(null);
   const [pendingPeeked, setPendingPeeked] = useState(false);
   const [selectedQuality, setSelectedQuality] = useState<number | null>(null);
+  const [navDirection, setNavDirection] = useState<'forward' | 'backward'>('forward');
+
+  const reviewHistoryRef = useRef<Map<number, ReviewHistoryEntry>>(new Map());
 
   useEffect(() => {
     loadDueExercises();
   }, []);
 
-  // Clear result and pending review state when exercise changes
+  // Restore or clear result/quality when index changes
   useEffect(() => {
-    setLastResult(null);
-    setPendingAnswer(null);
+    const history = reviewHistoryRef.current.get(currentIndex);
+    setLastResult(history?.result ?? null);
+    setPendingAnswer(history?.answer ?? null);
+    setSelectedQuality(history?.quality ?? null);
     setPendingPeeked(false);
-    setSelectedQuality(null);
   }, [currentIndex]);
 
   async function loadDueExercises() {
@@ -84,11 +94,15 @@ export default function ExerciseReview({ onClose }: Props) {
     setPendingAnswer(answer);
     setPendingPeeked(Boolean(meta?.peeked));
     setSelectedQuality(null);
-    setLastResult({
+    const result: ExerciseResult = {
       correct: isCorrect,
       correct_answer: exercise.correct_answer || '',
       explanation: exercise.explanation,
-    });
+    };
+    setLastResult(result);
+
+    // Store in history (quality not yet selected)
+    reviewHistoryRef.current.set(currentIndex, { result, answer, quality: null });
   }
 
   async function handleNextExercise() {
@@ -99,6 +113,12 @@ export default function ExerciseReview({ onClose }: Props) {
 
     const exercise = dueExercises[currentIndex];
     if (!exercise) return;
+
+    // Update history with quality
+    const existing = reviewHistoryRef.current.get(currentIndex);
+    if (existing) {
+      reviewHistoryRef.current.set(currentIndex, { ...existing, quality: selectedQuality });
+    }
 
     setSubmitting(true);
     setError(null);
@@ -115,6 +135,7 @@ export default function ExerciseReview({ onClose }: Props) {
       }));
 
       if (currentIndex < dueExercises.length - 1) {
+        setNavDirection('forward');
         setCurrentIndex(prev => prev + 1);
       } else {
         setSessionComplete(true);
@@ -125,6 +146,23 @@ export default function ExerciseReview({ onClose }: Props) {
     } finally {
       setSubmitting(false);
     }
+  }
+
+  function handleSkipExercise() {
+    if (lastResult) return; // don't skip after answering
+    reviewHistoryRef.current.set(currentIndex, { result: null, answer: null, quality: null });
+    setNavDirection('forward');
+    if (currentIndex < dueExercises.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+    } else {
+      setSessionComplete(true);
+    }
+  }
+
+  function handlePreviousExercise() {
+    if (currentIndex === 0) return;
+    setNavDirection('backward');
+    setCurrentIndex(prev => prev - 1);
   }
 
   if (loading) {
@@ -190,6 +228,8 @@ export default function ExerciseReview({ onClose }: Props) {
   const currentExercise = dueExercises[currentIndex];
   const progress = ((currentIndex + 1) / dueExercises.length) * 100;
   const isLastExercise = currentIndex === dueExercises.length - 1;
+  const currentHistory = reviewHistoryRef.current.get(currentIndex);
+  const previousAnswer = currentHistory?.answer ?? null;
 
   return (
     <div className="exercise-review">
@@ -210,17 +250,44 @@ export default function ExerciseReview({ onClose }: Props) {
         <div className="progress-fill" style={{ width: `${progress}%` }} />
       </div>
 
+      {/* Navigation toolbar */}
+      <div className="exercise-nav-toolbar review-nav-toolbar">
+        <button
+          className="nav-back-btn"
+          onClick={handlePreviousExercise}
+          disabled={currentIndex === 0}
+          aria-label="Previous exercise"
+        >
+          ← Back
+        </button>
+        <span className="nav-counter">
+          {currentIndex + 1} / {dueExercises.length}
+        </span>
+        {!lastResult ? (
+          <button
+            className="nav-skip-btn"
+            onClick={handleSkipExercise}
+            aria-label="Skip exercise"
+          >
+            Skip →
+          </button>
+        ) : (
+          <span className="nav-skip-placeholder" />
+        )}
+      </div>
+
       {currentExercise.lesson_title && (
         <p className="exercise-source">From: {currentExercise.lesson_title}</p>
       )}
 
-      <div className="exercise-container">
+      <div className={`exercise-container exercise-slide-${navDirection}`}>
         <ExerciseRenderer
           key={currentExercise.id}
           exercise={currentExercise}
           onSubmit={handleSubmitAnswer}
           result={lastResult}
           submitting={submitting}
+          previousAnswer={previousAnswer}
         />
 
         {lastResult && (
