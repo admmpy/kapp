@@ -304,7 +304,7 @@ function App() {
 
         {state.page === 'listening-practice' && (
           <ErrorBoundary>
-            <ListeningPractice onBack={navigateToDashboard} />
+            <ListeningPractice onBack={navigateToCourses} />
           </ErrorBoundary>
         )}
 

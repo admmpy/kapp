@@ -319,7 +319,12 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
 
         <header className="lesson-header">
           <button className="back-button" onClick={onBack}>← Back</button>
-          <h1>{lesson.title}</h1>
+          <div className="lesson-header__title-row">
+            <h1>{lesson.title}</h1>
+            {IMMERSION_MODE_ENABLED && onImmersionChange && (
+              <ImmersionSelector level={immersionLevel} onChange={onImmersionChange} compact />
+            )}
+          </div>
         </header>
 
         <div className="grammar-section">
@@ -333,9 +338,6 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
             <div className="grammar-tip">
               <strong>Tip:</strong> {lesson.grammar_tip}
             </div>
-          )}
-          {IMMERSION_MODE_ENABLED && onImmersionChange && (
-            <ImmersionSelector level={immersionLevel} onChange={onImmersionChange} />
           )}
           <button className="start-exercises-btn" onClick={handleStartExercises}>
             Start Exercises ({exercises.length})
@@ -374,7 +376,12 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     <div className="lesson-view">
       <header className="lesson-header">
         <button className="back-button" onClick={onBack}>← Back</button>
-        <h1>{lesson.title}</h1>
+        <div className="lesson-header__title-row">
+          <h1>{lesson.title}</h1>
+          {IMMERSION_MODE_ENABLED && onImmersionChange && (
+            <ImmersionSelector level={immersionLevel} onChange={onImmersionChange} compact />
+          )}
+        </div>
         <ProgressBar
           current={currentExerciseIndex + 1}
           total={exercises.length}
