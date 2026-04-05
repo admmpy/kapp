@@ -108,6 +108,7 @@
 
 .speed-button {
   padding: 8px 12px;
+  min-height: 36px;
   border: none;
   border-radius: 16px;
   background: transparent;
