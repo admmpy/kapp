@@ -390,6 +390,28 @@ class APIClient {
     );
     return response.data;
   }
+
+  // ============================================
+  // Daily Mission
+  // ============================================
+
+  async getDailyMission(): Promise<{
+    tasks: {
+      type: string;
+      label: string;
+      description: string;
+      lesson_id?: number;
+      estimated_minutes: number;
+      icon: string;
+      action: string;
+    }[];
+    total_estimated_minutes: number;
+    srs_due: number;
+    generated_at: string;
+  }> {
+    const response = await this.client.get('/daily-mission');
+    return response.data;
+  }
 }
 
 // Export singleton instance

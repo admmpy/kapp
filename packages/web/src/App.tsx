@@ -264,6 +264,8 @@ function App() {
             <CourseList
               onSelectCourse={navigateToCourse}
               onStartConversation={navigateToConversation}
+              onStartLesson={navigateToLesson}
+              onStartReview={navigateToReview}
               theme={theme}
               onToggleTheme={handleToggleTheme}
               immersionLevel={immersionLevel}

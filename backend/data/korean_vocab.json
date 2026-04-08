@@ -547,6 +547,982 @@
       ]
     },
     {
+      "name": "R&B Core",
+      "description": "Emotional vocabulary from Dean, Crush, and Zion.T lyrics — the words you'll hear most",
+      "level": 1,
+      "domain": "rnb",
+      "cards": [
+        {
+          "front_korean": "그리워",
+          "front_romanization": "geuriwo",
+          "back_english": "I miss (you/it) — longing feeling",
+          "example_sentence": "너무 그리워. — I miss you so much.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "보고 싶어",
+          "front_romanization": "bogo sipeo",
+          "back_english": "I want to see you / I miss you",
+          "example_sentence": "네가 보고 싶어. — I want to see you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "설레다",
+          "front_romanization": "seolleda",
+          "back_english": "To be excited / nervous with anticipation",
+          "example_sentence": "마음이 설레요. — My heart is fluttering.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "떠나다",
+          "front_romanization": "tteonada",
+          "back_english": "To leave / depart",
+          "example_sentence": "왜 떠나요? — Why are you leaving?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "남다",
+          "front_romanization": "namda",
+          "back_english": "To remain / stay behind",
+          "example_sentence": "나만 남았어. — Only I remained.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "눈물",
+          "front_romanization": "nunmul",
+          "back_english": "Tears",
+          "example_sentence": "눈물이 나요. — Tears are coming.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "마음",
+          "front_romanization": "maeum",
+          "back_english": "Heart / mind / feelings",
+          "example_sentence": "내 마음을 알아요? — Do you know my heart?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "기억",
+          "front_romanization": "gieok",
+          "back_english": "Memory / recollection",
+          "example_sentence": "그 기억이 있어요. — I have that memory.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "혼자",
+          "front_romanization": "honja",
+          "back_english": "Alone / by oneself",
+          "example_sentence": "혼자 있어요. — I'm alone.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "함께",
+          "front_romanization": "hamkke",
+          "back_english": "Together",
+          "example_sentence": "함께 가요. — Let's go together.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "밤",
+          "front_romanization": "bam",
+          "back_english": "Night",
+          "example_sentence": "밤이 깊어요. — The night is deep.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "새벽",
+          "front_romanization": "saebyeok",
+          "back_english": "Dawn / early morning (3–5 AM)",
+          "example_sentence": "새벽에 혼자 있어요. — I'm alone at dawn.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "언젠가",
+          "front_romanization": "eonjenga",
+          "back_english": "Someday / sometime",
+          "example_sentence": "언젠가 만나요. — Let's meet someday.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "항상",
+          "front_romanization": "hangsang",
+          "back_english": "Always",
+          "example_sentence": "항상 너를 생각해. — I always think of you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "여전히",
+          "front_romanization": "yeojeonhi",
+          "back_english": "Still / as before",
+          "example_sentence": "여전히 좋아해. — I still like you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "알다",
+          "front_romanization": "alda",
+          "back_english": "To know",
+          "example_sentence": "그거 알아요? — Do you know that?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "느끼다",
+          "front_romanization": "neukkida",
+          "back_english": "To feel",
+          "example_sentence": "뭔가 느껴요. — I feel something.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "바라다",
+          "front_romanization": "barada",
+          "back_english": "To wish / hope for",
+          "example_sentence": "행복을 바라요. — I wish for happiness.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "기다리다",
+          "front_romanization": "gidarida",
+          "back_english": "To wait",
+          "example_sentence": "너를 기다렸어. — I waited for you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "잊다",
+          "front_romanization": "itda",
+          "back_english": "To forget",
+          "example_sentence": "잊을 수 없어. — I can't forget.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "믿다",
+          "front_romanization": "mitda",
+          "back_english": "To trust / believe",
+          "example_sentence": "너를 믿어. — I trust you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "너",
+          "front_romanization": "neo",
+          "back_english": "You (casual/intimate)",
+          "example_sentence": "너가 좋아. — I like you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "우리",
+          "front_romanization": "uri",
+          "back_english": "We / our (intimate 'us')",
+          "example_sentence": "우리 둘이서. — Just the two of us.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "자기야",
+          "front_romanization": "jagiya",
+          "back_english": "Babe / honey (term of endearment)",
+          "example_sentence": "자기야, 사랑해. — Babe, I love you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "사랑해",
+          "front_romanization": "saranghae",
+          "back_english": "I love you (casual)",
+          "example_sentence": "진짜 사랑해. — I really love you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "하늘",
+          "front_romanization": "haneul",
+          "back_english": "Sky",
+          "example_sentence": "하늘이 예뻐요. — The sky is beautiful.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "비",
+          "front_romanization": "bi",
+          "back_english": "Rain",
+          "example_sentence": "비가 와요. — It's raining.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "별",
+          "front_romanization": "byeol",
+          "back_english": "Star",
+          "example_sentence": "별이 빛나요. — The stars are shining.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "꿈",
+          "front_romanization": "kkum",
+          "back_english": "Dream",
+          "example_sentence": "꿈에서 봤어. — I saw you in a dream.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "숨다",
+          "front_romanization": "sumda",
+          "back_english": "To hide",
+          "example_sentence": "어디 숨었어요? — Where are you hiding?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "돌아오다",
+          "front_romanization": "doraoda",
+          "back_english": "To come back / return",
+          "example_sentence": "돌아와요. — Come back.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "웃다",
+          "front_romanization": "utda",
+          "back_english": "To smile / laugh",
+          "example_sentence": "웃어요. — Smile.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "울다",
+          "front_romanization": "ulda",
+          "back_english": "To cry",
+          "example_sentence": "울지 마세요. — Don't cry.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "아프다",
+          "front_romanization": "apeuda",
+          "back_english": "To hurt / be sick",
+          "example_sentence": "마음이 아파요. — My heart hurts.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "가슴",
+          "front_romanization": "gaseum",
+          "back_english": "Chest / heart (physical)",
+          "example_sentence": "가슴이 떨려요. — My heart is trembling.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "손",
+          "front_romanization": "son",
+          "back_english": "Hand",
+          "example_sentence": "손을 잡아요. — Hold my hand.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "눈",
+          "front_romanization": "nun",
+          "back_english": "Eye / eyes",
+          "example_sentence": "눈을 감아요. — Close your eyes.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "목소리",
+          "front_romanization": "mokssori",
+          "back_english": "Voice",
+          "example_sentence": "목소리가 좋아요. — Your voice is nice.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "시간",
+          "front_romanization": "sigan",
+          "back_english": "Time",
+          "example_sentence": "시간이 필요해. — I need time.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "순간",
+          "front_romanization": "sungan",
+          "back_english": "Moment / instant",
+          "example_sentence": "그 순간을 기억해. — I remember that moment.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "처음",
+          "front_romanization": "cheoeum",
+          "back_english": "First time / beginning",
+          "example_sentence": "처음 봤을 때. — When I first saw you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "마지막",
+          "front_romanization": "majimak",
+          "back_english": "Last / final",
+          "example_sentence": "마지막으로 한 번만. — Just once more, the last time.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "진짜",
+          "front_romanization": "jinjja",
+          "back_english": "Really / truly / for real",
+          "example_sentence": "진짜야? — Really?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "왜",
+          "front_romanization": "wae",
+          "back_english": "Why",
+          "example_sentence": "왜 그래요? — Why are you like that?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "아직",
+          "front_romanization": "ajik",
+          "back_english": "Still / not yet",
+          "example_sentence": "아직 여기 있어. — I'm still here.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "다시",
+          "front_romanization": "dasi",
+          "back_english": "Again",
+          "example_sentence": "다시 만나요. — Let's meet again.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "그냥",
+          "front_romanization": "geunyang",
+          "back_english": "Just / simply",
+          "example_sentence": "그냥 좋아해. — I just like you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "괜찮아",
+          "front_romanization": "gwaenchana",
+          "back_english": "It's okay (casual)",
+          "example_sentence": "다 괜찮아. — Everything is okay.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "행복",
+          "front_romanization": "haengbok",
+          "back_english": "Happiness",
+          "example_sentence": "행복하길 바라요. — I hope you're happy.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "슬프다",
+          "front_romanization": "seulpeuda",
+          "back_english": "To be sad",
+          "example_sentence": "왜 슬퍼요? — Why are you sad?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "외롭다",
+          "front_romanization": "oeropda",
+          "back_english": "To be lonely",
+          "example_sentence": "너무 외로워. — I'm so lonely.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "두렵다",
+          "front_romanization": "duryeopda",
+          "back_english": "To be afraid / fearful",
+          "example_sentence": "두려워요. — I'm afraid.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "예쁘다",
+          "front_romanization": "yeppeuda",
+          "back_english": "To be pretty / beautiful",
+          "example_sentence": "너 예뻐. — You're pretty.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "차갑다",
+          "front_romanization": "chagapda",
+          "back_english": "To be cold (to the touch / emotionally)",
+          "example_sentence": "왜 이렇게 차가워요? — Why are you so cold?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "따뜻하다",
+          "front_romanization": "ttatteutada",
+          "back_english": "To be warm",
+          "example_sentence": "따뜻해요. — It's warm.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "빛",
+          "front_romanization": "bit",
+          "back_english": "Light",
+          "example_sentence": "빛이 나요. — You shine.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "길",
+          "front_romanization": "gil",
+          "back_english": "Road / path / way",
+          "example_sentence": "이 길을 걸어요. — I walk this road.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "노래",
+          "front_romanization": "norae",
+          "back_english": "Song",
+          "example_sentence": "이 노래 좋아요. — I like this song.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "음악",
+          "front_romanization": "eumak",
+          "back_english": "Music",
+          "example_sentence": "음악이 위로가 돼요. — Music comforts me.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "생각",
+          "front_romanization": "saenggak",
+          "back_english": "Thought",
+          "example_sentence": "네 생각을 해. — I think of you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "말",
+          "front_romanization": "mal",
+          "back_english": "Words / speech",
+          "example_sentence": "말이 없어요. — There are no words.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "이름",
+          "front_romanization": "ireum",
+          "back_english": "Name",
+          "example_sentence": "네 이름을 불러. — I call your name.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "숨",
+          "front_romanization": "sum",
+          "back_english": "Breath",
+          "example_sentence": "숨이 막혀요. — I can't breathe.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "끝",
+          "front_romanization": "kkeut",
+          "back_english": "End",
+          "example_sentence": "끝이 없어요. — There is no end.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "시작",
+          "front_romanization": "sijak",
+          "back_english": "Beginning / start",
+          "example_sentence": "새로운 시작이에요. — It's a new beginning.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "자꾸",
+          "front_romanization": "jakku",
+          "back_english": "Repeatedly / keep doing",
+          "example_sentence": "자꾸 생각나. — I keep thinking of you.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "조금",
+          "front_romanization": "joeum",
+          "back_english": "A little / a bit",
+          "example_sentence": "조금만 기다려. — Wait just a little.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "더",
+          "front_romanization": "deo",
+          "back_english": "More",
+          "example_sentence": "더 사랑해. — I love you more.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "많이",
+          "front_romanization": "mani",
+          "back_english": "A lot / very much",
+          "example_sentence": "많이 보고 싶어. — I miss you a lot.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "너무",
+          "front_romanization": "neomu",
+          "back_english": "Too / so (intensifier)",
+          "example_sentence": "너무 좋아. — I like it so much.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "아무도",
+          "front_romanization": "amudo",
+          "back_english": "Nobody / no one",
+          "example_sentence": "아무도 없어. — There's nobody.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "어디",
+          "front_romanization": "eodi",
+          "back_english": "Where",
+          "example_sentence": "어디 있어요? — Where are you?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "이제",
+          "front_romanization": "ije",
+          "back_english": "Now / from now on",
+          "example_sentence": "이제 괜찮아. — I'm okay now.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "결국",
+          "front_romanization": "gyeolguk",
+          "back_english": "In the end / after all",
+          "example_sentence": "결국 혼자야. — In the end, I'm alone.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "그때",
+          "front_romanization": "geuttae",
+          "back_english": "At that time / back then",
+          "example_sentence": "그때로 돌아가고 싶어. — I want to go back to that time.",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "어떻게",
+          "front_romanization": "eotteoke",
+          "back_english": "How",
+          "example_sentence": "어떻게 잊어요? — How can I forget?",
+          "level": 1,
+          "domain": "rnb"
+        },
+        {
+          "front_korean": "보여",
+          "front_romanization": "boyeo",
+          "back_english": "Show me / I can see",
+          "example_sentence": "보여줘. — Show me.",
+          "level": 1,
+          "domain": "rnb"
+        }
+      ]
+    },
+    {
+      "name": "Elder Small Talk",
+      "description": "Vocabulary for respectful conversation with elderly Korean speakers",
+      "level": 1,
+      "domain": "elder_conversation",
+      "cards": [
+        {
+          "front_korean": "어르신",
+          "front_romanization": "ereushin",
+          "back_english": "Respected elder (honorific address)",
+          "example_sentence": "어르신, 안녕하세요. — Hello, respected elder.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "선생님",
+          "front_romanization": "seonsaengnim",
+          "back_english": "Teacher / respected person",
+          "example_sentence": "선생님, 감사합니다. — Thank you, teacher.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "아저씨",
+          "front_romanization": "ajeossi",
+          "back_english": "Middle-aged man (sir)",
+          "example_sentence": "아저씨, 실례합니다. — Excuse me, sir.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "아주머니",
+          "front_romanization": "ajumeoni",
+          "back_english": "Middle-aged woman (ma'am)",
+          "example_sentence": "아주머니, 감사합니다. — Thank you, ma'am.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "할아버지",
+          "front_romanization": "harabeoji",
+          "back_english": "Grandfather / elderly man",
+          "example_sentence": "할아버지, 잘 지내셨어요? — Grandfather, have you been well?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "할머니",
+          "front_romanization": "halmeoni",
+          "back_english": "Grandmother / elderly woman",
+          "example_sentence": "할머니, 안녕하세요. — Hello, grandmother.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "날씨",
+          "front_romanization": "nalsi",
+          "back_english": "Weather",
+          "example_sentence": "오늘 날씨 좋네요. — The weather is nice today.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "덥다",
+          "front_romanization": "deobda",
+          "back_english": "To be hot",
+          "example_sentence": "오늘 많이 덥네요. — It's very hot today.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "춥다",
+          "front_romanization": "chupda",
+          "back_english": "To be cold (weather)",
+          "example_sentence": "오늘 많이 춥네요. — It's very cold today.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "오늘 날씨 좋네요",
+          "front_romanization": "oneul nalsi jonneyo",
+          "back_english": "The weather is nice today",
+          "example_sentence": "오늘 날씨 좋네요, 그렇죠? — The weather is nice today, isn't it?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "어디서 오셨어요",
+          "front_romanization": "eodiseo osyeosseoyo",
+          "back_english": "Where did you come from? (polite)",
+          "example_sentence": "어디서 오셨어요? — Where are you from?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "외국인이에요",
+          "front_romanization": "oeguginiyeyo",
+          "back_english": "I am a foreigner",
+          "example_sentence": "저는 외국인이에요. — I am a foreigner.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "맞아요",
+          "front_romanization": "majayo",
+          "back_english": "That's right / correct",
+          "example_sentence": "맞아요, 정말이에요. — That's right, it's true.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "잘 모르겠어요",
+          "front_romanization": "jal moreugeseoyo",
+          "back_english": "I don't know well / I'm not sure",
+          "example_sentence": "잘 모르겠어요, 죄송합니다. — I'm not sure, I'm sorry.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "천천히 말씀해 주세요",
+          "front_romanization": "cheoncheonhi malsseum-hae juseyo",
+          "back_english": "Please speak slowly",
+          "example_sentence": "죄송한데요, 천천히 말씀해 주세요. — I'm sorry, please speak slowly.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "맛있어요",
+          "front_romanization": "massisseoyo",
+          "back_english": "Delicious (polite)",
+          "example_sentence": "정말 맛있어요! — It's really delicious!",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "아름다워요",
+          "front_romanization": "areumdawoyo",
+          "back_english": "Beautiful (polite)",
+          "example_sentence": "경치가 아름다워요. — The scenery is beautiful.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "좋아요",
+          "front_romanization": "joayo",
+          "back_english": "Good / nice / I like it",
+          "example_sentence": "정말 좋아요. — It's really nice.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "실례합니다",
+          "front_romanization": "sillyehamnida",
+          "back_english": "Excuse me (formal, to interrupt)",
+          "example_sentence": "실례합니다, 길을 물어봐도 될까요? — Excuse me, may I ask for directions?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "건강하세요",
+          "front_romanization": "geonganghaseyo",
+          "back_english": "Please stay healthy (farewell blessing)",
+          "example_sentence": "안녕히 가세요, 건강하세요. — Goodbye, please stay healthy.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "잘 지내셨어요",
+          "front_romanization": "jal jinaesyeosseoyo",
+          "back_english": "Have you been well? (honorific)",
+          "example_sentence": "잘 지내셨어요? — Have you been well?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "연세",
+          "front_romanization": "yeonse",
+          "back_english": "Age (honorific, for elders)",
+          "example_sentence": "연세가 어떻게 되세요? — How old are you? (respectful)",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "어디 사세요",
+          "front_romanization": "eodi saseyo",
+          "back_english": "Where do you live? (polite)",
+          "example_sentence": "어디 사세요? — Where do you live?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "한국 음식",
+          "front_romanization": "hanguk eumsik",
+          "back_english": "Korean food",
+          "example_sentence": "한국 음식이 정말 맛있어요. — Korean food is really delicious.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "처음 왔어요",
+          "front_romanization": "cheoeum wasseoyo",
+          "back_english": "It's my first time (coming here)",
+          "example_sentence": "한국에 처음 왔어요. — It's my first time in Korea.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "오래 계셨어요",
+          "front_romanization": "orae gyesyeosseoyo",
+          "back_english": "Have you been here long? (honorific)",
+          "example_sentence": "여기 오래 계셨어요? — Have you been here long?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "감사합니다",
+          "front_romanization": "gamsahamnida",
+          "back_english": "Thank you (formal)",
+          "example_sentence": "도와주셔서 감사합니다. — Thank you for helping me.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "죄송합니다",
+          "front_romanization": "joesonghamnida",
+          "back_english": "I am sorry (formal)",
+          "example_sentence": "늦어서 죄송합니다. — I'm sorry for being late.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "괜찮으세요",
+          "front_romanization": "gwaenchaneuseyeo",
+          "back_english": "Are you okay? (honorific)",
+          "example_sentence": "괜찮으세요? — Are you okay?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "도와드릴까요",
+          "front_romanization": "dowadeurilkkayo",
+          "back_english": "Can I help you? (polite offer)",
+          "example_sentence": "도와드릴까요? — May I help you?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "한국어 조금 해요",
+          "front_romanization": "hangugeo joeum haeyo",
+          "back_english": "I speak a little Korean",
+          "example_sentence": "한국어 조금 해요. — I speak a little Korean.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "잘 못 해요",
+          "front_romanization": "jal mot haeyo",
+          "back_english": "I can't do it well / I'm not good at it",
+          "example_sentence": "한국어를 잘 못 해요. — I'm not good at Korean.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "배우고 있어요",
+          "front_romanization": "baeugo isseoyo",
+          "back_english": "I am learning",
+          "example_sentence": "한국어를 배우고 있어요. — I am learning Korean.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "이해했어요",
+          "front_romanization": "ihaeyeosseoyo",
+          "back_english": "I understood",
+          "example_sentence": "네, 이해했어요. — Yes, I understood.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "다시 말씀해 주시겠어요",
+          "front_romanization": "dasi malsseum-hae jusigesseoyo",
+          "back_english": "Could you say that again? (very polite)",
+          "example_sentence": "죄송한데, 다시 말씀해 주시겠어요? — Sorry, could you say that again?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "무슨 뜻이에요",
+          "front_romanization": "museun tteutsiyeyo",
+          "back_english": "What does that mean?",
+          "example_sentence": "이게 무슨 뜻이에요? — What does this mean?",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "반갑습니다",
+          "front_romanization": "bangapseumnida",
+          "back_english": "Nice to meet you (formal)",
+          "example_sentence": "만나서 반갑습니다. — Nice to meet you.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "여행 중이에요",
+          "front_romanization": "yeohaeng jung-iyeyo",
+          "back_english": "I am traveling",
+          "example_sentence": "한국 여행 중이에요. — I am traveling in Korea.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "음식이 맛있네요",
+          "front_romanization": "eumsigi masinneyo",
+          "back_english": "The food is delicious (exclamatory)",
+          "example_sentence": "음식이 맛있네요! — The food is so delicious!",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "한국이 좋아요",
+          "front_romanization": "hanguki joayo",
+          "back_english": "I like Korea",
+          "example_sentence": "한국이 정말 좋아요. — I really like Korea.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "또 만나요",
+          "front_romanization": "tto mannayo",
+          "back_english": "See you again",
+          "example_sentence": "또 만나요! — See you again!",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "안녕히 가세요",
+          "front_romanization": "annyeonghi gaseyo",
+          "back_english": "Goodbye (to someone leaving)",
+          "example_sentence": "건강하세요, 안녕히 가세요. — Stay healthy, goodbye.",
+          "level": 1,
+          "domain": "elder_conversation"
+        },
+        {
+          "front_korean": "안녕히 계세요",
+          "front_romanization": "annyeonghi gyeseyo",
+          "back_english": "Goodbye (speaker is leaving)",
+          "example_sentence": "저는 가볼게요, 안녕히 계세요. — I'll be going now, goodbye.",
+          "level": 1,
+          "domain": "elder_conversation"
+        }
+      ]
+    },
+    {
       "name": "Common Adjectives",
       "description": "Essential descriptive words",
       "level": 1,
