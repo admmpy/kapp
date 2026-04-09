@@ -1,0 +1,123 @@
+.word-boundary-exercise {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.wb-char-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  padding: 1rem;
+  background: var(--color-surface-alt, var(--color-surface));
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  min-height: 64px;
+}
+
+.wb-char-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.wb-char {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1;
+  padding: 0 1px;
+}
+
+.wb-gap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 44px;
+  padding: 0 4px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  color: var(--color-text-muted, var(--color-text));
+  opacity: 0.35;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s, color 0.15s;
+  touch-action: manipulation;
+}
+
+.wb-gap:hover:not(:disabled) {
+  background: var(--color-accent-light, rgba(var(--color-accent-rgb, 99, 102, 241), 0.12));
+  opacity: 1;
+}
+
+.wb-gap.active {
+  color: var(--color-accent);
+  opacity: 1;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.wb-gap.gap-correct {
+  color: var(--color-success);
+  opacity: 1;
+}
+
+.wb-gap.gap-wrong {
+  color: var(--color-error);
+  opacity: 1;
+}
+
+.wb-gap.gap-missed {
+  color: var(--color-warning, var(--color-error));
+  opacity: 0.7;
+}
+
+.wb-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.wb-result.correct {
+  background: var(--color-success-bg, rgba(34, 197, 94, 0.12));
+  border: 1px solid var(--color-success);
+}
+
+.wb-result.incorrect {
+  background: var(--color-error-bg, rgba(239, 68, 68, 0.12));
+  border: 1px solid var(--color-error);
+}
+
+.result-icon {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.wb-result.correct .result-icon { color: var(--color-success); }
+.wb-result.incorrect .result-icon { color: var(--color-error); }
+
+.wb-correct-answer {
+  font-size: 1rem;
+}
+
+.wb-correct-label {
+  color: var(--color-text-muted, var(--color-text));
+}
+
+.wb-correct-text {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 1.1rem;
+}
+
+.wb-explanation {
+  font-size: 0.9rem;
+  color: var(--color-text-muted, var(--color-text));
+  margin-top: 0.25rem;
+}

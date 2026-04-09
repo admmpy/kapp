@@ -1,15 +1,20 @@
 /**
  * ListeningPractice - AI-generated listening comprehension practice
+ * Includes Speed Ramp mode (F-06): same clips at ascending playback speeds
  */
 import { useState } from 'react';
 import { apiClient, API_BASE_URL } from '@kapp/core';
 import type { ListeningPracticeResponse, ListeningPracticeCheckResponse } from '@kapp/core';
 import './ListeningPractice.css';
 
-type PlaybackSpeed = 0.5 | 1.0 | 1.2;
+type PlaybackSpeed = 0.5 | 0.7 | 0.85 | 1.0 | 1.2;
+type Mode = 'standard' | 'speed-ramp';
+
+const RAMP_SPEEDS: PlaybackSpeed[] = [0.5, 0.7, 0.85, 1.0];
 
 interface Props {
   onBack: () => void;
+  onLyricRadio?: () => void;
 }
 
 const LEVELS = [
@@ -20,7 +25,8 @@ const LEVELS = [
   { value: 5, label: 'Advanced (TOPIK II-5-6)' },
 ];
 
-export default function ListeningPractice({ onBack }: Props) {
+export default function ListeningPractice({ onBack, onLyricRadio }: Props) {
+  const [mode, setMode] = useState<Mode>('standard');
   const [topic, setTopic] = useState('');
   const [level, setLevel] = useState(2);
   const [loading, setLoading] = useState(false);
@@ -32,6 +38,10 @@ export default function ListeningPractice({ onBack }: Props) {
   const [checkResult, setCheckResult] = useState<ListeningPracticeCheckResponse | null>(null);
   const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1.0);
   const [hasPlayed, setHasPlayed] = useState(false);
+
+  // Speed Ramp state
+  const [rampStep, setRampStep] = useState(0); // index into RAMP_SPEEDS
+  const [rampResults, setRampResults] = useState<boolean[]>([]);
 
   async function handleGenerate() {
     if (!topic.trim()) {
@@ -47,6 +57,12 @@ export default function ListeningPractice({ onBack }: Props) {
     setCheckingAnswer(false);
     setCheckResult(null);
     setHasPlayed(false);
+    setRampStep(0);
+    setRampResults([]);
+
+    if (mode === 'speed-ramp') {
+      setPlaybackSpeed(RAMP_SPEEDS[0]);
+    }
 
     try {
       const response = await apiClient.generateListeningPractice({
@@ -82,12 +98,35 @@ export default function ListeningPractice({ onBack }: Props) {
       });
       setCheckResult(result);
       setIsAnswered(true);
+
+      if (mode === 'speed-ramp') {
+        setRampResults((prev) => [...prev, result.correct]);
+      }
     } catch (err) {
       console.error('Failed to check listening practice answer:', err);
       setError(err instanceof Error ? err.message : 'Failed to check answer. Please try again.');
     } finally {
       setCheckingAnswer(false);
     }
+  }
+
+  function handleRampNext() {
+    const nextStep = rampStep + 1;
+    if (nextStep >= RAMP_SPEEDS.length) {
+      // Session complete — reset to show summary then allow new session
+      setIsAnswered(false);
+      setSelectedAnswer(null);
+      setCheckResult(null);
+      setHasPlayed(false);
+      setRampStep(RAMP_SPEEDS.length); // sentinel: session done
+      return;
+    }
+    setRampStep(nextStep);
+    setPlaybackSpeed(RAMP_SPEEDS[nextStep]);
+    setIsAnswered(false);
+    setSelectedAnswer(null);
+    setCheckResult(null);
+    setHasPlayed(false);
   }
 
   function handleNext() {
@@ -97,6 +136,11 @@ export default function ListeningPractice({ onBack }: Props) {
     setCheckingAnswer(false);
     setCheckResult(null);
     setHasPlayed(false);
+    setRampStep(0);
+    setRampResults([]);
+    if (mode === 'speed-ramp') {
+      setPlaybackSpeed(RAMP_SPEEDS[0]);
+    }
   }
 
   function getOptionClass(option: string): string {
@@ -117,6 +161,8 @@ export default function ListeningPractice({ onBack }: Props) {
     return classes;
   }
 
+  const rampDone = mode === 'speed-ramp' && rampStep >= RAMP_SPEEDS.length;
+
   return (
     <div className="listening-practice">
       <header className="practice-header">
@@ -125,11 +171,38 @@ export default function ListeningPractice({ onBack }: Props) {
         </button>
         <h1>Listening Practice</h1>
         <p className="subtitle">AI-generated comprehension exercises</p>
+        {onLyricRadio && (
+          <button className="lyric-radio-btn" onClick={onLyricRadio} title="Lyric Radio — passive listening">
+            🎵 Lyric Radio
+          </button>
+        )}
       </header>
 
       <div className="practice-content">
         {!exercise ? (
           <div className="practice-setup">
+            <div className="mode-toggle">
+              <button
+                className={`mode-btn${mode === 'standard' ? ' active' : ''}`}
+                onClick={() => setMode('standard')}
+              >
+                Standard
+              </button>
+              <button
+                className={`mode-btn${mode === 'speed-ramp' ? ' active' : ''}`}
+                onClick={() => setMode('speed-ramp')}
+              >
+                🚀 Speed Ramp
+              </button>
+            </div>
+
+            {mode === 'speed-ramp' && (
+              <div className="ramp-info">
+                <p>Same audio clip played at 4 increasing speeds: <strong>0.5x → 0.7x → 0.85x → 1.0x</strong></p>
+                <p>Answer a comprehension question after each speed.</p>
+              </div>
+            )}
+
             <div className="form-group">
               <label htmlFor="topic">Topic</label>
               <input
@@ -181,11 +254,30 @@ export default function ListeningPractice({ onBack }: Props) {
               </div>
             )}
           </div>
+        ) : rampDone ? (
+          <div className="ramp-summary">
+            <h2>Speed Ramp Complete! 🎉</h2>
+            <div className="ramp-results-grid">
+              {RAMP_SPEEDS.map((speed, i) => (
+                <div key={speed} className={`ramp-result-row ${rampResults[i] ? 'correct' : 'incorrect'}`}>
+                  <span className="ramp-speed-label">{speed}x</span>
+                  <span className="ramp-result-icon">{rampResults[i] ? '✓' : '✗'}</span>
+                </div>
+              ))}
+            </div>
+            <p className="ramp-score">
+              {rampResults.filter(Boolean).length}/{RAMP_SPEEDS.length} correct
+            </p>
+            <button className="next-button" onClick={handleNext}>New Session</button>
+          </div>
         ) : (
           <div className="exercise-container">
             <div className="exercise-meta">
               <span className="topic-badge">{exercise.topic}</span>
               <span className="level-badge">Level {exercise.level}</span>
+              {mode === 'speed-ramp' && (
+                <span className="ramp-badge">Speed Ramp {rampStep + 1}/{RAMP_SPEEDS.length} — {RAMP_SPEEDS[rampStep]}x</span>
+              )}
             </div>
 
             <div className="audio-section">
@@ -193,28 +285,30 @@ export default function ListeningPractice({ onBack }: Props) {
                 className={`play-audio-btn ${!hasPlayed ? 'pulse' : ''}`}
                 onClick={playAudio}
               >
-                🔊 Play Audio
+                🔊 Play Audio {mode === 'speed-ramp' ? `(${RAMP_SPEEDS[rampStep]}x)` : ''}
               </button>
-              <div className="speed-toggle">
-                <button
-                  className={`speed-button ${playbackSpeed === 0.5 ? 'active' : ''}`}
-                  onClick={() => setPlaybackSpeed(0.5)}
-                >
-                  0.5x
-                </button>
-                <button
-                  className={`speed-button ${playbackSpeed === 1.0 ? 'active' : ''}`}
-                  onClick={() => setPlaybackSpeed(1.0)}
-                >
-                  1x
-                </button>
-                <button
-                  className={`speed-button ${playbackSpeed === 1.2 ? 'active' : ''}`}
-                  onClick={() => setPlaybackSpeed(1.2)}
-                >
-                  1.2x
-                </button>
-              </div>
+              {mode !== 'speed-ramp' && (
+                <div className="speed-toggle">
+                  <button
+                    className={`speed-button ${playbackSpeed === 0.5 ? 'active' : ''}`}
+                    onClick={() => setPlaybackSpeed(0.5)}
+                  >
+                    0.5x
+                  </button>
+                  <button
+                    className={`speed-button ${playbackSpeed === 1.0 ? 'active' : ''}`}
+                    onClick={() => setPlaybackSpeed(1.0)}
+                  >
+                    1x
+                  </button>
+                  <button
+                    className={`speed-button ${playbackSpeed === 1.2 ? 'active' : ''}`}
+                    onClick={() => setPlaybackSpeed(1.2)}
+                  >
+                    1.2x
+                  </button>
+                </div>
+              )}
             </div>
 
             <div className="question-section">
@@ -275,6 +369,12 @@ export default function ListeningPractice({ onBack }: Props) {
                   disabled={!selectedAnswer || checkingAnswer}
                 >
                   {checkingAnswer ? 'Checking...' : 'Check Answer'}
+                </button>
+              ) : mode === 'speed-ramp' ? (
+                <button className="next-button" onClick={handleRampNext}>
+                  {rampStep + 1 < RAMP_SPEEDS.length
+                    ? `Next Speed (${RAMP_SPEEDS[rampStep + 1]}x) →`
+                    : 'See Results'}
                 </button>
               ) : (
                 <button className="next-button" onClick={handleNext}>

@@ -6,11 +6,14 @@ import { apiClient, IMMERSION_MODE_ENABLED } from '@kapp/core';
 import type { Course, OverallProgress, ImmersionLevel } from '@kapp/core';
 import { CourseCardSkeleton, Skeleton } from './Skeleton';
 import ImmersionSelector from './ImmersionSelector';
+import DailyMission from './DailyMission';
 import './CourseList.css';
 
 interface Props {
   onSelectCourse: (courseId: number) => void;
   onStartConversation?: () => void;
+  onStartLesson?: (lessonId: number) => void;
+  onStartReview?: () => void;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
   immersionLevel?: ImmersionLevel;
@@ -20,6 +23,8 @@ interface Props {
 export default function CourseList({
   onSelectCourse,
   onStartConversation,
+  onStartLesson,
+  onStartReview,
   theme,
   onToggleTheme,
   immersionLevel = 1,
@@ -142,6 +147,8 @@ export default function CourseList({
           </div>
         )}
       </header>
+
+      <DailyMission onStartLesson={onStartLesson} onStartReview={onStartReview} />
 
       <div className="courses-grid">
         {courses.map(course => {

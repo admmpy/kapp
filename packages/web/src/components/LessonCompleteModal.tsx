@@ -28,6 +28,9 @@ interface Props {
   onNextLesson?: (lessonId: number) => void;
   onBackToCourse: () => void;
   patternMasteryResults?: PatternMasteryResult[];
+  immersionNudgeLevel?: 2 | 3 | null;
+  onAcceptImmersionNudge?: () => void;
+  onDismissImmersionNudge?: () => void;
 }
 
 export default function LessonCompleteModal({
@@ -41,7 +44,10 @@ export default function LessonCompleteModal({
   isLastInCourse,
   onNextLesson,
   onBackToCourse,
-  patternMasteryResults
+  patternMasteryResults,
+  immersionNudgeLevel,
+  onAcceptImmersionNudge,
+  onDismissImmersionNudge,
 }: Props) {
   const percentage = totalAnswers > 0 ? (correctAnswers / totalAnswers) * 100 : 0;
   const getScoreColor = () => {
@@ -78,6 +84,26 @@ export default function LessonCompleteModal({
             )}
           </div>
         </div>
+
+        {immersionNudgeLevel && (
+          <div className="immersion-nudge">
+            <div className="immersion-nudge-icon">🎯</div>
+            <div className="immersion-nudge-text">
+              <strong>Ready for Level {immersionNudgeLevel}?</strong>
+              <p>You've aced 2 lessons without hints. Try{' '}
+                {immersionNudgeLevel === 2 ? 'hiding romanisation' : 'Korean-only mode'}!
+              </p>
+            </div>
+            <div className="immersion-nudge-actions">
+              <button className="nudge-accept-btn" onClick={onAcceptImmersionNudge}>
+                Level Up
+              </button>
+              <button className="nudge-dismiss-btn" onClick={onDismissImmersionNudge}>
+                Not yet
+              </button>
+            </div>
+          </div>
+        )}
 
         <div className="modal-body">
           {isLastInCourse ? (

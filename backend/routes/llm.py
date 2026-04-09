@@ -557,6 +557,103 @@ def normalize_conversation_history(history):
     return history
 
 
+ELDER_STARTERS = [
+    "어디서 오셨어요? 외국에서 오셨습니까?",
+    "오늘 날씨가 참 좋네요, 그렇지요?",
+    "한국에 오신 지 얼마나 되셨어요?",
+    "한국어를 아주 잘 하시네요! 어디서 배우셨어요?",
+    "차 한잔 하시겠어요? 앉으세요, 앉으세요.",
+]
+
+
+@llm_bp.route("/llm/conversation/elder", methods=["POST"])
+@limiter.limit("10/hour")
+def elder_conversation():
+    """
+    Elder conversation simulator — 할아버지 Mode
+
+    Request body:
+        {
+            "message": "안녕하세요!",
+            "context": {
+                "conversation_history": [...],
+                "starter_index": 0   // optional: which opener to use on first turn
+            }
+        }
+
+    Response:
+        {
+            "response": "...",
+            "timestamp": "..."
+        }
+    """
+    import random as _random
+
+    try:
+        disabled_response = ensure_llm_enabled()
+        if disabled_response:
+            return disabled_response
+
+        data = request.get_json(silent=True) or {}
+        raw_message = (data.get("message") or "").strip()
+        context = data.get("context") or {}
+
+        if not raw_message:
+            return validation_error_response("message is required")
+
+        message, msg_warnings = sanitize_user_input(raw_message, max_length=500)
+        if msg_warnings:
+            logger.info(f"Elder conv sanitization warnings: {msg_warnings}")
+
+        if not message:
+            return validation_error_response("message is required after sanitization")
+
+        raw_history = context.get("conversation_history", [])
+        history_input = normalize_conversation_history(raw_history)
+        history, _ = validate_conversation_history(history_input)
+
+        context_str = "\n".join([
+            f"Learner: {h.get('user', '')}\n할아버지: {h.get('assistant', '')}"
+            for h in history
+        ])
+        if not context_str:
+            starter_idx = context.get("starter_index")
+            if isinstance(starter_idx, int) and 0 <= starter_idx < len(ELDER_STARTERS):
+                opener = ELDER_STARTERS[starter_idx]
+            else:
+                opener = _random.choice(ELDER_STARTERS)
+            context_str = f"[Conversation starts. 할아버지 opens with: {opener}]"
+
+        template = PROMPT_TEMPLATES["elder_conversation"]
+        user_prompt = template["user"].format(
+            context=context_str,
+            message=message,
+        )
+
+        client = get_llm_client()
+        response = client.chat(
+            prompt=user_prompt,
+            system=template["system"],
+            temperature=0.85,
+            max_tokens=200,
+            use_cache=False,
+        )
+
+        return jsonify({"response": response, "timestamp": datetime.now().isoformat()}), 200
+
+    except Exception as e:
+        logger.error(f"Error in elder_conversation: {e}")
+        return error_response("Failed to generate response", 500)
+
+
+@llm_bp.route("/llm/conversation/elder/start", methods=["GET"])
+def elder_conversation_start():
+    """Return a random elder conversation opening line."""
+    import random as _random
+    idx = _random.randrange(len(ELDER_STARTERS))
+    return jsonify({"opening": ELDER_STARTERS[idx], "starter_index": idx}), 200
+
+
 @llm_bp.route("/llm/listening-practice", methods=["POST"])
 @limiter.limit("20/hour")
 def listening_practice():

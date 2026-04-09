@@ -639,6 +639,14 @@ def submit_exercise(exercise_id: int):
             is_correct = validate_sentence_arrange(user_answer, correct_answer)
         elif exercise.exercise_type.value == "writing":
             is_correct = validate_writing_answer(str(user_answer), correct_answer)
+        elif exercise.exercise_type.value == "read_aloud":
+            # Self-assessed — always correct; rating stored separately via pronunciation check
+            is_correct = True
+        elif exercise.exercise_type.value == "word_boundary":
+            # Compare space-separated string (strip trailing/leading spaces)
+            user_normalized = " ".join(str(user_answer).split())
+            correct_normalized = " ".join((correct_answer or "").split())
+            is_correct = user_normalized == correct_normalized
         else:
             # Standard text comparison for other exercise types
             user_answer_normalized = str(user_answer).strip().lower()
