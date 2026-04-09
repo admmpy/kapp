@@ -12,6 +12,7 @@ import VocabularyReview from './components/VocabularyReview';
 import WeaknessReview from './components/WeaknessReview';
 import ExerciseReview from './components/ExerciseReview';
 import ListeningPractice from './components/ListeningPractice';
+import LyricRadio from './components/LyricRadio';
 import ErrorBoundary from './components/ErrorBoundary';
 import IosInstallPrompt from './components/IosInstallPrompt';
 import BottomNav from './components/BottomNav';
@@ -20,7 +21,7 @@ import { initDB, setupOnlineListener, WEAKNESS_REVIEW_ENABLED, SENTENCE_SRS_ENAB
 import type { ImmersionLevel } from '@kapp/core';
 import './App.css';
 
-type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'elder-conversation' | 'dashboard' | 'vocabulary-review' | 'weakness-review' | 'exercise-review' | 'listening-practice';
+type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'elder-conversation' | 'dashboard' | 'vocabulary-review' | 'weakness-review' | 'exercise-review' | 'listening-practice' | 'lyric-radio';
 type Theme = 'light' | 'dark';
 
 interface AppState {
@@ -143,6 +144,11 @@ function App() {
         return;
       }
 
+      if (hash === 'lyric-radio') {
+        setState({ page: 'lyric-radio', courseId: null, lessonId: null });
+        return;
+      }
+
       if (hash.startsWith('lesson/')) {
         const lessonId = parseInt(hash.split('/')[1]);
         if (!isNaN(lessonId)) {
@@ -225,6 +231,11 @@ function App() {
     setState({ page: 'listening-practice', courseId: null, lessonId: null });
   }
 
+  function navigateToLyricRadio() {
+    window.location.hash = 'lyric-radio';
+    setState({ page: 'lyric-radio', courseId: null, lessonId: null });
+  }
+
   function handleToggleTheme() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   }
@@ -250,7 +261,7 @@ function App() {
     }
   }
 
-  const showBottomNav = ['courses', 'dashboard', 'vocabulary-review', 'weakness-review', 'exercise-review', 'listening-practice', 'conversation', 'elder-conversation'].includes(state.page);
+  const showBottomNav = ['courses', 'dashboard', 'vocabulary-review', 'weakness-review', 'exercise-review', 'listening-practice', 'conversation', 'elder-conversation', 'lyric-radio'].includes(state.page);
 
   // Map current page to a bottom nav tab (units maps to courses since it's a drill-down)
   const activeTab: Tab = (state.page === 'units' || state.page === 'lesson')
@@ -323,7 +334,13 @@ function App() {
 
         {state.page === 'listening-practice' && (
           <ErrorBoundary>
-            <ListeningPractice onBack={navigateToCourses} />
+            <ListeningPractice onBack={navigateToCourses} onLyricRadio={navigateToLyricRadio} />
+          </ErrorBoundary>
+        )}
+
+        {state.page === 'lyric-radio' && (
+          <ErrorBoundary>
+            <LyricRadio onBack={navigateToListeningPractice} />
           </ErrorBoundary>
         )}
 

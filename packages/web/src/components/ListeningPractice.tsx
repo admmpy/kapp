@@ -14,6 +14,7 @@ const RAMP_SPEEDS: PlaybackSpeed[] = [0.5, 0.7, 0.85, 1.0];
 
 interface Props {
   onBack: () => void;
+  onLyricRadio?: () => void;
 }
 
 const LEVELS = [
@@ -24,7 +25,7 @@ const LEVELS = [
   { value: 5, label: 'Advanced (TOPIK II-5-6)' },
 ];
 
-export default function ListeningPractice({ onBack }: Props) {
+export default function ListeningPractice({ onBack, onLyricRadio }: Props) {
   const [mode, setMode] = useState<Mode>('standard');
   const [topic, setTopic] = useState('');
   const [level, setLevel] = useState(2);
@@ -170,6 +171,11 @@ export default function ListeningPractice({ onBack }: Props) {
         </button>
         <h1>Listening Practice</h1>
         <p className="subtitle">AI-generated comprehension exercises</p>
+        {onLyricRadio && (
+          <button className="lyric-radio-btn" onClick={onLyricRadio} title="Lyric Radio — passive listening">
+            🎵 Lyric Radio
+          </button>
+        )}
       </header>
 
       <div className="practice-content">

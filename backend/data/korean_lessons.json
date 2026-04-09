@@ -4874,6 +4874,30 @@
                   "correct_answer": "Please eat (for me / I'm asking you)",
                   "explanation": "먹어줘 = eat + -어줘 (please do for me). The -줘 makes it an intimate, caring request. The singer is pleading: please eat, I'm worried about you.",
                   "source_lyric": true
+                },
+                {
+                  "exercise_type": "read_aloud",
+                  "question": "Read this lyric aloud, then check against the model audio",
+                  "instruction": "Say it at your own pace first. Then play to compare.",
+                  "korean_text": "밥은 먹고 다니냐",
+                  "romanization": "bab-eun meokgo daninyа",
+                  "english_text": "Are you eating well (are you getting by)?",
+                  "correct_answer": "read_aloud",
+                  "explanation": "This iconic opening line from 'Eat' — Zion.T asks with warm concern. The -냐 ending is casual.",
+                  "audio_url": null,
+                  "options": []
+                },
+                {
+                  "exercise_type": "read_aloud",
+                  "question": "Read aloud and match the gentle rhythm of this lyric",
+                  "instruction": "Focus on the soft final syllables — Korean often ends words softly.",
+                  "korean_text": "잘 자고 있냐",
+                  "romanization": "jal jago innya",
+                  "english_text": "Are you sleeping well?",
+                  "correct_answer": "read_aloud",
+                  "explanation": "Part of Zion.T's caring refrain — simple, tender language at a slow R&B pace.",
+                  "audio_url": null,
+                  "options": []
                 }
               ]
             },
@@ -5025,6 +5049,30 @@
                   "correct_answer": "보고 싶어",
                   "explanation": "보다 (to see) + -고 싶어 (want to) = 보고 싶어. The most common way to say 'I miss you' in Korean.",
                   "source_lyric": true
+                },
+                {
+                  "exercise_type": "read_aloud",
+                  "question": "Read this Dean lyric aloud — feel the longing in the words",
+                  "instruction": "Try matching Dean's slow, breathy delivery. Then play to compare.",
+                  "korean_text": "보고 싶어",
+                  "romanization": "bogo sipeo",
+                  "english_text": "I want to see you / I miss you",
+                  "correct_answer": "read_aloud",
+                  "explanation": "The most emotional phrase in 'Instagram' — two syllables that carry everything unsaid.",
+                  "audio_url": null,
+                  "options": []
+                },
+                {
+                  "exercise_type": "read_aloud",
+                  "question": "Read aloud — this is the core emotional hook of the song",
+                  "instruction": "Lengthen 아 slightly as Dean does. Then play the model audio.",
+                  "korean_text": "나 없이도 잘 살아",
+                  "romanization": "na eopsido jal sara",
+                  "english_text": "Living well even without me",
+                  "correct_answer": "read_aloud",
+                  "explanation": "살아 = living. The line captures the bittersweet core of 'Instagram' — watching an ex thrive.",
+                  "audio_url": null,
+                  "options": []
                 }
               ]
             }
