@@ -194,183 +194,6 @@
               ]
             },
             {
-              "title": "Thank You & Sorry",
-              "description": "Express gratitude and apologies",
-              "estimated_minutes": 5,
-              "grammar_explanation": "Expressing thanks and apologies is essential in Korean culture.\n\n감사합니다 (gamsahamnida) - Thank you (formal)\n고마워요 (gomawoyo) - Thank you (informal polite)\n\n죄송합니다 (joesonghamnida) - I'm sorry (formal apology)\n미안해요 (mianhaeyo) - I'm sorry (informal polite)",
-              "grammar_tip": "Use 감사합니다 with strangers and in formal situations. Use 고마워요 with friends.",
-              "grammar_patterns": [
-                {
-                  "key": "formal_thanks",
-                  "title": "Formal Thanks",
-                  "pattern": "감사합니다",
-                  "meaning": "Thank you (formal, to elders/strangers/bosses)",
-                  "example_korean": "도와 주셔서 감사합니다.",
-                  "example_english": "Thank you for your help."
-                },
-                {
-                  "key": "formal_apology",
-                  "title": "Formal Apology",
-                  "pattern": "죄송합니다",
-                  "meaning": "I'm sorry (formal, to strangers/elders)",
-                  "example_korean": "늦어서 죄송합니다.",
-                  "example_english": "I'm sorry for being late."
-                }
-              ],
-              "exercises": [
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 감사합니다 mean?",
-                  "instruction": "Select the correct translation",
-                  "korean_text": "감사합니다",
-                  "romanization": "gamsahamnida",
-                  "options": [
-                    "Hello",
-                    "Goodbye",
-                    "Thank you",
-                    "Sorry"
-                  ],
-                  "correct_answer": "Thank you",
-                  "explanation": "감사합니다 is the formal way to say 'thank you'",
-                  "audio_url": "/api/audio/03bf731fea8fe57f9285ac99920e4cd4.mp3"
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 죄송합니다 mean?",
-                  "instruction": "Select the correct translation",
-                  "korean_text": "죄송합니다",
-                  "romanization": "joesonghamnida",
-                  "options": [
-                    "Hello",
-                    "Please",
-                    "Thank you",
-                    "I'm sorry"
-                  ],
-                  "correct_answer": "I'm sorry",
-                  "explanation": "죄송합니다 is the formal way to apologize",
-                  "audio_url": "/api/audio/96cb025e8c5c9d7a81afaf3a5f39a724.mp3"
-                },
-                {
-                  "exercise_type": "writing",
-                  "question": "Listen to the sentence and type what you hear",
-                  "instruction": "Type your Korean answer before checking.",
-                  "korean_text": "도와 주셔서 정말 감사합니다.",
-                  "correct_answer": "도와 주셔서 정말 감사합니다.",
-                  "explanation": "The sentence means 'Thank you very much for your help.'",
-                  "audio_url": "/api/audio/99d94ba0d44298ff6ed36184b787bc31.mp3"
-                },
-                {
-                  "exercise_type": "listening",
-                  "question": "Listen and identify the apology phrase",
-                  "instruction": "Listen carefully to the full sentence",
-                  "korean_text": "죄송합니다. 잘 못 들었어요.",
-                  "options": [
-                    "죄송합니다. 잘 못 들었어요.",
-                    "감사합니다. 잘 들었어요.",
-                    "미안해요. 뭐라고요?",
-                    "죄송합니다. 다시 말해 주세요."
-                  ],
-                  "correct_answer": "죄송합니다. 잘 못 들었어요.",
-                  "explanation": "The sentence means 'I'm sorry. I didn't hear well.'",
-                  "audio_url": "/api/audio/a514cc0919403d991b7c8e39fa0a3d66.mp3"
-                },
-                {
-                  "exercise_type": "grammar",
-                  "grammar_pattern_key": "formal_thanks",
-                  "question": "Your boss helped you. How do you thank them?",
-                  "instruction": "Select the most appropriate response",
-                  "options": [
-                    "고마워",
-                    "감사합니다",
-                    "고마워요",
-                    "괜찮아요"
-                  ],
-                  "correct_answer": "감사합니다",
-                  "explanation": "Use 감사합니다 with your boss as it's the most formal"
-                },
-                {
-                  "exercise_type": "grammar",
-                  "grammar_pattern_key": "formal_apology",
-                  "question": "You accidentally bump into a stranger. What do you say?",
-                  "instruction": "Select the appropriate apology",
-                  "options": [
-                    "미안",
-                    "괜찮아요",
-                    "죄송합니다",
-                    "감사합니다"
-                  ],
-                  "correct_answer": "죄송합니다",
-                  "explanation": "죄송합니다 is appropriate when apologizing to strangers"
-                },
-                {
-                  "question": "How can I help you today?",
-                  "instruction": "Arrange the Korean words to form the question",
-                  "options": [
-                    {
-                      "korean": "오늘",
-                      "romanization": "oneul",
-                      "id": 0,
-                      "audio_url": "/api/audio/8e15c2b178b16af59d461830afa07a31.mp3"
-                    },
-                    {
-                      "korean": "어떻게",
-                      "romanization": "eotteoke",
-                      "id": 1,
-                      "audio_url": "/api/audio/4bbee0a4f358c9a94c45ef7c61bacb9e.mp3"
-                    },
-                    {
-                      "korean": "도와",
-                      "romanization": "dowa",
-                      "id": 2,
-                      "audio_url": "/api/audio/8f93ab51856d4a75dcfc56c6c2740511.mp3"
-                    },
-                    {
-                      "korean": "드릴까요",
-                      "romanization": "deurilkkayo",
-                      "id": 3,
-                      "audio_url": "/api/audio/18f5ca9d06d7a0ace7c021d39a0d3976.mp3"
-                    }
-                  ],
-                  "correct_answer": "[0, 1, 2, 3]",
-                  "explanation": "오늘 (today) + 어떻게 (how) + 도와 드릴까요 (can I help you) = How can I help you today?",
-                  "exercise_type": "sentence_arrange"
-                },
-                {
-                  "exercise_type": "sentence_arrange",
-                  "question": "I'm sorry, I don't understand Korean well.",
-                  "instruction": "Arrange the Korean words to form the sentence",
-                  "options": [
-                    {
-                      "korean": "죄송합니다",
-                      "romanization": "joesonghamnida",
-                      "id": 0,
-                      "audio_url": "/api/audio/96cb025e8c5c9d7a81afaf3a5f39a724.mp3"
-                    },
-                    {
-                      "korean": "한국어를",
-                      "romanization": "hangugeoreul",
-                      "id": 1,
-                      "audio_url": "/api/audio/6d29d0e4aa7668d0bd72bda4c1acc20c.mp3"
-                    },
-                    {
-                      "korean": "잘",
-                      "romanization": "jal",
-                      "id": 2,
-                      "audio_url": "/api/audio/dbb26a65202c2e997d2ae98159b03a4d.mp3"
-                    },
-                    {
-                      "korean": "못해요",
-                      "romanization": "mothaeyo",
-                      "id": 3,
-                      "audio_url": "/api/audio/84908b6b67179b8a81ff95f98e1fd76e.mp3"
-                    }
-                  ],
-                  "correct_answer": "[0, 1, 2, 3]",
-                  "explanation": "죄송합니다 (I'm sorry) + 한국어를 (Korean) + 잘 못해요 (can't do well) = I'm sorry, I don't speak Korean well"
-                }
-              ]
-            },
-            {
               "title": "Self Introduction",
               "description": "Introduce yourself in Korean",
               "estimated_minutes": 7,
@@ -590,6 +413,927 @@
                   ],
                   "correct_answer": "[0, 1, 2, 3, 4]",
                   "explanation": "저는 (I) + 한국어를 공부하는 (studying Korean) + 대학생입니다 (am a university student)"
+                }
+              ]
+            },
+            {
+              "title": "Thank You & Sorry",
+              "description": "Express gratitude and apologies",
+              "estimated_minutes": 5,
+              "grammar_explanation": "Expressing thanks and apologies is essential in Korean culture.\n\n감사합니다 (gamsahamnida) - Thank you (formal)\n고마워요 (gomawoyo) - Thank you (informal polite)\n\n죄송합니다 (joesonghamnida) - I'm sorry (formal apology)\n미안해요 (mianhaeyo) - I'm sorry (informal polite)",
+              "grammar_tip": "Use 감사합니다 with strangers and in formal situations. Use 고마워요 with friends.",
+              "grammar_patterns": [
+                {
+                  "key": "formal_thanks",
+                  "title": "Formal Thanks",
+                  "pattern": "감사합니다",
+                  "meaning": "Thank you (formal, to elders/strangers/bosses)",
+                  "example_korean": "도와 주셔서 감사합니다.",
+                  "example_english": "Thank you for your help."
+                },
+                {
+                  "key": "formal_apology",
+                  "title": "Formal Apology",
+                  "pattern": "죄송합니다",
+                  "meaning": "I'm sorry (formal, to strangers/elders)",
+                  "example_korean": "늦어서 죄송합니다.",
+                  "example_english": "I'm sorry for being late."
+                }
+              ],
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 감사합니다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "감사합니다",
+                  "romanization": "gamsahamnida",
+                  "options": [
+                    "Hello",
+                    "Goodbye",
+                    "Thank you",
+                    "Sorry"
+                  ],
+                  "correct_answer": "Thank you",
+                  "explanation": "감사합니다 is the formal way to say 'thank you'",
+                  "audio_url": "/api/audio/03bf731fea8fe57f9285ac99920e4cd4.mp3"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 죄송합니다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "죄송합니다",
+                  "romanization": "joesonghamnida",
+                  "options": [
+                    "Hello",
+                    "Please",
+                    "Thank you",
+                    "I'm sorry"
+                  ],
+                  "correct_answer": "I'm sorry",
+                  "explanation": "죄송합니다 is the formal way to apologize",
+                  "audio_url": "/api/audio/96cb025e8c5c9d7a81afaf3a5f39a724.mp3"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Listen to the sentence and type what you hear",
+                  "instruction": "Type your Korean answer before checking.",
+                  "korean_text": "도와 주셔서 정말 감사합니다.",
+                  "correct_answer": "도와 주셔서 정말 감사합니다.",
+                  "explanation": "The sentence means 'Thank you very much for your help.'",
+                  "audio_url": "/api/audio/99d94ba0d44298ff6ed36184b787bc31.mp3"
+                },
+                {
+                  "exercise_type": "listening",
+                  "question": "Listen and identify the apology phrase",
+                  "instruction": "Listen carefully to the full sentence",
+                  "korean_text": "죄송합니다. 잘 못 들었어요.",
+                  "options": [
+                    "죄송합니다. 잘 못 들었어요.",
+                    "감사합니다. 잘 들었어요.",
+                    "미안해요. 뭐라고요?",
+                    "죄송합니다. 다시 말해 주세요."
+                  ],
+                  "correct_answer": "죄송합니다. 잘 못 들었어요.",
+                  "explanation": "The sentence means 'I'm sorry. I didn't hear well.'",
+                  "audio_url": "/api/audio/a514cc0919403d991b7c8e39fa0a3d66.mp3"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "grammar_pattern_key": "formal_thanks",
+                  "question": "Your boss helped you. How do you thank them?",
+                  "instruction": "Select the most appropriate response",
+                  "options": [
+                    "고마워",
+                    "감사합니다",
+                    "고마워요",
+                    "괜찮아요"
+                  ],
+                  "correct_answer": "감사합니다",
+                  "explanation": "Use 감사합니다 with your boss as it's the most formal"
+                },
+                {
+                  "exercise_type": "grammar",
+                  "grammar_pattern_key": "formal_apology",
+                  "question": "You accidentally bump into a stranger. What do you say?",
+                  "instruction": "Select the appropriate apology",
+                  "options": [
+                    "미안",
+                    "괜찮아요",
+                    "죄송합니다",
+                    "감사합니다"
+                  ],
+                  "correct_answer": "죄송합니다",
+                  "explanation": "죄송합니다 is appropriate when apologizing to strangers"
+                },
+                {
+                  "question": "How can I help you today?",
+                  "instruction": "Arrange the Korean words to form the question",
+                  "options": [
+                    {
+                      "korean": "오늘",
+                      "romanization": "oneul",
+                      "id": 0,
+                      "audio_url": "/api/audio/8e15c2b178b16af59d461830afa07a31.mp3"
+                    },
+                    {
+                      "korean": "어떻게",
+                      "romanization": "eotteoke",
+                      "id": 1,
+                      "audio_url": "/api/audio/4bbee0a4f358c9a94c45ef7c61bacb9e.mp3"
+                    },
+                    {
+                      "korean": "도와",
+                      "romanization": "dowa",
+                      "id": 2,
+                      "audio_url": "/api/audio/8f93ab51856d4a75dcfc56c6c2740511.mp3"
+                    },
+                    {
+                      "korean": "드릴까요",
+                      "romanization": "deurilkkayo",
+                      "id": 3,
+                      "audio_url": "/api/audio/18f5ca9d06d7a0ace7c021d39a0d3976.mp3"
+                    }
+                  ],
+                  "correct_answer": "[0, 1, 2, 3]",
+                  "explanation": "오늘 (today) + 어떻게 (how) + 도와 드릴까요 (can I help you) = How can I help you today?",
+                  "exercise_type": "sentence_arrange"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "I'm sorry, I don't understand Korean well.",
+                  "instruction": "Arrange the Korean words to form the sentence",
+                  "options": [
+                    {
+                      "korean": "죄송합니다",
+                      "romanization": "joesonghamnida",
+                      "id": 0,
+                      "audio_url": "/api/audio/96cb025e8c5c9d7a81afaf3a5f39a724.mp3"
+                    },
+                    {
+                      "korean": "한국어를",
+                      "romanization": "hangugeoreul",
+                      "id": 1,
+                      "audio_url": "/api/audio/6d29d0e4aa7668d0bd72bda4c1acc20c.mp3"
+                    },
+                    {
+                      "korean": "잘",
+                      "romanization": "jal",
+                      "id": 2,
+                      "audio_url": "/api/audio/dbb26a65202c2e997d2ae98159b03a4d.mp3"
+                    },
+                    {
+                      "korean": "못해요",
+                      "romanization": "mothaeyo",
+                      "id": 3,
+                      "audio_url": "/api/audio/84908b6b67179b8a81ff95f98e1fd76e.mp3"
+                    }
+                  ],
+                  "correct_answer": "[0, 1, 2, 3]",
+                  "explanation": "죄송합니다 (I'm sorry) + 한국어를 (Korean) + 잘 못해요 (can't do well) = I'm sorry, I don't speak Korean well"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Respectful Korean (존댓말)",
+          "description": "Master formal speech for speaking with elders and in formal situations",
+          "lessons": [
+            {
+              "title": "존댓말 Basics",
+              "description": "Formal verb endings -ㅂ니다/습니다 and polite -세요",
+              "estimated_minutes": 10,
+              "grammar_explanation": "Korean has two main formal registers:\n\n1. 해요체 (Polite informal): Ends in -아요/어요/해요. Used with strangers and in everyday polite contexts.\n   - 가요 (I go), 먹어요 (I eat), 해요 (I do)\n\n2. 합쇼체 (Formal formal): Ends in -ㅂ니다/습니다. Used in formal situations, with elders, in business.\n   - 갑니다 (I go), 먹습니다 (I eat), 합니다 (I do)\n\nThe rule:\n- Verb stem ends in vowel → add -ㅂ니다 (e.g. 가다 → 갑니다)\n- Verb stem ends in consonant → add -습니다 (e.g. 먹다 → 먹습니다)\n\nFor questions, use -ㅂ니까/습니까:\n- 갑니까? (Are you going?), 먹습니까? (Do you eat?)",
+              "grammar_tip": "When meeting an elder for the first time, always use 합쇼체. It is the safest and most respectful choice.",
+              "grammar_patterns": [
+                {
+                  "key": "hapsyo_statement",
+                  "title": "Formal Statement (-ㅂ니다/습니다)",
+                  "pattern": "Verb stem + ㅂ니다 / 습니다",
+                  "meaning": "Formal present tense statement",
+                  "example_korean": "저는 한국어를 배웁니다.",
+                  "example_english": "I am learning Korean."
+                },
+                {
+                  "key": "hapsyo_question",
+                  "title": "Formal Question (-ㅂ니까/습니까)",
+                  "pattern": "Verb stem + ㅂ니까 / 습니까",
+                  "meaning": "Formal present tense question",
+                  "example_korean": "어디 가십니까?",
+                  "example_english": "Where are you going?"
+                },
+                {
+                  "key": "polite_seyo",
+                  "title": "Polite Request (-세요/-으세요)",
+                  "pattern": "Verb stem + 세요 / 으세요",
+                  "meaning": "Polite request or honorific description",
+                  "example_korean": "천천히 말씀해 주세요.",
+                  "example_english": "Please speak slowly."
+                }
+              ],
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "Which ending makes a verb formal in Korean?",
+                  "instruction": "Select the correct formal verb ending",
+                  "options": [
+                    "-아요/어요",
+                    "-ㅂ니다/습니다",
+                    "-고 싶다",
+                    "-ㄹ게요"
+                  ],
+                  "correct_answer": "-ㅂ니다/습니다",
+                  "explanation": "-ㅂ니다/습니다 is the 합쇼체 (formal formal) ending, appropriate for elders and formal situations"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you say 'I go' in formal Korean (합쇼체)?",
+                  "instruction": "Select the formal form of 가다",
+                  "korean_text": "가다 → ?",
+                  "options": [
+                    "가요",
+                    "갑니다",
+                    "가세요",
+                    "갔어요"
+                  ],
+                  "correct_answer": "갑니다",
+                  "explanation": "가다: the stem 가 ends in a vowel, so we add -ㅂ니다 → 갑니다"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you say 'I eat' in formal Korean?",
+                  "instruction": "Select the formal form of 먹다",
+                  "korean_text": "먹다 → ?",
+                  "options": [
+                    "먹어요",
+                    "먹습니다",
+                    "먹겠어요",
+                    "먹을게요"
+                  ],
+                  "correct_answer": "먹습니다",
+                  "explanation": "먹다: the stem 먹 ends in a consonant, so we add -습니다 → 먹습니다"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Convert to formal Korean: 저는 학생이에요 (I am a student)",
+                  "instruction": "Type the formal 합쇼체 version",
+                  "correct_answer": "저는 학생입니다",
+                  "explanation": "이에요 → 입니다 in formal speech. 저는 학생입니다 = I am a student (formal)"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 만나서 반갑습니다 mean?",
+                  "instruction": "Select the correct meaning",
+                  "korean_text": "만나서 반갑습니다",
+                  "romanization": "mannaseo bangapseumnida",
+                  "options": [
+                    "Goodbye",
+                    "Nice to meet you",
+                    "How are you?",
+                    "Thank you"
+                  ],
+                  "correct_answer": "Nice to meet you",
+                  "explanation": "반갑습니다 is the formal version of 반가워요 — 'nice to meet you / glad to meet you'"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Arrange the words to say: 'I am learning Korean' (formal)",
+                  "instruction": "Put the tiles in the correct order",
+                  "tiles": [
+                    "저는",
+                    "한국어를",
+                    "배웁니다"
+                  ],
+                  "correct_answer": "저는 한국어를 배웁니다",
+                  "explanation": "Korean word order: Subject (저는) + Object (한국어를) + Verb (배웁니다)"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "Which phrase means 'Please speak slowly' in formal Korean?",
+                  "instruction": "Select the correct phrase",
+                  "options": [
+                    "빨리 말해요",
+                    "천천히 말씀해 주세요",
+                    "말하지 마세요",
+                    "다시 해요"
+                  ],
+                  "correct_answer": "천천히 말씀해 주세요",
+                  "explanation": "천천히 (slowly) + 말씀해 주세요 (please speak — honorific). 말씀 is the honorific form of 말."
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "How do you say 'Nice to meet you' in formal Korean?",
+                  "instruction": "Type the formal greeting phrase",
+                  "correct_answer": "만나서 반갑습니다",
+                  "explanation": "만나서 (having met) + 반갑습니다 (I am glad) = Nice to meet you (formal)"
+                }
+              ]
+            },
+            {
+              "title": "Elder Small Talk",
+              "description": "Polite questions and answers for conversing with older Koreans",
+              "estimated_minutes": 12,
+              "grammar_explanation": "When speaking with elders, use honorific forms:\n\n- Replace 있어요 with 계세요 for people (이 자리에 계세요? — Are you sitting here?)\n- Replace 먹어요 with 드세요 (드시고 계세요? — Are you eating?)\n- Replace 말해요 with 말씀하세요 (말씀하세요 — Please speak)\n- Use 께서 instead of 이/가 as the subject marker for elders\n\nKey question patterns:\n- 어디서 오셨어요? — Where are you from? (오셨어요 = came, honorific past)\n- 연세가 어떻게 되세요? — How old are you? (연세 = honorific word for age)\n- 잘 지내셨어요? — Have you been well? (지내셨어요 = lived/got along, honorific past)",
+              "grammar_tip": "Using 말씀 instead of 말 and 드세요 instead of 먹어요 shows real respect — elders will notice and appreciate it.",
+              "grammar_patterns": [
+                {
+                  "key": "honorific_verb",
+                  "title": "Honorific Verb Substitution",
+                  "pattern": "먹다 → 드시다, 말하다 → 말씀하다, 있다 → 계시다",
+                  "meaning": "Special honorific verbs used when the subject is an elder",
+                  "example_korean": "할아버지, 진지 드셨어요?",
+                  "example_english": "Grandfather, have you eaten? (honorific)"
+                },
+                {
+                  "key": "honorific_age",
+                  "title": "Asking Age Respectfully",
+                  "pattern": "연세가 어떻게 되세요?",
+                  "meaning": "How old are you? (honorific — never use 나이 with elders)",
+                  "example_korean": "연세가 어떻게 되세요?",
+                  "example_english": "How old are you? (respectful)"
+                },
+                {
+                  "key": "origin_question",
+                  "title": "Asking Where Someone Is From",
+                  "pattern": "어디서 오셨어요?",
+                  "meaning": "Where did you come from? (honorific past tense)",
+                  "example_korean": "어디서 오셨어요? 저는 호주에서 왔습니다.",
+                  "example_english": "Where are you from? I am from Australia."
+                }
+              ],
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you ask an elder 'Have you been well?'",
+                  "instruction": "Select the honorific form",
+                  "options": [
+                    "잘 지냈어요?",
+                    "잘 지내셨어요?",
+                    "어떻게 지내요?",
+                    "괜찮아요?"
+                  ],
+                  "correct_answer": "잘 지내셨어요?",
+                  "explanation": "지내셨어요 uses the honorific -시- infix (지내다 → 지내시다 → 지내셨어요). This is the respectful form."
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What is the honorific word for 'age' used with elders?",
+                  "instruction": "Select the correct word",
+                  "options": [
+                    "나이",
+                    "연세",
+                    "살",
+                    "나이가"
+                  ],
+                  "correct_answer": "연세",
+                  "explanation": "연세 is the honorific form of 나이 (age). Always use 연세 with elders, never 나이."
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 어디서 오셨어요? mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "어디서 오셨어요?",
+                  "romanization": "eodiseo osyeosseoyo?",
+                  "options": [
+                    "Where are you going?",
+                    "Where are you from?",
+                    "Do you live here?",
+                    "How long have you been here?"
+                  ],
+                  "correct_answer": "Where are you from?",
+                  "explanation": "어디서 (from where) + 오셨어요 (did you come, honorific) = Where did you come from / Where are you from?"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "How do you say 'I am a foreigner' in polite Korean?",
+                  "instruction": "Type the polite Korean phrase",
+                  "correct_answer": "저는 외국인이에요",
+                  "explanation": "저는 (I, formal) + 외국인 (foreigner) + 이에요 (am, polite). You could also say 저는 외국인입니다 in 합쇼체."
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you politely ask someone to speak slowly?",
+                  "instruction": "Select the most polite option",
+                  "options": [
+                    "빨리 말해요",
+                    "천천히 말해요",
+                    "천천히 말씀해 주세요",
+                    "말 좀 해요"
+                  ],
+                  "correct_answer": "천천히 말씀해 주세요",
+                  "explanation": "천천히 (slowly) + 말씀해 주세요 (please speak, honorific). 말씀 is the honorific noun form of 말 (words/speech)."
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Arrange to say: 'Where are you from?' (polite)",
+                  "instruction": "Put the tiles in the correct order",
+                  "tiles": [
+                    "어디서",
+                    "오셨어요?"
+                  ],
+                  "correct_answer": "어디서 오셨어요?",
+                  "explanation": "어디서 (from where) + 오셨어요 (did you come, honorific) — a complete polite question"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "Which phrase means 'Please stay healthy'?",
+                  "instruction": "Select the correct farewell blessing",
+                  "options": [
+                    "잘 자요",
+                    "건강하세요",
+                    "안녕히 가세요",
+                    "또 봐요"
+                  ],
+                  "correct_answer": "건강하세요",
+                  "explanation": "건강하세요 (please be healthy) — a warm farewell blessing often said to elders"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "I am learning Korean — say this in formal Korean",
+                  "instruction": "Type the formal Korean sentence",
+                  "correct_answer": "저는 한국어를 배우고 있습니다",
+                  "explanation": "저는 (I) + 한국어를 (Korean) + 배우고 있습니다 (am learning, formal continuous)"
+                }
+              ]
+            },
+            {
+              "title": "Graceful Exits",
+              "description": "Farewells, thank-you forms, and polite conversation closers",
+              "estimated_minutes": 10,
+              "grammar_explanation": "Ending a conversation gracefully is just as important as starting one.\n\nFarewells:\n- 안녕히 가세요 — Goodbye (said to person who is LEAVING)\n- 안녕히 계세요 — Goodbye (said when YOU are the one leaving)\n- 건강하세요 — Please stay healthy (warm farewell for elders)\n- 또 만나요 / 또 뵙겠습니다 — See you again (또 뵙겠습니다 is more formal)\n\nThanks:\n- 감사합니다 — Thank you (polite)\n- 정말 감사합니다 — Thank you very much\n- 도와주셔서 감사합니다 — Thank you for your help\n\nPolite self-exit phrases:\n- 그럼 이만 가보겠습니다 — Well, I'll be going now\n- 바쁘신데 감사합니다 — Thank you, I know you're busy",
+              "grammar_tip": "뵙겠습니다 is the ultra-formal/humble form of 봐요. Using it with an elder shows real effort — they will be impressed.",
+              "grammar_patterns": [
+                {
+                  "key": "farewell_direction",
+                  "title": "Directional Farewell",
+                  "pattern": "안녕히 가세요 (to leaver) / 안녕히 계세요 (you are leaving)",
+                  "meaning": "The correct farewell depends on who is moving",
+                  "example_korean": "안녕히 가세요, 건강하세요!",
+                  "example_english": "Goodbye, please stay healthy!"
+                },
+                {
+                  "key": "humble_form",
+                  "title": "Humble 'See you again'",
+                  "pattern": "또 뵙겠습니다",
+                  "meaning": "I will see you again (humble/formal) — 뵙다 is the humble form of 보다",
+                  "example_korean": "다음에 또 뵙겠습니다.",
+                  "example_english": "I hope to see you again next time."
+                },
+                {
+                  "key": "polite_thanks",
+                  "title": "Gratitude in Formal Korean",
+                  "pattern": "도와주셔서 감사합니다",
+                  "meaning": "Thank you for helping me (formal + honorific -셔-)",
+                  "example_korean": "도와주셔서 정말 감사합니다.",
+                  "example_english": "Thank you so much for your help."
+                }
+              ],
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "You are leaving someone behind. Which goodbye do you say?",
+                  "instruction": "Select the correct farewell",
+                  "options": [
+                    "안녕히 가세요",
+                    "안녕히 계세요",
+                    "잘 자요",
+                    "내일 봐요"
+                  ],
+                  "correct_answer": "안녕히 계세요",
+                  "explanation": "안녕히 계세요 (stay in peace) is said when YOU are the one leaving. The other person stays — they stay in peace."
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "Someone is leaving you. What do you say?",
+                  "instruction": "Select the correct farewell",
+                  "options": [
+                    "안녕히 계세요",
+                    "안녕히 가세요",
+                    "건강하세요",
+                    "잘 자요"
+                  ],
+                  "correct_answer": "안녕히 가세요",
+                  "explanation": "안녕히 가세요 (go in peace) is said when the OTHER person is leaving."
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 도와주셔서 감사합니다 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "도와주셔서 감사합니다",
+                  "romanization": "dowajusyeoseo gamsahamnida",
+                  "options": [
+                    "Sorry for bothering you",
+                    "Thank you for your help",
+                    "I'll come back soon",
+                    "Nice to meet you"
+                  ],
+                  "correct_answer": "Thank you for your help",
+                  "explanation": "도와주셔서 (having helped, honorific) + 감사합니다 (I am grateful) = Thank you for your help"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What is the formal/humble way to say 'See you again'?",
+                  "instruction": "Select the most formal version",
+                  "options": [
+                    "또 봐요",
+                    "다시 만나요",
+                    "또 뵙겠습니다",
+                    "나중에 봐요"
+                  ],
+                  "correct_answer": "또 뵙겠습니다",
+                  "explanation": "뵙겠습니다 is the humble future form of 뵙다 (humble form of 보다). Using it shows deep respect."
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "Say 'Thank you very much' in formal Korean",
+                  "instruction": "Type the formal Korean phrase",
+                  "correct_answer": "정말 감사합니다",
+                  "explanation": "정말 (really/truly) + 감사합니다 (I am grateful, formal) = Thank you very much"
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Arrange: 'Thank you for your help' (formal)",
+                  "instruction": "Put the tiles in the correct order",
+                  "tiles": [
+                    "도와주셔서",
+                    "정말",
+                    "감사합니다"
+                  ],
+                  "correct_answer": "도와주셔서 정말 감사합니다",
+                  "explanation": "도와주셔서 (for helping, honorific) + 정말 (truly) + 감사합니다 (thank you)"
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "Which phrase means 'Please stay healthy'?",
+                  "instruction": "Select the correct farewell",
+                  "options": [
+                    "잘 자요",
+                    "건강하세요",
+                    "어서 오세요",
+                    "실례합니다"
+                  ],
+                  "correct_answer": "건강하세요",
+                  "explanation": "건강하세요 is a warm farewell blessing meaning 'please be/stay healthy' — very appropriate for elders"
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "How do you say 'I'll be going now' politely?",
+                  "instruction": "Type the polite exit phrase",
+                  "correct_answer": "그럼 이만 가보겠습니다",
+                  "explanation": "그럼 (then/well) + 이만 (this much/at this point) + 가보겠습니다 (I will try going, humble) — a graceful exit phrase"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Lyric Lessons — R&B",
+          "description": "Learn Korean through Dean and Zion.T lyrics — vocabulary, grammar, and feeling in context",
+          "lessons": [
+            {
+              "title": "Zion.T — Eat (먹자)",
+              "description": "Intimate, slow-tempo song about caring for someone through food — perfect for beginners",
+              "estimated_minutes": 15,
+              "lesson_type": "lyric",
+              "grammar_explanation": "This song uses extremely conversational Korean — short, gentle sentences that sound like whispers.\n\nKey construction: -자 (Let's...)\nAdding -자 to a verb stem makes an informal suggestion:\n- 먹자 (let's eat), 자자 (let's sleep), 가자 (let's go)\n\nThis is casual speech. In formal Korean it becomes -ㅂ시다 (먹읍시다).\n\nKey construction: -아/어줘 (Do [it] for me)\n- 먹어줘 (eat [for me/please]), 와줘 (come [please]), 봐줘 (look [please])\nThe -줘 ending makes a request feel warm and intimate.\n\nLyric excerpt:\n밥은 먹고 다니냐\n잠은 자고 다니냐\n(Are you eating your meals? Are you sleeping enough?)",
+              "grammar_tip": "-자 for 'let's' is casual — use -ㅂ시다 or -아요/어요 with elders. In songs it is almost always casual.",
+              "grammar_patterns": [
+                {
+                  "key": "lets_verb",
+                  "title": "Casual 'Let's' (-자)",
+                  "pattern": "Verb stem + 자",
+                  "meaning": "Let's [do something] — informal suggestion",
+                  "example_korean": "같이 먹자.",
+                  "example_english": "Let's eat together."
+                },
+                {
+                  "key": "request_juwo",
+                  "title": "Warm Request (-아/어줘)",
+                  "pattern": "Verb stem + 아줘 / 어줘",
+                  "meaning": "Please do [it] for me — intimate request",
+                  "example_korean": "밥 먹어줘.",
+                  "example_english": "Please eat (for me)."
+                },
+                {
+                  "key": "care_question",
+                  "title": "Caring Question Pattern",
+                  "pattern": "Verb + 고 다니냐?",
+                  "meaning": "Are you (going around) doing X? — concerned inquiry",
+                  "example_korean": "밥은 먹고 다니냐?",
+                  "example_english": "Are you (going around) eating your meals?"
+                }
+              ],
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 먹자 mean?",
+                  "instruction": "Select the correct meaning",
+                  "korean_text": "먹자",
+                  "romanization": "meokja",
+                  "options": [
+                    "I eat",
+                    "Let's eat",
+                    "Don't eat",
+                    "I want to eat"
+                  ],
+                  "correct_answer": "Let's eat",
+                  "explanation": "먹다 (to eat) + -자 = 먹자 (let's eat). The -자 ending makes an informal 'let's' suggestion.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 밥 mean in the song context?",
+                  "instruction": "Select the correct meaning",
+                  "korean_text": "밥",
+                  "romanization": "bap",
+                  "options": [
+                    "Night",
+                    "Meal / Rice",
+                    "Love",
+                    "Music"
+                  ],
+                  "correct_answer": "Meal / Rice",
+                  "explanation": "밥 literally means cooked rice but in Korean culture means 'a meal'. '밥 먹었어요?' = 'Have you eaten?' is the most common caring question.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "In the lyric '밥은 먹고 다니냐', what emotion is the singer expressing?",
+                  "instruction": "Select the emotion behind the lyric",
+                  "korean_text": "밥은 먹고 다니냐",
+                  "options": [
+                    "Anger",
+                    "Jealousy",
+                    "Concern and care",
+                    "Sadness"
+                  ],
+                  "correct_answer": "Concern and care",
+                  "explanation": "Asking 'Are you eating your meals?' is a Korean expression of deep care. It's a way of saying 'I'm thinking about you and your wellbeing.'",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 잠 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "잠",
+                  "romanization": "jam",
+                  "options": [
+                    "Dream",
+                    "Sleep",
+                    "Rest",
+                    "Night"
+                  ],
+                  "correct_answer": "Sleep",
+                  "explanation": "잠 = sleep (noun). 자다 = to sleep (verb). '잠은 자고 다니냐?' = Are you getting enough sleep?",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Arrange the lyric: 'Let's eat together'",
+                  "instruction": "Put the tiles in the correct order",
+                  "tiles": [
+                    "같이",
+                    "먹자"
+                  ],
+                  "correct_answer": "같이 먹자",
+                  "explanation": "같이 (together) + 먹자 (let's eat). Simple, intimate, beautiful.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you say 'let's sleep' using the same pattern as 먹자?",
+                  "instruction": "Select the correct form",
+                  "options": [
+                    "자요",
+                    "자자",
+                    "잡니다",
+                    "잘게요"
+                  ],
+                  "correct_answer": "자자",
+                  "explanation": "자다 (to sleep) + -자 = 자자 (let's sleep). Same pattern as 먹자.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "How do you say 'Let's go together' using -자?",
+                  "instruction": "Type the casual Korean phrase",
+                  "correct_answer": "같이 가자",
+                  "explanation": "가다 (to go) + -자 = 가자 (let's go). 같이 = together. So: 같이 가자.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 밥 먹어줘 mean?",
+                  "instruction": "Select the meaning with the right nuance",
+                  "korean_text": "밥 먹어줘",
+                  "options": [
+                    "I want to eat",
+                    "Please eat (for me / I'm asking you)",
+                    "Don't eat",
+                    "You ate"
+                  ],
+                  "correct_answer": "Please eat (for me / I'm asking you)",
+                  "explanation": "먹어줘 = eat + -어줘 (please do for me). The -줘 makes it an intimate, caring request. The singer is pleading: please eat, I'm worried about you.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "read_aloud",
+                  "question": "Read this lyric aloud, then check against the model audio",
+                  "instruction": "Say it at your own pace first. Then play to compare.",
+                  "korean_text": "밥은 먹고 다니냐",
+                  "romanization": "bab-eun meokgo daninyа",
+                  "english_text": "Are you eating well (are you getting by)?",
+                  "correct_answer": "read_aloud",
+                  "explanation": "This iconic opening line from 'Eat' — Zion.T asks with warm concern. The -냐 ending is casual.",
+                  "audio_url": null,
+                  "options": []
+                },
+                {
+                  "exercise_type": "read_aloud",
+                  "question": "Read aloud and match the gentle rhythm of this lyric",
+                  "instruction": "Focus on the soft final syllables — Korean often ends words softly.",
+                  "korean_text": "잘 자고 있냐",
+                  "romanization": "jal jago innya",
+                  "english_text": "Are you sleeping well?",
+                  "correct_answer": "read_aloud",
+                  "explanation": "Part of Zion.T's caring refrain — simple, tender language at a slow R&B pace.",
+                  "audio_url": null,
+                  "options": []
+                }
+              ]
+            },
+            {
+              "title": "Dean — Instagram (인스타그램)",
+              "description": "Neo-soul track about longing and social media — conversational vocabulary about missing someone",
+              "estimated_minutes": 15,
+              "lesson_type": "lyric",
+              "grammar_explanation": "Dean's Instagram is built on longing — and the grammar reflects it.\n\nKey construction: -고 싶다 (I want to...)\nAttach to verb stem to express desire:\n- 보고 싶다 (I want to see / I miss you)\n- 듣고 싶다 (I want to hear)\n- 알고 싶다 (I want to know)\n\n보고 싶어 is one of the most important phrases in Korean R&B. It means both 'I want to see you' and 'I miss you'.\n\nKey construction: -아/어서 (because / so)\n- 네가 보고 싶어서 (because I miss you...)\n- 힘들어서 (because it's hard...)\n\nLyric excerpt:\n네 인스타그램 몰래 보다가\n나도 모르게 또 웃었어\n(Secretly looking at your Instagram,\nI smiled without realizing it)",
+              "grammar_tip": "보고 싶어 (I miss you) is used constantly in Korean R&B. It literally means 'I want to see you' — the missing and the longing are the same feeling.",
+              "grammar_patterns": [
+                {
+                  "key": "want_to",
+                  "title": "Wanting (-고 싶다)",
+                  "pattern": "Verb stem + 고 싶다",
+                  "meaning": "I want to [do something]",
+                  "example_korean": "보고 싶어.",
+                  "example_english": "I want to see you / I miss you."
+                },
+                {
+                  "key": "because_so",
+                  "title": "Because / So (-아/어서)",
+                  "pattern": "Verb/Adjective + 아서 / 어서",
+                  "meaning": "Because [this], (so that)...",
+                  "example_korean": "보고 싶어서 왔어.",
+                  "example_english": "I came because I missed you."
+                },
+                {
+                  "key": "secretly",
+                  "title": "Doing Something Secretly (몰래)",
+                  "pattern": "몰래 + Verb",
+                  "meaning": "Secretly / without telling anyone",
+                  "example_korean": "몰래 봤어.",
+                  "example_english": "I looked secretly."
+                }
+              ],
+              "exercises": [
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 보고 싶어 mean?",
+                  "instruction": "Select the best translation",
+                  "korean_text": "보고 싶어",
+                  "romanization": "bogo sipeo",
+                  "options": [
+                    "I saw you",
+                    "I want to see you / I miss you",
+                    "Don't look",
+                    "You are beautiful"
+                  ],
+                  "correct_answer": "I want to see you / I miss you",
+                  "explanation": "보다 (to see) + -고 싶다 (want to) = 보고 싶다 (I want to see). In Korean, missing someone IS wanting to see them — the same phrase.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 몰래 mean?",
+                  "instruction": "Select the correct meaning",
+                  "korean_text": "몰래",
+                  "romanization": "mollae",
+                  "options": [
+                    "Loudly",
+                    "Secretly / without telling",
+                    "Quickly",
+                    "Slowly"
+                  ],
+                  "correct_answer": "Secretly / without telling",
+                  "explanation": "몰래 = secretly, without others knowing. '인스타그램 몰래 보다가' = secretly looking at [your] Instagram.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 웃었어 mean?",
+                  "instruction": "Select the correct meaning",
+                  "korean_text": "웃었어",
+                  "romanization": "useosseo",
+                  "options": [
+                    "I cried",
+                    "I smiled / laughed",
+                    "I waited",
+                    "I forgot"
+                  ],
+                  "correct_answer": "I smiled / laughed",
+                  "explanation": "웃다 = to smile / laugh. 웃었어 = I smiled (casual past tense). 나도 모르게 웃었어 = I smiled without realizing it.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you say 'I want to hear' using -고 싶다?",
+                  "instruction": "Select the correct form",
+                  "korean_text": "듣다 → ?",
+                  "options": [
+                    "듣고 싶어",
+                    "들어요",
+                    "들었어",
+                    "들고 싶지 않아"
+                  ],
+                  "correct_answer": "듣고 싶어",
+                  "explanation": "듣다 (to listen) + -고 싶어 = 듣고 싶어 (I want to hear). Same pattern as 보고 싶어.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "sentence_arrange",
+                  "question": "Arrange: 'I want to see you again'",
+                  "instruction": "Put the tiles in the correct order",
+                  "tiles": [
+                    "다시",
+                    "보고",
+                    "싶어"
+                  ],
+                  "correct_answer": "다시 보고 싶어",
+                  "explanation": "다시 (again) + 보고 싶어 (I want to see you) = 다시 보고 싶어 (I want to see you again)",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What emotion does '네 인스타그램 몰래 보다가' capture?",
+                  "instruction": "Select the emotion",
+                  "korean_text": "네 인스타그램 몰래 보다가",
+                  "options": [
+                    "Pride",
+                    "Anger",
+                    "Longing and nostalgia",
+                    "Fear"
+                  ],
+                  "correct_answer": "Longing and nostalgia",
+                  "explanation": "Secretly scrolling an ex-lover's Instagram is the classic modern-longing moment. 보다가 = while looking — the action is interrupted by the feeling.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 그리워 mean?",
+                  "instruction": "Select the correct meaning",
+                  "korean_text": "그리워",
+                  "romanization": "geuriwo",
+                  "options": [
+                    "I like it",
+                    "I miss (it/you) — a longing feeling",
+                    "I'm angry",
+                    "I'm scared"
+                  ],
+                  "correct_answer": "I miss (it/you) — a longing feeling",
+                  "explanation": "그리워 (from 그립다) = the ache of missing something or someone. More profound than 보고 싶어 — it's deep nostalgia.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "writing",
+                  "question": "How do you say 'I miss you' using 보고 싶다?",
+                  "instruction": "Type the casual Korean phrase",
+                  "correct_answer": "보고 싶어",
+                  "explanation": "보다 (to see) + -고 싶어 (want to) = 보고 싶어. The most common way to say 'I miss you' in Korean.",
+                  "source_lyric": true
+                },
+                {
+                  "exercise_type": "read_aloud",
+                  "question": "Read this Dean lyric aloud — feel the longing in the words",
+                  "instruction": "Try matching Dean's slow, breathy delivery. Then play to compare.",
+                  "korean_text": "보고 싶어",
+                  "romanization": "bogo sipeo",
+                  "english_text": "I want to see you / I miss you",
+                  "correct_answer": "read_aloud",
+                  "explanation": "The most emotional phrase in 'Instagram' — two syllables that carry everything unsaid.",
+                  "audio_url": null,
+                  "options": []
+                },
+                {
+                  "exercise_type": "read_aloud",
+                  "question": "Read aloud — this is the core emotional hook of the song",
+                  "instruction": "Lengthen 아 slightly as Dean does. Then play the model audio.",
+                  "korean_text": "나 없이도 잘 살아",
+                  "romanization": "na eopsido jal sara",
+                  "english_text": "Living well even without me",
+                  "correct_answer": "read_aloud",
+                  "explanation": "살아 = living. The line captures the bittersweet core of 'Instagram' — watching an ex thrive.",
+                  "audio_url": null,
+                  "options": []
                 }
               ]
             }
@@ -1539,7 +2283,7 @@
         },
         {
           "title": "Time & Weather",
-          "description": "Talk about time, dates, and weather",
+          "description": "Learn time expressions, weather talk, and the emotional vocabulary that defines Korean R&B",
           "lessons": [
             {
               "title": "Time Expressions",
@@ -1759,395 +2503,127 @@
                   "explanation": "The sentence means: It's raining a lot."
                 }
               ]
-            }
-          ]
-        },
-        {
-          "title": "Respectful Korean (존댓말)",
-          "description": "Master formal speech for speaking with elders and in formal situations",
-          "lessons": [
-            {
-              "title": "존댓말 Basics",
-              "description": "Formal verb endings -ㅂ니다/습니다 and polite -세요",
-              "estimated_minutes": 10,
-              "grammar_explanation": "Korean has two main formal registers:\n\n1. 해요체 (Polite informal): Ends in -아요/어요/해요. Used with strangers and in everyday polite contexts.\n   - 가요 (I go), 먹어요 (I eat), 해요 (I do)\n\n2. 합쇼체 (Formal formal): Ends in -ㅂ니다/습니다. Used in formal situations, with elders, in business.\n   - 갑니다 (I go), 먹습니다 (I eat), 합니다 (I do)\n\nThe rule:\n- Verb stem ends in vowel → add -ㅂ니다 (e.g. 가다 → 갑니다)\n- Verb stem ends in consonant → add -습니다 (e.g. 먹다 → 먹습니다)\n\nFor questions, use -ㅂ니까/습니까:\n- 갑니까? (Are you going?), 먹습니까? (Do you eat?)",
-              "grammar_tip": "When meeting an elder for the first time, always use 합쇼체. It is the safest and most respectful choice.",
-              "grammar_patterns": [
-                {
-                  "key": "hapsyo_statement",
-                  "title": "Formal Statement (-ㅂ니다/습니다)",
-                  "pattern": "Verb stem + ㅂ니다 / 습니다",
-                  "meaning": "Formal present tense statement",
-                  "example_korean": "저는 한국어를 배웁니다.",
-                  "example_english": "I am learning Korean."
-                },
-                {
-                  "key": "hapsyo_question",
-                  "title": "Formal Question (-ㅂ니까/습니까)",
-                  "pattern": "Verb stem + ㅂ니까 / 습니까",
-                  "meaning": "Formal present tense question",
-                  "example_korean": "어디 가십니까?",
-                  "example_english": "Where are you going?"
-                },
-                {
-                  "key": "polite_seyo",
-                  "title": "Polite Request (-세요/-으세요)",
-                  "pattern": "Verb stem + 세요 / 으세요",
-                  "meaning": "Polite request or honorific description",
-                  "example_korean": "천천히 말씀해 주세요.",
-                  "example_english": "Please speak slowly."
-                }
-              ],
-              "exercises": [
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "Which ending makes a verb formal in Korean?",
-                  "instruction": "Select the correct formal verb ending",
-                  "options": [
-                    "-아요/어요",
-                    "-ㅂ니다/습니다",
-                    "-고 싶다",
-                    "-ㄹ게요"
-                  ],
-                  "correct_answer": "-ㅂ니다/습니다",
-                  "explanation": "-ㅂ니다/습니다 is the 합쇼체 (formal formal) ending, appropriate for elders and formal situations"
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "How do you say 'I go' in formal Korean (합쇼체)?",
-                  "instruction": "Select the formal form of 가다",
-                  "korean_text": "가다 → ?",
-                  "options": [
-                    "가요",
-                    "갑니다",
-                    "가세요",
-                    "갔어요"
-                  ],
-                  "correct_answer": "갑니다",
-                  "explanation": "가다: the stem 가 ends in a vowel, so we add -ㅂ니다 → 갑니다"
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "How do you say 'I eat' in formal Korean?",
-                  "instruction": "Select the formal form of 먹다",
-                  "korean_text": "먹다 → ?",
-                  "options": [
-                    "먹어요",
-                    "먹습니다",
-                    "먹겠어요",
-                    "먹을게요"
-                  ],
-                  "correct_answer": "먹습니다",
-                  "explanation": "먹다: the stem 먹 ends in a consonant, so we add -습니다 → 먹습니다"
-                },
-                {
-                  "exercise_type": "writing",
-                  "question": "Convert to formal Korean: 저는 학생이에요 (I am a student)",
-                  "instruction": "Type the formal 합쇼체 version",
-                  "correct_answer": "저는 학생입니다",
-                  "explanation": "이에요 → 입니다 in formal speech. 저는 학생입니다 = I am a student (formal)"
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 만나서 반갑습니다 mean?",
-                  "instruction": "Select the correct meaning",
-                  "korean_text": "만나서 반갑습니다",
-                  "romanization": "mannaseo bangapseumnida",
-                  "options": [
-                    "Goodbye",
-                    "Nice to meet you",
-                    "How are you?",
-                    "Thank you"
-                  ],
-                  "correct_answer": "Nice to meet you",
-                  "explanation": "반갑습니다 is the formal version of 반가워요 — 'nice to meet you / glad to meet you'"
-                },
-                {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Arrange the words to say: 'I am learning Korean' (formal)",
-                  "instruction": "Put the tiles in the correct order",
-                  "tiles": [
-                    "저는",
-                    "한국어를",
-                    "배웁니다"
-                  ],
-                  "correct_answer": "저는 한국어를 배웁니다",
-                  "explanation": "Korean word order: Subject (저는) + Object (한국어를) + Verb (배웁니다)"
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "Which phrase means 'Please speak slowly' in formal Korean?",
-                  "instruction": "Select the correct phrase",
-                  "options": [
-                    "빨리 말해요",
-                    "천천히 말씀해 주세요",
-                    "말하지 마세요",
-                    "다시 해요"
-                  ],
-                  "correct_answer": "천천히 말씀해 주세요",
-                  "explanation": "천천히 (slowly) + 말씀해 주세요 (please speak — honorific). 말씀 is the honorific form of 말."
-                },
-                {
-                  "exercise_type": "writing",
-                  "question": "How do you say 'Nice to meet you' in formal Korean?",
-                  "instruction": "Type the formal greeting phrase",
-                  "correct_answer": "만나서 반갑습니다",
-                  "explanation": "만나서 (having met) + 반갑습니다 (I am glad) = Nice to meet you (formal)"
-                }
-              ]
             },
             {
-              "title": "Elder Small Talk",
-              "description": "Polite questions and answers for conversing with older Koreans",
-              "estimated_minutes": 12,
-              "grammar_explanation": "When speaking with elders, use honorific forms:\n\n- Replace 있어요 with 계세요 for people (이 자리에 계세요? — Are you sitting here?)\n- Replace 먹어요 with 드세요 (드시고 계세요? — Are you eating?)\n- Replace 말해요 with 말씀하세요 (말씀하세요 — Please speak)\n- Use 께서 instead of 이/가 as the subject marker for elders\n\nKey question patterns:\n- 어디서 오셨어요? — Where are you from? (오셨어요 = came, honorific past)\n- 연세가 어떻게 되세요? — How old are you? (연세 = honorific word for age)\n- 잘 지내셨어요? — Have you been well? (지내셨어요 = lived/got along, honorific past)",
-              "grammar_tip": "Using 말씀 instead of 말 and 드세요 instead of 먹어요 shows real respect — elders will notice and appreciate it.",
+              "title": "Emotions & Feelings",
+              "description": "Express emotions using vocabulary from R&B music — feelings that appear in Dean, Crush, and Zion.T lyrics",
+              "estimated_minutes": 8,
+              "grammar_explanation": "Korean emotion words come in two forms: adjectives (이/가 + adjective) and verb-like expressions. Many R&B emotions use the -아/어 verb stem form.\n\nKey patterns:\n- 그립다 → 그리워 (I miss / I'm longing)\n- 설레다 → 설레어/설레 (to feel butterflies/excitement)\n- 보고 싶다 → 보고 싶어 (I want to see you)\n- 혼자 (alone) and 함께 (together) are adverbs used widely in songs",
+              "grammar_tip": "많이 is the intensifier for emotions: 많이 그리워 = 'I miss you a lot'.",
               "grammar_patterns": [
                 {
-                  "key": "honorific_verb",
-                  "title": "Honorific Verb Substitution",
-                  "pattern": "먹다 → 드시다, 말하다 → 말씀하다, 있다 → 계시다",
-                  "meaning": "Special honorific verbs used when the subject is an elder",
-                  "example_korean": "할아버지, 진지 드셨어요?",
-                  "example_english": "Grandfather, have you eaten? (honorific)"
+                  "key": "longing_expression",
+                  "title": "Longing / Missing someone",
+                  "pattern": "그리워 / 보고 싶어",
+                  "meaning": "I miss you / I want to see you",
+                  "example_korean": "너무 보고 싶어.",
+                  "example_english": "I miss you so much."
                 },
                 {
-                  "key": "honorific_age",
-                  "title": "Asking Age Respectfully",
-                  "pattern": "연세가 어떻게 되세요?",
-                  "meaning": "How old are you? (honorific — never use 나이 with elders)",
-                  "example_korean": "연세가 어떻게 되세요?",
-                  "example_english": "How old are you? (respectful)"
+                  "key": "excitement_feeling",
+                  "title": "Nervous excitement (설레다)",
+                  "pattern": "설레어 / 설레",
+                  "meaning": "Heart fluttering / butterflies",
+                  "example_korean": "네 생각에 설레.",
+                  "example_english": "I get butterflies thinking about you."
                 },
                 {
-                  "key": "origin_question",
-                  "title": "Asking Where Someone Is From",
-                  "pattern": "어디서 오셨어요?",
-                  "meaning": "Where did you come from? (honorific past tense)",
-                  "example_korean": "어디서 오셨어요? 저는 호주에서 왔습니다.",
-                  "example_english": "Where are you from? I am from Australia."
+                  "key": "alone_together",
+                  "title": "혼자 vs 함께",
+                  "pattern": "혼자 / 함께",
+                  "meaning": "alone / together",
+                  "example_korean": "혼자가 싫어. 함께 있고 싶어.",
+                  "example_english": "I don't want to be alone. I want to be together."
                 }
               ],
               "exercises": [
                 {
                   "exercise_type": "vocabulary",
-                  "question": "How do you ask an elder 'Have you been well?'",
-                  "instruction": "Select the honorific form",
+                  "question": "What does 그리워 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "그리워",
+                  "romanization": "geuriwo",
                   "options": [
-                    "잘 지냈어요?",
-                    "잘 지내셨어요?",
-                    "어떻게 지내요?",
-                    "괜찮아요?"
+                    "I miss you / I'm longing",
+                    "I'm happy",
+                    "I'm afraid",
+                    "I'm angry"
                   ],
-                  "correct_answer": "잘 지내셨어요?",
-                  "explanation": "지내셨어요 uses the honorific -시- infix (지내다 → 지내시다 → 지내셨어요). This is the respectful form."
+                  "correct_answer": "I miss you / I'm longing",
+                  "explanation": "그리워 comes from 그립다 — a deep longing or missing someone. You hear it constantly in R&B lyrics."
                 },
                 {
                   "exercise_type": "vocabulary",
-                  "question": "What is the honorific word for 'age' used with elders?",
+                  "question": "What does 설레다 mean?",
+                  "instruction": "Select the best translation",
+                  "korean_text": "설레다",
+                  "romanization": "seolleda",
+                  "options": [
+                    "Nervous excitement / heart fluttering",
+                    "Sadness",
+                    "Anger",
+                    "Surprise"
+                  ],
+                  "correct_answer": "Nervous excitement / heart fluttering",
+                  "explanation": "설레다 describes the flutter of excitement — butterflies before seeing someone you like. Untranslatable in one English word."
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "What does 눈물 mean?",
+                  "instruction": "Select the correct translation",
+                  "korean_text": "눈물",
+                  "romanization": "nunmul",
+                  "options": [
+                    "Tears",
+                    "Memory",
+                    "Heart",
+                    "Voice"
+                  ],
+                  "correct_answer": "Tears",
+                  "explanation": "눈물 (tears) appears in almost every R&B ballad. 눈 = eye, 물 = water."
+                },
+                {
+                  "exercise_type": "vocabulary",
+                  "question": "How do you say 'alone' in Korean?",
                   "instruction": "Select the correct word",
+                  "korean_text": "혼자",
+                  "romanization": "honja",
                   "options": [
-                    "나이",
-                    "연세",
-                    "살",
-                    "나이가"
+                    "혼자",
+                    "함께",
+                    "마음",
+                    "기억"
                   ],
-                  "correct_answer": "연세",
-                  "explanation": "연세 is the honorific form of 나이 (age). Always use 연세 with elders, never 나이."
+                  "correct_answer": "혼자",
+                  "explanation": "혼자 means alone. Its opposite is 함께 (together) — both appear constantly in Dean and Crush lyrics."
                 },
                 {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 어디서 오셨어요? mean?",
-                  "instruction": "Select the correct translation",
-                  "korean_text": "어디서 오셨어요?",
-                  "romanization": "eodiseo osyeosseoyo?",
+                  "exercise_type": "listening",
+                  "question": "Listen and choose the phrase that means 'I want to see you'",
+                  "instruction": "Play the audio and select the correct phrase",
+                  "korean_text": "보고 싶어",
+                  "romanization": "bogo sipeo",
                   "options": [
-                    "Where are you going?",
-                    "Where are you from?",
-                    "Do you live here?",
-                    "How long have you been here?"
+                    "보고 싶어",
+                    "그리워",
+                    "설레어",
+                    "눈물"
                   ],
-                  "correct_answer": "Where are you from?",
-                  "explanation": "어디서 (from where) + 오셨어요 (did you come, honorific) = Where did you come from / Where are you from?"
-                },
-                {
-                  "exercise_type": "writing",
-                  "question": "How do you say 'I am a foreigner' in polite Korean?",
-                  "instruction": "Type the polite Korean phrase",
-                  "correct_answer": "저는 외국인이에요",
-                  "explanation": "저는 (I, formal) + 외국인 (foreigner) + 이에요 (am, polite). You could also say 저는 외국인입니다 in 합쇼체."
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "How do you politely ask someone to speak slowly?",
-                  "instruction": "Select the most polite option",
-                  "options": [
-                    "빨리 말해요",
-                    "천천히 말해요",
-                    "천천히 말씀해 주세요",
-                    "말 좀 해요"
-                  ],
-                  "correct_answer": "천천히 말씀해 주세요",
-                  "explanation": "천천히 (slowly) + 말씀해 주세요 (please speak, honorific). 말씀 is the honorific noun form of 말 (words/speech)."
+                  "correct_answer": "보고 싶어",
+                  "explanation": "보고 싶어 = I want to see you. 보다 (to see/look) + 고 싶다 (want to). Very common in song lyrics and everyday speech."
                 },
                 {
                   "exercise_type": "sentence_arrange",
-                  "question": "Arrange to say: 'Where are you from?' (polite)",
+                  "question": "Arrange the words to form: 'I miss you and want to see you'",
                   "instruction": "Put the tiles in the correct order",
+                  "korean_text": "그리워 보고 싶어",
                   "tiles": [
-                    "어디서",
-                    "오셨어요?"
+                    "그리워",
+                    "보고",
+                    "싶어"
                   ],
-                  "correct_answer": "어디서 오셨어요?",
-                  "explanation": "어디서 (from where) + 오셨어요 (did you come, honorific) — a complete polite question"
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "Which phrase means 'Please stay healthy'?",
-                  "instruction": "Select the correct farewell blessing",
-                  "options": [
-                    "잘 자요",
-                    "건강하세요",
-                    "안녕히 가세요",
-                    "또 봐요"
-                  ],
-                  "correct_answer": "건강하세요",
-                  "explanation": "건강하세요 (please be healthy) — a warm farewell blessing often said to elders"
-                },
-                {
-                  "exercise_type": "writing",
-                  "question": "I am learning Korean — say this in formal Korean",
-                  "instruction": "Type the formal Korean sentence",
-                  "correct_answer": "저는 한국어를 배우고 있습니다",
-                  "explanation": "저는 (I) + 한국어를 (Korean) + 배우고 있습니다 (am learning, formal continuous)"
-                }
-              ]
-            },
-            {
-              "title": "Graceful Exits",
-              "description": "Farewells, thank-you forms, and polite conversation closers",
-              "estimated_minutes": 10,
-              "grammar_explanation": "Ending a conversation gracefully is just as important as starting one.\n\nFarewells:\n- 안녕히 가세요 — Goodbye (said to person who is LEAVING)\n- 안녕히 계세요 — Goodbye (said when YOU are the one leaving)\n- 건강하세요 — Please stay healthy (warm farewell for elders)\n- 또 만나요 / 또 뵙겠습니다 — See you again (또 뵙겠습니다 is more formal)\n\nThanks:\n- 감사합니다 — Thank you (polite)\n- 정말 감사합니다 — Thank you very much\n- 도와주셔서 감사합니다 — Thank you for your help\n\nPolite self-exit phrases:\n- 그럼 이만 가보겠습니다 — Well, I'll be going now\n- 바쁘신데 감사합니다 — Thank you, I know you're busy",
-              "grammar_tip": "뵙겠습니다 is the ultra-formal/humble form of 봐요. Using it with an elder shows real effort — they will be impressed.",
-              "grammar_patterns": [
-                {
-                  "key": "farewell_direction",
-                  "title": "Directional Farewell",
-                  "pattern": "안녕히 가세요 (to leaver) / 안녕히 계세요 (you are leaving)",
-                  "meaning": "The correct farewell depends on who is moving",
-                  "example_korean": "안녕히 가세요, 건강하세요!",
-                  "example_english": "Goodbye, please stay healthy!"
-                },
-                {
-                  "key": "humble_form",
-                  "title": "Humble 'See you again'",
-                  "pattern": "또 뵙겠습니다",
-                  "meaning": "I will see you again (humble/formal) — 뵙다 is the humble form of 보다",
-                  "example_korean": "다음에 또 뵙겠습니다.",
-                  "example_english": "I hope to see you again next time."
-                },
-                {
-                  "key": "polite_thanks",
-                  "title": "Gratitude in Formal Korean",
-                  "pattern": "도와주셔서 감사합니다",
-                  "meaning": "Thank you for helping me (formal + honorific -셔-)",
-                  "example_korean": "도와주셔서 정말 감사합니다.",
-                  "example_english": "Thank you so much for your help."
-                }
-              ],
-              "exercises": [
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "You are leaving someone behind. Which goodbye do you say?",
-                  "instruction": "Select the correct farewell",
-                  "options": [
-                    "안녕히 가세요",
-                    "안녕히 계세요",
-                    "잘 자요",
-                    "내일 봐요"
-                  ],
-                  "correct_answer": "안녕히 계세요",
-                  "explanation": "안녕히 계세요 (stay in peace) is said when YOU are the one leaving. The other person stays — they stay in peace."
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "Someone is leaving you. What do you say?",
-                  "instruction": "Select the correct farewell",
-                  "options": [
-                    "안녕히 계세요",
-                    "안녕히 가세요",
-                    "건강하세요",
-                    "잘 자요"
-                  ],
-                  "correct_answer": "안녕히 가세요",
-                  "explanation": "안녕히 가세요 (go in peace) is said when the OTHER person is leaving."
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 도와주셔서 감사합니다 mean?",
-                  "instruction": "Select the correct translation",
-                  "korean_text": "도와주셔서 감사합니다",
-                  "romanization": "dowajusyeoseo gamsahamnida",
-                  "options": [
-                    "Sorry for bothering you",
-                    "Thank you for your help",
-                    "I'll come back soon",
-                    "Nice to meet you"
-                  ],
-                  "correct_answer": "Thank you for your help",
-                  "explanation": "도와주셔서 (having helped, honorific) + 감사합니다 (I am grateful) = Thank you for your help"
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What is the formal/humble way to say 'See you again'?",
-                  "instruction": "Select the most formal version",
-                  "options": [
-                    "또 봐요",
-                    "다시 만나요",
-                    "또 뵙겠습니다",
-                    "나중에 봐요"
-                  ],
-                  "correct_answer": "또 뵙겠습니다",
-                  "explanation": "뵙겠습니다 is the humble future form of 뵙다 (humble form of 보다). Using it shows deep respect."
-                },
-                {
-                  "exercise_type": "writing",
-                  "question": "Say 'Thank you very much' in formal Korean",
-                  "instruction": "Type the formal Korean phrase",
-                  "correct_answer": "정말 감사합니다",
-                  "explanation": "정말 (really/truly) + 감사합니다 (I am grateful, formal) = Thank you very much"
-                },
-                {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Arrange: 'Thank you for your help' (formal)",
-                  "instruction": "Put the tiles in the correct order",
-                  "tiles": [
-                    "도와주셔서",
-                    "정말",
-                    "감사합니다"
-                  ],
-                  "correct_answer": "도와주셔서 정말 감사합니다",
-                  "explanation": "도와주셔서 (for helping, honorific) + 정말 (truly) + 감사합니다 (thank you)"
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "Which phrase means 'Please stay healthy'?",
-                  "instruction": "Select the correct farewell",
-                  "options": [
-                    "잘 자요",
-                    "건강하세요",
-                    "어서 오세요",
-                    "실례합니다"
-                  ],
-                  "correct_answer": "건강하세요",
-                  "explanation": "건강하세요 is a warm farewell blessing meaning 'please be/stay healthy' — very appropriate for elders"
-                },
-                {
-                  "exercise_type": "writing",
-                  "question": "How do you say 'I'll be going now' politely?",
-                  "instruction": "Type the polite exit phrase",
-                  "correct_answer": "그럼 이만 가보겠습니다",
-                  "explanation": "그럼 (then/well) + 이만 (this much/at this point) + 가보겠습니다 (I will try going, humble) — a graceful exit phrase"
+                  "correct_answer": "그리워 보고 싶어",
+                  "explanation": "Two feeling expressions together: 그리워 (I miss you) 보고 싶어 (I want to see you). Both are complete sentences on their own but commonly stacked in lyrics."
                 }
               ]
             }
@@ -4720,359 +5196,6 @@
                   ],
                   "correct_answer": "카드로 계산할게요.",
                   "explanation": "The sentence means: I'll pay by card."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Lyric Lessons — R&B",
-          "description": "Learn Korean through Dean and Zion.T lyrics — vocabulary, grammar, and feeling in context",
-          "lessons": [
-            {
-              "title": "Zion.T — Eat (먹자)",
-              "description": "Intimate, slow-tempo song about caring for someone through food — perfect for beginners",
-              "estimated_minutes": 15,
-              "lesson_type": "lyric",
-              "grammar_explanation": "This song uses extremely conversational Korean — short, gentle sentences that sound like whispers.\n\nKey construction: -자 (Let's...)\nAdding -자 to a verb stem makes an informal suggestion:\n- 먹자 (let's eat), 자자 (let's sleep), 가자 (let's go)\n\nThis is casual speech. In formal Korean it becomes -ㅂ시다 (먹읍시다).\n\nKey construction: -아/어줘 (Do [it] for me)\n- 먹어줘 (eat [for me/please]), 와줘 (come [please]), 봐줘 (look [please])\nThe -줘 ending makes a request feel warm and intimate.\n\nLyric excerpt:\n밥은 먹고 다니냐\n잠은 자고 다니냐\n(Are you eating your meals? Are you sleeping enough?)",
-              "grammar_tip": "-자 for 'let's' is casual — use -ㅂ시다 or -아요/어요 with elders. In songs it is almost always casual.",
-              "grammar_patterns": [
-                {
-                  "key": "lets_verb",
-                  "title": "Casual 'Let's' (-자)",
-                  "pattern": "Verb stem + 자",
-                  "meaning": "Let's [do something] — informal suggestion",
-                  "example_korean": "같이 먹자.",
-                  "example_english": "Let's eat together."
-                },
-                {
-                  "key": "request_juwo",
-                  "title": "Warm Request (-아/어줘)",
-                  "pattern": "Verb stem + 아줘 / 어줘",
-                  "meaning": "Please do [it] for me — intimate request",
-                  "example_korean": "밥 먹어줘.",
-                  "example_english": "Please eat (for me)."
-                },
-                {
-                  "key": "care_question",
-                  "title": "Caring Question Pattern",
-                  "pattern": "Verb + 고 다니냐?",
-                  "meaning": "Are you (going around) doing X? — concerned inquiry",
-                  "example_korean": "밥은 먹고 다니냐?",
-                  "example_english": "Are you (going around) eating your meals?"
-                }
-              ],
-              "exercises": [
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 먹자 mean?",
-                  "instruction": "Select the correct meaning",
-                  "korean_text": "먹자",
-                  "romanization": "meokja",
-                  "options": [
-                    "I eat",
-                    "Let's eat",
-                    "Don't eat",
-                    "I want to eat"
-                  ],
-                  "correct_answer": "Let's eat",
-                  "explanation": "먹다 (to eat) + -자 = 먹자 (let's eat). The -자 ending makes an informal 'let's' suggestion.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 밥 mean in the song context?",
-                  "instruction": "Select the correct meaning",
-                  "korean_text": "밥",
-                  "romanization": "bap",
-                  "options": [
-                    "Night",
-                    "Meal / Rice",
-                    "Love",
-                    "Music"
-                  ],
-                  "correct_answer": "Meal / Rice",
-                  "explanation": "밥 literally means cooked rice but in Korean culture means 'a meal'. '밥 먹었어요?' = 'Have you eaten?' is the most common caring question.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "In the lyric '밥은 먹고 다니냐', what emotion is the singer expressing?",
-                  "instruction": "Select the emotion behind the lyric",
-                  "korean_text": "밥은 먹고 다니냐",
-                  "options": [
-                    "Anger",
-                    "Jealousy",
-                    "Concern and care",
-                    "Sadness"
-                  ],
-                  "correct_answer": "Concern and care",
-                  "explanation": "Asking 'Are you eating your meals?' is a Korean expression of deep care. It's a way of saying 'I'm thinking about you and your wellbeing.'",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 잠 mean?",
-                  "instruction": "Select the correct translation",
-                  "korean_text": "잠",
-                  "romanization": "jam",
-                  "options": [
-                    "Dream",
-                    "Sleep",
-                    "Rest",
-                    "Night"
-                  ],
-                  "correct_answer": "Sleep",
-                  "explanation": "잠 = sleep (noun). 자다 = to sleep (verb). '잠은 자고 다니냐?' = Are you getting enough sleep?",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Arrange the lyric: 'Let's eat together'",
-                  "instruction": "Put the tiles in the correct order",
-                  "tiles": [
-                    "같이",
-                    "먹자"
-                  ],
-                  "correct_answer": "같이 먹자",
-                  "explanation": "같이 (together) + 먹자 (let's eat). Simple, intimate, beautiful.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "How do you say 'let's sleep' using the same pattern as 먹자?",
-                  "instruction": "Select the correct form",
-                  "options": [
-                    "자요",
-                    "자자",
-                    "잡니다",
-                    "잘게요"
-                  ],
-                  "correct_answer": "자자",
-                  "explanation": "자다 (to sleep) + -자 = 자자 (let's sleep). Same pattern as 먹자.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "writing",
-                  "question": "How do you say 'Let's go together' using -자?",
-                  "instruction": "Type the casual Korean phrase",
-                  "correct_answer": "같이 가자",
-                  "explanation": "가다 (to go) + -자 = 가자 (let's go). 같이 = together. So: 같이 가자.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 밥 먹어줘 mean?",
-                  "instruction": "Select the meaning with the right nuance",
-                  "korean_text": "밥 먹어줘",
-                  "options": [
-                    "I want to eat",
-                    "Please eat (for me / I'm asking you)",
-                    "Don't eat",
-                    "You ate"
-                  ],
-                  "correct_answer": "Please eat (for me / I'm asking you)",
-                  "explanation": "먹어줘 = eat + -어줘 (please do for me). The -줘 makes it an intimate, caring request. The singer is pleading: please eat, I'm worried about you.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "read_aloud",
-                  "question": "Read this lyric aloud, then check against the model audio",
-                  "instruction": "Say it at your own pace first. Then play to compare.",
-                  "korean_text": "밥은 먹고 다니냐",
-                  "romanization": "bab-eun meokgo daninyа",
-                  "english_text": "Are you eating well (are you getting by)?",
-                  "correct_answer": "read_aloud",
-                  "explanation": "This iconic opening line from 'Eat' — Zion.T asks with warm concern. The -냐 ending is casual.",
-                  "audio_url": null,
-                  "options": []
-                },
-                {
-                  "exercise_type": "read_aloud",
-                  "question": "Read aloud and match the gentle rhythm of this lyric",
-                  "instruction": "Focus on the soft final syllables — Korean often ends words softly.",
-                  "korean_text": "잘 자고 있냐",
-                  "romanization": "jal jago innya",
-                  "english_text": "Are you sleeping well?",
-                  "correct_answer": "read_aloud",
-                  "explanation": "Part of Zion.T's caring refrain — simple, tender language at a slow R&B pace.",
-                  "audio_url": null,
-                  "options": []
-                }
-              ]
-            },
-            {
-              "title": "Dean — Instagram (인스타그램)",
-              "description": "Neo-soul track about longing and social media — conversational vocabulary about missing someone",
-              "estimated_minutes": 15,
-              "lesson_type": "lyric",
-              "grammar_explanation": "Dean's Instagram is built on longing — and the grammar reflects it.\n\nKey construction: -고 싶다 (I want to...)\nAttach to verb stem to express desire:\n- 보고 싶다 (I want to see / I miss you)\n- 듣고 싶다 (I want to hear)\n- 알고 싶다 (I want to know)\n\n보고 싶어 is one of the most important phrases in Korean R&B. It means both 'I want to see you' and 'I miss you'.\n\nKey construction: -아/어서 (because / so)\n- 네가 보고 싶어서 (because I miss you...)\n- 힘들어서 (because it's hard...)\n\nLyric excerpt:\n네 인스타그램 몰래 보다가\n나도 모르게 또 웃었어\n(Secretly looking at your Instagram,\nI smiled without realizing it)",
-              "grammar_tip": "보고 싶어 (I miss you) is used constantly in Korean R&B. It literally means 'I want to see you' — the missing and the longing are the same feeling.",
-              "grammar_patterns": [
-                {
-                  "key": "want_to",
-                  "title": "Wanting (-고 싶다)",
-                  "pattern": "Verb stem + 고 싶다",
-                  "meaning": "I want to [do something]",
-                  "example_korean": "보고 싶어.",
-                  "example_english": "I want to see you / I miss you."
-                },
-                {
-                  "key": "because_so",
-                  "title": "Because / So (-아/어서)",
-                  "pattern": "Verb/Adjective + 아서 / 어서",
-                  "meaning": "Because [this], (so that)...",
-                  "example_korean": "보고 싶어서 왔어.",
-                  "example_english": "I came because I missed you."
-                },
-                {
-                  "key": "secretly",
-                  "title": "Doing Something Secretly (몰래)",
-                  "pattern": "몰래 + Verb",
-                  "meaning": "Secretly / without telling anyone",
-                  "example_korean": "몰래 봤어.",
-                  "example_english": "I looked secretly."
-                }
-              ],
-              "exercises": [
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 보고 싶어 mean?",
-                  "instruction": "Select the best translation",
-                  "korean_text": "보고 싶어",
-                  "romanization": "bogo sipeo",
-                  "options": [
-                    "I saw you",
-                    "I want to see you / I miss you",
-                    "Don't look",
-                    "You are beautiful"
-                  ],
-                  "correct_answer": "I want to see you / I miss you",
-                  "explanation": "보다 (to see) + -고 싶다 (want to) = 보고 싶다 (I want to see). In Korean, missing someone IS wanting to see them — the same phrase.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 몰래 mean?",
-                  "instruction": "Select the correct meaning",
-                  "korean_text": "몰래",
-                  "romanization": "mollae",
-                  "options": [
-                    "Loudly",
-                    "Secretly / without telling",
-                    "Quickly",
-                    "Slowly"
-                  ],
-                  "correct_answer": "Secretly / without telling",
-                  "explanation": "몰래 = secretly, without others knowing. '인스타그램 몰래 보다가' = secretly looking at [your] Instagram.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 웃었어 mean?",
-                  "instruction": "Select the correct meaning",
-                  "korean_text": "웃었어",
-                  "romanization": "useosseo",
-                  "options": [
-                    "I cried",
-                    "I smiled / laughed",
-                    "I waited",
-                    "I forgot"
-                  ],
-                  "correct_answer": "I smiled / laughed",
-                  "explanation": "웃다 = to smile / laugh. 웃었어 = I smiled (casual past tense). 나도 모르게 웃었어 = I smiled without realizing it.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "How do you say 'I want to hear' using -고 싶다?",
-                  "instruction": "Select the correct form",
-                  "korean_text": "듣다 → ?",
-                  "options": [
-                    "듣고 싶어",
-                    "들어요",
-                    "들었어",
-                    "들고 싶지 않아"
-                  ],
-                  "correct_answer": "듣고 싶어",
-                  "explanation": "듣다 (to listen) + -고 싶어 = 듣고 싶어 (I want to hear). Same pattern as 보고 싶어.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "sentence_arrange",
-                  "question": "Arrange: 'I want to see you again'",
-                  "instruction": "Put the tiles in the correct order",
-                  "tiles": [
-                    "다시",
-                    "보고",
-                    "싶어"
-                  ],
-                  "correct_answer": "다시 보고 싶어",
-                  "explanation": "다시 (again) + 보고 싶어 (I want to see you) = 다시 보고 싶어 (I want to see you again)",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What emotion does '네 인스타그램 몰래 보다가' capture?",
-                  "instruction": "Select the emotion",
-                  "korean_text": "네 인스타그램 몰래 보다가",
-                  "options": [
-                    "Pride",
-                    "Anger",
-                    "Longing and nostalgia",
-                    "Fear"
-                  ],
-                  "correct_answer": "Longing and nostalgia",
-                  "explanation": "Secretly scrolling an ex-lover's Instagram is the classic modern-longing moment. 보다가 = while looking — the action is interrupted by the feeling.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "vocabulary",
-                  "question": "What does 그리워 mean?",
-                  "instruction": "Select the correct meaning",
-                  "korean_text": "그리워",
-                  "romanization": "geuriwo",
-                  "options": [
-                    "I like it",
-                    "I miss (it/you) — a longing feeling",
-                    "I'm angry",
-                    "I'm scared"
-                  ],
-                  "correct_answer": "I miss (it/you) — a longing feeling",
-                  "explanation": "그리워 (from 그립다) = the ache of missing something or someone. More profound than 보고 싶어 — it's deep nostalgia.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "writing",
-                  "question": "How do you say 'I miss you' using 보고 싶다?",
-                  "instruction": "Type the casual Korean phrase",
-                  "correct_answer": "보고 싶어",
-                  "explanation": "보다 (to see) + -고 싶어 (want to) = 보고 싶어. The most common way to say 'I miss you' in Korean.",
-                  "source_lyric": true
-                },
-                {
-                  "exercise_type": "read_aloud",
-                  "question": "Read this Dean lyric aloud — feel the longing in the words",
-                  "instruction": "Try matching Dean's slow, breathy delivery. Then play to compare.",
-                  "korean_text": "보고 싶어",
-                  "romanization": "bogo sipeo",
-                  "english_text": "I want to see you / I miss you",
-                  "correct_answer": "read_aloud",
-                  "explanation": "The most emotional phrase in 'Instagram' — two syllables that carry everything unsaid.",
-                  "audio_url": null,
-                  "options": []
-                },
-                {
-                  "exercise_type": "read_aloud",
-                  "question": "Read aloud — this is the core emotional hook of the song",
-                  "instruction": "Lengthen 아 slightly as Dean does. Then play the model audio.",
-                  "korean_text": "나 없이도 잘 살아",
-                  "romanization": "na eopsido jal sara",
-                  "english_text": "Living well even without me",
-                  "correct_answer": "read_aloud",
-                  "explanation": "살아 = living. The line captures the bittersweet core of 'Instagram' — watching an ex thrive.",
-                  "audio_url": null,
-                  "options": []
                 }
               ]
             }

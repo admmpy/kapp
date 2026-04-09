@@ -281,6 +281,7 @@ function App() {
           </div>
         )}
         <IosInstallPrompt />
+        <div key={state.page} className="page-transition">
         {state.page === 'courses' && (
           <ErrorBoundary>
             <CourseList
@@ -370,6 +371,7 @@ function App() {
           </ErrorBoundary>
         )}
 
+        </div>
         {showBottomNav && (
           <BottomNav activeTab={activeTab} onNavigate={handleBottomNavNavigate} />
         )}

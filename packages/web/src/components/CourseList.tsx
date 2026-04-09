@@ -34,6 +34,8 @@ export default function CourseList({
   const [progress, setProgress] = useState<OverallProgress | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [nextLessonId, setNextLessonId] = useState<number | null>(null);
+  const [nextLessonTitle, setNextLessonTitle] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadData() {
@@ -54,6 +56,13 @@ export default function CourseList({
       }
     }
     loadData();
+    apiClient.getDailyMission().then((data) => {
+      const lessonTask = data.tasks.find((t: { type: string; lesson_id?: number; description: string }) => t.type === 'lesson' && t.lesson_id);
+      if (lessonTask) {
+        setNextLessonId(lessonTask.lesson_id!);
+        setNextLessonTitle(lessonTask.description);
+      }
+    }).catch(() => {});
   }, []);
 
   if (loading) {
@@ -194,6 +203,17 @@ export default function CourseList({
         <div className="no-courses">
           <p>No courses available yet.</p>
           <p>Run the import script to add lesson content.</p>
+        </div>
+      )}
+
+      {nextLessonId && onStartLesson && (
+        <div className="continue-shortcut" onClick={() => onStartLesson(nextLessonId)}>
+          <div className="continue-shortcut-icon">▶</div>
+          <div className="continue-shortcut-text">
+            <span className="continue-shortcut-label">Continue Learning</span>
+            <span className="continue-shortcut-title">{nextLessonTitle}</span>
+          </div>
+          <span className="continue-shortcut-arrow">→</span>
         </div>
       )}
     </div>

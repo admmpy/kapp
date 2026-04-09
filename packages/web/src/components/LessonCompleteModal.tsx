@@ -77,11 +77,9 @@ export default function LessonCompleteModal({
           <p className="score-message">{getScoreMessage()}</p>
           <div className="score-details">
             <p>
-              <strong>{correctAnswers}</strong> correct out of <strong>{totalAnswers}</strong> exercises
+              Completed <strong>{correctAnswers}</strong> of <strong>{totalAnswers + skippedCount}</strong>
+              {skippedCount > 0 && <> · <strong>{skippedCount}</strong> skipped</>}
             </p>
-            {skippedCount > 0 && (
-              <p className="skipped-count">{skippedCount} skipped</p>
-            )}
           </div>
         </div>
 

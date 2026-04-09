@@ -377,9 +377,14 @@ export default function ListeningPractice({ onBack, onLyricRadio }: Props) {
                     : 'See Results'}
                 </button>
               ) : (
-                <button className="next-button" onClick={handleNext}>
-                  Next Practice
-                </button>
+                <div className="next-actions">
+                  <button className="next-button" onClick={handleNext}>
+                    Same Topic
+                  </button>
+                  <button className="try-another-button" onClick={() => { handleNext(); setTopic(''); }}>
+                    Try Another Topic
+                  </button>
+                </div>
               )}
             </div>
           </div>

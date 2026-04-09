@@ -400,6 +400,30 @@
   background: var(--color-success-dark, #43a047);
 }
 
+.next-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.try-another-button {
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid var(--color-accent, #4a90d9);
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-accent, #4a90d9);
+  transition: background 0.2s, color 0.2s;
+}
+
+.try-another-button:hover {
+  background: var(--color-accent, #4a90d9);
+  color: white;
+}
+
 @media (max-width: 480px) {
   .listening-practice {
     padding: 16px;
