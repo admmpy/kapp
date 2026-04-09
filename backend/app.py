@@ -118,6 +118,10 @@ def register_blueprints(app):
     from routes.settings import settings_bp
     app.register_blueprint(settings_bp, url_prefix="/api")
 
+    # Daily mission
+    from routes.daily_mission import daily_mission_bp
+    app.register_blueprint(daily_mission_bp, url_prefix="/api")
+
     # Register shared blueprints
     app.register_blueprint(audio_bp, url_prefix="/api")
     app.register_blueprint(llm_bp, url_prefix="/api")

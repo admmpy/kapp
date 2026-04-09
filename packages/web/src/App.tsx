@@ -6,6 +6,7 @@ import CourseList from './components/CourseList';
 import UnitView from './components/UnitView';
 import LessonView from './components/LessonView';
 import ConversationView from './components/ConversationView';
+import ElderConversationView from './components/ElderConversationView';
 import Dashboard from './components/Dashboard';
 import VocabularyReview from './components/VocabularyReview';
 import WeaknessReview from './components/WeaknessReview';
@@ -19,7 +20,7 @@ import { initDB, setupOnlineListener, WEAKNESS_REVIEW_ENABLED, SENTENCE_SRS_ENAB
 import type { ImmersionLevel } from '@kapp/core';
 import './App.css';
 
-type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'dashboard' | 'vocabulary-review' | 'weakness-review' | 'exercise-review' | 'listening-practice';
+type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'elder-conversation' | 'dashboard' | 'vocabulary-review' | 'weakness-review' | 'exercise-review' | 'listening-practice';
 type Theme = 'light' | 'dark';
 
 interface AppState {
@@ -112,6 +113,11 @@ function App() {
         return;
       }
 
+      if (hash === 'elder-conversation') {
+        setState({ page: 'elder-conversation', courseId: null, lessonId: null });
+        return;
+      }
+
       if (hash === 'dashboard') {
         setState({ page: 'dashboard', courseId: null, lessonId: null });
         return;
@@ -189,6 +195,11 @@ function App() {
     setState({ page: 'conversation', courseId: null, lessonId: null });
   }
 
+  function navigateToElderConversation() {
+    window.location.hash = 'elder-conversation';
+    setState({ page: 'elder-conversation', courseId: null, lessonId: null });
+  }
+
   function navigateToDashboard() {
     window.location.hash = 'dashboard';
     setState({ page: 'dashboard', courseId: null, lessonId: null });
@@ -239,7 +250,7 @@ function App() {
     }
   }
 
-  const showBottomNav = ['courses', 'dashboard', 'vocabulary-review', 'weakness-review', 'exercise-review', 'listening-practice', 'conversation'].includes(state.page);
+  const showBottomNav = ['courses', 'dashboard', 'vocabulary-review', 'weakness-review', 'exercise-review', 'listening-practice', 'conversation', 'elder-conversation'].includes(state.page);
 
   // Map current page to a bottom nav tab (units maps to courses since it's a drill-down)
   const activeTab: Tab = (state.page === 'units' || state.page === 'lesson')
@@ -264,6 +275,8 @@ function App() {
             <CourseList
               onSelectCourse={navigateToCourse}
               onStartConversation={navigateToConversation}
+              onStartLesson={navigateToLesson}
+              onStartReview={navigateToReview}
               theme={theme}
               onToggleTheme={handleToggleTheme}
               immersionLevel={immersionLevel}
@@ -274,7 +287,13 @@ function App() {
 
         {state.page === 'conversation' && (
           <ErrorBoundary>
-            <ConversationView onBack={navigateToCourses} />
+            <ConversationView onBack={navigateToCourses} onElderMode={navigateToElderConversation} />
+          </ErrorBoundary>
+        )}
+
+        {state.page === 'elder-conversation' && (
+          <ErrorBoundary>
+            <ElderConversationView onBack={navigateToConversation} />
           </ErrorBoundary>
         )}
 

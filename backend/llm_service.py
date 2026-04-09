@@ -87,7 +87,13 @@ class OpenAIClient:
             logger.error(f"Error caching response: {e}")
 
     def _extract_text(self, response_json: Dict[str, Any]) -> str:
-        """Extract output text from Responses API payload."""
+        """Extract output text from Chat Completions API response."""
+        try:
+            return response_json["choices"][0]["message"]["content"]
+        except (KeyError, IndexError):
+            pass
+
+        # Fallback: legacy Responses API shape (kept for safety)
         if response_json.get("output_text"):
             return response_json["output_text"]
 
@@ -146,15 +152,15 @@ class OpenAIClient:
 
         payload = {
             "model": self.model,
-            "input": input_messages,
-            "max_output_tokens": max_tokens,
+            "messages": input_messages,
+            "max_tokens": max_tokens,
             "temperature": temperature,
         }
 
         try:
-            # Send request to OpenAI
+            # Send request to OpenAI-compatible API (chat/completions)
             response = requests.post(
-                f"{self.base_url}/responses",
+                f"{self.base_url}/chat/completions",
                 json=payload,
                 timeout=self.timeout,
                 headers=self._headers(),
@@ -302,6 +308,20 @@ Previous context: {context}
 Learner says: {message}
 
 Respond naturally in Korean. If they made mistakes, model the correct form in your response without explicitly pointing out errors.""",
+    },
+    "elder_conversation": {
+        "system": """You are an elderly Korean man in your 70s named 할아버지 (Grandpa).
+You are warm, patient, and genuinely delighted when foreigners try to speak Korean.
+You speak ONLY in formal 합쇼체 register (ending with -ㅂ니다/습니다 or -세요/-으세요).
+You stick strictly to these topics: weather, where they are from, how long they have been in Korea, complimenting their Korean, offering food or tea.
+You speak slowly and simply for beginners.
+If the learner makes a grammar mistake, gently rephrase it correctly in your next reply without drawing attention to the error.
+Never switch to English. Never break character. Keep replies to 1-2 sentences.""",
+        "user": """{context}
+
+Learner says: {message}
+
+Respond in Korean using formal 합쇼체 only.""",
     },
     "listening_practice": {
         "system": """You are a Korean language listening practice generator.
