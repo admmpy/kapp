@@ -1,0 +1,112 @@
+.elder-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.elder-scene-card {
+  background: var(--color-surface-alt, var(--color-surface));
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.elder-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.elder-scene-card h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: var(--color-text);
+}
+
+.elder-scene {
+  font-size: 0.95rem;
+  color: var(--color-text-muted, var(--color-text));
+  line-height: 1.5;
+  margin: 0;
+}
+
+.elder-tips {
+  background: var(--color-surface-alt, var(--color-surface));
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.elder-tips h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted, var(--color-text));
+  margin: 0 0 0.5rem;
+}
+
+.elder-tips ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.elder-tips li {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.elder-opening-preview {
+  background: var(--color-accent-light, rgba(99, 102, 241, 0.08));
+  border: 1px solid var(--color-accent);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.elder-opening-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  margin: 0 0 0.35rem;
+}
+
+.elder-opening-text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.elder-start-btn {
+  width: 100%;
+  padding: 0.875rem;
+  min-height: 52px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.elder-start-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.elder-start-btn:hover:not(:disabled) {
+  opacity: 0.88;
+}

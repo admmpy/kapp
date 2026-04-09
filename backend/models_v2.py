@@ -39,6 +39,8 @@ class ExerciseType(str, Enum):
     WRITING = "writing"  # Free-form writing exercises
     REVIEW = "review"  # Mixed review exercises
     SENTENCE_ARRANGE = "sentence_arrange"  # Arrange words to form sentence
+    WORD_BOUNDARY = "word_boundary"  # Tap to insert word spaces in continuous Korean text
+    READ_ALOUD = "read_aloud"  # Show Korean, play TTS, self-rate pronunciation
 
 
 class Course(db.Model):
