@@ -59,7 +59,7 @@ export interface LessonSummary {
 // Exercise Types
 // ============================================
 
-export type ExerciseType = 'vocabulary' | 'grammar' | 'reading' | 'listening' | 'writing' | 'review' | 'sentence_arrange';
+export type ExerciseType = 'vocabulary' | 'grammar' | 'reading' | 'listening' | 'writing' | 'review' | 'sentence_arrange' | 'word_boundary';
 
 export interface SentenceTile {
   korean: string;

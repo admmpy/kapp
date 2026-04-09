@@ -368,6 +368,27 @@ class APIClient {
   }
 
   // ============================================
+  // Elder Conversation Simulator (F-07)
+  // ============================================
+
+  async getElderConversationStart(): Promise<{ opening: string; starter_index: number }> {
+    const response = await this.client.get('/llm/conversation/elder/start', { timeout: 10000 });
+    return response.data;
+  }
+
+  async sendElderConversationMessage(
+    message: string,
+    context?: { conversation_history?: Array<{ user: string; assistant: string }>; starter_index?: number }
+  ): Promise<{ response: string; timestamp: string }> {
+    const response = await this.client.post(
+      '/llm/conversation/elder',
+      { message, context },
+      { timeout: 90000 }
+    );
+    return response.data;
+  }
+
+  // ============================================
   // Listening Practice endpoints
   // ============================================
 

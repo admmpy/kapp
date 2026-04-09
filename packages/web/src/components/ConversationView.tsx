@@ -9,9 +9,10 @@ import './ConversationView.css';
 
 interface Props {
   onBack: () => void;
+  onElderMode?: () => void;
 }
 
-export default function ConversationView({ onBack }: Props) {
+export default function ConversationView({ onBack, onElderMode }: Props) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
@@ -171,6 +172,11 @@ export default function ConversationView({ onBack }: Props) {
         </button>
         <h1>Practice Conversation</h1>
         <p className="subtitle">Chat with your AI Korean tutor</p>
+        {onElderMode && (
+          <button className="elder-mode-btn" onClick={onElderMode} title="Try 할아버지 Mode">
+            👴 할아버지 Mode
+          </button>
+        )}
       </header>
 
       <div className="conversation-container">

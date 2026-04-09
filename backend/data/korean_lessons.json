@@ -5983,6 +5983,88 @@
               ]
             }
           ]
+        },
+        {
+          "title": "Phonological Training",
+          "description": "Train your ear to hear where Korean words begin and end",
+          "lessons": [
+            {
+              "title": "Word Boundary Basics",
+              "description": "Tap to insert spaces between Korean words — train your ear to segment speech",
+              "estimated_minutes": 8,
+              "grammar_explanation": "Korean words run together in speech. Learning to identify boundaries between particles, verbs, and nouns is the first step to hearing natural Korean.",
+              "grammar_tip": "Look for particles like 은/는, 이/가, 을/를, 에 — they always attach directly to the preceding noun.",
+              "grammar_patterns": [],
+              "exercises": [
+                {
+                  "exercise_type": "word_boundary",
+                  "question": "Tap the gaps between characters to mark where each word ends",
+                  "instruction": "This sentence has 3 words. Tap the · dots to add | spaces.",
+                  "korean_text": "나는학생이에요",
+                  "romanization": "naneun haksaeng-ieyo",
+                  "correct_answer": "나는 학생이에요",
+                  "explanation": "나는 (I/topic) / 학생이에요 (am a student)",
+                  "options": [],
+                  "audio_url": null
+                },
+                {
+                  "exercise_type": "word_boundary",
+                  "question": "Tap the gaps to mark where each word ends",
+                  "instruction": "This sentence has 2 words.",
+                  "korean_text": "오늘날씨좋아요",
+                  "romanization": "oneul nalsi johayo",
+                  "correct_answer": "오늘 날씨 좋아요",
+                  "explanation": "오늘 (today) / 날씨 (weather) / 좋아요 (is good)",
+                  "options": [],
+                  "audio_url": null
+                },
+                {
+                  "exercise_type": "word_boundary",
+                  "question": "Tap the gaps to mark where each word ends",
+                  "instruction": "4 words in this phrase.",
+                  "korean_text": "저는한국어를공부해요",
+                  "romanization": "jeoneun hangugeo-reul gongbuhaeyo",
+                  "correct_answer": "저는 한국어를 공부해요",
+                  "explanation": "저는 (I/formal topic) / 한국어를 (Korean/object) / 공부해요 (study)",
+                  "options": [],
+                  "audio_url": null
+                },
+                {
+                  "exercise_type": "word_boundary",
+                  "question": "Tap the gaps to mark where each word ends",
+                  "instruction": "R&B lyric — Zion.T 'Eat'. 3 words.",
+                  "korean_text": "밥은먹었어",
+                  "romanization": "bab-eun meogeosseo",
+                  "correct_answer": "밥은 먹었어",
+                  "explanation": "밥은 (rice/food topic) / 먹었어 (did you eat, casual) — the iconic opening of 'Eat'",
+                  "options": [],
+                  "audio_url": null
+                },
+                {
+                  "exercise_type": "word_boundary",
+                  "question": "Tap the gaps to mark where each word ends",
+                  "instruction": "5 words — a longer phrase.",
+                  "korean_text": "보고싶어서전화했어",
+                  "romanization": "bogo sipeo-seo jeonhwa haesseo",
+                  "correct_answer": "보고 싶어서 전화했어",
+                  "explanation": "보고 (to see) / 싶어서 (because I want) / 전화했어 (called) — 'I called because I missed you'",
+                  "options": [],
+                  "audio_url": null
+                },
+                {
+                  "exercise_type": "word_boundary",
+                  "question": "Tap the gaps to mark where each word ends",
+                  "instruction": "Full sentence — 4 words.",
+                  "korean_text": "너무그리워서눈물이나",
+                  "romanization": "neomu geuriwo-seo nunmuri na",
+                  "correct_answer": "너무 그리워서 눈물이 나",
+                  "explanation": "너무 (too much) / 그리워서 (because I miss) / 눈물이 (tears/subject) / 나 (come out) — Dean-style lyric phrase",
+                  "options": [],
+                  "audio_url": null
+                }
+              ]
+            }
+          ]
         }
       ]
     }
