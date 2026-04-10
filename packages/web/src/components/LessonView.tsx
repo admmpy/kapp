@@ -84,6 +84,10 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     Array<{ pattern_title: string; mastery_score: number; attempts: number }>
   >([]);
 
+  // Immersion auto-progression tracking
+  const [immersionNudgeLevel, setImmersionNudgeLevel] = useState<2 | 3 | null>(null);
+  const peekCountRef = useRef(0);
+
   // Skip / Back navigation
   const [skippedCount, setSkippedCount] = useState(0);
   const [navDirection, setNavDirection] = useState<'forward' | 'backward'>('forward');
@@ -155,6 +159,8 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     const exercise = exercises[currentExerciseIndex];
     pendingAnswerRef.current = answer;
     setSubmitting(true);
+
+    if (meta?.peeked) peekCountRef.current += 1;
 
     try {
       const result = await apiClient.submitExercise(exercise.id, { answer, peeked: meta?.peeked });
@@ -255,6 +261,24 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
     }
 
     setFinalScore(score);
+
+    // Immersion auto-progression: nudge after 2 consecutive high-accuracy no-peek lessons
+    if (IMMERSION_MODE_ENABLED && score >= 85 && peekCountRef.current === 0) {
+      const streakKey = `immersion_streak_${immersionLevel}`;
+      const streak = parseInt(localStorage.getItem(streakKey) || '0', 10) + 1;
+      localStorage.setItem(streakKey, String(streak));
+      if (streak >= 2) {
+        const nextLevel = immersionLevel < 3 ? ((immersionLevel + 1) as 2 | 3) : null;
+        if (nextLevel) {
+          setImmersionNudgeLevel(nextLevel);
+          localStorage.removeItem(streakKey);
+        }
+      }
+    } else if (IMMERSION_MODE_ENABLED) {
+      // Reset streak if the lesson wasn't clean
+      localStorage.removeItem(`immersion_streak_${immersionLevel}`);
+    }
+
     setShowCompleteModal(true);
   }
 
@@ -488,6 +512,12 @@ export default function LessonView({ lessonId, courseId, onComplete, onBack, onB
           onNextLesson={handleNextLesson}
           onBackToCourse={handleBackToCourse}
           patternMasteryResults={GRAMMAR_MASTERY_ENABLED ? patternMasteryResults : undefined}
+          immersionNudgeLevel={immersionNudgeLevel}
+          onAcceptImmersionNudge={immersionNudgeLevel && onImmersionChange ? () => {
+            onImmersionChange(immersionNudgeLevel);
+            setImmersionNudgeLevel(null);
+          } : undefined}
+          onDismissImmersionNudge={() => setImmersionNudgeLevel(null)}
         />
       )}
 

@@ -5,6 +5,8 @@ import { useState } from 'react';
 import type { Exercise, ExerciseResult, PronunciationSelfCheck as PronCheck, ImmersionLevel, OptionTile } from '@kapp/core';
 import { API_BASE_URL, PRONUNCIATION_SELF_CHECK_ENABLED, apiClient, savePronunciationCheck } from '@kapp/core';
 import SentenceArrangeExercise from './SentenceArrangeExercise';
+import WordBoundaryExercise from './WordBoundaryExercise';
+import ReadAloudExercise from './ReadAloudExercise';
 import HangulKeyboard from './HangulKeyboard';
 import './ExerciseRenderer.css';
 
@@ -74,6 +76,31 @@ export default function ExerciseRenderer({
         submitting={submitting}
         immersionLevel={immersionLevel}
         previousAnswer={previousAnswer}
+      />
+    );
+  }
+
+  // Route read_aloud exercises to dedicated component
+  if (exercise.exercise_type === 'read_aloud') {
+    return (
+      <ReadAloudExercise
+        exercise={exercise}
+        onSubmit={onSubmit}
+        result={result}
+        submitting={submitting}
+        immersionLevel={immersionLevel}
+      />
+    );
+  }
+
+  // Route word_boundary exercises to dedicated component
+  if (exercise.exercise_type === 'word_boundary') {
+    return (
+      <WordBoundaryExercise
+        exercise={exercise}
+        onSubmit={onSubmit}
+        result={result}
+        submitting={submitting}
       />
     );
   }

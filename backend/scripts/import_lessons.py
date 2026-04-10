@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from database import db
 from app import create_app
-from models_v2 import Course, Unit, Lesson, Exercise, VocabularyItem, ExerciseType, GrammarPattern, GrammarMastery
+from models_v2 import Course, Unit, Lesson, Exercise, VocabularyItem, ExerciseType, GrammarPattern, GrammarMastery, UserProgress, ExerciseSRS
 
 
 def load_lessons_json():
@@ -168,8 +168,10 @@ def check_existing_data():
 
 
 def clear_existing_data():
-    """Clear all existing lesson data"""
+    """Clear all existing lesson data and dependent user data (exercise/lesson IDs change on reimport)"""
     print("Clearing existing data...")
+    db.session.query(ExerciseSRS).delete()
+    db.session.query(UserProgress).delete()
     db.session.query(GrammarMastery).delete()
     db.session.query(Exercise).delete()
     db.session.query(GrammarPattern).delete()
@@ -178,7 +180,7 @@ def clear_existing_data():
     db.session.query(Course).delete()
     db.session.query(VocabularyItem).delete()
     db.session.commit()
-    print("Cleared existing data")
+    print("Cleared existing data (including user progress & SRS — IDs reset)")
 
 
 def run_import(force=False):

@@ -6,11 +6,13 @@ import CourseList from './components/CourseList';
 import UnitView from './components/UnitView';
 import LessonView from './components/LessonView';
 import ConversationView from './components/ConversationView';
+import ElderConversationView from './components/ElderConversationView';
 import Dashboard from './components/Dashboard';
 import VocabularyReview from './components/VocabularyReview';
 import WeaknessReview from './components/WeaknessReview';
 import ExerciseReview from './components/ExerciseReview';
 import ListeningPractice from './components/ListeningPractice';
+import LyricRadio from './components/LyricRadio';
 import ErrorBoundary from './components/ErrorBoundary';
 import IosInstallPrompt from './components/IosInstallPrompt';
 import BottomNav from './components/BottomNav';
@@ -19,7 +21,7 @@ import { initDB, setupOnlineListener, WEAKNESS_REVIEW_ENABLED, SENTENCE_SRS_ENAB
 import type { ImmersionLevel } from '@kapp/core';
 import './App.css';
 
-type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'dashboard' | 'vocabulary-review' | 'weakness-review' | 'exercise-review' | 'listening-practice';
+type Page = 'courses' | 'units' | 'lesson' | 'conversation' | 'elder-conversation' | 'dashboard' | 'vocabulary-review' | 'weakness-review' | 'exercise-review' | 'listening-practice' | 'lyric-radio';
 type Theme = 'light' | 'dark';
 
 interface AppState {
@@ -112,6 +114,11 @@ function App() {
         return;
       }
 
+      if (hash === 'elder-conversation') {
+        setState({ page: 'elder-conversation', courseId: null, lessonId: null });
+        return;
+      }
+
       if (hash === 'dashboard') {
         setState({ page: 'dashboard', courseId: null, lessonId: null });
         return;
@@ -134,6 +141,11 @@ function App() {
 
       if (hash === 'listening-practice') {
         setState({ page: 'listening-practice', courseId: null, lessonId: null });
+        return;
+      }
+
+      if (hash === 'lyric-radio') {
+        setState({ page: 'lyric-radio', courseId: null, lessonId: null });
         return;
       }
 
@@ -189,6 +201,11 @@ function App() {
     setState({ page: 'conversation', courseId: null, lessonId: null });
   }
 
+  function navigateToElderConversation() {
+    window.location.hash = 'elder-conversation';
+    setState({ page: 'elder-conversation', courseId: null, lessonId: null });
+  }
+
   function navigateToDashboard() {
     window.location.hash = 'dashboard';
     setState({ page: 'dashboard', courseId: null, lessonId: null });
@@ -212,6 +229,11 @@ function App() {
   function navigateToListeningPractice() {
     window.location.hash = 'listening-practice';
     setState({ page: 'listening-practice', courseId: null, lessonId: null });
+  }
+
+  function navigateToLyricRadio() {
+    window.location.hash = 'lyric-radio';
+    setState({ page: 'lyric-radio', courseId: null, lessonId: null });
   }
 
   function handleToggleTheme() {
@@ -239,7 +261,7 @@ function App() {
     }
   }
 
-  const showBottomNav = ['courses', 'dashboard', 'vocabulary-review', 'weakness-review', 'exercise-review', 'listening-practice', 'conversation'].includes(state.page);
+  const showBottomNav = ['courses', 'dashboard', 'vocabulary-review', 'weakness-review', 'exercise-review', 'listening-practice', 'conversation', 'elder-conversation', 'lyric-radio'].includes(state.page);
 
   // Map current page to a bottom nav tab (units maps to courses since it's a drill-down)
   const activeTab: Tab = (state.page === 'units' || state.page === 'lesson')
@@ -259,11 +281,14 @@ function App() {
           </div>
         )}
         <IosInstallPrompt />
+        <div key={state.page} className="page-transition">
         {state.page === 'courses' && (
           <ErrorBoundary>
             <CourseList
               onSelectCourse={navigateToCourse}
               onStartConversation={navigateToConversation}
+              onStartLesson={navigateToLesson}
+              onStartReview={navigateToReview}
               theme={theme}
               onToggleTheme={handleToggleTheme}
               immersionLevel={immersionLevel}
@@ -274,7 +299,13 @@ function App() {
 
         {state.page === 'conversation' && (
           <ErrorBoundary>
-            <ConversationView onBack={navigateToCourses} />
+            <ConversationView onBack={navigateToCourses} onElderMode={navigateToElderConversation} />
+          </ErrorBoundary>
+        )}
+
+        {state.page === 'elder-conversation' && (
+          <ErrorBoundary>
+            <ElderConversationView onBack={navigateToConversation} />
           </ErrorBoundary>
         )}
 
@@ -304,7 +335,13 @@ function App() {
 
         {state.page === 'listening-practice' && (
           <ErrorBoundary>
-            <ListeningPractice onBack={navigateToCourses} />
+            <ListeningPractice onBack={navigateToCourses} onLyricRadio={navigateToLyricRadio} />
+          </ErrorBoundary>
+        )}
+
+        {state.page === 'lyric-radio' && (
+          <ErrorBoundary>
+            <LyricRadio onBack={navigateToListeningPractice} />
           </ErrorBoundary>
         )}
 
@@ -334,6 +371,7 @@ function App() {
           </ErrorBoundary>
         )}
 
+        </div>
         {showBottomNav && (
           <BottomNav activeTab={activeTab} onNavigate={handleBottomNavNavigate} />
         )}
