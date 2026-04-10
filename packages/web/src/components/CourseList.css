@@ -321,3 +321,57 @@
     padding: 1rem;
   }
 }
+
+/* Continue Learning shortcut */
+.continue-shortcut {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 1rem 1.5rem;
+  padding: 0.875rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.continue-shortcut:hover,
+.continue-shortcut:active {
+  background: var(--color-surface-elevated, var(--color-surface));
+  border-color: var(--color-accent);
+}
+
+.continue-shortcut-icon {
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.continue-shortcut-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.continue-shortcut-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.continue-shortcut-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.continue-shortcut-arrow {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary, var(--color-text));
+  opacity: 0.5;
+  flex-shrink: 0;
+}
