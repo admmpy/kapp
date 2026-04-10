@@ -657,7 +657,8 @@
                     "갔어요"
                   ],
                   "correct_answer": "갑니다",
-                  "explanation": "가다: the stem 가 ends in a vowel, so we add -ㅂ니다 → 갑니다"
+                  "explanation": "가다: the stem 가 ends in a vowel, so we add -ㅂ니다 → 갑니다",
+                  "audio_url": "/api/audio/a1e58b2870d2397362db25abe99d6176.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -671,7 +672,8 @@
                     "먹을게요"
                   ],
                   "correct_answer": "먹습니다",
-                  "explanation": "먹다: the stem 먹 ends in a consonant, so we add -습니다 → 먹습니다"
+                  "explanation": "먹다: the stem 먹 ends in a consonant, so we add -습니다 → 먹습니다",
+                  "audio_url": "/api/audio/c7a136abaa4fabb6a43d148c12c37fac.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -693,7 +695,8 @@
                     "Thank you"
                   ],
                   "correct_answer": "Nice to meet you",
-                  "explanation": "반갑습니다 is the formal version of 반가워요 — 'nice to meet you / glad to meet you'"
+                  "explanation": "반갑습니다 is the formal version of 반가워요 — 'nice to meet you / glad to meet you'",
+                  "audio_url": "/api/audio/6664d471befeb925e17dd60c5d2f54ec.mp3"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -801,7 +804,8 @@
                     "How long have you been here?"
                   ],
                   "correct_answer": "Where are you from?",
-                  "explanation": "어디서 (from where) + 오셨어요 (did you come, honorific) = Where did you come from / Where are you from?"
+                  "explanation": "어디서 (from where) + 오셨어요 (did you come, honorific) = Where did you come from / Where are you from?",
+                  "audio_url": "/api/audio/71d65b850c4eff7efccb5faa5e5f8b04.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -928,7 +932,8 @@
                     "Nice to meet you"
                   ],
                   "correct_answer": "Thank you for your help",
-                  "explanation": "도와주셔서 (having helped, honorific) + 감사합니다 (I am grateful) = Thank you for your help"
+                  "explanation": "도와주셔서 (having helped, honorific) + 감사합니다 (I am grateful) = Thank you for your help",
+                  "audio_url": "/api/audio/bce3b04c9a783767e76383e3fa8f4acd.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -1038,7 +1043,8 @@
                   ],
                   "correct_answer": "Let's eat",
                   "explanation": "먹다 (to eat) + -자 = 먹자 (let's eat). The -자 ending makes an informal 'let's' suggestion.",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/260684d608184fe734d3b7f3091990fa.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -1054,7 +1060,8 @@
                   ],
                   "correct_answer": "Meal / Rice",
                   "explanation": "밥 literally means cooked rice but in Korean culture means 'a meal'. '밥 먹었어요?' = 'Have you eaten?' is the most common caring question.",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/10b2f3fc8df34b922bd8a17fdf3dc35b.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -1069,7 +1076,8 @@
                   ],
                   "correct_answer": "Concern and care",
                   "explanation": "Asking 'Are you eating your meals?' is a Korean expression of deep care. It's a way of saying 'I'm thinking about you and your wellbeing.'",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/7c85a36d6961917e2d89cf791ec7d3d1.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -1085,7 +1093,8 @@
                   ],
                   "correct_answer": "Sleep",
                   "explanation": "잠 = sleep (noun). 자다 = to sleep (verb). '잠은 자고 다니냐?' = Are you getting enough sleep?",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/71c5d5db64b725270e486e1741c8f606.mp3"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -1134,7 +1143,8 @@
                   ],
                   "correct_answer": "Please eat (for me / I'm asking you)",
                   "explanation": "먹어줘 = eat + -어줘 (please do for me). The -줘 makes it an intimate, caring request. The singer is pleading: please eat, I'm worried about you.",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/20ff1b73298e078dae7da8d559ac0332.mp3"
                 },
                 {
                   "exercise_type": "read_aloud",
@@ -1145,7 +1155,7 @@
                   "english_text": "Are you eating well (are you getting by)?",
                   "correct_answer": "read_aloud",
                   "explanation": "This iconic opening line from 'Eat' — Zion.T asks with warm concern. The -냐 ending is casual.",
-                  "audio_url": null,
+                  "audio_url": "/api/audio/7c85a36d6961917e2d89cf791ec7d3d1.mp3",
                   "options": []
                 },
                 {
@@ -1157,7 +1167,7 @@
                   "english_text": "Are you sleeping well?",
                   "correct_answer": "read_aloud",
                   "explanation": "Part of Zion.T's caring refrain — simple, tender language at a slow R&B pace.",
-                  "audio_url": null,
+                  "audio_url": "/api/audio/3d52a49765489ea0ba6e49cbfa77d908.mp3",
                   "options": []
                 }
               ]
@@ -1210,7 +1220,8 @@
                   ],
                   "correct_answer": "I want to see you / I miss you",
                   "explanation": "보다 (to see) + -고 싶다 (want to) = 보고 싶다 (I want to see). In Korean, missing someone IS wanting to see them — the same phrase.",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/1ea38f794e18bced35cc290aef3f4b94.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -1226,7 +1237,8 @@
                   ],
                   "correct_answer": "Secretly / without telling",
                   "explanation": "몰래 = secretly, without others knowing. '인스타그램 몰래 보다가' = secretly looking at [your] Instagram.",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/6f5d55dae79c89c62a57c3ce341f85a8.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -1242,7 +1254,8 @@
                   ],
                   "correct_answer": "I smiled / laughed",
                   "explanation": "웃다 = to smile / laugh. 웃었어 = I smiled (casual past tense). 나도 모르게 웃었어 = I smiled without realizing it.",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/6afe4c7acff90c15e1a6dd6d1a10faf5.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -1257,7 +1270,8 @@
                   ],
                   "correct_answer": "듣고 싶어",
                   "explanation": "듣다 (to listen) + -고 싶어 = 듣고 싶어 (I want to hear). Same pattern as 보고 싶어.",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/72084670f8e706aff4f17da1cf2d9f25.mp3"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -1285,7 +1299,8 @@
                   ],
                   "correct_answer": "Longing and nostalgia",
                   "explanation": "Secretly scrolling an ex-lover's Instagram is the classic modern-longing moment. 보다가 = while looking — the action is interrupted by the feeling.",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/51a9aa25696f8140c1246cd695368856.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -1301,7 +1316,8 @@
                   ],
                   "correct_answer": "I miss (it/you) — a longing feeling",
                   "explanation": "그리워 (from 그립다) = the ache of missing something or someone. More profound than 보고 싶어 — it's deep nostalgia.",
-                  "source_lyric": true
+                  "source_lyric": true,
+                  "audio_url": "/api/audio/ba0508e9b409b151b4bef7624b5862c2.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -1320,7 +1336,7 @@
                   "english_text": "I want to see you / I miss you",
                   "correct_answer": "read_aloud",
                   "explanation": "The most emotional phrase in 'Instagram' — two syllables that carry everything unsaid.",
-                  "audio_url": null,
+                  "audio_url": "/api/audio/1ea38f794e18bced35cc290aef3f4b94.mp3",
                   "options": []
                 },
                 {
@@ -1332,7 +1348,7 @@
                   "english_text": "Living well even without me",
                   "correct_answer": "read_aloud",
                   "explanation": "살아 = living. The line captures the bittersweet core of 'Instagram' — watching an ex thrive.",
-                  "audio_url": null,
+                  "audio_url": "/api/audio/b142078392f73b303a6dccd5c41475fc.mp3",
                   "options": []
                 }
               ]
@@ -2100,7 +2116,8 @@
                     "to come"
                   ],
                   "correct_answer": "to eat",
-                  "explanation": "먹다 (meokda) means 'to eat' in Korean"
+                  "explanation": "먹다 (meokda) means 'to eat' in Korean",
+                  "audio_url": "/api/audio/94e2c11d09664c3a21495f5c44e0e9c3.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2115,7 +2132,8 @@
                     "to walk"
                   ],
                   "correct_answer": "to drink",
-                  "explanation": "마시다 (masida) means 'to drink' in Korean"
+                  "explanation": "마시다 (masida) means 'to drink' in Korean",
+                  "audio_url": "/api/audio/31bb523ca4bb02ce71d328b9a2392bee.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -2137,7 +2155,8 @@
                     "to run"
                   ],
                   "correct_answer": "to go",
-                  "explanation": "가다 (gada) means 'to go' in Korean"
+                  "explanation": "가다 (gada) means 'to go' in Korean",
+                  "audio_url": "/api/audio/bb528e66334adee362b66bc8d29eea7c.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2152,7 +2171,8 @@
                     "to arrive"
                   ],
                   "correct_answer": "to come",
-                  "explanation": "오다 (oda) means 'to come' in Korean"
+                  "explanation": "오다 (oda) means 'to come' in Korean",
+                  "audio_url": "/api/audio/a7b870f1ae30fe15a444bcd327d71784.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -2166,7 +2186,7 @@
                   "question": "Listen and type what you hear",
                   "instruction": "Type your Korean answer before checking.",
                   "korean_text": "저는 공부해요.",
-                  "audio_url": "/api/audio/add9fdd87c1ad053097347e17bb415c0.mp3",
+                  "audio_url": "/api/audio/01da83a43315fb4b7373ff806fae9566.mp3",
                   "correct_answer": "저는 공부해요.",
                   "explanation": "The sentence means: I study."
                 },
@@ -2175,7 +2195,7 @@
                   "question": "Listen and select what you hear",
                   "instruction": "Play the audio and choose the correct text",
                   "korean_text": "친구가 일해요.",
-                  "audio_url": "/api/audio/1e0731d6d6524f7375276f0895d9eca6.mp3",
+                  "audio_url": "/api/audio/050abb53d666b7186468a7878a8544e9.mp3",
                   "options": [
                     "친구가 일해요.",
                     "친구가 공부해요.",
@@ -2207,7 +2227,8 @@
                     "to rest"
                   ],
                   "correct_answer": "to sleep",
-                  "explanation": "자다 (jada) means 'to sleep' in Korean"
+                  "explanation": "자다 (jada) means 'to sleep' in Korean",
+                  "audio_url": "/api/audio/4ab374bc2038983828eab587c9735c0d.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2222,7 +2243,8 @@
                     "to write"
                   ],
                   "correct_answer": "to see/watch",
-                  "explanation": "보다 (boda) means 'to see' or 'to watch' in Korean"
+                  "explanation": "보다 (boda) means 'to see' or 'to watch' in Korean",
+                  "audio_url": "/api/audio/694154a65a1ec65fab8cd6fee57fff08.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -2244,7 +2266,8 @@
                     "to listen"
                   ],
                   "correct_answer": "to read",
-                  "explanation": "읽다 (ikda) means 'to read' in Korean"
+                  "explanation": "읽다 (ikda) means 'to read' in Korean",
+                  "audio_url": "/api/audio/f8d96b23ba42342368a56136d2d2cd82.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -2258,7 +2281,7 @@
                   "question": "Listen and type what you hear",
                   "instruction": "Type your Korean answer before checking.",
                   "korean_text": "저는 매일 운동해요.",
-                  "audio_url": "/api/audio/1ea0b6933df957b792191088865e35d0.mp3",
+                  "audio_url": "/api/audio/9d3f5c60bce289a25346b53b6ae7d794.mp3",
                   "correct_answer": "저는 매일 운동해요.",
                   "explanation": "The sentence means: I exercise every day."
                 },
@@ -2267,7 +2290,7 @@
                   "question": "Listen and select what you hear",
                   "instruction": "Play the audio and choose the correct text",
                   "korean_text": "언니가 요리해요.",
-                  "audio_url": "/api/audio/85ca718aec3d0b0b302ec0d94c2c82bb.mp3",
+                  "audio_url": "/api/audio/320277f365242b9f877492eeaafbdfe7.mp3",
                   "options": [
                     "언니가 요리해요.",
                     "언니가 청소해요.",
@@ -2305,7 +2328,8 @@
                     "now"
                   ],
                   "correct_answer": "today",
-                  "explanation": "오늘 (oneul) means 'today'"
+                  "explanation": "오늘 (oneul) means 'today'",
+                  "audio_url": "/api/audio/8e15c2b178b16af59d461830afa07a31.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2320,7 +2344,8 @@
                     "later"
                   ],
                   "correct_answer": "tomorrow",
-                  "explanation": "내일 (naeil) means 'tomorrow'"
+                  "explanation": "내일 (naeil) means 'tomorrow'",
+                  "audio_url": "/api/audio/16163903dbe7b71900d634d0d6c45896.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -2342,7 +2367,8 @@
                     "before"
                   ],
                   "correct_answer": "yesterday",
-                  "explanation": "어제 (eoje) means 'yesterday'"
+                  "explanation": "어제 (eoje) means 'yesterday'",
+                  "audio_url": "/api/audio/3f0a9a0efad3dc9f889981f097621dd3.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2357,14 +2383,15 @@
                     "always"
                   ],
                   "correct_answer": "now",
-                  "explanation": "지금 (jigeum) means 'now'"
+                  "explanation": "지금 (jigeum) means 'now'",
+                  "audio_url": "/api/audio/d86dbe2282629e475a2d36d46d2fdcc6.mp3"
                 },
                 {
                   "exercise_type": "writing",
                   "question": "Listen and type what you hear",
                   "instruction": "Type your Korean answer before checking.",
                   "korean_text": "지금 몇 시예요?",
-                  "audio_url": "/api/audio/574f93eb5a46f17de8cb751122e1f252.mp3",
+                  "audio_url": "/api/audio/11d94102b4fc7bfe0e407f974ecf7882.mp3",
                   "correct_answer": "지금 몇 시예요?",
                   "explanation": "The sentence means: What time is it now?"
                 },
@@ -2373,7 +2400,7 @@
                   "question": "Listen and type what you hear",
                   "instruction": "Type your Korean answer before checking.",
                   "korean_text": "세 시 삼십 분이에요.",
-                  "audio_url": "/api/audio/a9462a0d093e7a6afb3e91ae09f51e34.mp3",
+                  "audio_url": "/api/audio/f0feeaa0eae5a52f7650e65ca4fc235b.mp3",
                   "correct_answer": "세 시 삼십 분이에요.",
                   "explanation": "The sentence means: It's 3:30."
                 }
@@ -2399,7 +2426,8 @@
                     "season"
                   ],
                   "correct_answer": "weather",
-                  "explanation": "날씨 (nalssi) means 'weather'"
+                  "explanation": "날씨 (nalssi) means 'weather'",
+                  "audio_url": "/api/audio/4b9cb78409ef8c516d542cd7b4095da7.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2414,7 +2442,8 @@
                     "It's cool"
                   ],
                   "correct_answer": "It's hot",
-                  "explanation": "더워요 means 'it's hot' (weather or feeling)"
+                  "explanation": "더워요 means 'it's hot' (weather or feeling)",
+                  "audio_url": "/api/audio/c261e3d76a5e2581f8d0b981b88b58bf.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2429,7 +2458,8 @@
                     "It's cool"
                   ],
                   "correct_answer": "It's cold",
-                  "explanation": "추워요 means 'it's cold' (weather or feeling)"
+                  "explanation": "추워요 means 'it's cold' (weather or feeling)",
+                  "audio_url": "/api/audio/e241478c077f4fb1e94ef52d87c2fe25.mp3"
                 },
                 {
                   "exercise_type": "grammar",
@@ -2470,14 +2500,15 @@
                     "It's sunny"
                   ],
                   "correct_answer": "It's snowing",
-                  "explanation": "눈 (snow) + 이 (subject marker) + 와요 (comes) = It's snowing"
+                  "explanation": "눈 (snow) + 이 (subject marker) + 와요 (comes) = It's snowing",
+                  "audio_url": "/api/audio/55a9c04ab1fa5e5369f4ea72b63292ed.mp3"
                 },
                 {
                   "exercise_type": "listening",
                   "question": "Listen and select what you hear",
                   "instruction": "Play the audio and choose the correct text",
                   "korean_text": "오늘 날씨가 어때요?",
-                  "audio_url": "/api/audio/26d400e9101948bbeebb8245a0218570.mp3",
+                  "audio_url": "/api/audio/4c771fccfdc4808fc5fe89bb005ea228.mp3",
                   "options": [
                     "오늘 날씨가 어때요?",
                     "내일 날씨가 어때요?",
@@ -2492,7 +2523,7 @@
                   "question": "Listen and select what you hear",
                   "instruction": "Play the audio and choose the correct text",
                   "korean_text": "비가 많이 와요.",
-                  "audio_url": "/api/audio/31467519a817fb8ee13ec7a505369869.mp3",
+                  "audio_url": "/api/audio/c64fb2c461f39fd69f1886eae8cf3ed2.mp3",
                   "options": [
                     "비가 많이 와요.",
                     "눈이 많이 와요.",
@@ -2550,7 +2581,8 @@
                     "I'm angry"
                   ],
                   "correct_answer": "I miss you / I'm longing",
-                  "explanation": "그리워 comes from 그립다 — a deep longing or missing someone. You hear it constantly in R&B lyrics."
+                  "explanation": "그리워 comes from 그립다 — a deep longing or missing someone. You hear it constantly in R&B lyrics.",
+                  "audio_url": "/api/audio/ba0508e9b409b151b4bef7624b5862c2.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2565,7 +2597,8 @@
                     "Surprise"
                   ],
                   "correct_answer": "Nervous excitement / heart fluttering",
-                  "explanation": "설레다 describes the flutter of excitement — butterflies before seeing someone you like. Untranslatable in one English word."
+                  "explanation": "설레다 describes the flutter of excitement — butterflies before seeing someone you like. Untranslatable in one English word.",
+                  "audio_url": "/api/audio/6f0932b7cc98dc07e8c29772608eedc2.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2580,7 +2613,8 @@
                     "Voice"
                   ],
                   "correct_answer": "Tears",
-                  "explanation": "눈물 (tears) appears in almost every R&B ballad. 눈 = eye, 물 = water."
+                  "explanation": "눈물 (tears) appears in almost every R&B ballad. 눈 = eye, 물 = water.",
+                  "audio_url": "/api/audio/fc25c95f3b108bba7133067acce68418.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2595,7 +2629,8 @@
                     "기억"
                   ],
                   "correct_answer": "혼자",
-                  "explanation": "혼자 means alone. Its opposite is 함께 (together) — both appear constantly in Dean and Crush lyrics."
+                  "explanation": "혼자 means alone. Its opposite is 함께 (together) — both appear constantly in Dean and Crush lyrics.",
+                  "audio_url": "/api/audio/c00a028ff4c476ca4cbd9355050d72ca.mp3"
                 },
                 {
                   "exercise_type": "listening",
@@ -2610,7 +2645,8 @@
                     "눈물"
                   ],
                   "correct_answer": "보고 싶어",
-                  "explanation": "보고 싶어 = I want to see you. 보다 (to see/look) + 고 싶다 (want to). Very common in song lyrics and everyday speech."
+                  "explanation": "보고 싶어 = I want to see you. 보다 (to see/look) + 고 싶다 (want to). Very common in song lyrics and everyday speech.",
+                  "audio_url": "/api/audio/1ea38f794e18bced35cc290aef3f4b94.mp3"
                 },
                 {
                   "exercise_type": "sentence_arrange",
@@ -2623,7 +2659,8 @@
                     "싶어"
                   ],
                   "correct_answer": "그리워 보고 싶어",
-                  "explanation": "Two feeling expressions together: 그리워 (I miss you) 보고 싶어 (I want to see you). Both are complete sentences on their own but commonly stacked in lyrics."
+                  "explanation": "Two feeling expressions together: 그리워 (I miss you) 보고 싶어 (I want to see you). Both are complete sentences on their own but commonly stacked in lyrics.",
+                  "audio_url": "/api/audio/401b5f05dabfc8b0b00f3499f1061fd9.mp3"
                 }
               ]
             }
@@ -2718,7 +2755,8 @@
                     "Location marker"
                   ],
                   "correct_answer": "Topic marker",
-                  "explanation": "은/는 marks the topic of the sentence"
+                  "explanation": "은/는 marks the topic of the sentence",
+                  "audio_url": "/api/audio/e00831269a2512492243cf5b9c2d7d28.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -2733,7 +2771,8 @@
                     "Location marker"
                   ],
                   "correct_answer": "Subject marker",
-                  "explanation": "이/가 marks the subject doing the action"
+                  "explanation": "이/가 marks the subject doing the action",
+                  "audio_url": "/api/audio/6ebe88dd2475086f9d6a42bec2ff7cdb.mp3"
                 },
                 {
                   "exercise_type": "grammar",
@@ -4401,7 +4440,8 @@
                     "When"
                   ],
                   "correct_answer": "Who",
-                  "explanation": "누구 = who"
+                  "explanation": "누구 = who",
+                  "audio_url": "/api/audio/7672fad62cba848a1d0ab8f426b7da9f.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -4416,7 +4456,8 @@
                     "When"
                   ],
                   "correct_answer": "What",
-                  "explanation": "뭐 = what (informal)"
+                  "explanation": "뭐 = what (informal)",
+                  "audio_url": "/api/audio/47c984f9287e88fdb52bf12e047b3859.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -4431,7 +4472,8 @@
                     "When"
                   ],
                   "correct_answer": "Where",
-                  "explanation": "어디 = where"
+                  "explanation": "어디 = where",
+                  "audio_url": "/api/audio/d38f9b01e37facf309dfbba9db3b5962.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -4446,7 +4488,8 @@
                     "When"
                   ],
                   "correct_answer": "When",
-                  "explanation": "언제 = when"
+                  "explanation": "언제 = when",
+                  "audio_url": "/api/audio/ef3bf401f57ec188040895754c4e21fd.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -4461,7 +4504,8 @@
                     "How"
                   ],
                   "correct_answer": "Why",
-                  "explanation": "왜 = why"
+                  "explanation": "왜 = why",
+                  "audio_url": "/api/audio/dbc77c2497a4e105cfbdc19f80f20693.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -4476,7 +4520,8 @@
                     "How"
                   ],
                   "correct_answer": "How",
-                  "explanation": "어떻게 = how"
+                  "explanation": "어떻게 = how",
+                  "audio_url": "/api/audio/4bbee0a4f358c9a94c45ef7c61bacb9e.mp3"
                 },
                 {
                   "exercise_type": "grammar",
@@ -5022,7 +5067,8 @@
                     "what"
                   ],
                   "correct_answer": "this",
-                  "explanation": "이거 (igeo) means 'this (thing)' - used when pointing at something close to you"
+                  "explanation": "이거 (igeo) means 'this (thing)' - used when pointing at something close to you",
+                  "audio_url": "/api/audio/a5dd2eb590be0c23b1b018e69db8c367.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -5037,7 +5083,8 @@
                     "Do you have it?"
                   ],
                   "correct_answer": "How much is it?",
-                  "explanation": "얼마예요? is used to ask the price of something"
+                  "explanation": "얼마예요? is used to ask the price of something",
+                  "audio_url": "/api/audio/b046bf6bb293fc0e174a94591794efa5.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -5066,7 +5113,8 @@
                     "Where?"
                   ],
                   "correct_answer": "Do you have?/Is there?",
-                  "explanation": "있어요 means 'to have/exist'. As a question, it asks 'Do you have?' or 'Is there?'"
+                  "explanation": "있어요 means 'to have/exist'. As a question, it asks 'Do you have?' or 'Is there?'",
+                  "audio_url": "/api/audio/3ac5a8cd25ef4473949166b1cd2cbfab.mp3"
                 },
                 {
                   "exercise_type": "grammar",
@@ -5086,7 +5134,7 @@
                   "question": "Listen and type what you hear",
                   "instruction": "Type your Korean answer before checking.",
                   "korean_text": "이거 얼마예요?",
-                  "audio_url": "/api/audio/8b13301ace96b42c805ae0630632b062.mp3",
+                  "audio_url": "/api/audio/eaf397a67dc92c024e20d887736b1276.mp3",
                   "correct_answer": "이거 얼마예요?",
                   "explanation": "The sentence means: How much is this?"
                 },
@@ -5095,7 +5143,7 @@
                   "question": "Listen and select what you hear",
                   "instruction": "Play the audio and choose the correct text",
                   "korean_text": "너무 비싸요.",
-                  "audio_url": "/api/audio/2bcb61438f6d567673c9b511961bdfb1.mp3",
+                  "audio_url": "/api/audio/90dd7a990c4a11f2ef53e89816372172.mp3",
                   "options": [
                     "너무 비싸요.",
                     "너무 싸요.",
@@ -5127,7 +5175,8 @@
                     "It's small"
                   ],
                   "correct_answer": "It's expensive",
-                  "explanation": "비싸요 means 'it's expensive'"
+                  "explanation": "비싸요 means 'it's expensive'",
+                  "audio_url": "/api/audio/96bc370775a175c785716c992211b05f.mp3"
                 },
                 {
                   "exercise_type": "vocabulary",
@@ -5142,7 +5191,8 @@
                     "It's bad"
                   ],
                   "correct_answer": "It's cheap",
-                  "explanation": "싸요 means 'it's cheap' - the opposite of 비싸요"
+                  "explanation": "싸요 means 'it's cheap' - the opposite of 비싸요",
+                  "audio_url": "/api/audio/f99b935274010ac7d1313ae326037efc.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -5164,7 +5214,8 @@
                     "It's there"
                   ],
                   "correct_answer": "There isn't/Don't have",
-                  "explanation": "없어요 is the opposite of 있어요 - it means 'there isn't' or 'don't have'"
+                  "explanation": "없어요 is the opposite of 있어요 - it means 'there isn't' or 'don't have'",
+                  "audio_url": "/api/audio/7b18e37e18d3fe3c3abb58b7efbf9067.mp3"
                 },
                 {
                   "exercise_type": "writing",
@@ -5178,7 +5229,7 @@
                   "question": "Listen and type what you hear",
                   "instruction": "Type your Korean answer before checking.",
                   "korean_text": "할인해 주세요.",
-                  "audio_url": "/api/audio/d1e68cf5046a27a3a06e6c0a75aea588.mp3",
+                  "audio_url": "/api/audio/e2c51a5ba6a0ebe9950a49e9aad95e0e.mp3",
                   "correct_answer": "할인해 주세요.",
                   "explanation": "The sentence means: Please give me a discount."
                 },
@@ -5187,7 +5238,7 @@
                   "question": "Listen and select what you hear",
                   "instruction": "Play the audio and choose the correct text",
                   "korean_text": "카드로 계산할게요.",
-                  "audio_url": "/api/audio/f3273838cdb412f49e061ba727c0abc5.mp3",
+                  "audio_url": "/api/audio/bd8e7a4002b7cbea0eac6b1b77e6e075.mp3",
                   "options": [
                     "카드로 계산할게요.",
                     "현금으로 계산할게요.",
@@ -5916,7 +5967,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 어디 가세요? B: 도서관에 가요. 공부하러 가요.",
-                  "audio_url": "/api/audio/b46656f8b9b237ec1ed7d1ff58277a2f.mp3",
+                  "audio_url": "/api/audio/77a955e52f269859eb5557e4635d5220.mp3",
                   "options": [
                     "A: 어디 가세요? B: 도서관에 가요. 공부하러 가요."
                   ],
@@ -5928,7 +5979,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 점심 먹었어요? B: 아니요, 아직 안 먹었어요.",
-                  "audio_url": "/api/audio/a4b56ea40dc712fbded366fe4ba6f03d.mp3",
+                  "audio_url": "/api/audio/5212992e4dcf4ceee743c64201d333bc.mp3",
                   "options": [
                     "A: 점심 먹었어요? B: 아니요, 아직 안 먹었어요."
                   ],
@@ -5940,7 +5991,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 주말에 뭐 할 거예요? B: 친구들하고 영화 볼 거예요.",
-                  "audio_url": "/api/audio/a17c7a237259d0f83fd86438277e122c.mp3",
+                  "audio_url": "/api/audio/24785fe711b36fd21194ede83931e5d7.mp3",
                   "options": [
                     "A: 주말에 뭐 할 거예요? B: 친구들하고 영화 볼 거예요."
                   ],
@@ -5952,7 +6003,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 이 옷 어때요? B: 정말 예쁘네요! 잘 어울려요.",
-                  "audio_url": "/api/audio/7fd628f5cda2ec84836e7797e2cc847b.mp3",
+                  "audio_url": "/api/audio/cb4832f1c590faa1ef3e4c1051e8ad91.mp3",
                   "options": [
                     "A: 이 옷 어때요? B: 정말 예쁘네요! 잘 어울려요."
                   ],
@@ -5964,7 +6015,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 커피 마실래요? B: 좋아요! 카페에 가요.",
-                  "audio_url": "/api/audio/718995daa53414034ef05115081c4606.mp3",
+                  "audio_url": "/api/audio/6abed70be21803661daaaf95071cf6dd.mp3",
                   "options": [
                     "A: 커피 마실래요? B: 좋아요! 카페에 가요."
                   ],
@@ -5976,7 +6027,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 버스 정류장이 어디예요? B: 저기 모퉁이에 있어요.",
-                  "audio_url": "/api/audio/9e83583ef27e6d1b2532cf809826099a.mp3",
+                  "audio_url": "/api/audio/bfcad4e881228fe104d3f28fca08927b.mp3",
                   "options": [
                     "A: 버스 정류장이 어디예요? B: 저기 모퉁이에 있어요."
                   ],
@@ -5988,7 +6039,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 한국어 공부한 지 얼마나 됐어요? B: 6개월 됐어요.",
-                  "audio_url": "/api/audio/9993566c31ab2da1ed138444aa590b9f.mp3",
+                  "audio_url": "/api/audio/2aed2673ac7333505c0f17db64665d68.mp3",
                   "options": [
                     "A: 한국어 공부한 지 얼마나 됐어요? B: 6개월 됐어요."
                   ],
@@ -6000,7 +6051,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 비빔밥 주문할게요. B: 네, 잠깐만 기다려 주세요.",
-                  "audio_url": "/api/audio/8aab242dee5cee33e3d3febfbb2895f0.mp3",
+                  "audio_url": "/api/audio/91f54053639a5d919417227325a19098.mp3",
                   "options": [
                     "A: 비빔밥 주문할게요. B: 네, 잠깐만 기다려 주세요."
                   ],
@@ -6012,7 +6063,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 오늘 날씨가 너무 더워요. B: 맞아요. 에어컨 켤까요?",
-                  "audio_url": "/api/audio/9b0ae2b77f3f2d290ee4761aa603e653.mp3",
+                  "audio_url": "/api/audio/26b98e07c9a168cb8fb408507a92348d.mp3",
                   "options": [
                     "A: 오늘 날씨가 너무 더워요. B: 맞아요. 에어컨 켤까요?"
                   ],
@@ -6024,7 +6075,7 @@
                   "question": "Listen to this dialogue and select what you hear",
                   "instruction": "This is a natural conversation between two people",
                   "korean_text": "A: 생일 축하해요! B: 고마워요! 같이 케이크 먹어요.",
-                  "audio_url": "/api/audio/adebe707bef9ab43b1a1582c5a3a3b3b.mp3",
+                  "audio_url": "/api/audio/6b1c0e701741e490761176d4de529915.mp3",
                   "options": [
                     "A: 생일 축하해요! B: 고마워요! 같이 케이크 먹어요."
                   ],
@@ -6036,7 +6087,7 @@
                   "question": "Listen to this announcement",
                   "instruction": "This is a public announcement you might hear in Korea",
                   "korean_text": "잠시 후 3호선 열차가 들어옵니다. 안전선 밖으로 물러서 주시기 바랍니다.",
-                  "audio_url": "/api/audio/63a65d55e44f39a9fce01d5edf691675.mp3",
+                  "audio_url": "/api/audio/f892bad1169315c23d1ce4ef8d818df3.mp3",
                   "options": [
                     "잠시 후 3호선 열차가 들어옵니다. 안전선 밖으로 물러서 주시기 바랍니다."
                   ],
@@ -6048,7 +6099,7 @@
                   "question": "Listen to this announcement",
                   "instruction": "This is a public announcement you might hear in Korea",
                   "korean_text": "고객 여러분께 알려드립니다. 지금부터 30분간 전관 할인 행사를 진행합니다.",
-                  "audio_url": "/api/audio/466b03ff3a51f9decdf47c9da01eaabe.mp3",
+                  "audio_url": "/api/audio/ef6ae44ed354bb1a446539ff5e27cdcb.mp3",
                   "options": [
                     "고객 여러분께 알려드립니다. 지금부터 30분간 전관 할인 행사를 진행합니다."
                   ],
@@ -6060,7 +6111,7 @@
                   "question": "Listen to this announcement",
                   "instruction": "This is a public announcement you might hear in Korea",
                   "korean_text": "서울행 KTX 열차가 곧 출발합니다. 승객 여러분은 서둘러 탑승해 주시기 바랍니다.",
-                  "audio_url": "/api/audio/6e67e8c305059e5a100cb595ccd8b296.mp3",
+                  "audio_url": "/api/audio/be089e3f32937ebac77c519f9dd89da3.mp3",
                   "options": [
                     "서울행 KTX 열차가 곧 출발합니다. 승객 여러분은 서둘러 탑승해 주시기 바랍니다."
                   ],
@@ -6072,7 +6123,7 @@
                   "question": "Listen to this announcement",
                   "instruction": "This is a public announcement you might hear in Korea",
                   "korean_text": "휴대폰은 매너 모드로 설정해 주시고, 통화는 로비에서 부탁드립니다.",
-                  "audio_url": "/api/audio/7d7e3a504aea8004da6324e8323dd7d9.mp3",
+                  "audio_url": "/api/audio/0c0b151e8b50951676f53dd3ccc573a6.mp3",
                   "options": [
                     "휴대폰은 매너 모드로 설정해 주시고, 통화는 로비에서 부탁드립니다."
                   ],
@@ -6084,7 +6135,7 @@
                   "question": "Listen to this announcement",
                   "instruction": "This is a public announcement you might hear in Korea",
                   "korean_text": "김영수 고객님, 1번 창구로 오시기 바랍니다.",
-                  "audio_url": "/api/audio/e37e409fe80fe76aec4481d025919493.mp3",
+                  "audio_url": "/api/audio/8f6bc2c2d311ad222bac5249dd577f59.mp3",
                   "options": [
                     "김영수 고객님, 1번 창구로 오시기 바랍니다."
                   ],
@@ -6096,7 +6147,7 @@
                   "question": "Listen to this phone conversation",
                   "instruction": "This is a typical phone conversation in Korean",
                   "korean_text": "여보세요? 지수 씨 계세요? 저 민호예요.",
-                  "audio_url": "/api/audio/970f10f835a26d82e89b7d543c6dae63.mp3",
+                  "audio_url": "/api/audio/fa24c502f53eaa588296f674d717ca73.mp3",
                   "options": [
                     "여보세요? 지수 씨 계세요? 저 민호예요."
                   ],
@@ -6108,7 +6159,7 @@
                   "question": "Listen to this phone conversation",
                   "instruction": "This is a typical phone conversation in Korean",
                   "korean_text": "안녕하세요. 예약하려고 전화했어요. 내일 저녁 7시에 두 명이요.",
-                  "audio_url": "/api/audio/67fd82e11995abf6e280a95b339e509c.mp3",
+                  "audio_url": "/api/audio/3608bbb9ab9b0e326eb3b156eba26ff7.mp3",
                   "options": [
                     "안녕하세요. 예약하려고 전화했어요. 내일 저녁 7시에 두 명이요."
                   ],
@@ -6120,7 +6171,7 @@
                   "question": "Listen to this phone conversation",
                   "instruction": "This is a typical phone conversation in Korean",
                   "korean_text": "죄송하지만, 지금 통화하기 어려워요. 나중에 다시 전화할게요.",
-                  "audio_url": "/api/audio/bce43a718777e495781959464361af7b.mp3",
+                  "audio_url": "/api/audio/0c99f3c2727f0075a2fd37c88cca9bed.mp3",
                   "options": [
                     "죄송하지만, 지금 통화하기 어려워요. 나중에 다시 전화할게요."
                   ],
@@ -6132,7 +6183,7 @@
                   "question": "Listen to this phone conversation",
                   "instruction": "This is a typical phone conversation in Korean",
                   "korean_text": "배송 확인차 전화드렸습니다. 오늘 오후에 도착 예정입니다.",
-                  "audio_url": "/api/audio/ec893488504f26f1425cd0c9a11e38b2.mp3",
+                  "audio_url": "/api/audio/7e064bc581fd19c613bf88be498d404d.mp3",
                   "options": [
                     "배송 확인차 전화드렸습니다. 오늘 오후에 도착 예정입니다."
                   ],
@@ -6144,7 +6195,7 @@
                   "question": "Listen to this phone conversation",
                   "instruction": "This is a typical phone conversation in Korean",
                   "korean_text": "실례지만, 전화 잘못 거셨어요. 여기는 회사예요.",
-                  "audio_url": "/api/audio/1b0be122e7247ec5619d7bffb855afa4.mp3",
+                  "audio_url": "/api/audio/c1350a3abe16dd6aa30eec9b176adb9a.mp3",
                   "options": [
                     "실례지만, 전화 잘못 거셨어요. 여기는 회사예요."
                   ],
@@ -6176,7 +6227,7 @@
                   "correct_answer": "나는 학생이에요",
                   "explanation": "나는 (I/topic) / 학생이에요 (am a student)",
                   "options": [],
-                  "audio_url": null
+                  "audio_url": "/api/audio/c15a8d202d417750948da51a37f7d986.mp3"
                 },
                 {
                   "exercise_type": "word_boundary",
@@ -6187,7 +6238,7 @@
                   "correct_answer": "오늘 날씨 좋아요",
                   "explanation": "오늘 (today) / 날씨 (weather) / 좋아요 (is good)",
                   "options": [],
-                  "audio_url": null
+                  "audio_url": "/api/audio/f48283fb0009df29d69ed1beef08e334.mp3"
                 },
                 {
                   "exercise_type": "word_boundary",
@@ -6198,7 +6249,7 @@
                   "correct_answer": "저는 한국어를 공부해요",
                   "explanation": "저는 (I/formal topic) / 한국어를 (Korean/object) / 공부해요 (study)",
                   "options": [],
-                  "audio_url": null
+                  "audio_url": "/api/audio/3fb1f1d322298ab41642371891d21d02.mp3"
                 },
                 {
                   "exercise_type": "word_boundary",
@@ -6209,7 +6260,7 @@
                   "correct_answer": "밥은 먹었어",
                   "explanation": "밥은 (rice/food topic) / 먹었어 (did you eat, casual) — the iconic opening of 'Eat'",
                   "options": [],
-                  "audio_url": null
+                  "audio_url": "/api/audio/ac7251715b3df67b9c8f927aad437690.mp3"
                 },
                 {
                   "exercise_type": "word_boundary",
@@ -6220,7 +6271,7 @@
                   "correct_answer": "보고 싶어서 전화했어",
                   "explanation": "보고 (to see) / 싶어서 (because I want) / 전화했어 (called) — 'I called because I missed you'",
                   "options": [],
-                  "audio_url": null
+                  "audio_url": "/api/audio/8024b80fe1ff66532e6ec142527e7f14.mp3"
                 },
                 {
                   "exercise_type": "word_boundary",
@@ -6231,7 +6282,7 @@
                   "correct_answer": "너무 그리워서 눈물이 나",
                   "explanation": "너무 (too much) / 그리워서 (because I miss) / 눈물이 (tears/subject) / 나 (come out) — Dean-style lyric phrase",
                   "options": [],
-                  "audio_url": null
+                  "audio_url": "/api/audio/055fb2313962cdd25c9aadaee34cc9cd.mp3"
                 }
               ]
             }
